@@ -14,3 +14,24 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**
+ *
+ * 后台路由组
+ */
+
+Route::group([],function(){
+	// 后台首页
+	Route::any('admin','admin\IndexController@index');
+});
+
+
+
+
+
+
+
+/**
+ *
+ * 前台路由组
+ */
