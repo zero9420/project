@@ -187,6 +187,13 @@
                             <li><a href="form_elements.html">浏览用户</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/cate/create">添加分类</a></li>
+                            <li><a href="/admin/cate">浏览分类</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>
@@ -198,14 +205,12 @@
             <div class="container">
             
             	<!-- Statistics Button Container -->
-            	<div class="mws-stat-container clearfix">
                 
                 @section('content')
 
 
                 @show
 
-                </div>
                 
             </div>
             <!-- Inner Container End -->
