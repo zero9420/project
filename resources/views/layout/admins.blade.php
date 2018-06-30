@@ -35,6 +35,7 @@
 
 <link rel="stylesheet" type="text/css" href="/admins/css/admins.css" media="screen">
 
+
 <title>@yield('title')</title>
 
 </head>
@@ -48,7 +49,10 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
-            	<h3 style='color:white'>yun商城</h3>
+                    <h4 style="font-size: 24px;color:white">
+                        云商城
+                    </h4>
+            	<span style="color:white" id="nowsTime"></span>
 			</div>
         </div>
         
@@ -250,6 +254,8 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
+    <script src="/admins/js/times/nowtime.js"></script>
+
 
 </body>
 </html>
