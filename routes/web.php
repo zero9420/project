@@ -25,6 +25,8 @@ Route::group([],function(){
 	Route::any('admin','admin\IndexController@index');
 	// 商品分类
 	Route::resource('admin/cate','admin\CateController');
+	// 商品管理
+	Route::resource('admin/goods','admin\GoodsController');
 });
 
 
