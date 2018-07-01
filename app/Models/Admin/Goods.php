@@ -29,7 +29,8 @@ class Goods extends Model
     					'goods_price','goods_price',
     					'goods_stock','goods_sales',
     					'goods_hot','goods_pic',
-    					'goods_desc','goods_status'
+    					'goods_desc','goods_status',
+                        'create_time'
     				];
 
      /**
@@ -37,6 +38,6 @@ class Goods extends Model
      */
     public function spec()
     {
-        return $this->hasOne('App\Models\Admin\Goods_spec','goods_id');
+        return $this->hasOne('App\Models\Admin\GoodsSpec','goods_id');
     }
 }

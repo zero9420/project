@@ -17,7 +17,8 @@ class CateController extends Controller
     {
         // 分类列表页
         $res = Cate::paginate(10);
-        return view('admin/cate/index',['title'=>'商品类别表','res'=>$res]);
+        $num = $res->firstItem();
+        return view('admin/cate/index',['title'=>'商品类别表','res'=>$res,'num'=>$num]);
     }
 
     /**

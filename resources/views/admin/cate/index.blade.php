@@ -38,7 +38,7 @@
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 156px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                            ID编号
+                            编号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 212px;" aria-label="Browser: activate to sort column ascending">
@@ -62,7 +62,7 @@
                 @foreach($res as $k => $v)
                     <tr class="@if($k % 2 == 1)  odd   @else even  @endif">
                         <td class=" ">
-                            {{$v->cate_id}}
+                            {{$num++}}
                         </td>
                         <td class=" ">
                             {{$v->cate_name}}

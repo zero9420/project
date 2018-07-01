@@ -4,7 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Goods_spec extends Model
+class GoodsSpec extends Model
 {
      //
 
