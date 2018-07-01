@@ -43,7 +43,7 @@
                         类名
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="cate_name">
+                        <input type="text" class="medium" name="cate_name" class="error large">
                     </div>
                 </div>
                 <div class="mws-form-row">

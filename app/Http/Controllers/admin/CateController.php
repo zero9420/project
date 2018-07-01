@@ -16,7 +16,7 @@ class CateController extends Controller
     public function index()
     {
         // 分类列表页
-        $res = Cate::paginate(3);
+        $res = Cate::paginate(10);
         return view('admin/cate/index',['title'=>'商品类别表','res'=>$res]);
     }
 
@@ -29,7 +29,7 @@ class CateController extends Controller
     {
         error_reporting(0);
         // 分类添加页
-        $cates=Cate::select()->get();
+        $cates=Cate::select()->orderBy('cate_path')->get();
         // dd($cates);
         return view('admin/cate/add',['cates'=>$cates]);
     }
@@ -51,19 +51,22 @@ class CateController extends Controller
             'cate_name.required'=>'类名不能为空',
         ]);
         $res = $request->except(['_token']);
-        // dd($res);
         if($res['cate_pid']==0){
             $res['cate_path'] = '0,';
         }else{
-            // 根据cate_id获取cate_path
-            $cate_path = Cate::where('cate_id',$res['cate_pid'])->first();
-            $res['cate_path']=$cate_path->cate_path.$res['cate_pid'].',';
+            // 根据cate_id获取cate
+            $cate = Cate::where('cate_id',$res['cate_pid'])->first();
+            $res['cate_path']=$cate->cate_path.$res['cate_pid'].',';
         }
         // 存入数据表
         $data = Cate::create($res);
         if($data){
-
-            return redirect('/admin/cate')->with('info','添加成功');
+            return view('/layout/jump')->with([
+                    'message'=>'添加成功！',
+                    'url' =>'/admin/cate',
+                    'jumpTime'=>2,
+                    'title'=>'添加成功'
+                ]);
 
         } else {
 
@@ -117,8 +120,12 @@ class CateController extends Controller
         // 修改数据表
         $data = Cate::where('cate_id',$id)->update($res);
         if($data){
-
-            return redirect('/admin/cate')->with('info','修改成功');
+            return view('/layout/jump')->with([
+                    'message'=>'修改成功！',
+                    'url' =>'/admin/cate',
+                    'jumpTime'=>2,
+                    'title'=>'修改成功'
+                ]);
 
         } else {
 
@@ -138,11 +145,21 @@ class CateController extends Controller
         $cate=Cate::where('cate_pid','=',$id)->first();
         // dd($cate);
         if($cate){
-            echo "<script>alert('有子类不能删除!!!');</script>",redirect('/admin/cate');
+            return view('/layout/jump')->with([
+                    'message'=>'有子类不能删除！',
+                    'url' =>'/admin/cate',
+                    'jumpTime'=>2,
+                    'title'=>'删除失败'
+                ]);
         } else {
             $res = Cate::where('cate_id',$id)->delete();
             if($res){
-                return redirect('/admin/cate')->with('info','删除成功');
+                return view('/layout/jump')->with([
+                    'message'=>'删除成功',
+                    'url' =>'/admin/cate',
+                    'jumpTime'=>2,
+                    'title'=>'删除成功页'
+                ]);
             } else {
 
             return back();

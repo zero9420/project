@@ -12,8 +12,16 @@
             {{$title}}
         </span>
     </div>
+    @if(Session::has('message'))
+        <script>alert({{Session::get('message')}});</script>
+    @endif
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
+            <div id="DataTables_Table_1_length" class="dataTables_length">
+                <label>
+                    <a href="/admin/cate/create" class="btn btn-primary">添加类别</a>
+                </label>
+            </div>
             <form action="/admin/cate" method='get'>
                 <div class="dataTables_filter" id="DataTables_Table_1_filter">
                     <label>
@@ -78,7 +86,7 @@
                 </tbody>
             </table>
             <div class="dataTables_info" id="DataTables_Table_1_info">
-                Showing 1 to 10 of 57 entries
+                共 {{$res->total()}} 数据, 每页显示 {{$res->count()}} 数据!
             </div>
             <style>
             	.pagination{
