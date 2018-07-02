@@ -12,9 +12,6 @@
             {{$title}}
         </span>
     </div>
-    @if(Session::has('message'))
-        <script>alert({{Session::get('message')}});</script>
-    @endif
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
             <div id="DataTables_Table_1_length" class="dataTables_length">
@@ -23,6 +20,23 @@
                 </label>
             </div>
             <form action="/admin/cate" method='get'>
+                <div id="DataTables_Table_1_length" class="dataTables_length">
+                    <label>
+                        显示
+                        <select name="pages" size="1" aria-controls="DataTables_Table_1">
+                            <option value="5" @if($arr['pages'] == 5)   selected="selected" @endif>
+                                5
+                            </option>
+                            <option value="10" @if($arr['pages'] == 10)   selected="selected" @endif>
+                                10
+                            </option>
+                            <option value="15" @if($arr['pages'] == 15)   selected="selected" @endif>
+                                15
+                            </option>
+                        </select>
+                        条数据
+                    </label>
+                </div>
                 <div class="dataTables_filter" id="DataTables_Table_1_filter">
                     <label>
                         关键字:
@@ -37,23 +51,23 @@
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 156px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                             编号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 212px;" aria-label="Browser: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 180px;" aria-label="Browser: activate to sort column ascending">
                             类别名称
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 197px;" aria-label="Platform(s): activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">
                             CATE_PID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 133px;" aria-label="Engine version: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Engine version: activate to sort column ascending">
                             CATE_PATH
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 97px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                             操作
                         </th>
                     </tr>
@@ -74,8 +88,10 @@
                             {{$v->cate_path}}
                         </td>
                         <td class=" ">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="/admin/cate/{{$v->cate_id}}/edit" class='btn btn-warning'>修改</a>
-                            <form action="/admin/cate/{{$v->cate_id}}" method='post'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <form action="/admin/cate/{{$v->cate_id}}" method='post' style="display: inline;">
 								{{method_field('DELETE')}}
 								{{csrf_field()}}
 								<button class='btn btn-danger' onclick="return confirm('确认要删除吗?');">删除</button>
@@ -88,22 +104,9 @@
             <div class="dataTables_info" id="DataTables_Table_1_info">
                 共 {{$res->total()}} 数据, 每页显示 {{$res->count()}} 数据!
             </div>
-            <style>
-            	.pagination{
-            		float:right;
-            		margin: 8px;
-            	}
-            	.pagination{
-            		list-style: none;
-            	}
-            	.pagination li{
-            		display:inline-block;
-            	}
-            	.pagination a{margin:0 5px;padding:2px 7px;border:1px solid #c5d52b;}
-				.pagination a:hover{background:#CCCC00;border:1px solid #000000;}
-            </style>
-            <div class="paginations">
-            	{{$res->links()}}
+            <link rel="stylesheet" type="text/css" href="/css/page.css" media="screen">
+            <div class="dataTables_paginate paging_full_numbers" id="paginate">
+                {{ $res->appends($arr)->links() }}
             </div>
         </div>
     </div>

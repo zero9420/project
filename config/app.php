@@ -227,5 +227,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'goods_path'=>'/uploads/goods/',
 
 ];

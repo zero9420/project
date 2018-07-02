@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Cate;
+use DB;
 
 class CateController extends Controller
 {
@@ -13,12 +14,18 @@ class CateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // 分类列表页
-        $res = Cate::paginate(10);
+        $res = Cate::where('cate_name','like','%'.$request->input('search').'%')->
+                paginate($request->input('pages',10));
+        $arr = ['pages'=>$request->input('pages'),'search'=>$request->input('search')];
+        // 获取每页首条数据编号
         $num = $res->firstItem();
-        return view('admin/cate/index',['title'=>'商品类别表','res'=>$res,'num'=>$num]);
+        return view('admin/cate/index',['title'=>'商品类别表',
+                                        'res'=>$res,
+                                        'num'=>$num,
+                                        'arr'=>$arr,
+                                    ]);
     }
 
     /**
@@ -30,7 +37,8 @@ class CateController extends Controller
     {
         error_reporting(0);
         // 分类添加页
-        $cates=Cate::select()->orderBy('cate_path')->get();
+        // $cates=Cate::select()->orderBy('cate_path')->get();
+        $cates = DB::select('select *,concat(cate_path,cate_id) from shop_cate order by concat(cate_path,cate_id)');
         // dd($cates);
         return view('admin/cate/add',['cates'=>$cates]);
     }
@@ -60,18 +68,24 @@ class CateController extends Controller
             $res['cate_path']=$cate->cate_path.$res['cate_pid'].',';
         }
         // 存入数据表
-        $data = Cate::create($res);
-        if($data){
+        try{
+            $data = Cate::create($res);
+            if($data){
+                return view('/layout/jump')->with([
+                        'message'=>'添加成功！',
+                        'url' =>'/admin/cate',
+                        'jumpTime'=>2,
+                        'title'=>'添加成功'
+                    ]);
+
+            }
+        } catch(\Exception $e) {
+
             return view('/layout/jump')->with([
-                    'message'=>'添加成功！',
-                    'url' =>'/admin/cate',
-                    'jumpTime'=>2,
-                    'title'=>'添加成功'
-                ]);
-
-        } else {
-
-            return back();
+                        'message'=>'添加失败！',
+                        'url' =>'/admin/cate/create',
+                        'jumpTime'=>2
+                    ]);
         }
     }
 
@@ -119,18 +133,24 @@ class CateController extends Controller
         $res = $request->except(['_token','_method']);
         // dd($res);
         // 修改数据表
-        $data = Cate::where('cate_id',$id)->update($res);
-        if($data){
+        try{
+                $data = Cate::where('cate_id',$id)->update($res);
+            if($data){
+                return view('/layout/jump')->with([
+                        'message'=>'修改成功！',
+                        'url' =>'/admin/cate',
+                        'jumpTime'=>2,
+                        'title'=>'修改成功'
+                    ]);
+
+            }
+        } catch(\Exception $e) {
+
             return view('/layout/jump')->with([
-                    'message'=>'修改成功！',
-                    'url' =>'/admin/cate',
-                    'jumpTime'=>2,
-                    'title'=>'修改成功'
-                ]);
-
-        } else {
-
-            return back();
+                        'message'=>'修改失败！',
+                        'url' =>'/admin/cate/'.$id.'/edit',
+                        'jumpTime'=>2
+                    ]);
         }
     }
 
@@ -152,7 +172,8 @@ class CateController extends Controller
                     'jumpTime'=>2,
                     'title'=>'删除失败'
                 ]);
-        } else {
+        }
+        try {
             $res = Cate::where('cate_id',$id)->delete();
             if($res){
                 return view('/layout/jump')->with([
@@ -161,10 +182,13 @@ class CateController extends Controller
                     'jumpTime'=>2,
                     'title'=>'删除成功页'
                 ]);
-            } else {
-
-            return back();
             }
+        } catch (\Exception $e) {
+            return view('/layout/jump')->with([
+                    'message'=>'删除失败',
+                    'url' =>'/admin/cate',
+                    'jumpTime'=>2
+                ]);
         }
     }
 }

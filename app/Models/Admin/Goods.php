@@ -18,7 +18,7 @@ class Goods extends Model
 
     protected $primaryKey = 'goods_id';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * 可以被批量赋值的属性。
@@ -30,9 +30,14 @@ class Goods extends Model
     					'goods_stock','goods_sales',
     					'goods_hot','goods_pic',
     					'goods_desc','goods_status',
-                        'create_time'
+                        'created_at','updated_at'
     				];
-
+    /**
+     * 模型的日期字段保存格式。
+     *
+     * @var string
+     */
+    protected $dateFormat = 'U';
      /**
      * 获得与商品关联字段。
      */
@@ -40,4 +45,5 @@ class Goods extends Model
     {
         return $this->hasOne('App\Models\Admin\GoodsSpec','goods_id');
     }
+
 }

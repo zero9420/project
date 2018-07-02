@@ -30,7 +30,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" class="error large">
+                        <input type="text" class="medium" name="goods_name" placeholder="请输入最长120字符的商品名">
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -41,13 +41,12 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <select class="medium" name="cate_pid">
-                            <option value="0">顶级分类</option>
+                        <select class="medium" name="goods_cate">
                             @foreach($cates as $k=>$v)
 	                            <?php
 	                            	$n = substr_count($v->cate_path,',')-1;
 	                            ?>
-								<option value="{{$v->cate_id}}">{{str_repeat('&nbsp;',$n*5)}}|--{{$v->cate_name}}</option>
+								<option value="{{$v->cate_name}}">{{str_repeat('&nbsp;',$n*5)}}|--{{$v->cate_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -84,16 +83,40 @@
                             *
                         </span>
                     </label>
-                    <div class="mws-form-item">
-                        <select class="large" name="goods_color[]" multiple>
-                            <option value="0">红色</option>
-                            <option value="1">橙色</option>
-                            <option value="2">黄色</option>
-                            <option value="3">绿色</option>
-                            <option value="4">青色</option>
-                            <option value="5">蓝色</option>
-                            <option value="6">紫色</option>
-                        </select>
+                    <div class="mws-form-item clearfix">
+                        <ul class="mws-form-list inline">
+                            <li>
+                                <input type="checkbox" name="goods_color[]" value="红色">
+                                <label>
+                                    红色
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_color[]" value="蓝色">
+                                <label>
+                                    蓝色
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_color[]" value="黄色">
+                                <label>
+                                    黄色
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_color[]" value="白色" checked="checked">
+                                <label>
+                                    白色
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_color[]" value="黑色">
+                                <label>
+                                    黑色
+                                </label>
+                            </li>
+                            <input type="text" name="goods_color[]" placeholder="其他颜色请输入,用'|'隔开!">
+                        </ul>
                     </div>
                 </div>
 
@@ -104,18 +127,63 @@
                             *
                         </span>
                     </label>
-                    <div class="mws-form-item">
-                        <select class="large" name="goods_size[]" multiple>
-                            <option value="0">均码</option>
-                            <option value="1">S</option>
-                            <option value="2">M</option>
-                            <option value="3">L</option>
-                            <option value="4">XS</option>
-                            <option value="5">XL</option>
-                            <option value="6">XXL</option>
-                            <option value="6">XXXL</option>
-                            <option value="6">XXXXL</option>
-                        </select>
+                    <div class="mws-form-item clearfix">
+                        <ul class="mws-form-list inline">
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="均码" checked="checked">
+                                <label>
+                                    均码
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="S">
+                                <label>
+                                    S
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="M">
+                                <label>
+                                    M
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="L">
+                                <label>
+                                    L
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="XS">
+                                <label>
+                                    XS
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="XL">
+                                <label>
+                                    XL
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="XXL">
+                                <label>
+                                    XXL
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="XXXL">
+                                <label>
+                                    XXXL
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="goods_size[]" value="XXXXL">
+                                <label>
+                                    XXXXL
+                                </label>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -160,7 +228,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <textarea name="goods_desc" class="required large">请输入商品描述
+                        <textarea name="goods_desc" class="required large">请输入最多255个字符的商品描述
                         </textarea>
                     </div>
                 </div>

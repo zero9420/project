@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Cate;
 use App\Models\Admin\Goods;
 use App\Models\Admin\GoodsSpec;
+use App\Http\Requests\FormRequest;
+use Config;
+use DB;
 
 class GoodsController extends Controller
 {
@@ -29,7 +32,7 @@ class GoodsController extends Controller
     {
         //
         // 商品分类
-        $cates=Cate::select()->get();
+        $cates = DB::select('select *,concat(cate_path,cate_id) from shop_cate order by concat(cate_path,cate_id)');
         return view('admin.goods.add',['title'=>'商品添加页','cates'=>$cates]);
     }
 
@@ -39,33 +42,50 @@ class GoodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormRequest $request)
     {
-        dd($request->all());
-        //表单验证
-        $this->validate($request, [
-            'goods_name' => 'required|regex:/^\w{5,120}$/',
-            'goods_cate' => 'required',
-            'goods_price'=>'required|regex:/^\d{0,6}\.\d{0,2}$/',
-            'goods_stock'=>'required|regex:/^\d+$/',
-            'goods_color'=>'required|regex:/^1[3456789]\d{9}$/',
-            'goods_size'=>'required|regex:/^1[3456789]\d{9}$/',
-            'goods_hot'=>'required|regex:/^1[3456789]\d{9}$/',
-            'goods_pic'=>'required|regex:/^1[3456789]\d{9}$/',
-            'goods_desc'=>'required|regex:/^1[3456789]\d{9}$/',
-            'goods_status'=>'required|regex:/^1[3456789]\d{9}$/',
-            'goods_status'=>'required|regex:/^1[3456789]\d{9}$/',
-        ],[
-            'username.required'=>'用户名不能为空',
-            'username.regex'=>'用户名格式不正确',
-            'password.required'=>'密码不能为空',
-            'password.regex'=>'密码格式不正确',
-            'repass.same'=>'两次密码不一致',
-            'email.email'=>'邮箱格式不正确',
-            'phone.required'=>'手机号不能为空',
-            'phone.regex'=>'手机号格式不正确'
+        $res = $request->except(['_token','goods_pic']);
+        // 商品图片
+        if($request->hasFile('goods_pic')){
 
-        ]);
+            //设置名字
+            $name = str_random(10).time();
+
+            //获取后缀
+            $suffix = $request->file('goods_pic')->getClientOriginalExtension();
+
+            //移动
+            $request->file('goods_pic')->move('./uploads/goods/',$name.'.'.$suffix);
+        }
+
+        //存数据表
+        $res['goods_pic'] = Config::get('app.goods_path').$name.'.'.$suffix;
+        $res['goods_color'] = implode('|',$res['goods_color']);
+        $res['goods_size'] = implode('|', $res['goods_size']);
+        // 开启事务
+        DB::beginTransaction();
+        // 存数据到商品表
+        $data = Goods::create($res);
+        // 获取商品id
+        $res['goods_id'] = $data->goods_id;
+        // 存数据到商品详情表
+        $data_spec = GoodsSpec::create($res);
+        if($data && $data_spec){   //判断两条同时执行成功
+            DB::commit();  //提交事务
+            return view('/layout/jump')->with([
+                        'message'=>'添加成功！',
+                        'url' =>'/admin/goods',
+                        'jumpTime'=>2,
+                        'title'=>'添加成功'
+                    ]);
+        } else {
+            DB::rollback();  //回滚事务
+            return view('/layout/jump')->with([
+                        'message'=>'添加失败！',
+                        'url' =>'/admin/goods/create',
+                        'jumpTime'=>2,
+                    ]);
+        }
     }
 
     /**
