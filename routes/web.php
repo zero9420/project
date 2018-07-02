@@ -20,9 +20,13 @@ Route::get('/', function () {
  * 后台路由组
  */
 
+
 Route::group([],function(){
 	// 后台首页
-	Route::any('admin','admin\IndexController@index');
+		Route::any('admin','admin\IndexController@index');
+		//角色管理
+		Route::resource('admin/auth','admin\AuthController');
+
 });
 
 

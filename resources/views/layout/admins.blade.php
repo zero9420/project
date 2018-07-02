@@ -35,7 +35,6 @@
 
 <link rel="stylesheet" type="text/css" href="/admins/css/admins.css" media="screen">
 
-
 <title>@yield('title')</title>
 
 </head>
@@ -49,10 +48,7 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
-                    <h4 style="font-size: 24px;color:white">
-                        云商城
-                    </h4>
-            	<span style="color:white" id="nowsTime"></span>
+            	<h3 style='color:white'>lamp203商城</h3>
 			</div>
         </div>
         
@@ -140,7 +136,7 @@
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, world!
+                        Hello, lamp203
                     </div>
                     <ul>
                     	<li><a href="#">修改头像</a></li>
@@ -181,10 +177,10 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-list"></i>用户管理</a>
+                        <a href="#"><i class="icon-list"></i>角色管理</a>
                         <ul class='closed'>
-                            <li><a href="form_layouts.html">添加用户</a></li>
-                            <li><a href="form_elements.html">浏览用户</a></li>
+                            <li><a href="/admin/auth/create">添加角色</a></li>
+                            <li><a href="/admin/auth/">浏览角色</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -193,20 +189,23 @@
         
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-        
+                        @if(session('success'))
+                <div class="mws-form-message info">
+                    {{session('success')}}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="mws-form-message warning">
+                    {{session('error')}}
+                </div>
+            @endif
         	<!-- Inner Container Start -->
             <div class="container">
-            
-            	<!-- Statistics Button Container -->
-            	<div class="mws-stat-container clearfix">
-                
-                @section('content')
+            @section('content')
 
 
-                @show
-
-                </div>
-                
+            @show
             </div>
             <!-- Inner Container End -->
                        
@@ -254,8 +253,11 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
-    <script src="/admins/js/times/nowtime.js"></script>
 
+    @section('js')
+
+
+    @show
 
 </body>
 </html>
