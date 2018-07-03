@@ -15,17 +15,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//后台路由组
-Route::group([],function(){
+/**
+ *
+ * 后台路由组
+ */
 
-	//后台首页
+
+Route::group([],function(){
+	// 后台首页
+	Route::any('admin','admin\IndexController@index');
+	// 商品分类
+	Route::resource('admin/cate','admin\CateController');
+	// 商品管理
+	Route::resource('admin/goods','admin\GoodsController');
+	//角色管理
+	Route::resource('admin/auth','admin\AuthController');
+
+		//后台首页
 	Route::any('/admin/index','admin\IndexController@index');
 	//友情链接
 	Route::resource('/admin/link','admin\LinkController');
 
 	//广告管理
 	Route::resource('/admin/position','admin\PositionController');
-
 
 });
 
@@ -40,5 +52,4 @@ Route::group([],function(){
 	Route::post('/home/userinfoma','home\IndexController@UpdateUser');
 
 });
-
 
