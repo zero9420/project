@@ -47,7 +47,7 @@ class FormRequest extends FormRequest
             'goods_price.regex'=>'商品价格格式不正确',
             'goods_stock.required'=>'商品库存不能为空',
             'goods_stock.regex'=>'商品库存格式不正确',
-            'goods_stock.required'=>'商品图片不能为空',
+            'goods_pic.required'=>'商品图片不能为空',
             'goods_desc.required'=>'商品描述不能为空',
             'goods_desc.max'=>'商品描述格式不正确',
         ];

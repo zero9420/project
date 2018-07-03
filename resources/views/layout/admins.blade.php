@@ -72,7 +72,7 @@
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
                                     <span class="time">
-                                        January 21, 2012
+                                        {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
                             </li>
@@ -82,7 +82,7 @@
                                         Lorem ipsum dolor sit amet
                                     </span>
                                     <span class="time">
-                                        January 21, 2012
+                                        {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
                           
@@ -112,7 +112,7 @@
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
                                     <span class="time">
-                                        January 21, 2012
+                                        {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
                             </li>
@@ -164,15 +164,9 @@
                 <span></span>
                 <span></span>
             </div>
-            
-        	<!-- Searchbox -->
-        	<div id="mws-searchbox" class="mws-inset">
-            	<form action="typography.html">
-                	<input type="text" class="mws-search-input" placeholder="Search...">
-                    <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
-            
+
+
+
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
@@ -228,7 +222,7 @@
 
             <!-- Footer -->
             <div id="mws-footer">
-            	Copyright Your Website 2012. All Rights Reserved.
+            	Copyright Your Website {{date('Y-m-d',time())}}. All Rights Reserved.
             </div>
 
         </div>

@@ -20,7 +20,9 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        return view('admin.goods.index',['title'=>'商品浏览页']);
+        $goods = Goods::with('spec')->paginate(10);
+        $num = $goods->firstItem();
+        return view('admin/goods/index',['title'=>'商品浏览页','goods'=>$goods,'num'=>$num]);
     }
 
     /**
@@ -32,7 +34,9 @@ class GoodsController extends Controller
     {
         //
         // 商品分类
-        $cates = DB::select('select *,concat(cate_path,cate_id) from shop_cate order by concat(cate_path,cate_id)');
+        $cates = Cate::select(DB::raw('*,concat(cate_path,cate_id) as paths'))
+                ->orderBy('paths')
+                ->get();
         return view('admin.goods.add',['title'=>'商品添加页','cates'=>$cates]);
     }
 
@@ -44,21 +48,57 @@ class GoodsController extends Controller
      */
     public function store(FormRequest $request)
     {
-        $res = $request->except(['_token','goods_pic']);
+        $res = $request->except(['_token']);
         // 商品图片
-        if($request->hasFile('goods_pic')){
-
-            //设置名字
-            $name = date('Y-m-d H:i:s',time()).str_random(10);
-            //获取后缀
-            $suffix = $request->file('goods_pic')->getClientOriginalExtension();
-
-            //移动
-            $request->file('goods_pic')->move('./uploads/goods/',$name.'.'.$suffix);
+        foreach ($res['goods_pic'] as $key => $value) {
+            $suffix[] = $value->getClientOriginalExtension();
+        }
+        //设置名字
+        $name1 = time().str_random(10);
+        $name2 = time().str_random(10);
+        $name3 = time().str_random(10);
+        $name4 = time().str_random(10);
+        $name5 = time().str_random(10);
+        $file = $request->file('goods_pic');
+        // 判断是否上传图片数量存入数据库
+        if(count($file) == '5') {
+            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
+            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
+            $file[2]->move('./uploads/goods/',$name3.'.'.$suffix[2]);
+            $file[3]->move('./uploads/goods/',$name4.'.'.$suffix[3]);
+            $file[4]->move('./uploads/goods/',$name5.'.'.$suffix[4]);
+            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
+            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
+            $res['goods_pic3'] = Config::get('app.goods_path').$name3.'.'.$suffix[2];
+            $res['goods_pic4'] = Config::get('app.goods_path').$name4.'.'.$suffix[3];
+            $res['goods_pic5'] = Config::get('app.goods_path').$name5.'.'.$suffix[4];
+        } else if (count($file) == '4') {
+            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
+            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
+            $file[2]->move('./uploads/goods/',$name3.'.'.$suffix[2]);
+            $file[3]->move('./uploads/goods/',$name4.'.'.$suffix[3]);
+            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
+            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
+            $res['goods_pic3'] = Config::get('app.goods_path').$name3.'.'.$suffix[2];
+            $res['goods_pic4'] = Config::get('app.goods_path').$name4.'.'.$suffix[3];
+        } else if (count($file) == '3')  {
+            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
+            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
+            $file[2]->move('./uploads/goods/',$name3.'.'.$suffix[2]);
+            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
+            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
+            $res['goods_pic3'] = Config::get('app.goods_path').$name3.'.'.$suffix[2];
+        } else if (count($file) == '2')  {
+            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
+            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
+            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
+            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
+        }  else if (count($file) == '1')  {
+            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
+            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
         }
 
         //存数据表
-        $res['goods_pic'] = Config::get('app.goods_path').$name.'.'.$suffix;
         $res['goods_color'] = implode('|',$res['goods_color']);
         $res['goods_size'] = implode('|', $res['goods_size']);
         // 开启事务
@@ -95,7 +135,8 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //
+        $detail = Goods::with('spec')->find($id);
+        return view('admin/goods/show',['title'=>'商品详情页','detail'=>$detail]);
     }
 
     /**
@@ -106,7 +147,7 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin/goods/edit',['title'=>'商品修改页']);
     }
 
     /**
@@ -129,6 +170,6 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo "商品删除";
     }
 }

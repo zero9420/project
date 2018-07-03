@@ -28,9 +28,8 @@ class Goods extends Model
     protected $fillable = ['goods_name','goods_cate',
     					'goods_price','goods_price',
     					'goods_stock','goods_sales',
-    					'goods_hot','goods_pic',
-    					'goods_desc','goods_status',
-                        'created_at','updated_at'
+    					'goods_hot','goods_desc',
+                        'goods_status','created_at','updated_at'
     				];
     /**
      * 模型的日期字段保存格式。
