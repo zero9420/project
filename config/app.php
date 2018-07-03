@@ -92,7 +92,7 @@ return [
     */
 
     'fallback_locale' => 'en',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -163,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+      
 
         /*
          * Package Service Providers...
@@ -225,8 +226,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
 
     ],
-    'goods_path'=>'/uploads/goods/',
+
+    'path' => '/uploads/',
+    'address' => '/userinfo/',
 
 ];

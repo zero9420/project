@@ -48,7 +48,7 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
-            	<h3 style='color:white'>lamp203商城</h3>
+            	<h3 style='color:white'>后台管理</h3>
 			</div>
         </div>
         
@@ -177,63 +177,61 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-list"></i>角色管理</a>
+                        <a href="#"><i class="icon-list"></i>友情链接</a>
                         <ul class='closed'>
-                            <li><a href="/admin/auth/create">添加角色</a></li>
-                            <li><a href="/admin/auth/">浏览角色</a></li>
+                            <li><a href="/admin/link/create">添加链接</a></li>
+                            <li><a href="/admin/link">浏览链接</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <a href="#"><i class="icon-list"></i>广告管理</a>
                         <ul class='closed'>
-                            <li><a href="/admin/cate/create">添加分类</a></li>
-                            <li><a href="/admin/cate">浏览分类</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-list"></i>商品管理</a>
-                        <ul class='closed'>
-                            <li><a href="/admin/goods/create">添加商品</a></li>
-                            <li><a href="/admin/goods">浏览商品</a></li>
+                            <li><a href="/admin/position/create">添加广告</a></li>
+                            <li><a href="/admin/position">浏览广告</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>         
         </div>
+       
+        
         
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-                        @if(session('success'))
-                <div class="mws-form-message info">
-                    {{session('success')}}
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="mws-form-message warning">
-                    {{session('error')}}
-                </div>
-            @endif
+        
         	<!-- Inner Container Start -->
             <div class="container">
+            
+                @if(session('success'))
+                    <div class="mws-form-message info">
+                        {{session('success')}}
+                    </div>
+                @endif
 
+                @if(session('error'))
+                    <div class="mws-form-message warning">
+                        {{session('error')}}
+                    </div>
+                @endif
+                
                 @section('content')
 
-            @section('content')
 
-            @show
+                @show
 
+               
+                
             </div>
             <!-- Inner Container End -->
-
+                       
             <!-- Footer -->
             <div id="mws-footer">
             	Copyright Your Website 2012. All Rights Reserved.
             </div>
-
+            
         </div>
         <!-- Main Container End -->
-
+        
     </div>
 
     <!-- JavaScript Plugins -->
@@ -271,10 +269,16 @@
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
 
-    @section('js')
+    <script type="text/javascript">
+           
+           setTimeout(function(){
+
+                $('.mws-form-message').remove();
+
+           },3000) 
 
 
-    @show
+    </script>
 
 </body>
 </html>
