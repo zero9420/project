@@ -22,17 +22,19 @@ Route::get('/', function () {
 
 
 Route::group([],function(){
-	// 后台首页
-	Route::any('admin','admin\IndexController@index');
+
+	//后台首页
+	Route::any('/admin/index','admin\IndexController@index');
+
 	// 商品分类
 	Route::resource('admin/cate','admin\CateController');
+
 	// 商品管理
 	Route::resource('admin/goods','admin\GoodsController');
+
 	//角色管理
 	Route::resource('admin/auth','admin\AuthController');
 
-		//后台首页
-	Route::any('/admin/index','admin\IndexController@index');
 	//友情链接
 	Route::resource('/admin/link','admin\LinkController');
 
