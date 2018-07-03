@@ -49,8 +49,7 @@ class GoodsController extends Controller
         if($request->hasFile('goods_pic')){
 
             //设置名字
-            $name = str_random(10).time();
-
+            $name = date('Y-m-d H:i:s',time()).str_random(10);
             //获取后缀
             $suffix = $request->file('goods_pic')->getClientOriginalExtension();
 
