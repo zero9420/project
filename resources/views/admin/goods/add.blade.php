@@ -216,7 +216,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="file" name='goods_pic' class="fileinput-preview" style="width: 100%; padding-right: 84px;" readonly="readonly" placeholder="No file selected...">
+                        <input type="file" name='goods_pic[]' class="fileinput-preview" style="width: 100%; padding-right: 84px;" multiple="multiple"  readonly="readonly" placeholder="No file selected...">
                     </div>
                 </div>
 

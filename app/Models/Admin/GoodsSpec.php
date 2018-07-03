@@ -25,5 +25,5 @@ class GoodsSpec extends Model
      *
      * @var array
      */
-    protected $fillable = ['goods_id','goods_color','goods_size'];
+    protected $fillable = ['goods_id','goods_color','goods_size','goods_pic1','goods_pic2','goods_pic3','goods_pic4','goods_pic5'];
 }
