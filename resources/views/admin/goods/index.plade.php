@@ -166,10 +166,6 @@
 
             <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
-				<!-- {{$res->links()}} -->
-
-                <!-- $arr  ====> ['num'=20,'search'=>'zz'] -->
-
                 {{--$res->links()--}}
             </div>
         </div>

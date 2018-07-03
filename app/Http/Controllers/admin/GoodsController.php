@@ -20,7 +20,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.goods.index',['title'=>'商品浏览页']);
     }
 
     /**
