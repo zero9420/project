@@ -248,21 +248,25 @@ class LunboController extends Controller
             }
           
 
-        try{
+       
             $data = DB::table('lunbo')->where('lunbo_id',$id)->update($res);
 
             if($data){
-                return redirect('/admin/lunbo')->with('success','修改成功');
+                return view('/layout/jump')->with([
+                        'message'=>'修改成功！',
+                        'url' =>'/admin/lunbo',
+                        'jumpTime'=>2
+                    ]);
             }
-        }catch(\Exception $e){
-
-            return back()->with('error');
-
-        }
+       
 
 
 
-         return redirect('/admin/lunbo')->with('error','更新失败');
+         return view('/layout/jump')->with([
+                        'message'=>'修改失败！',
+                        'url' =>'/admin/lunbo/'.$id.'/edit',
+                        'jumpTime'=>2
+                    ]);
 
     }
 

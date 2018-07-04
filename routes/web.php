@@ -44,6 +44,9 @@ Route::group([],function(){
 	//轮播管理
 	Route::resource('admin/lunbo','admin\LunboController');
 
+	//订单管理
+
+	Route::resource('admin/order','admin\OrderController');
 });
 
 

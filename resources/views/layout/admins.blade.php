@@ -208,10 +208,18 @@
                     </li>
 
                      <li>
-                        <a href="#"><i class="icon-link"></i>轮播管理</a>
+                        <a href="#"><i class="icol32-shape-group"></i>轮播管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/lunbo/create">添加轮播</a></li>
                             <li><a href="/admin/lunbo">浏览轮播</a></li>
+                        </ul>
+                    </li>
+
+                     <li>
+                        <a href="#"><i class="icol32-page-white-edit"></i>订单管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/lunbo/create">浏览订单</a></li>
+                            <li><a href="/admin/lunbo">订单状态</a></li>
                         </ul>
                     </li>
                 </ul>

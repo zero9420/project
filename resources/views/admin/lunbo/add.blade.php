@@ -63,7 +63,7 @@
                             	 <div class="mws-form-row" style="width:92%" >
                                 	<label class="mws-form-label">添加时间:</label>
                                 	<div class="mws-form-item">
-                                    	<input type="text" class="large" value="{{date('Y-m-d H:i:s',time())}}" name="lunbo_time">
+                                    	<input type="text" class="large" value="{{date('Y-m-d H:i:s',time())}}" disabled name="lunbo_time">
                                     </div>
                                 </div>
 
