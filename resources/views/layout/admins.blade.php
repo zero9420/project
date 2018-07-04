@@ -212,6 +212,10 @@
                         <ul class='closed'>
                             <li><a href="/admin/lunbo/create">添加轮播</a></li>
                             <li><a href="/admin/lunbo">浏览轮播</a></li>
+                    <li>
+                        <a href="#"><i class="icon-link"></i>个人信息</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/user">浏览信息</a></li>
                         </ul>
                     </li>
                 </ul>

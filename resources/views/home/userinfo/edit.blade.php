@@ -23,6 +23,7 @@
 
 </head>
 <body>
+
 <header id="pc-header">
 	<div class="pc-header-nav">
 		<div class="pc-header-con">
@@ -111,15 +112,16 @@
 <div class="containers center"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 <section id="member">
 
-	<form action="/home/userinfoma" method="post" enctype='multipart/form-data'>
+	<form action="/home/userup/{{$mation->info_id}}" method="post" enctype='multipart/form-data'>
 	<div class="member-center clearfix">
 		<div class="member-left fl">
 			<div class="member-apart ">
 				<div class="fl"><a href="#">
-					<img src="/homes/img/mem.png"></a>
+					<img src="{{$mation->info_image}}"></a>
 				</div>
 				<div class="fffl" >
-					<p>用户名:<div></div>撒反对</p>
+
+					<p>用户名：<div></div>{{$mation->info_nickname}}</p>
 					
 				</div>
 				
@@ -157,29 +159,29 @@
 						<li class="clearfix">
 							<div class="warn1"></div>
 							<div class="warn2">姓名</div>
-							<input type="text" class="war" name="info_name">
+							<input type="text" class="war" name="info_name" value="{{$mation->info_name}}">
 							<!-- <div class="warn4"><a href="#">修改</a> </div> -->
 						</li>
 						<li class="clearfix">
 							<div class="warn1"></div>
 							<div class="warn2">性别</div>
-							<input type="radio" name="info_sex" id="inlineRadio1" value="1" class='p1'> 男
-							<input type="radio" name="info_sex" id="inlineRadio1" value="2" class='p1'> 女
+							<input type="radio" name="info_sex" id="inlineRadio1" value="1" class='p1'   @if($mation->info_sex == 1)  checked @endif> 男
+							<input type="radio" name="info_sex" id="inlineRadio1" value="2" class='p1'  @if($mation->info_sex == 2)  checked @endif > 女
 						</li>
 						<li class="clearfix">
 							<div class="warn1"></div>
 							<div class="warn2">昵称</div>
-							<input type="text" class="war" name="info_nickname" value="">
+							<input type="text" class="war" name="info_nickname" value="{{$mation->info_nickname}}">
 						</li>
 						<li class="clearfix">
 							<div class="warn6"></div>
 							<div class="warn2">联系电话</div>
-							<input type="text" class="war" name="info_telphone" value="">
+							<input type="text" class="war" name="info_telphone" value="{{$mation->info_telphone}}">
 						</li>
 						<li class="clearfix">
 							<div class="warn6"></div>
 							<div class="warn2">地址</div>
-							<input type="text" class="wa" name="info_address" value="">
+							<input type="text" class="wa" name="info_address" value="{{$mation->info_address}}">
 						</li>
 						<li class="clearfix">
 							<div class="warn6"></div>
@@ -285,6 +287,9 @@
         $(this).removeClass("hover");
         $(this).find(".nav a").removeClass("hover");
     })
+</script>
+<script>
+	onfocus="javascript:if(this.value=='未选择任何文件')this.value='';"
 </script>
 </body>
 </html>
