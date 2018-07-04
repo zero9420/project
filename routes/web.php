@@ -20,16 +20,22 @@ Route::get('/', function () {
  * 后台路由组
  */
 
-
-Route::group([],function(){
+Route::get('/admin/login','admin\LoginController@login');
+Route::post('/admin/login','admin\LoginController@dologin');
+Route::any('/admin/captcha','admin\LoginController@captcha');
+Route::group(['middleware'=>'adminlogin'],function(){
 	// 后台首页
-	Route::any('admin','admin\IndexController@index');
+	Route::any('admin/index','admin\IndexController@index');
+	//退出登录
+	Route::any('admin/outlogin','admin\LoginController@outlogin');
 	// 商品分类
 	Route::resource('admin/cate','admin\CateController');
 	// 商品管理
 	Route::resource('admin/goods','admin\GoodsController');
 	//角色管理
 	Route::resource('admin/auth','admin\AuthController');
+	Route::any('admin/authpassword/{id}','admin\AuthController@authpassword');
+	Route::post('admin/editpasswords','admin\AuthController@editpasswords');
 });
 
 
@@ -37,6 +43,10 @@ Route::group([],function(){
  *
  * 前台路由组
  */
+Route::get('/home/register','home\RegisterController@index');
+Route::post('/home/registers','home\RegisterController@registers');
+Route::get('/home/login','home\LoginController@index');
+Route::post('/home/login','home\LoginController@login');
 
 Route::group([],function(){
 
