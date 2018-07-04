@@ -206,6 +206,12 @@
                             <li><a href="/admin/link">浏览链接</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="icon-link"></i>个人信息</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/user">浏览信息</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>

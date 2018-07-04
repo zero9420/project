@@ -41,6 +41,9 @@ Route::group([],function(){
 	//广告管理
 	Route::resource('/admin/position','admin\PositionController');
 
+	//前台个人中心信息浏览
+	Route::get('/admin/user', 'admin\IndexController@Userinfo');
+
 });
 
 
@@ -48,10 +51,27 @@ Route::group([],function(){
 //前台路由组
 Route::group([],function(){
 
-
+	//前台首页
 	Route::get('/home/index','home\IndexController@Index');
+
+	//前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');
-	Route::post('/home/userinfoma','home\IndexController@UpdateUser');
+
+	//前台个人中心注册页
+	Route::any('/home/userinfoma','home\IndexController@CreateUser');
+
+	//前台个人中心修改页
+	Route::post('/home/userup/{id}','home\IndexController@Update');
+
+	//前台检测登陆者信息跳转页
+	Route::any('/home/tiao','home\IndexController@tiao');
 
 });
 
+
+//test测试
+Route::get('/home/home',function(){
+
+
+	session(['id'=>18]);
+});
