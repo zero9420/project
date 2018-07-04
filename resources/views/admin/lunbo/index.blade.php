@@ -61,30 +61,30 @@
                 }
 
                 img{
-                	width:100PX;
-                	height: 100px;
+                	width:77PX;
+                	height: 90px;
                 }
 			</style>
 
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-			<form action="/admin/user" method='get'>
+			<form action="/admin/lunbo" method='get'>
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
 	                    显示
 	                    <select name="num" size="1" aria-controls="DataTables_Table_1">
-	                        <option value="10" selected="selected">
-	                            10
+	                        <option value="5" @if($arr == 5)   selected="selected" @endif>
+	                            5
 	                        </option>
-	                        <option value="25">
-	                            25
+	                        <option value="25" @if($arr == 15)   selected="selected" @endif >
+	                            15
 	                        </option>
-	                        <option value="50">
-	                            50
+	                        <option value="50" @if($arr == 20)   selected="selected" @endif>
+	                            20
 	                        </option>
-	                        <option value="100">
-	                            100
+	                        <option value="100" @if($arr == 30)   selected="selected" @endif>
+	                            30
 	                        </option>
 	                    </select>
 	                    条数据
@@ -93,7 +93,8 @@
 	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
 	                <label>
 	                    关键字:
-	                    <input type="text" name='search' aria-controls="DataTables_Table_1">
+
+	                    <input type="text" name='lunbo_title' value="{{$res['lunbo_title']}}" aria-controls="DataTables_Table_1">
 	                </label>
 
 	                <button class='btn btn-info'>搜索</button>
@@ -117,7 +118,7 @@
                             轮播标题
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 200px;" aria-label="Platform(s): activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 300px;" aria-label="Platform(s): activate to sort column ascending">
                             轮播图片
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -130,7 +131,7 @@
                            当前状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width:20px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width:80px;" aria-label="CSS grade: activate to sort column ascending">
                            操作
                         </th>
                     </tr>
@@ -196,7 +197,7 @@
             </table>
 
             <div class="dataTables_info" id="DataTables_Table_1_info">
-                Showing 1 to 10 of 57 entries
+               
             </div>
 
 			<style>

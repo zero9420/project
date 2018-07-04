@@ -105,7 +105,7 @@
                                 {{csrf_field()}}
 
                                 {{method_field('PUT')}}
-                             <input type="submit" class="btn btn-success" value="修改fds">
+                             <input type="submit" class="btn btn-success" value="修改">
                         </div>
    
                         </form>
