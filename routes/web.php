@@ -32,6 +32,10 @@ Route::group([],function(){
 	// 商品管理
 	Route::resource('admin/goods','admin\GoodsController');
 
+	// 商品ajax修改
+	Route::any('/admin/goods/up/{id}','admin\GoodsdetailController@up');
+	Route::any('/admin/goods/down/{id}','admin\GoodsdetailController@down');
+
 	//角色管理
 	Route::resource('admin/auth','admin\AuthController');
 

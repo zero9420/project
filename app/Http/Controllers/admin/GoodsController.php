@@ -20,7 +20,8 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $goods = Goods::with('spec')->paginate(10);
+        $goods = Goods::with('spec')->with('cate')->paginate(10);
+        // dd($goods);
         $num = $goods->firstItem();
         return view('admin/goods/index',['title'=>'商品浏览页','goods'=>$goods,'num'=>$num]);
     }
@@ -37,6 +38,13 @@ class GoodsController extends Controller
         $cates = Cate::select(DB::raw('*,concat(cate_path,cate_id) as paths'))
                 ->orderBy('paths')
                 ->get();
+        foreach($cates as $k => $v){
+
+            // 根据phth,将模版层次分明
+            $rs = substr_count($v->cate_path,',')-1;
+            $v->cate_name = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$rs).'|--'.$v->cate_name;
+
+        }
         return view('admin.goods.add',['title'=>'商品添加页','cates'=>$cates]);
     }
 
@@ -48,82 +56,66 @@ class GoodsController extends Controller
      */
     public function store(FormRequest $request)
     {
-        $res = $request->except(['_token']);
-        // 商品图片
-        foreach ($res['goods_pic'] as $key => $value) {
-            $suffix[] = $value->getClientOriginalExtension();
-        }
-        //设置名字
-        $name1 = time().str_random(10);
-        $name2 = time().str_random(10);
-        $name3 = time().str_random(10);
-        $name4 = time().str_random(10);
-        $name5 = time().str_random(10);
-        $file = $request->file('goods_pic');
-        // 判断是否上传图片数量存入数据库
-        if(count($file) == '5') {
-            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
-            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
-            $file[2]->move('./uploads/goods/',$name3.'.'.$suffix[2]);
-            $file[3]->move('./uploads/goods/',$name4.'.'.$suffix[3]);
-            $file[4]->move('./uploads/goods/',$name5.'.'.$suffix[4]);
-            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
-            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
-            $res['goods_pic3'] = Config::get('app.goods_path').$name3.'.'.$suffix[2];
-            $res['goods_pic4'] = Config::get('app.goods_path').$name4.'.'.$suffix[3];
-            $res['goods_pic5'] = Config::get('app.goods_path').$name5.'.'.$suffix[4];
-        } else if (count($file) == '4') {
-            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
-            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
-            $file[2]->move('./uploads/goods/',$name3.'.'.$suffix[2]);
-            $file[3]->move('./uploads/goods/',$name4.'.'.$suffix[3]);
-            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
-            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
-            $res['goods_pic3'] = Config::get('app.goods_path').$name3.'.'.$suffix[2];
-            $res['goods_pic4'] = Config::get('app.goods_path').$name4.'.'.$suffix[3];
-        } else if (count($file) == '3')  {
-            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
-            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
-            $file[2]->move('./uploads/goods/',$name3.'.'.$suffix[2]);
-            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
-            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
-            $res['goods_pic3'] = Config::get('app.goods_path').$name3.'.'.$suffix[2];
-        } else if (count($file) == '2')  {
-            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
-            $file[1]->move('./uploads/goods/',$name2.'.'.$suffix[1]);
-            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
-            $res['goods_pic2'] = Config::get('app.goods_path').$name2.'.'.$suffix[1];
-        }  else if (count($file) == '1')  {
-            $file[0]->move('./uploads/goods/',$name1.'.'.$suffix[0]);
-            $res['goods_pic1'] = Config::get('app.goods_path').$name1.'.'.$suffix[0];
-        }
+        // 获取表单数据
+        $data = $request->except('_token','goods_pic[]');
 
-        //存数据表
-        $res['goods_color'] = implode('|',$res['goods_color']);
-        $res['goods_size'] = implode('|', $res['goods_size']);
-        // 开启事务
-        DB::beginTransaction();
-        // 存数据到商品表
-        $data = Goods::create($res);
+        $res = Goods::create($data);
         // 获取商品id
-        $res['goods_id'] = $data->goods_id;
-        // 存数据到商品详情表
-        $data_spec = GoodsSpec::create($res);
-        if($data && $data_spec){   //判断两条同时执行成功
-            DB::commit();  //提交事务
-            return view('/layout/jump')->with([
-                        'message'=>'添加成功！',
+        $goods_id = $res->goods_id;
+
+        //设置名字
+        //商品图片
+        if($request->hasFile('goods_pic')){
+
+            $req = $request->file('goods_pic');
+
+            $goods_pic= [];
+
+            foreach($req as $k => $v){
+
+                $g_pic = [];
+
+                //设置名字
+                $name = date('Y-m-d-H-i-s',time()).str_random(10);
+
+                //获取后缀
+                $suffix = $v->getClientOriginalExtension();
+
+                //移动
+                $v->move('./uploads/goods/photo/',$name.'.'.$suffix);
+
+                // 添加商品id
+                $g_pic['goods_gid'] = $goods_id;
+
+                // 添加商品图片
+                $g_pic['goods_pic'] = '/uploads/goods/photo/'.$name.'.'.$suffix;
+
+                // 存入二维数组
+                $goods_pic[] = $g_pic;
+
+            }
+        }
+        $goods = Goods::find($goods_id);
+        // dd($goods_pic);
+        //模型
+        try{
+            // 存入数据库
+            $data = $goods->spec()->createMany($goods_pic);
+            if($data){
+                return view('/layout/jump')->with([
+                        'message'=>'添加成功',
                         'url' =>'/admin/goods',
                         'jumpTime'=>2,
                         'title'=>'添加成功'
                     ]);
-        } else {
-            DB::rollback();  //回滚事务
+            }
+        }catch(\Exception $e){
             return view('/layout/jump')->with([
-                        'message'=>'添加失败！',
+                        'message'=>'添加失败',
                         'url' =>'/admin/goods/create',
                         'jumpTime'=>2,
                     ]);
+
         }
     }
 
@@ -147,7 +139,25 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin/goods/edit',['title'=>'商品修改页']);
+        // 获取分类
+        $cate = Cate::select(DB::raw('*,concat(cate_path,cate_id) as paths'))
+                ->orderBy('paths')
+                ->get();
+
+        foreach($cate as $k => $v){
+
+            // 根据phth,将模版层次分明
+            $rs = substr_count($v->cate_path,',')-1;
+            $v->cate_name = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$rs).'|--'.$v->cate_name;
+
+        }
+        // 获取商品
+        $goods = Goods::where('goods_id',$id)->first();
+        return view('admin/goods/edit',
+            ['title'=>'商品修改页',
+            'cate'=>$cate,
+            'goods'=>$goods
+        ]);
     }
 
     /**
@@ -160,6 +170,43 @@ class GoodsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //表单验证
+        $this->validate($request, [
+            'goods_name' => 'required|unique:shop_goods|max:100',
+            'goods_price'=>'required|regex:/^\d{0,9}\.\d{0,2}$/',
+            'goods_stock'=>'required|regex:/^\d+$/',
+        ],[
+            'goods_name.required'=>'商品名不能为空',
+            'goods_name.unique'=>'商品名不能重复',
+            'goods_name.max'=>'商品名格式不正确',
+            'goods_price.required'=>'商品价格不能为空',
+            'goods_price.regex'=>'商品价格格式不正确',
+            'goods_stock.required'=>'商品库存不能为空',
+            'goods_stock.regex'=>'商品库存格式不正确',
+
+        ]);
+        $res = $request->except('_token','_method');
+        //模型
+        try{
+            // 修改数据库
+            $data = Goods::where('goods_id',$id)->update($res);
+            if($data){
+                return view('/layout/jump')->with([
+                        'message'=>'修改成功',
+                        'url' =>'/admin/goods',
+                        'jumpTime'=>2,
+                        'title'=>'修改成功'
+                    ]);
+            }
+        }catch(\Exception $e){
+            return view('/layout/jump')->with([
+                        'message'=>'修改失败',
+                        'url' =>'/admin/goods/'.$id.'/edit',
+                        'jumpTime'=>2,
+                    ]);
+
+        }
+
     }
 
     /**

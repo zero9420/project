@@ -186,7 +186,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-folder-closed"></i>商品管理</a>
+                        <a href="#"><i class="icon-shopping-cart"></i>商品管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/goods/create">添加商品</a></li>
                             <li><a href="/admin/goods">浏览商品</a></li>
