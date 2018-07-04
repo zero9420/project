@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Position;
+use App\Models\Admin\Position;
 use Config;
 use App\Http\Requests\PositionRequest;
 
@@ -139,7 +139,6 @@ class PositionController extends Controller
 
         $res = $request->except('_token','_method','position_image');
 
-        dd($res);
 
         //检测是否上传广告图片
         if($request->hasFile('position_image')){

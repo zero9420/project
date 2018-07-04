@@ -126,12 +126,12 @@ class LinkController extends Controller
 
         if($data){
 
-            return redirect('/admin/link')->with('success','添加成功');
+            return redirect('/admin/link')->with('success','修改成功');
             }
 
         }catch(\Exception $e){
 
-            return back()->with('error','添加失败');
+            return back()->with('error','修改失败');
         }
 
     

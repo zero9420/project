@@ -5,8 +5,8 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use App\Model\Position;
-use App\Model\Info;
+use App\Models\Admin\Position;
+use App\Models\Home\Info;
 use Config;
 
 class IndexController extends Controller
@@ -68,7 +68,7 @@ class IndexController extends Controller
 
 
 				//存入数据表
-				$res['info_image'] = Config::get('app.address
+				$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
 
 				//存入数据库
 				$data = Info::create($res);
