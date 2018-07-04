@@ -47,8 +47,9 @@
     	<div id="mws-logo-container">
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
-        	<div id="mws-logo-wrap">
-            	<h3 style='color:white'>后台管理</h3>
+        	<div id="mws-logo-wrap" style='color:white'>
+            	<h4>后台管理</h4>
+                <span id="nowsTime"><script src="/admins/js/times/nowtime.js"></script></span>
 			</div>
         </div>
         
@@ -171,17 +172,38 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-list"></i>友情链接</a>
+                        <a href="#"><i class="icon-users"></i>角色管理</a>
                         <ul class='closed'>
-                            <li><a href="/admin/link/create">添加链接</a></li>
-                            <li><a href="/admin/link">浏览链接</a></li>
+                            <li><a href="/admin/auth/create">添加角色</a></li>
+                            <li><a href="/admin/auth">浏览角色</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-list"></i>广告管理</a>
+                        <a href="#"><i class="icon-th"></i>分类管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/cate/create">添加分类</a></li>
+                            <li><a href="/admin/cate">浏览分类</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-folder-closed"></i>商品管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/goods/create">添加商品</a></li>
+                            <li><a href="/admin/goods">浏览商品</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-calendar"></i>广告管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/position/create">添加广告</a></li>
                             <li><a href="/admin/position">浏览广告</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-link"></i>链接管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/link/create">添加链接</a></li>
+                            <li><a href="/admin/link">浏览链接</a></li>
                         </ul>
                     </li>
                 </ul>

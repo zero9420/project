@@ -55,7 +55,7 @@ function play(){
                 break;
 
             }
-    nowTime = time_y+"-"+time_m+"-"+time_day+"-"+time_h+":"+time_ms+":"+time_s+" "+time_w;
+    nowTime = time_y+"-"+time_m+"-"+time_day+" "+time_h+":"+time_ms+":"+time_s+" "+time_w;
     nowsTime.innerHTML = nowTime;
 }
 setInterval(play,1000);
