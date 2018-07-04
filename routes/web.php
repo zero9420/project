@@ -45,13 +45,12 @@ Route::group([],function(){
 	//广告管理
 	Route::resource('/admin/position','admin\PositionController');
 
-<<<<<<< HEAD
+
 	//轮播管理
 	Route::resource('admin/lunbo','admin\LunboController');
-=======
+
 	//前台个人中心信息浏览
 	Route::get('/admin/user', 'admin\IndexController@Userinfo');
->>>>>>> origin/zxq
 
 });
 
