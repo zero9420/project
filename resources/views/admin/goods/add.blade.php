@@ -35,7 +35,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" maxlength="20" placeholder="请输入最长100字符的商品名">
+                        <input type="text" class="medium" name="goods_name" maxlength="100" placeholder="请输入最长100字符的商品名" value="{{old('goods_name')}}">
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -62,7 +62,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_price" class="error large">
+                        <input type="text" class="medium" name="goods_price" value="{{old('goods_price')}}" class="error large">
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_stock" class="error large">
+                        <input type="text" class="medium" name="goods_stock" value="{{old('goods_stock')}}" class="error large">
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_color" class="error large" placeholder="颜色请用'|'分割...">
+                        <input type="text" class="medium" name="goods_color" value="{{old('goods_color')}}" class="error large" placeholder="颜色请用'|'分割...">
                     </div>
                 </div>
 
@@ -98,7 +98,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_size" class="error large" placeholder="规格请用'|'分割...">
+                        <input type="text" class="medium" name="goods_size" value="{{old('goods_size')}}" class="error large" placeholder="规格请用'|'分割...">
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <script id="editor" name='goods_desc' type="text/plain" style="width:800px;height:300px;"></script>
+                        <script id="editor" name='goods_desc' type="text/plain" style="width:800px;height:300px;">{!!old('goods_desc')!!}</script>
                     </div>
                 </div>
 
