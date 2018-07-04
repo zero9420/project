@@ -1,5 +1,4 @@
 @extends('layout.admins')
-
 @section('title',$title)
 
 @section('content')
@@ -72,15 +71,15 @@
                            库存
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 120px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
                            销量
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 120px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
                            热销
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                            状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -99,7 +98,7 @@
                             {{$v->goods_name}}
                         </td>
                         <td class=" ">
-                            {{$v->goods_cate}}
+                            {{$v->cate->cate_name}}
                         </td>
                         <td class=" ">
                             {{$v->goods_price}}
@@ -111,10 +110,20 @@
                             {{$v->goods_sales}}
                         </td>
                         <td class=" ">
-                            {{$v->goods_hot}}
+                            @if($v->goods_hot==1)
+                                普通商品
+                            @else
+                                热销商品
+                            @endif
                         </td>
-                         <td class=" ">
-                            {{$v->goods_status}}
+                         <td class=" " id="status">
+                            @if($v->goods_status==1)
+                                上架&nbsp;&nbsp;&nbsp;
+                                <a href="/admin/goods/up/{{$v->goods_id}}">下架</a>
+                            @else
+                                下架&nbsp;&nbsp;&nbsp;
+                                <a href="/admin/goods/down/{{$v->goods_id}}">上架</a>
+                            @endif
                         </td>
                          <td class=" ">
                             <a href="/admin/goods/{{$v->goods_id}}" class='btn btn-info'>商品详情</a>

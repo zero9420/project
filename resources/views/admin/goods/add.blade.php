@@ -1,6 +1,11 @@
 @extends('layout.admins')
 
 @section('title',$title)
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 
 @section('content')
 
@@ -30,7 +35,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" placeholder="请输入最长120字符的商品名">
+                        <input type="text" class="medium" name="goods_name" maxlength="20" placeholder="请输入最长100字符的商品名">
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -41,12 +46,9 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <select class="medium" name="goods_cate">
+                        <select class="medium" name="cate_id">
                             @foreach($cates as $k=>$v)
-	                            <?php
-	                            	$n = substr_count($v->cate_path,',')-1;
-	                            ?>
-								<option value="{{$v->cate_name}}">{{str_repeat('&nbsp;',$n*5)}}|--{{$v->cate_name}}</option>
+								<option value="{{$v->cate_id}}">{{$v->cate_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -83,107 +85,20 @@
                             *
                         </span>
                     </label>
-                    <div class="mws-form-item clearfix">
-                        <ul class="mws-form-list inline">
-                            <li>
-                                <input type="checkbox" name="goods_color[]" value="红色">
-                                <label>
-                                    红色
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_color[]" value="蓝色">
-                                <label>
-                                    蓝色
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_color[]" value="黄色">
-                                <label>
-                                    黄色
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_color[]" value="白色" checked="checked">
-                                <label>
-                                    白色
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_color[]" value="黑色">
-                                <label>
-                                    黑色
-                                </label>
-                            </li>
-                            <input type="text" name="goods_color[]" placeholder="其他颜色请输入,用'|'隔开!">
-                        </ul>
+                    <div class="mws-form-item">
+                        <input type="text" class="medium" name="goods_color" class="error large" placeholder="颜色请用'|'分割...">
                     </div>
                 </div>
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品大小
+                        商品规格
                         <span class="required">
                             *
                         </span>
                     </label>
-                    <div class="mws-form-item clearfix">
-                        <ul class="mws-form-list inline">
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="均码" checked="checked">
-                                <label>
-                                    均码
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="S">
-                                <label>
-                                    S
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="M">
-                                <label>
-                                    M
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="L">
-                                <label>
-                                    L
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="XS">
-                                <label>
-                                    XS
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="XL">
-                                <label>
-                                    XL
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="XXL">
-                                <label>
-                                    XXL
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="XXXL">
-                                <label>
-                                    XXXL
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="goods_size[]" value="XXXXL">
-                                <label>
-                                    XXXXL
-                                </label>
-                            </li>
-                        </ul>
+                    <div class="mws-form-item">
+                        <input type="text" class="medium" name="goods_size" class="error large" placeholder="规格请用'|'分割...">
                     </div>
                 </div>
 
@@ -219,6 +134,12 @@
                         <input type="file" name='goods_pic[]' class="fileinput-preview" style="width: 100%; padding-right: 84px;" multiple="multiple"  readonly="readonly" placeholder="No file selected...">
                     </div>
                 </div>
+                <script>
+                    //实例化编辑器
+                    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                    var ue = UE.getEditor('editor');
+
+                </script>
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
@@ -228,8 +149,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <textarea name="goods_desc" class="required large">请输入最多255个字符的商品描述
-                        </textarea>
+                        <script id="editor" name='goods_desc' type="text/plain" style="width:800px;height:300px;"></script>
                     </div>
                 </div>
 
@@ -242,10 +162,8 @@
                     </label>
                     <div class="mws-form-item clearfix">
                         <ul class="mws-form-list inline">
-                            <li><input type="radio" name='goods_status' value='0' checked='checked'> <label>新品</label></li>
                             <li><input type="radio" name='goods_status' value='1'> <label>上架</label></li>
                             <li><input type="radio" name='goods_status' value='2'> <label>下架</label></li>
-                            <li><input type="radio" name='goods_status' value='3'> <label>特殊</label></li>
                         </ul>
                     </div>
                 </div>
