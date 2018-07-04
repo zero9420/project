@@ -41,6 +41,9 @@ Route::group([],function(){
 	//广告管理
 	Route::resource('/admin/position','admin\PositionController');
 
+	//轮播管理
+	Route::resource('admin/lunbo','admin\LunboController');
+
 });
 
 
