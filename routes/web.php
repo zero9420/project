@@ -66,7 +66,14 @@ Route::group(['middleware'=>'adminlogin'],function(){
 });
 
 
-//前台路由组
+
+/**
+ *
+ * 前台路由组
+ */
+
+
+
 Route::group([],function(){
 
 	// 前台首页
