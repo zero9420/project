@@ -12,15 +12,18 @@ class LunboController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-          $res = DB::table('lunbo')->paginate(3);
+
+      
 
 
-                
-            // dd($res);
-
-        return view('/admin/lunbo/index',['res'=>$res,'title'=>'轮播添加']);
+        $res = DB::table('lunbo')
+                ->where('lunbo_title', 'like','%'.$request->input('lunbo_title').'%')
+                ->paginate($request->input('num',5));
+         $arr = $request['num'];       
+       
+        return view('/admin/lunbo/index',['res'=>$res,'title'=>'浏览轮播','arr'=>$arr]);
         
         
     }
@@ -106,7 +109,7 @@ class LunboController extends Controller
        }   
        
 
-       return redirect('/admin/lunbo/create')->with('error','上传个啥啊你'); 
+       return redirect('/admin/lunbo')->with('error','上传失败'); 
 
         // dump($res);
 
@@ -245,21 +248,25 @@ class LunboController extends Controller
             }
           
 
-        try{
+       
             $data = DB::table('lunbo')->where('lunbo_id',$id)->update($res);
 
             if($data){
-                return redirect('/admin/lunbo')->with('success','修改成功');
+                return view('/layout/jump')->with([
+                        'message'=>'修改成功！',
+                        'url' =>'/admin/lunbo',
+                        'jumpTime'=>2
+                    ]);
             }
-        }catch(\Exception $e){
-
-            return back()->with('error');
-
-        }
+       
 
 
 
-        return back()->with('error','更新失败');
+         return view('/layout/jump')->with([
+                        'message'=>'修改失败！',
+                        'url' =>'/admin/lunbo/'.$id.'/edit',
+                        'jumpTime'=>2
+                    ]);
 
     }
 

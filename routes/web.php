@@ -49,9 +49,13 @@ Route::group([],function(){
 	// 轮播管理
 	Route::resource('admin/lunbo','admin\LunboController');
 
+
 	// 前台个人中心信息浏览
 	Route::get('/admin/user', 'admin\IndexController@Userinfo');
 
+	// 订单管理
+
+	Route::resource('admin/order','admin\OrderController');
 });
 
 
