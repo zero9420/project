@@ -4,8 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\admin\Auth;
-
+use App\Models\Admin\Auth;
+use Hash;
 class AuthController extends Controller
 {
     /**
@@ -251,6 +251,66 @@ class AuthController extends Controller
         if($res){
 
             return redirect('/admin/auth')->with('success','删除成功');
+        }
+    }
+
+    // 修改用户密码
+    public function authpassword($id)
+    {   
+        // 渲染修改密码页面
+       $res = Auth::where('id',$id)->first();
+       return view('admin/login/editpassword',['title'=>'管理员修改密码页面','res'=>$res]);
+    }
+
+
+    public function editpasswords(Request $request)
+    {
+
+         //校验
+        $this->validate($request, [
+            'passwords' => 'required|regex:/^\S{5,30}$/',
+            'password' => 'required|regex:/^\S{5,30}$/',
+            'repass' => 'required|regex:/^\S{5,30}$/',             
+        ],[
+
+            'passwords.required'=>'原密码不能为空',
+            'passwords.regex'=>'原密码格式不正确',
+            'password.required'=>'新密码不能为空',
+            'password.regex'=>'新密码格式不正确',
+            'repass.required'=>'确认新密码不能为空',
+            'repass.regex'=>'确认新密码格式不正确',
+
+        ]);
+            $res = $request->except(['_token']);
+           $uname = Auth::where('auth_name',$res['auth_name'])->first();
+
+           if ($res['repass'] != $res['password']) {
+               return back()->with('error','新密码与确认密码必须相同');
+           }
+
+           if ($res['passwords'] === $res['password']) {
+                return back()->with('error','原密码与新密码不可以相同');
+           }
+            
+
+      //判断密码
+        if (!Hash::check($res['passwords'], $uname->password)) {
+            // 密码对比...
+
+            //如果说密码失败
+            return back()->with('error','原密码或新密码不正确');
+        }
+                // dd($uname);
+
+        $password = $request->input('password');
+
+        $date = bcrypt($password);
+
+        $data = Auth::where('auth_name',$res['auth_name'])->update(['password'=>$date]);
+        if ($data) {
+            return back()->with('success','修改成功');
+        }else{
+            return back()->with('error','修改失败');
         }
     }
 }
