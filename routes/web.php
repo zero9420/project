@@ -21,10 +21,15 @@ Route::get('/', function () {
  */
 
 
-Route::group([],function(){
-
+Route::get('/admin/login','admin\LoginController@login');
+Route::post('/admin/login','admin\LoginController@dologin');
+Route::any('/admin/captcha','admin\LoginController@captcha');
+Route::group(['middleware'=>'adminlogin'],function(){
 	// 后台首页
-	Route::any('/admin/index','admin\IndexController@index');
+	Route::any('admin/index','admin\IndexController@index');
+
+	// 退出登录
+	Route::any('admin/outlogin','admin\LoginController@outlogin');
 
 	// 商品分类
 	Route::resource('admin/cate','admin\CateController');
@@ -38,6 +43,8 @@ Route::group([],function(){
 
 	// 角色管理
 	Route::resource('admin/auth','admin\AuthController');
+	Route::any('admin/authpassword/{id}','admin\AuthController@authpassword');
+	Route::post('admin/editpasswords','admin\AuthController@editpasswords');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -59,7 +66,6 @@ Route::group([],function(){
 });
 
 
-
 //前台路由组
 Route::group([],function(){
 
@@ -77,6 +83,12 @@ Route::group([],function(){
 
 	// 前台检测登陆者信息跳转页
 	Route::any('/home/tiao','home\IndexController@tiao');
+
+	Route::get('/home/register','home\RegisterController@index');
+	Route::post('/home/registers','home\RegisterController@registers');
+	Route::get('/home/login','home\LoginController@index');
+	Route::post('/home/login','home\LoginController@login');
+
 
 });
 
