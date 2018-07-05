@@ -15,7 +15,7 @@
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-			<form action="/admin/user" method='get'>
+			<form action="/admin/goods" method='get'>
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
 	                    显示
