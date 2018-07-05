@@ -71,7 +71,7 @@ class CateController extends Controller
      */
     public function store(Request $request)
     {
-        //表单验证
+        // 表单验证
         $this->validate($request, [
             'cate_pid' => 'required',
             'cate_name' => 'required',
@@ -157,7 +157,7 @@ class CateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //表单验证
+        // 表单验证
         $this->validate($request, [
             'cate_name' => 'required|unique:shop_cate',
         ],[

@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::group([],function(){
 
-	//后台首页
+	// 后台首页
 	Route::any('/admin/index','admin\IndexController@index');
 
 	// 商品分类
@@ -32,24 +32,24 @@ Route::group([],function(){
 	// 商品管理
 	Route::resource('admin/goods','admin\GoodsController');
 
-	// 商品ajax修改
+	// 商品上架下架
 	Route::any('/admin/goods/up/{id}','admin\GoodsdetailController@up');
 	Route::any('/admin/goods/down/{id}','admin\GoodsdetailController@down');
 
-	//角色管理
+	// 角色管理
 	Route::resource('admin/auth','admin\AuthController');
 
-	//友情链接
+	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
 
-	//广告管理
+	// 广告管理
 	Route::resource('/admin/position','admin\PositionController');
 
 
-	//轮播管理
+	// 轮播管理
 	Route::resource('admin/lunbo','admin\LunboController');
 
-	//前台个人中心信息浏览
+	// 前台个人中心信息浏览
 	Route::get('/admin/user', 'admin\IndexController@Userinfo');
 
 });
@@ -59,25 +59,25 @@ Route::group([],function(){
 //前台路由组
 Route::group([],function(){
 
-	//前台首页
+	// 前台首页
 	Route::get('/home/index','home\IndexController@Index');
 
-	//前台个人中心
+	// 前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');
 
-	//前台个人中心注册页
+	// 前台个人中心注册页
 	Route::any('/home/userinfoma','home\IndexController@CreateUser');
 
-	//前台个人中心修改页
+	// 前台个人中心修改页
 	Route::post('/home/userup/{id}','home\IndexController@Update');
 
-	//前台检测登陆者信息跳转页
+	// 前台检测登陆者信息跳转页
 	Route::any('/home/tiao','home\IndexController@tiao');
 
 });
 
 
-//test测试
+// test测试
 Route::get('/home/home',function(){
 
 

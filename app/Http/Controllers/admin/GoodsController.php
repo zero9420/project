@@ -63,8 +63,7 @@ class GoodsController extends Controller
         // 获取商品id
         $goods_id = $res->goods_id;
 
-        //设置名字
-        //商品图片
+        // 商品图片
         if($request->hasFile('goods_pic')){
 
             $req = $request->file('goods_pic');
@@ -75,13 +74,13 @@ class GoodsController extends Controller
 
                 $g_pic = [];
 
-                //设置名字
+                // 设置名字
                 $name = date('Y-m-d-H-i-s',time()).str_random(10);
 
-                //获取后缀
+                // 获取后缀
                 $suffix = $v->getClientOriginalExtension();
 
-                //移动
+                // 移动
                 $v->move('./uploads/goods/photo/',$name.'.'.$suffix);
 
                 // 添加商品id
@@ -170,7 +169,7 @@ class GoodsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        //表单验证
+        // 表单验证
         $this->validate($request, [
             'goods_name' => 'required|unique:shop_goods|max:100',
             'goods_price'=>'required|regex:/^\d{0,9}\.\d{0,2}$/',
@@ -186,7 +185,7 @@ class GoodsController extends Controller
 
         ]);
         $res = $request->except('_token','_method');
-        //模型
+        // 模型
         try{
             // 修改数据库
             $data = Goods::where('goods_id',$id)->update($res);
