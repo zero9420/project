@@ -131,18 +131,18 @@
             
             	<!-- User Photo -->
             	<div id="mws-user-photo">
-                	<img src="/admins/example/profile.jpg" alt="User Photo">
+                	<img src="{{session('profile')}}" alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, lamp203
+                         {{session('auth_name')}}
                     </div>
                     <ul>
-                    	<li><a href="#">修改头像</a></li>
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="index.html">退出</a></li>
+                    	<li><a href="/admin/auth/{{session('id')}}/edit">修改头像</a></li>
+                        <li><a href="/admin/authpassword/{{session('id')}}">修改密码</a></li>
+                        <li><a href="/admin/outlogin">退出</a></li>
                     </ul>
                 </div>
             </div>
