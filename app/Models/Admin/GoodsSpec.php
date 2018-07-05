@@ -25,5 +25,14 @@ class GoodsSpec extends Model
      *
      * @var array
      */
-    protected $fillable = ['goods_id','goods_color','goods_size'];
+    protected $fillable = ['goods_gid','goods_pic'];
+
+    /**
+     * [goods description]
+     * @return [type] [description]
+     */
+    public function goods()
+    {
+        return $this->belongsTo('App\Models\Admin\Goods', 'goods_id');
+    }
 }

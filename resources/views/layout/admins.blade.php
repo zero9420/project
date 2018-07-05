@@ -47,8 +47,9 @@
     	<div id="mws-logo-container">
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
-        	<div id="mws-logo-wrap">
-            	<h3 style='color:white'>lamp203商城</h3>
+        	<div id="mws-logo-wrap" style='color:white'>
+            	<h4>后台管理</h4>
+                <span id="nowsTime"><script src="/admins/js/times/nowtime.js"></script></span>
 			</div>
         </div>
         
@@ -72,7 +73,7 @@
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
                                     <span class="time">
-                                        January 21, 2012
+                                        {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
                             </li>
@@ -82,7 +83,7 @@
                                         Lorem ipsum dolor sit amet
                                     </span>
                                     <span class="time">
-                                        January 21, 2012
+                                        {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
                           
@@ -112,7 +113,7 @@
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
                                     <span class="time">
-                                        January 21, 2012
+                                        {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
                             </li>
@@ -164,76 +165,102 @@
                 <span></span>
                 <span></span>
             </div>
-            
-        	<!-- Searchbox -->
-        	<div id="mws-searchbox" class="mws-inset">
-            	<form action="typography.html">
-                	<input type="text" class="mws-search-input" placeholder="Search...">
-                    <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
-            
+
+
+
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
+                	<li>
+                        <a href="#"><i class="icon-user"></i>个人信息</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/user">浏览信息</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="#"><i class="icon-users"></i>角色管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/auth/create">添加角色</a></li>
-                            <li><a href="/admin/auth/">浏览角色</a></li>
+                            <li><a href="/admin/auth">浏览角色</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <a href="#"><i class="icon-th"></i>分类管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/cate/create">添加分类</a></li>
                             <li><a href="/admin/cate">浏览分类</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-list"></i>商品管理</a>
+                        <a href="#"><i class="icon-shopping-cart"></i>商品管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/goods/create">添加商品</a></li>
                             <li><a href="/admin/goods">浏览商品</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="icon-calendar"></i>广告管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/position/create">添加广告</a></li>
+                            <li><a href="/admin/position">浏览广告</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-link"></i>链接管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/link/create">添加链接</a></li>
+                            <li><a href="/admin/link">浏览链接</a></li>
+                        </ul>
+                    </li>
+
+                     <li>
+                        <a href="#"><i class="icon-television"></i>轮播管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/lunbo/create">添加轮播</a></li>
+                            <li><a href="/admin/lunbo">浏览轮播</a></li>
+                    </li>
                 </ul>
             </div>         
         </div>
+       
+        
         
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-                        @if(session('success'))
-                <div class="mws-form-message info">
-                    {{session('success')}}
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="mws-form-message warning">
-                    {{session('error')}}
-                </div>
-            @endif
+        
         	<!-- Inner Container Start -->
             <div class="container">
+            
+                @if(session('success'))
+                    <div class="mws-form-message info">
+                        {{session('success')}}
+                    </div>
+                @endif
 
+                @if(session('error'))
+                    <div class="mws-form-message warning">
+                        {{session('error')}}
+                    </div>
+                @endif
+                
                 @section('content')
 
-            @section('content')
 
-            @show
+                @show
 
+               
+                
             </div>
             <!-- Inner Container End -->
-
+                       
             <!-- Footer -->
             <div id="mws-footer">
-            	Copyright Your Website 2012. All Rights Reserved.
+            	Copyright Your Website {{date('Y-m-d',time())}}. All Rights Reserved.
             </div>
-
+            
         </div>
         <!-- Main Container End -->
-
+        
     </div>
 
     <!-- JavaScript Plugins -->
@@ -271,10 +298,16 @@
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
 
-    @section('js')
+    <script type="text/javascript">
+           
+           setTimeout(function(){
+
+                $('.mws-form-message').remove();
+
+           },3000) 
 
 
-    @show
+    </script>
 
 </body>
 </html>

@@ -20,7 +20,10 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        return view('admin.goods.index',['title'=>'商品浏览页']);
+        $goods = Goods::with('spec')->with('cate')->paginate(10);
+        // dd($goods);
+        $num = $goods->firstItem();
+        return view('admin/goods/index',['title'=>'商品浏览页','goods'=>$goods,'num'=>$num]);
     }
 
     /**
@@ -32,7 +35,16 @@ class GoodsController extends Controller
     {
         //
         // 商品分类
-        $cates = DB::select('select *,concat(cate_path,cate_id) from shop_cate order by concat(cate_path,cate_id)');
+        $cates = Cate::select(DB::raw('*,concat(cate_path,cate_id) as paths'))
+                ->orderBy('paths')
+                ->get();
+        foreach($cates as $k => $v){
+
+            // 根据phth,将模版层次分明
+            $rs = substr_count($v->cate_path,',')-1;
+            $v->cate_name = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$rs).'|--'.$v->cate_name;
+
+        }
         return view('admin.goods.add',['title'=>'商品添加页','cates'=>$cates]);
     }
 
@@ -44,46 +56,65 @@ class GoodsController extends Controller
      */
     public function store(FormRequest $request)
     {
-        $res = $request->except(['_token','goods_pic']);
+        // 获取表单数据
+        $data = $request->except('_token','goods_pic[]');
+
+        $res = Goods::create($data);
+        // 获取商品id
+        $goods_id = $res->goods_id;
+
         // 商品图片
         if($request->hasFile('goods_pic')){
 
-            //设置名字
-            $name = date('Y-m-d H:i:s',time()).str_random(10);
-            //获取后缀
-            $suffix = $request->file('goods_pic')->getClientOriginalExtension();
+            $req = $request->file('goods_pic');
 
-            //移动
-            $request->file('goods_pic')->move('./uploads/goods/',$name.'.'.$suffix);
+            $goods_pic= [];
+
+            foreach($req as $k => $v){
+
+                $g_pic = [];
+
+                // 设置名字
+                $name = date('Y-m-d-H-i-s',time()).str_random(10);
+
+                // 获取后缀
+                $suffix = $v->getClientOriginalExtension();
+
+                // 移动
+                $v->move('./uploads/goods/photo/',$name.'.'.$suffix);
+
+                // 添加商品id
+                $g_pic['goods_gid'] = $goods_id;
+
+                // 添加商品图片
+                $g_pic['goods_pic'] = '/uploads/goods/photo/'.$name.'.'.$suffix;
+
+                // 存入二维数组
+                $goods_pic[] = $g_pic;
+
+            }
         }
-
-        //存数据表
-        $res['goods_pic'] = Config::get('app.goods_path').$name.'.'.$suffix;
-        $res['goods_color'] = implode('|',$res['goods_color']);
-        $res['goods_size'] = implode('|', $res['goods_size']);
-        // 开启事务
-        DB::beginTransaction();
-        // 存数据到商品表
-        $data = Goods::create($res);
-        // 获取商品id
-        $res['goods_id'] = $data->goods_id;
-        // 存数据到商品详情表
-        $data_spec = GoodsSpec::create($res);
-        if($data && $data_spec){   //判断两条同时执行成功
-            DB::commit();  //提交事务
-            return view('/layout/jump')->with([
-                        'message'=>'添加成功！',
+        $goods = Goods::find($goods_id);
+        // dd($goods_pic);
+        //模型
+        try{
+            // 存入数据库
+            $data = $goods->spec()->createMany($goods_pic);
+            if($data){
+                return view('/layout/jump')->with([
+                        'message'=>'添加成功',
                         'url' =>'/admin/goods',
                         'jumpTime'=>2,
                         'title'=>'添加成功'
                     ]);
-        } else {
-            DB::rollback();  //回滚事务
+            }
+        }catch(\Exception $e){
             return view('/layout/jump')->with([
-                        'message'=>'添加失败！',
+                        'message'=>'添加失败',
                         'url' =>'/admin/goods/create',
                         'jumpTime'=>2,
                     ]);
+
         }
     }
 
@@ -95,7 +126,8 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //
+        $detail = Goods::with('spec')->find($id);
+        return view('admin/goods/show',['title'=>'商品详情页','detail'=>$detail]);
     }
 
     /**
@@ -106,7 +138,25 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 获取分类
+        $cate = Cate::select(DB::raw('*,concat(cate_path,cate_id) as paths'))
+                ->orderBy('paths')
+                ->get();
+
+        foreach($cate as $k => $v){
+
+            // 根据phth,将模版层次分明
+            $rs = substr_count($v->cate_path,',')-1;
+            $v->cate_name = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$rs).'|--'.$v->cate_name;
+
+        }
+        // 获取商品
+        $goods = Goods::where('goods_id',$id)->first();
+        return view('admin/goods/edit',
+            ['title'=>'商品修改页',
+            'cate'=>$cate,
+            'goods'=>$goods
+        ]);
     }
 
     /**
@@ -119,6 +169,43 @@ class GoodsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // 表单验证
+        $this->validate($request, [
+            'goods_name' => 'required|unique:shop_goods|max:100',
+            'goods_price'=>'required|regex:/^\d{0,9}\.\d{0,2}$/',
+            'goods_stock'=>'required|regex:/^\d+$/',
+        ],[
+            'goods_name.required'=>'商品名不能为空',
+            'goods_name.unique'=>'商品名不能重复',
+            'goods_name.max'=>'商品名格式不正确',
+            'goods_price.required'=>'商品价格不能为空',
+            'goods_price.regex'=>'商品价格格式不正确',
+            'goods_stock.required'=>'商品库存不能为空',
+            'goods_stock.regex'=>'商品库存格式不正确',
+
+        ]);
+        $res = $request->except('_token','_method');
+        // 模型
+        try{
+            // 修改数据库
+            $data = Goods::where('goods_id',$id)->update($res);
+            if($data){
+                return view('/layout/jump')->with([
+                        'message'=>'修改成功',
+                        'url' =>'/admin/goods',
+                        'jumpTime'=>2,
+                        'title'=>'修改成功'
+                    ]);
+            }
+        }catch(\Exception $e){
+            return view('/layout/jump')->with([
+                        'message'=>'修改失败',
+                        'url' =>'/admin/goods/'.$id.'/edit',
+                        'jumpTime'=>2,
+                    ]);
+
+        }
+
     }
 
     /**
@@ -129,6 +216,6 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo "商品删除";
     }
 }

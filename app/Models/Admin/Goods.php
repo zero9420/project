@@ -25,11 +25,12 @@ class Goods extends Model
      *
      * @var array
      */
-    protected $fillable = ['goods_name','goods_cate',
-    					'goods_price','goods_price',
-    					'goods_stock','goods_sales',
-    					'goods_hot','goods_pic',
-    					'goods_desc','goods_status',
+    protected $fillable = ['goods_name',
+                        'cate_id','goods_price',
+                        'goods_stock','goods_sales',
+                        'goods_color','goods_size',
+                        'goods_hot','goods_status',
+                        'goods_desc',
                         'created_at','updated_at'
     				];
     /**
@@ -38,12 +39,22 @@ class Goods extends Model
      * @var string
      */
     protected $dateFormat = 'U';
-     /**
-     * 获得与商品关联字段。
+    /**
+     * [comments description]
+     * @return [type] [description]
      */
     public function spec()
     {
-        return $this->hasOne('App\Models\Admin\GoodsSpec','goods_id');
+        return $this->hasMany('App\Models\Admin\GoodsSpec', 'goods_gid');
+    }
+
+    /**
+     * [cate description]
+     * @return [type] [description]
+     */
+    public function cate()
+    {
+        return $this->belongsTo('App\Models\Admin\Cate', 'cate_id');
     }
 
 }

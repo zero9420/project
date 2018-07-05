@@ -20,14 +20,28 @@
 		        </ul>
 		    </div>
 		@endif
-        <form class="mws-form" action="/admin/cate/{{$res->cate_id}}" method="post">
+        <form class="mws-form" action="/admin/cate/{{$info->cate_id}}" method="post">
             <div class="mws-form-inline">
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
+                        分类
+                    </label>
+                    <div class="mws-form-item">
+                        <select class="medium" name="cate_pid" disabled>
+                            <option value="0">顶级分类</option>
+                                <!-- 判断pid == 接受id 显示父类 -->
+                            @foreach($res as $k=>$v)
+                                <option value="{{$v->cate_id}}" @if($info->cate_pid == $v->cate_id) selected @endif>{{$v->cate_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="mws-form-row">
                     <label class="mws-form-label">
                         类名
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="cate_name" value="{{$res->cate_name}}">
+                        <input type="text" class="medium" name="cate_name" value="{{$info->cate_name}}">
                     </div>
                 </div>
                 <div class="mws-form-row">
