@@ -18,7 +18,6 @@ class GoodsTableSeeder extends Seeder
 	            'goods_name' => '天王盖地虎'.str_random(5),
 	            'cate_id' => mt_rand(1,50),
 	            'goods_price' => mt_rand(100,10000),
-	            'goods_stock' => mt_rand(100,1000),
 	        	'goods_color' => '红色|蓝色|黄色|白色|黑色|紫色|粉红色',
 	        	'goods_size' => '36|37|38|39|40',
 	            'goods_hot' => '1',
