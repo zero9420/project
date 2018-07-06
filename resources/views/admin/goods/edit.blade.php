@@ -68,18 +68,6 @@
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品库存
-                        <span class="required">
-                            *
-                        </span>
-                    </label>
-                    <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_stock" value="{{$goods->goods_stock}}" class="error large">
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">
                         热卖商品
                         <span class="required">
                             *
