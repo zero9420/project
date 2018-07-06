@@ -21,6 +21,7 @@ Route::get('/', function () {
  */
 
 
+
 Route::group([],function(){
 
 
@@ -44,14 +45,17 @@ Route::group([],function(){
 	Route::resource('/admin/position','admin\PositionController');
 
 
-
+Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 前台个人中心信息浏览
 	Route::get('/admin/user', 'admin\IndexController@Userinfo');
 
 
-});
+	// 订单管理
 
+
+});
+}
 
 
 /**
@@ -60,6 +64,7 @@ Route::group([],function(){
  */
 
 Route::group([],function(){
+
 
 
 	// 前台首页
@@ -79,6 +84,7 @@ Route::group([],function(){
 
 	//前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
+
 
 
 

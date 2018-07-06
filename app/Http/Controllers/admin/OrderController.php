@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Order;
 
 class OrderController extends Controller
 {
@@ -12,9 +13,22 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $res =  Order::where('order_id','like','%'.$request->input('order_id').'%')->
+                paginate($request->input('num',5));
+
+        $arr = ['num'=>$request->input('num'),'order_id'=>$request->input('order_id')];
+
+
+        return view('/admin/order.index',[
+
+            'title'=>'订单浏览管理',
+            'res'=>$res,
+            'arr'=>$arr
+        ]);
+        
+        
     }
 
     /**
@@ -24,7 +38,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        echo "string";
+
+
     }
 
     /**
@@ -46,7 +61,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('/admin/order/particulars',['title'=>'后台订单详情']);
     }
 
     /**
@@ -57,7 +72,17 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        
+        $res = Order::where('order_id',$id)->first();
+        
+
+       return view('/admin/order.edit',[
+
+            'title'=>'订单浏览管理',
+            'res'=>$res,
+            
+        ]);
     }
 
     /**
@@ -68,8 +93,22 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {       
+
+        // dd($request->update_at);
+
+            $res = $request->except('_token','_method');
+
+            $data = Order::where('order_id',$id)->update($res);
+
+            if ($data) {
+                return redirect('admin/order')->with('success','修改成功');
+            } else {
+                return back()->with('error','修改失败');
+            } 
+
+
+        
     }
 
     /**
