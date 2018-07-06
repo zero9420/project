@@ -47,8 +47,8 @@
     	<div id="mws-logo-container">
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
-        	<div id="mws-logo-wrap">
-                <iframe id="fancybox-frame" name="fancybox-frame1530782195454" frameborder="0" scrolling="no" hspace="0"  src="http://i.tianqi.com/index.php?c=code&a=getcode&id=40&h=40&w=310"></iframe>
+        	<div id="mws-logo-wrap" style="color: white">
+                <h4>云商城后台管理</h4>
 			</div>
         </div>
         
@@ -169,7 +169,6 @@
 
             <!-- Main Navigation -->
             <div id="mws-navigation">
-
                 <ul>
                 	<li>
                         <a href="#"><i class="icon-user"></i>个人信息</a>
@@ -241,6 +240,7 @@
 
                         </ul>
                     </li>
+                </ul>
             </div>
         </div>
 

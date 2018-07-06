@@ -63,20 +63,16 @@
                             编号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Browser: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 160px;" aria-label="Browser: activate to sort column ascending">
                             名称
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 160px;" aria-label="Platform(s): activate to sort column ascending">
                             类别
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 120px;" aria-label="Engine version: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-label="Engine version: activate to sort column ascending">
                             价格
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
-                           库存
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
@@ -91,7 +87,7 @@
                            状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 360px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 300px;" aria-label="CSS grade: activate to sort column ascending">
                            操作
                         </th>
                     </tr>
@@ -112,9 +108,6 @@
                             {{$v->goods_price}}
                         </td>
                         <td class=" ">
-                            {{$v->goods_stock}}
-                        </td>
-                        <td class=" ">
                             {{$v->goods_sales}}
                         </td>
                         <td class=" ">
@@ -126,7 +119,7 @@
                         </td>
                          <td class=" ">
                             @if($v->goods_status==1)
-                                <button class="btn btn-success status"  id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="1">上架</button>
+                                <button class="btn btn-success status" id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="1">上架</button>
                             @else
                                 <button class='btn btn-primary status' id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="2">下架</button>
                             @endif
@@ -165,9 +158,11 @@
         $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
             if(data == '2'){
                 $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
+                $('.status'+'#'+id).val('2');
                 alert('下架成功');
             } else if(data=='1') {
                 $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
+                $('.status'+'#'+id).val('1');
                 alert('上架成功');
             } else {
                 alert('修改失败');
