@@ -93,6 +93,10 @@ Route::group([],function(){
 	// 前台检测登陆者信息跳转页
 	Route::any('/home/tiao','home\IndexController@tiao');
 
+	//前台退货
+	Route::any('/home/apply','home\IndexController@Apply');
+
+
 	Route::get('/home/register','home\RegisterController@index');
 	Route::post('/home/registers','home\RegisterController@registers');
 	Route::get('/home/login','home\LoginController@index');
@@ -106,5 +110,5 @@ Route::group([],function(){
 Route::get('/home/home',function(){
 
 
-	session(['id'=>18]);
+	return view('layout.homes');
 });
