@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Order;
+use App\Models\Admin\Goods;
+use App\Models\Admin\GoodsSpec;
 
 class OrderController extends Controller
 {
@@ -61,6 +63,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+
+
+
         return view('/admin/order/particulars',['title'=>'后台订单详情']);
     }
 
