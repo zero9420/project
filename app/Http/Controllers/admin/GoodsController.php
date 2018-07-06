@@ -18,12 +18,37 @@ class GoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $goods = Goods::with('spec')->with('cate')->paginate(10);
+        $goods = Goods::with('spec')->with('cate')->orderBy('goods_id','asc')
+
+            ->where(function($query) use($request){
+                // 检测关键字
+                $gname = $request->input('gname');
+                $max_price = $request->input('max_price');
+                $min_price = $request->input('min_price');
+                // 如果用户名不为空
+                if(!empty($gname)) {
+                    $query->where('goods_name','like','%'.$gname.'%');
+                }
+                // 如果最大价格不为空
+                if(!empty($max_price)) {
+                    $query->where('goods_price','<=',$max_price);
+                }
+                // 如果最小价格不为空
+                if(!empty($min_price)) {
+                    $query->where('goods_price','>=',$min_price);
+                }
+            })
+
+        ->paginate($request->input('pages', 10));
         // dd($goods);
         $num = $goods->firstItem();
-        return view('admin/goods/index',['title'=>'商品浏览页','goods'=>$goods,'num'=>$num]);
+        return view('admin/goods/index',['title'=>'商品浏览页',
+                                        'goods'=>$goods,
+                                        'num'=>$num,
+                                        'request'=> $request
+                                    ]);
     }
 
     /**
@@ -152,10 +177,12 @@ class GoodsController extends Controller
         }
         // 获取商品
         $goods = Goods::where('goods_id',$id)->first();
+        $spec = GoodsSpec::where('goods_gid',$id)->get();
         return view('admin/goods/edit',
             ['title'=>'商品修改页',
             'cate'=>$cate,
-            'goods'=>$goods
+            'goods'=>$goods,
+            'spec'=>$spec
         ]);
     }
 
@@ -174,6 +201,7 @@ class GoodsController extends Controller
             'goods_name' => 'required|unique:shop_goods|max:100',
             'goods_price'=>'required|regex:/^\d{0,9}\.\d{0,2}$/',
             'goods_stock'=>'required|regex:/^\d+$/',
+            'goods_pic'=>'required',
         ],[
             'goods_name.required'=>'商品名不能为空',
             'goods_name.unique'=>'商品名不能重复',
@@ -182,12 +210,62 @@ class GoodsController extends Controller
             'goods_price.regex'=>'商品价格格式不正确',
             'goods_stock.required'=>'商品库存不能为空',
             'goods_stock.regex'=>'商品库存格式不正确',
+            'goods_pic.required'=>'商品图片不能为空',
 
         ]);
-        $res = $request->except('_token','_method');
+        $res = $request->except('_token','_method','goods_pic');
+
+        // 商品图片
+        if($request->hasFile('goods_pic')){
+            // 删除详情表本地图片
+            $url = '/uploads/goods/picture.png';
+            $urls = GoodsSpec::where('goods_gid',$id)->get();
+            foreach ($urls as $k => $v) {
+                if($v->goods_pic == $url){
+                    // 默认图片不删除
+                    continue;
+                } else {
+                    unlink('.'.$v->goods_pic);
+                }
+            }
+
+            // 删除原图片所有记录
+            $res_spec = GoodsSpec::where('goods_gid',$id)->delete();
+
+            // 重新添加图片
+            $req = $request->file('goods_pic');
+
+            $goods_pic= [];
+
+            foreach($req as $k => $v){
+
+                $g_pic = [];
+
+                // 设置名字
+                $name = date('Y-m-d-H-i-s',time()).str_random(10);
+
+                // 获取后缀
+                $suffix = $v->getClientOriginalExtension();
+
+                // 移动
+                $v->move('./uploads/goods/photo/',$name.'.'.$suffix);
+
+                // 添加商品id
+                $g_pic['goods_gid'] = $id;
+
+                // 添加商品图片
+                $g_pic['goods_pic'] = '/uploads/goods/photo/'.$name.'.'.$suffix;
+
+                // 存入二维数组
+                $goods_pic[] = $g_pic;
+
+            }
+            // 添加到数据库
+            $data_pic = Goods::find($id)->spec()->createMany($goods_pic);
+        }
         // 模型
         try{
-            // 修改数据库
+            // 修改商品表
             $data = Goods::where('goods_id',$id)->update($res);
             if($data){
                 return view('/layout/jump')->with([
@@ -216,6 +294,36 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        echo "商品删除";
+        // 删除详情表本地图片
+        $url = '/uploads/goods/picture.png';
+        $urls = GoodsSpec::where('goods_gid',$id)->get();
+        foreach ($urls as $k => $v) {
+            if($v->goods_pic == $url){
+                // 默认图片不删除
+                continue;
+            } else {
+                unlink('.'.$v->goods_pic);
+            }
+        }
+
+        try {
+            $goods = Goods::find($id);
+            $res_one = $goods->delete();
+            $res_spec = $goods->spec()->delete();
+            if ($res_one && $res_spec) {
+                return view('/layout/jump')->with([
+                    'message'=>'删除成功',
+                    'url' =>'/admin/goods',
+                    'jumpTime'=>2,
+                    'title'=>'删除成功页'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return view('/layout/jump')->with([
+                    'message'=>'删除失败',
+                    'url' =>'/admin/goods',
+                    'jumpTime'=>2
+                ]);
+        }
     }
 }

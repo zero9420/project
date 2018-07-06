@@ -19,16 +19,16 @@
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
 	                <label>
 	                    显示
-	                    <select name="num" size="1" aria-controls="DataTables_Table_1">
+	                    <select name="pages" size="1" aria-controls="DataTables_Table_1">
 
-	                        <option value="10">
+	                        <option value="10" @if($request->pages== 10)   selected="selected" @endif>
 	                            10
 	                        </option>
-	                        <option value="20">
-	                            20
-	                        </option>
-	                        <option value="30">
+	                        <option value="30" @if($request->pages== 30)   selected="selected" @endif>
 	                            30
+	                        </option>
+	                        <option value="50" @if($request->pages== 50)   selected="selected" @endif>
+	                            50
 	                        </option>
 	                    </select>
 	                    条数据
@@ -36,8 +36,16 @@
 	            </div>
 	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
 	                <label>
-	                    关键字:
-	                    <input type="text" name='search' value="" aria-controls="DataTables_Table_1">
+                        商品名字:
+                        <input type="text" name='gname' value="{{$request->gname}}" aria-controls="DataTables_Table_1">
+                    </label>
+                    <label>
+                        最小价格:
+                        <input type="number" name='min_price' value="{{$request->min_price}}" aria-controls="DataTables_Table_1">
+                    </label>
+                    <label>
+	                    最大价格:
+	                    <input type="number" name='max_price' value="{{$request->max_price}}" aria-controls="DataTables_Table_1">
 	                </label>
 
 	                <button class='btn btn-info'>搜索</button>
@@ -67,11 +75,11 @@
                             价格
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 120px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
                            库存
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
                            销量
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -79,7 +87,7 @@
                            热销
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 70px;" aria-label="CSS grade: activate to sort column ascending">
                            状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -116,13 +124,11 @@
                                 热销商品
                             @endif
                         </td>
-                         <td class=" " id="status">
+                         <td class=" ">
                             @if($v->goods_status==1)
-                                上架&nbsp;&nbsp;&nbsp;
-                                <a href="/admin/goods/up/{{$v->goods_id}}">下架</a>
+                                <button class="btn btn-success status"  id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="1">上架</button>
                             @else
-                                下架&nbsp;&nbsp;&nbsp;
-                                <a href="/admin/goods/down/{{$v->goods_id}}">上架</a>
+                                <button class='btn btn-primary status' id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="2">下架</button>
                             @endif
                         </td>
                          <td class=" ">
@@ -131,9 +137,8 @@
 
                             <form action="/admin/goods/{{$v->goods_id}}" method='post' style='display:inline'>
                                 {{csrf_field()}}
-
                                 {{method_field('DELETE')}}
-                                <button href="" class='btn btn-danger'>删除</button>
+                                <button href="" class='btn btn-danger' onclick="return confirm('确定要删除吗?');">删除</button>
 
                             </form>
                         </td>
@@ -147,10 +152,29 @@
             </div>
             <link rel="stylesheet" type="text/css" href="/css/page.css" media="screen">
             <div class="dataTables_paginate paging_full_numbers" id="paginate">
-                {{ $goods->links() }}
+                {{ $goods->appends($request->all())->links() }}
             </div>
         </div>
     </div>
 </div>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script>
+    function stu($id){
+        var id = $id;
+        var status = $('.status'+'#'+id).val();
+        $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
+            if(data == '2'){
+                $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
+                alert('下架成功');
+            } else if(data=='1') {
+                $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
+                alert('上架成功');
+            } else {
+                alert('修改失败');
+            }
+        })
+    }
+
+</script>
 
 @endsection

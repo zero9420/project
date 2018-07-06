@@ -37,9 +37,11 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 商品管理
 	Route::resource('admin/goods','admin\GoodsController');
 
+	// 商品详情页ajax修改
+	Route::any('/admin/ajaxsize','admin\GoodsdetailController@ajaxsize');
+	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
 	// 商品上架下架
-	Route::any('/admin/goods/up/{id}','admin\GoodsdetailController@up');
-	Route::any('/admin/goods/down/{id}','admin\GoodsdetailController@down');
+	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
 
 	// 角色管理
 	Route::resource('admin/auth','admin\AuthController');

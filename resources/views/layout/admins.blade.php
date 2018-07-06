@@ -47,9 +47,8 @@
     	<div id="mws-logo-container">
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
-        	<div id="mws-logo-wrap" style='color:white'>
-            	<h4>后台管理</h4>
-                <span id="nowsTime"><script src="/admins/js/times/nowtime.js"></script></span>
+        	<div id="mws-logo-wrap">
+                <iframe id="fancybox-frame" name="fancybox-frame1530782195454" frameborder="0" scrolling="no" hspace="0"  src="http://i.tianqi.com/index.php?c=code&a=getcode&id=40&h=40&w=310"></iframe>
 			</div>
         </div>
         
