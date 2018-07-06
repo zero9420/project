@@ -74,7 +74,7 @@
 	                <label>
 	                    显示
 	                    <select name="num" size="1" aria-controls="DataTables_Table_1">
-	                        <option value="5" @if($arr == 5)   selected="selected" @endif>
+	                        <option value="5" @if($arr == 5) selected="selected" @endif>
 	                            5
 	                        </option>
 	                        <option value="25" @if($arr == 15)   selected="selected" @endif >
