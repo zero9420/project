@@ -39,5 +39,13 @@ class Info extends Model
 
 	];
 
+      /**
+     * 获得与用户关联的电话记录。
+     */
+    public function order()
+    {
+        return $this->hasOne('App\Models\Home\order','order_name');
+    }
+
 
 }

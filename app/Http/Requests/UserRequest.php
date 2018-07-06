@@ -50,7 +50,7 @@ class UserRequest extends FormRequest
                 'info_nickname.max' => '请输入2~16位的用户名',
                 'info_nickname.min' => '请输入2~16位的用户名',
                 'info_image.required' => '头像不能为空',
-                'info_address.required' => '地址不能为空'
+                'info_address.required' => '地址不能为空',
                
             ];
         }
