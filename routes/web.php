@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::group([],function(){
 
+
 	// 商品分类
 	Route::resource('admin/cate','admin\CateController');
 
@@ -35,6 +36,20 @@ Route::group([],function(){
 	// 商品上架下架
 	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
 
+
+	// 友情链接
+	Route::resource('/admin/link','admin\LinkController');
+
+	// 广告管理
+	Route::resource('/admin/position','admin\PositionController');
+
+
+
+
+	// 前台个人中心信息浏览
+	Route::get('/admin/user', 'admin\IndexController@Userinfo');
+
+
 });
 
 
@@ -45,6 +60,26 @@ Route::group([],function(){
  */
 
 Route::group([],function(){
+
+
+	// 前台首页
+	Route::get('/home/index','home\IndexController@Index');
+
+	// 前台个人中心
+	Route::get('/home/userinfo','home\IndexController@UserInfo');
+
+	// 前台个人中心注册页
+	Route::any('/home/userinfoma','home\IndexController@CreateUser');
+
+	// 前台个人中心修改页
+	Route::post('/home/userup/{id}','home\IndexController@Update');
+
+	// 前台检测登陆者信息跳转页
+	Route::any('/home/tiao','home\IndexController@tiao');
+
+	//前台退货
+	Route::any('/home/apply','home\IndexController@Apply');
+
 
 
 
