@@ -169,6 +169,7 @@
 
             <!-- Main Navigation -->
             <div id="mws-navigation">
+
                 <ul>
                 	<li>
                         <a href="#"><i class="icon-user"></i>个人信息</a>
@@ -219,6 +220,7 @@
                         <ul class='closed'>
                             <li><a href="/admin/lunbo/create">添加轮播</a></li>
                             <li><a href="/admin/lunbo">浏览轮播</a></li>
+
                         </ul>
                     </li>
 
@@ -227,14 +229,21 @@
                         <ul class='closed'>
                             <li><a href="/admin/order">浏览订单</a></li>
                             <li><a href="/admin/order">订单状态</a></li>
+
                         </ul>
                     </li>
-                </ul>
-            </div>         
+
+                    <li>
+                        <a href="#"><i class="icon-users"></i>用户管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/users/create">添加用户</a></li>
+                            <li><a href="/admin/users">浏览用户</a></li>
+
+                        </ul>
+                    </li>
+            </div>
         </div>
-       
-        
-        
+
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
         

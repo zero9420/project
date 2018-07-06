@@ -52,7 +52,7 @@ class LoginController extends Controller
                 // }
 
         //渲染
-            return '<script>alert("登入成功");location.href="/admin/index";</script>';
+            return '<script>alert("登入成功");location.href="/home/index";</script>';
 
     }
 
