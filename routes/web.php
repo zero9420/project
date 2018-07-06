@@ -21,33 +21,8 @@ Route::get('/', function () {
  */
 
 
-Route::get('/admin/login','admin\LoginController@login');
-Route::post('/admin/login','admin\LoginController@dologin');
-Route::any('/admin/captcha','admin\LoginController@captcha');
-Route::group(['middleware'=>'adminlogin'],function(){
-	// 后台首页
-	Route::any('admin/index','admin\IndexController@index');
-
-	// 退出登录
-	Route::any('admin/outlogin','admin\LoginController@outlogin');
-
-	// 商品分类
-	Route::resource('admin/cate','admin\CateController');
-
-	// 商品管理
-	Route::resource('admin/goods','admin\GoodsController');
-
-	// 商品详情页ajax修改
-	Route::any('/admin/ajaxsize','admin\GoodsdetailController@ajaxsize');
-	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
-	// 商品上架下架
-	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
-
-	// 角色管理
-	Route::resource('admin/auth','admin\AuthController');
-	Route::any('admin/authpassword/{id}','admin\AuthController@authpassword');
-	Route::post('admin/editpasswords','admin\AuthController@editpasswords');
-
+Route::group([],function(){
+	
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
 
@@ -55,16 +30,12 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::resource('/admin/position','admin\PositionController');
 
 
-	// 轮播管理
-	Route::resource('admin/lunbo','admin\LunboController');
-
+	
 
 	// 前台个人中心信息浏览
 	Route::get('/admin/user', 'admin\IndexController@Userinfo');
 
-	// 订单管理
-
-	Route::resource('admin/order','admin\OrderController');
+	
 });
 
 
@@ -97,11 +68,7 @@ Route::group([],function(){
 	Route::any('/home/apply','home\IndexController@Apply');
 
 
-	Route::get('/home/register','home\RegisterController@index');
-	Route::post('/home/registers','home\RegisterController@registers');
-	Route::get('/home/login','home\LoginController@index');
-	Route::post('/home/login','home\LoginController@login');
-
+	
 
 });
 

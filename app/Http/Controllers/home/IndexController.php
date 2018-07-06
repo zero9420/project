@@ -166,9 +166,8 @@ class IndexController extends Controller
 			
 			$res = Info::where('info_cid',$user)->first();
 			
-			// $data = Info::where('order_name',$res->info_nickname)->first()->order();
-				$data = Info::where('info_nickname')->order();
-			dd($data);
+		
+			$data = Apply::where('order_name',$res->info_nickname)->first();
 		
 			return view('home.apply.index',['res'=>$res,'data'=>$data]);
 
