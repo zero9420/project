@@ -73,7 +73,12 @@ Route::group(['middleware'=>'adminlogin'],function(){
  *
  * 前台路由组
  */
-
+// 前台注册
+Route::get('/home/register','home\RegisterController@index');
+Route::post('/home/registers','home\RegisterController@registers');
+// 前台登录
+Route::get('/home/login','home\LoginController@index');
+Route::post('/home/login','home\LoginController@login');
 
 
 Route::group([],function(){
@@ -84,7 +89,7 @@ Route::group([],function(){
 	// 前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');
 
-	// 前台个人中心注册页
+	// 前台个人中心页
 	Route::any('/home/userinfoma','home\IndexController@CreateUser');
 
 	// 前台个人中心修改页
@@ -97,10 +102,6 @@ Route::group([],function(){
 	Route::any('/home/apply','home\IndexController@Apply');
 
 
-	Route::get('/home/register','home\RegisterController@index');
-	Route::post('/home/registers','home\RegisterController@registers');
-	Route::get('/home/login','home\LoginController@index');
-	Route::post('/home/login','home\LoginController@login');
 
 
 });
