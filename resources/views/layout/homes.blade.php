@@ -452,5 +452,8 @@
         $(this).find(".nav a").removeClass("hover");
     })
 </script>
+@section('js')
+
+@show
 </body>
 </html>
