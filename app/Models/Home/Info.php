@@ -39,5 +39,7 @@ class Info extends Model
 
 	];
 
+  
+
 
 }

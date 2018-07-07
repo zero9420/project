@@ -13,26 +13,20 @@ class GoodsTableSeeder extends Seeder
      */
     public function run()
     {
-    	for ($i=1; $i < 301; $i++) {
-    		Goods::create([
-	            'goods_name' => '天王盖地虎',
-	            'goods_cate' => '电脑 / 办公',
-	            'goods_price' => '7777.77',
-	            'goods_stock' => '100',
-	            'goods_hot' => '1',
-	            'goods_desc' => '天王盖地虎,小鸡炖蘑菇!!!!!',
-	            'goods_status' => '0'
-        	]);
-	        GoodsSpec::create([
-	        	'goods_id' => $i,
+    	for ($i=1; $i < 300; $i++) {
+    		$res = Goods::create([
+	            'goods_name' => '天王盖地虎'.str_random(5),
+	            'cate_id' => mt_rand(1,50),
+	            'goods_price' => mt_rand(100,10000),
 	        	'goods_color' => '红色|蓝色|黄色|白色|黑色|紫色|粉红色',
-	        	'goods_size' => '均码|S|M|L|XS|XL',
-	            'goods_pic1' => '/uploads/goods/picture.png',
-	            'goods_pic2' => '/uploads/goods/picture.png',
-	            'goods_pic3' => '/uploads/goods/picture.png',
-	            'goods_pic4' => '/uploads/goods/picture.png',
-	            'goods_pic5' => '/uploads/goods/picture.png',
-	        ]);
+	        	'goods_size' => '36|37|38|39|40',
+	            'goods_hot' => '1',
+	            'goods_status' => mt_rand(1,2),
+	            'goods_desc' => '<p><img src="/uploads/goods/image/20180705/1530758286142130dhy6hyuuypd6n5qy.jpg" style="" title="153075966117-121109161R1.jpg"/></p><p><img src="/uploads/goods/image/20180705/1530758286142130dhy6hyuuypd6n5qy.jpg" style="" title="1530758286142130dhy6hyuuypd6n5qy.jpg"/></p><p><img src="/uploads/goods/image/20180705/1530758286142130dhy6hyuuypd6n5qy.jpg" style="" title="1530758286142130dhy6hyuuypd6n5qy.jpg"/></p><p><img src="/uploads/goods/image/20180705/1530758286142130dhy6hyuuypd6n5qy.jpg" style="" title="1530758286142130dhy6hyuuypd6n5qy.jpg"/></p><p><br/></p>'
+        	]);
+        	$goods_gid = $res->goods_id;
+        	$goods_pic = ['goods_gid'=>$goods_gid,'goods_pic'=>'/uploads/goods/photo/2018-07-04-21-24-3483MabP8Q3v.jpg'];
+        	GoodsSpec::create($goods_pic);
     	}
     }
 }

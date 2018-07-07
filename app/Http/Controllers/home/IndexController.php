@@ -9,6 +9,7 @@ use App\Models\Admin\Position;
 use App\Models\Home\Info;
 use Config;
 use App\Http\Requests\UserRequest;
+use App\Models\Home\Apply;
 
 class IndexController extends Controller
 {
@@ -35,11 +36,12 @@ class IndexController extends Controller
 		public function UserInfo()
 		{	
 
-			//检测用户信息
+			// 检测用户信息
 			
-			$user = session('id');
-					
-			// //显示页面
+			$user = session('user_id');
+			
+
+			// 显示页面
 			$mation = Info::where('info_cid',$user)->first();
 			
 			// dd($mation);
@@ -58,11 +60,18 @@ class IndexController extends Controller
 		}
 
 
+
+		/**
+		 * 已注册用户跳转
+		 * @return [type] [description]
+		 */
+		
+
 		public function tiao()
 		{
 
-			$user = session('id');
-
+			$user = session('user_id');
+			
 			$mation = Info::where('info_cid',$user)->first();
 
 			return view('home.userinfo.edit',['mation'=>$mation]);
@@ -72,12 +81,11 @@ class IndexController extends Controller
 		 * 修改登录者信息
 		 */
 
-		public function CreateUser(Request $request)
+		public function CreateUser(UserRequest $request)
 		{
 				
-								
 				$res = $request->except('_token','info_image');
-
+			
 				
 				//检测是否有上传图片
 				if($request->hasfile('info_image')){
@@ -98,7 +106,7 @@ class IndexController extends Controller
 				$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
 
 			
-				$res['info_cid'] =  session('id');
+				$res['info_cid'] =  session('user_id');
 				
 				$data = Info::create($res);
 			
@@ -113,15 +121,16 @@ class IndexController extends Controller
 		}
 
 
-		public function Update(Request $request, $id)
+		public function Update(UserRequest $request, $id)
 		{
 				
 								
 				$res = $request->except('_token','info_image');
-
+				
 				
 				//检测是否有上传图片
 				if($request->hasfile('info_image')){
+
 
 					//设置名字
 					$name = str_random(6).time();
@@ -137,7 +146,7 @@ class IndexController extends Controller
 
 				//存入数据表
 				$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
-
+				
 				
 				$data = Info::where('info_id',$id)->update($res);
 			
@@ -145,9 +154,22 @@ class IndexController extends Controller
 
 					return back();
 				}
+		
+
+		}
 
 
-				
+		public function Apply(Request $request)
+		{	
+			// 查找个人信息ID
+			$user = session('user_id');
+			
+			$res = Info::where('info_cid',$user)->first();
+			
+		
+			$data = Apply::where('order_name',$res->info_nickname)->first();
+		
+			return view('home.apply.index',['res'=>$res,'data'=>$data]);
 
 		}
     	

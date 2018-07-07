@@ -62,7 +62,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_price" value="{{old('goods_price')}}" class="error large">
+                        <input type="number" class="medium" name="goods_price" value="{{old('goods_price')}}" class="error large">
                     </div>
                 </div>
 

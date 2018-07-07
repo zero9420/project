@@ -1,6 +1,11 @@
 @extends('layout.admins')
 
 @section('title',$title)
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 
 @section('content')
 
@@ -20,7 +25,7 @@
 		        </ul>
 		    </div>
 		@endif
-        <form class="mws-form" action="/admin/goods/{{$goods->goods_id}}" method="post">
+        <form class="mws-form" action="/admin/goods/{{$goods->goods_id}}" method="post" enctype="multipart/form-data">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">
@@ -91,6 +96,39 @@
                                 <label>热卖</label>
                             </li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
+                        商品图片
+                        <span class="required">
+                            *
+                        </span>
+                    </label>
+                    <div class="mws-form-item">
+                        @foreach($spec as $k => $v) 
+                            <img src="{{$v->goods_pic}}" alt="" width='200'>
+                        @endforeach
+                        <input type="file" name='goods_pic[]' class="fileinput-preview" style="width: 100%; padding-right: 84px;" multiple="multiple"  readonly="readonly" placeholder="No file selected...">
+                    </div>
+                </div>
+                <script>
+                    //实例化编辑器
+                    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                    var ue = UE.getEditor('editor');
+
+                </script>
+
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
+                        商品描述
+                        <span class="required">
+                            *
+                        </span>
+                    </label>
+                    <div class="mws-form-item">
+                        <script id="editor" name='goods_desc' type="text/plain" style="width:800px;height:300px;">{!!$goods->goods_desc!!}</script>
                     </div>
                 </div>
             </div>
