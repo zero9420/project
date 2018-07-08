@@ -46,15 +46,15 @@
                     </div>
                     <div class="content-box">
                         <h2>价格区间</h2>
-                            <div class="info_widget">
-                                <div class="price_filter">
-                                    <div id="slider-range"></div>
-                                    <div class="price_slider_amount">
-                                        <input type="text" id="amount" name="price"  placeholder="Add Your Price" disabled="disable" />元
-                                        <input type="submit" value="提交">
-                                    </div>
+                        <div class="info_widget">
+                            <div class="price_filter">
+                                <div id="slider-range"></div>
+                                <div class="price_slider_amount">
+                                    <input type="text" id="amount" name="price"  placeholder="Add Your Price" disabled="disable" />元
+                                    <input type="submit" id="price" value="提交">
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <div class="content-box">
                         <h2>规格</h2>

@@ -26,6 +26,11 @@ class GoodsController extends Controller
     public function priceajax(Request $request)
     {
     	$price = $request -> input('price');
-    	echo $price;
+		// 最小价格
+        $goods[] = Goods::where('goods_price','>=',$price[0]);
+        // 最大价格
+        $goods[] = Goods::where('goods_price','<=',$price[1]);
+
+        echo $price;
     }
 }
