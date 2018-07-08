@@ -59,6 +59,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/msq
 
 	// 角色管理
 	Route::resource('admin/auth','admin\AuthController');
@@ -91,6 +95,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 订单管理
 	Route::resource('/admin/order','admin\OrderController');
+
+	// 订单状态
+	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
+	
 
 });
 
@@ -137,10 +145,17 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
 
+<<<<<<< HEAD
 	//购物车
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
 	Route::any('/home/cart/delete','home\CartController@delete');
+=======
+	// 前台轮播
+	Route::any('/home/lunbo','home\LunboController@lunbo');
+
+
+>>>>>>> origin/msq
 
 
 

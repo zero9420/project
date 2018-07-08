@@ -61,8 +61,8 @@
                 }
 
                 img{
-                  width:77PX;
-                  height: 90px;
+                  width:100PX;
+                  height: 100px;
                 }
       </style>
 
@@ -119,21 +119,24 @@
 
                     </tr>
                 </thead>
+
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 
                          <tr class="">
-                            <td class=""> </td>
+                            <td class=""> {{$res->goods_name}}</td>
 
-                            <td class=""> </td>
+                           <td class="">
+                            <img src="{{$spec->goods_pic}}" alt="..." class="img-rounded" >
+                           </td>
 
-                            <td class=" "> </td>
+                            <td class=" "> {{$res->goods_price}}</td>
 
 
-                            <td class=" "></td>
+                            <td class=" ">{{$order->order_cat}}</td>
 
 
-                             <td class=" "></td>
-                             <td class=" "></td>
+                             <td class=" ">{{$order->order_payment}}</td>
+                             <td class=" ">{{$order->order_create_time}}</td>
 
                             
                        

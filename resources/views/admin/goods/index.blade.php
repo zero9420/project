@@ -150,6 +150,27 @@
         </div>
     </div>
 </div>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script>
+    function stu($id){
+        var id = $id;
+        var status = $('.status'+'#'+id).val();
+        $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
+            if(data == '2'){
+                $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
+                $('.status'+'#'+id).val('2');
+                alert('下架成功');
+            } else if(data=='1') {
+                $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
+                $('.status'+'#'+id).val('1');
+                alert('上架成功');
+            } else {
+                alert('修改失败');
+            }
+        })
+    }
+
+</script>
 
 @endsection
 

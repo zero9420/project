@@ -52,7 +52,8 @@ class LunboController extends Controller
     public function store(Request $request)
     {
 
-         $file = $request->file();
+
+      $file = $request->file();
 
         if (count($file) == 5) {
             
@@ -60,7 +61,7 @@ class LunboController extends Controller
 
         $res = $request->except('_token');
         
-        // dd($res);
+        
         // dd($res['lunbo_image']->getClientOriginalExtension());
         
        
@@ -91,20 +92,20 @@ class LunboController extends Controller
            
             } 
 
-
+           
           
 
-        try{
-            $data = DB::table('lunbo')->insert($res);
+              try{
+                  $data = DB::table('lunbo')->insert($res);
 
-            if($data){
-                return redirect('/admin/lunbo')->with('success','修改成功');
-            }
-        }catch(\Exception $e){
+                  if($data){
+                      return redirect('/admin/lunbo')->with('success','修改成功');
+                  }
+              }catch(\Exception $e){
 
-            return back()->with('error');
+                  return back()->with('error');
 
-        }
+              }
 
        }   
        

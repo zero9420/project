@@ -62,11 +62,27 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        
 
+        $res = Goods::find($id)->first();
 
+        $spec = GoodsSpec::find($id)->first();
 
-        return view('/admin/order/particulars',['title'=>'后台订单详情']);
+        $order = Order::where('id',$id)->first();
+
+        
+        
+
+        return view('/admin/order/particulars',[
+            'title'=>'后台订单详情',
+
+            'res'=>$res,
+
+            'spec'=>$spec,
+
+            'order' =>$order
+        ]);
     }
 
     /**
@@ -80,11 +96,11 @@ class OrderController extends Controller
 
         
         $res = Order::where('order_id',$id)->first();
-        
+               
 
        return view('/admin/order.edit',[
 
-            'title'=>'订单浏览管理',
+            'title'=>'订单状态管理',
             'res'=>$res,
             
         ]);
@@ -111,6 +127,7 @@ class OrderController extends Controller
             } else {
                 return back()->with('error','修改失败');
             } 
+
 
 
         
