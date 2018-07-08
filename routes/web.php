@@ -137,6 +137,10 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
 
+	//购物车
+	Route::any('/home/cart','home\CartController@index');
+	//购物车ajax删除
+	Route::any('/home/cart/delete','home\CartController@delete');
 
 
 
