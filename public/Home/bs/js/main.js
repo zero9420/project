@@ -236,12 +236,20 @@
         values: [300, 3000],
         value:this,
         slide: function(event, ui) {
-            $("#amount").val(ui.values[0] + " - " + ui.values[1]);
+            $("#amount").val(ui.values[0] + "-" + ui.values[1]);
         }
     });
     $("#amount").val($("#slider-range").slider("values", 0) +
-        " - " + $("#slider-range").slider("values", 1));
+        "-" + $("#slider-range").slider("values", 1));
 
+    $("#price").click(function(){
+        var price = $("#amount").val();
+        var price = price.split('-');
+        // console.log(price);
+        $.get('/goods/price',{price:price},function(data){
+            console.log(data);
+        })
+    })
 
     /*----------------------------
 

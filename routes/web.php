@@ -104,7 +104,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
  */
 
 // 前台首页
-Route::get('/','home\IndexController@Index');
+Route::any('/','home\IndexController@Index');
 Route::any('/goodslist/{id?}','home\GoodsController@index');
 Route::any('/goods/price','home\GoodsController@priceajax');
 

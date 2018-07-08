@@ -24,7 +24,7 @@ class IndexController extends Controller
 			$data = Position::all();
 
 			//显示模板分配数据
-			return view('home.index.index',['title'=>'云商城购物中心','res'=>$res,'data'=>$data]);
+			return view('home.index',['title'=>'云商城购物中心','res'=>$res,'data'=>$data]);
 
 
 		}
