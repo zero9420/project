@@ -105,8 +105,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 // 前台首页
 Route::any('/','home\IndexController@Index');
-Route::any('/goodslist/{id?}','home\GoodsController@index');
-Route::any('/goods/price','home\GoodsController@priceajax');
+Route::any('/goodslist/{id}','home\GoodslistController@index')->where(['id' => '\d+']);;
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');
