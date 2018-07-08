@@ -53,6 +53,8 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
 	// 商品上架下架
 	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
+	// 定义热卖商品
+	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -102,7 +104,9 @@ Route::group(['middleware'=>'adminlogin'],function(){
  */
 
 // 前台首页
-Route::get('/home/index','home\IndexController@Index');
+Route::get('/','home\IndexController@Index');
+Route::any('/goodslist/{id?}','home\GoodsController@index');
+Route::any('/goods/price','home\GoodsController@priceajax');
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');

@@ -150,7 +150,7 @@
                     </label>
                     <div class="mws-form-item clearfix">
                         <ul class="mws-form-list inline">
-                            <li><input type="radio" name='goods_status' value='1'> <label>上架</label></li>
+                            <li><input type="radio" name='goods_status' value='1' checked="checked"> <label>上架</label></li>
                             <li><input type="radio" name='goods_status' value='2'> <label>下架</label></li>
                         </ul>
                     </div>

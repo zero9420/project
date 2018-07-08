@@ -68,27 +68,6 @@
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        热卖商品
-                        <span class="required">
-                            *
-                        </span>
-                    </label>
-                    <div class="mws-form-item clearfix">
-                        <ul class="mws-form-list inline">
-                            <li>
-                                <input type="radio" name="goods_hot" value="1" @if($goods->goods_hot == 1) checked @endif>
-                                <label>普通</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="goods_hot" value="2" @if($goods->goods_hot == 2) checked @endif>
-                                <label>热卖</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">
                         商品图片
                         <span class="required">
                             *
