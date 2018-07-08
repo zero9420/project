@@ -315,7 +315,3 @@
 
 
 @endsection
-
-@section('js')
-
-@endsection
