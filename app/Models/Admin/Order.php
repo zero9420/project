@@ -26,9 +26,10 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\Admin\GoodsSpec;','goods_gid');
     }
+
      public function goods()
     {
-        return $this->hasMany('App\Models\Admin\Goods','id');
+        return $this->hasMany('App\Models\Admin\Goods','goods_id');
     }
 
    

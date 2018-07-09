@@ -13,7 +13,6 @@ use App\Models\Home\Apply;
 
 class IndexController extends Controller
 {
-    	
 		public function Index(Request $request)
 		{
 
@@ -23,9 +22,11 @@ class IndexController extends Controller
 
 			//广告管理数据接收
 			$data = Position::all();
-	
+
 			//显示模板分配数据
+
 			return view('home.index.index',['data'=>$data]);
+
 
 
 		}

@@ -25,7 +25,7 @@ class FormRequest extends FormRequest
     {
         return [
             'goods_name' => 'required|unique:shop_goods|max:100',
-            'goods_price'=>'required|max:11',
+            'goods_price'=>'required|regex:/^\d{1,9}$/',
             'goods_stock'=>'required|regex:/^\d+$/',
             'goods_pic'=>'required',
             'goods_desc'=>'required',

@@ -68,18 +68,6 @@
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品库存
-                        <span class="required">
-                            *
-                        </span>
-                    </label>
-                    <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_stock" value="{{old('goods_stock')}}" class="error large">
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">
                         商品颜色
                         <span class="required">
                             *
@@ -162,7 +150,7 @@
                     </label>
                     <div class="mws-form-item clearfix">
                         <ul class="mws-form-list inline">
-                            <li><input type="radio" name='goods_status' value='1'> <label>上架</label></li>
+                            <li><input type="radio" name='goods_status' value='1' checked="checked"> <label>上架</label></li>
                             <li><input type="radio" name='goods_status' value='2'> <label>下架</label></li>
                         </ul>
                     </div>

@@ -107,9 +107,13 @@
             aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
+                       <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 20px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >
+                            ID
+                        </th>
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 20px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >
-                            订单ID
+                            订单号
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 20px;" aria-label="Browser: activate to sort column ascending">
@@ -147,7 +151,10 @@
                         rowspan="1" colspan="1" style="width: 20px;" aria-label="CSS grade: activate to sort column ascending">
                            修改时间
                         </th>
-                          </th>
+                           <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 20px;" aria-label="CSS grade: activate to sort column ascending">
+                           订单状态
+                        </th>
                        
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width:80px;" aria-label="CSS grade: activate to sort column ascending">
@@ -160,6 +167,8 @@
 					@foreach($res as $k => $v)
 
                     <tr class="@if($k % 2 == 1)  odd   @else even  @endif">
+                        <td class="">{{$v->id}}</td>
+
                         <td class="">{{$v->order_id}}</td>
 
                         <td class="">{{$v->order_payment}}</td>
@@ -199,27 +208,39 @@
 
 
                          <td class=" ">{{$v->order_update_time}}</td>
+                         <td class="">
+                            @if($v->order_status == 0)
+                            未发货
+                            @endif
+                            @if($v->order_status == 1)
+                            已发货
+                            @endif
+                            @if($v->order_status == 2)
+                            交易完成
+                            @endif
+                          </td>
+
                        
                         
                            <td>
-                             <a href="/admin/order/{{$v->order_id}}/edit" class="btn btn-info">订单修改</a>
-                             <a href="/admin/order/{{$v->order_id}}" class="btn btn-info">订单详情</a>
+                             <a href="/admin/order/{{$v->order_id}}/edit" class="btn btn-warning">订单修改</a>
+                             <a href="/admin/order/{{$v->id}}" class="btn btn-info">订单详情</a>
 
-                            
-
+          
                              @if($v->order_return_goods == 1)
-                              <div display='block'>
+                                <div display='block'>
                              
-                                <button class="btn btn-success" name="order_return_goods" value="2">同意退款</button>
+                                 <a href="/admin/orderstatus?id={{$v->id}}" class="btn btn-danger">同意退款</a>
 
-                              </div>
+                               </div>
                             
                               @endif
 
-                              
-                               @if($v->order_return_goods == 2)
-                              <div display='none'>
-                                <button class="btn btn-success" name="order_return_goods" value="2">退款完成</button>
+                              @if($v->order_return_goods == 2)
+                              <div display='block'>
+                             
+                               <button class="btn btn-success " >退款成功</button>
+
                               </div>
                             
                               @endif

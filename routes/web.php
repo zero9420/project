@@ -53,9 +53,12 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
 	// 商品上架下架
 	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
+	// 定义热卖商品
+	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
+
 
 
 	// 角色管理
@@ -90,6 +93,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 订单管理
 	Route::resource('/admin/order','admin\OrderController');
 
+	// 订单状态
+	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
+	
+
 });
 
 
@@ -102,7 +109,8 @@ Route::group(['middleware'=>'adminlogin'],function(){
  */
 
 // 前台首页
-Route::get('/home/index','home\IndexController@Index');
+Route::any('/','home\IndexController@Index');
+Route::any('/goodslist/{id}','home\GoodslistController@index')->where(['id' => '\d+']);;
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');
@@ -132,6 +140,17 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
+
+
+	//购物车
+	Route::any('/home/cart','home\CartController@index');
+	//购物车ajax删除
+	Route::any('/home/cart/delete','home\CartController@delete');
+
+	// 前台轮播
+	Route::any('/home/lunbo','home\LunboController@lunbo');
+
+
 
 
 	// 前台退款

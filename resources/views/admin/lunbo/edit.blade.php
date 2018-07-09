@@ -82,7 +82,7 @@
                                  <div class="mws-form-row">
                                     <label class="mws-form-label">修改时间:</label>
                                     <div class="mws-form-item">
-                                        <input type="text" class="large" value=" {{date('Y-m-d H:i:s',time())}} " disabled name="lunbo_time">
+                                        <input type="text" class="large" value=" {{date('Y-m-d H:i:s',time())}} " readonly name="lunbo_time">
                                     </div>
                                 </div>
 
@@ -105,7 +105,7 @@
                                 {{csrf_field()}}
 
                                 {{method_field('PUT')}}
-                             <input type="submit" class="btn btn-success" value="修改">
+                             <input type="submit" class="btn btn-success" value="确定">
                         </div>
    
                         </form>
