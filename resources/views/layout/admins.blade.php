@@ -48,7 +48,7 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap" style="color: white">
-                <h4>云商城后台管理</h4>
+                <a href="/admin/index"><h4>云购物大数据后台管理</h4></a>
 			</div>
         </div>
         
@@ -227,6 +227,8 @@
                         <a href="#"><i class="icon-list-2"></i>订单管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/order">浏览订单</a></li>
+                            <li><a href="/admin/order">订单状态</a></li>
+
 
                         </ul>
                     </li>
@@ -326,6 +328,10 @@
 
 
     </script>
+    @section('js')
+
+
+    @show
 
 </body>
 </html>

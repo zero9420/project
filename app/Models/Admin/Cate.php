@@ -25,4 +25,5 @@ class Cate extends Model
      * @var array
      */
     protected $fillable = ['cate_name','cate_pid','cate_path'];
+
 }
