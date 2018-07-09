@@ -11,11 +11,32 @@ use App\Models\Admin\Goods;
 class GoodslistController extends Controller
 {
     //
-    public function index(Request $request,$id)
+    public function index(Request $request)
     {
-    	$cate = Cate::where('cate_pid',$id)->get();
-    	$goods = Goods::where('cate_id',$id)->with('spec')->paginate(12);
-    	return view('home.goods.index',['title'=>'商品列表页','cate'=>$cate,'goods'=>$goods]);
+    	// 获取id
+        $path = $request->path();
+    	$id = substr($path,10);
+    	$id = intval($id);
+
+    	if (!empty($id)) {
+    		$goods = Goods::with('spec')->where('cate_id',$id)->paginate(12);
+    	} else {
+    		$goods = Goods::with('spec')
+    		->where(function($query) use($request){
+                // 检测关键字
+                $gname = $request->input('gname');
+                // 如果关键字不为空
+                if (!empty($gname)) {
+                	$query->where('goods_name','like','%'.$gname.'%');
+                }
+            })->paginate(12);
+    	}
+            // dump($goods);
+    	return view('home.goods.index',['title'=>'商品列表页',
+    									'goods'=>$goods,
+    									'id'=>$id,
+                                        'request'=> $request
+    								]);
     }
 
 }

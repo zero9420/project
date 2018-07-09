@@ -85,7 +85,8 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 // 前台首页
 Route::any('/','home\IndexController@Index');
-Route::any('/goodslist/{id}','home\GoodslistController@index')->where(['id' => '\d+']);;
+Route::any('/goodslist/{id?}','home\GoodslistController@index');
+Route::resource('/goods','home\GoodsController');
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');
