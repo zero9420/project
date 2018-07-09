@@ -25,7 +25,7 @@ class IndexController extends Controller
 
 			//显示模板分配数据
 
-			return view('home.index.index',['data'=>$data]);
+			return view('home.index',['data'=>$data,'title'=>'云商城购物中心']);
 
 
 		}
