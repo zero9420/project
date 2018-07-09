@@ -25,9 +25,10 @@ class LinkRequest extends FormRequest
     {
         return [
             
-             'link_name' => 'required|max:6|min:2',
+            'link_name' => 'required|max:6|min:2',
             'link_url' => 'required',
             'link_url' => array('regex:/(http?|ftp?):\/\/(www)\.([^\.\/]+)\.(com|cn)(\/[\w-\.\/\?\%\&\=]*)?/i'),
+            'link_logo' => 'image|required',
            
 
         ];
@@ -48,6 +49,8 @@ class LinkRequest extends FormRequest
             'link_name.min' => '请输入2-6位的链接名称',
             'link_url.required' => '链接地址不能为空', 
             'link_url.regex' => '链接格式不正确,正确格式为http://www.***.com或者http://www.***.cn',
+            'link_logo.image' => '广告图片格式不正确',
+            'link_logo.required' => '广告图片不能为空',
   
 
         ];

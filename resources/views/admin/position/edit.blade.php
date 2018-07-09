@@ -55,7 +55,7 @@
                         <input type="text" class="large" name="position_desc" value="{{$res->position_desc}}" style="width:55%">
                     </div>
                 </div>
-                   <div class="mws-form-row">
+                <div class="mws-form-row">
                     <label class="mws-form-label">
                        广告图片
                     </label>

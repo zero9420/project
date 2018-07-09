@@ -115,7 +115,7 @@
                             {{$v->info_telphone}}
                         </td>
                			<td class=" ">
-                            <img src="{{$v->info_image}}" alt="" width:30px height:30px>
+                            <img src="{{$v->info_image}}" alt=""  width="170px" height="170px">
                         </td>
                       	<td class=" ">
                             {{$v->info_address}}
