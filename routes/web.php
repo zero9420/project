@@ -134,7 +134,8 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/apply','home\IndexController@Apply');
 
 
-
+	// 前台退款
+	Route::any('/home/ajax','home\IndexController@ajax');
 
 
 

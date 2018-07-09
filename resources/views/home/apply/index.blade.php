@@ -3,7 +3,8 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="/homes/css/member.css">
 <link rel="stylesheet" type="text/css" href="/homes/css/user.css">
-
+<script src="/js/jquery-3.2.1.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="containers center"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 <section id="member">
 	
@@ -43,11 +44,10 @@
 		<div class="member-right fr">
 			<div class="member-head">
 				<div class="member-heels fl"><h2>退货申请</h2></div>
-				<div class="member-backs member-icons fr"><a href="#">搜索</a></div>
 				
 			</div>
 			<div class="member-border">
-				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span> <span><b>订单状态：</b><i class="reds">已完成</i></span></div>
+				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span> <span><b>订单状态：</b><i class="reds">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</i></span></div>
 				<div class="member-cargo">
 					<h3>收货人信息：</h3>
 					<p>{{$data->order_name}}</p>
@@ -68,8 +68,8 @@
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
-									<div class="ap2 fl"><a href="#">查看订单</a> </div>
-									<div class="ap3 fl"><a href="#">@if($data->order_return_goods == 1)退款中 @else申请退款   @endif</a> </div>
+									
+									<div class="ap3 fl ajax tk" id="1"><a href="#">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</a> </div>
 								</div>
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
@@ -77,8 +77,7 @@
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
-									<div class="ap2 fl"><a href="#">查看订单</a> </div>
-									<div class="ap3 fl"><a href="#">申请退款</a> </div>
+									<div class="ap3 fl ajax ck"><a href="#">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</a> </div>
 								</div>
 							</div>
 						</li>
@@ -102,5 +101,32 @@
 		</div>
 	</div>
 </section>
+
+
+});
+<script>
+	
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+	
+	$('.ajax').click(function(){
+
+	
+
+		$.post('/home/ajax',{status:1},function(data){
+
+			
+			console.log(data);
+
+		})
+
+
+
+	})
+
+</script>
 
 @endsection
