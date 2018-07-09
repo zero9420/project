@@ -13,7 +13,7 @@
                     </a>
                     <span class="navigation-page">
                         <span class="navigation-pipe">></span>
-                        商品页
+                        <a href="/goodslist">商品页</a>
                     </span>
                 </div>
             </div>
@@ -32,128 +32,62 @@
                     <div class="content-box">
                         <h2>分类</h2>
                         <ul>
-                            @foreach($cate as $k=>$v)
+                            @php
+                                $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
+                            @endphp
+                            @foreach($cates as $k=>$v)
                             <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
                                 <label class="check-label">
-                                    <a href="/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a>
+                                    <a @if($id == $v->cate_id) class="bg-danger" @endif href="/goodslist/{{$v->cate_pid}}">{{$v->cate_name}}</a>
                                 </label>
+                                @if($v->sub)
+                                @foreach($v->sub as $kk => $vv)
+                                    <li>
+                                        <label class="check-label">
+                                            &nbsp;&nbsp;&nbsp;<a @if($id == $vv->cate_id) class="bg-danger" @endif href="/goodslist/{{$vv->cate_id}}">{{$vv->cate_name}}</a>
+                                        </label>
+                                        @if($vv->sub)
+                                        @foreach($vv->sub as $kkk => $vvv)
+                                            <li>
+                                                <label class="check-label">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @if($id == $vvv->cate_id) class="bg-danger" @endif href="/goodslist/{{$vvv->cate_id}}">{{$vvv->cate_name}}</a>
+                                                </label>
+                                            </li>
+                                        @endforeach
+                                        @endif
+                                    </li>
+                                @endforeach
+                                @endif
                             </li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div><!-- 
                     <div class="content-box">
-                        <h2>价格区间</h2>
+                        <h2>按价格进行搜索</h2>
                         <div class="info_widget">
+                        <form action="/goodslist" method="get">
                             <div class="price_filter">
-                                <div id="slider-range"></div>
+                                <style>
+                                    input[type="number"]{
+                                        border: medium none;
+                                        font-weight: bold;
+                                        letter-spacing: 3px;
+                                        margin-left: -15px;
+                                        text-align: center;
+                                        width: 130px;
+                                    }
+                                </style>
                                 <div class="price_slider_amount">
-                                    <input type="text" id="amount" name="price"  placeholder="Add Your Price" disabled="disable" />元
-                                    <input type="submit" id="price" value="提交">
+                                    <input type="number" name="price_min" value="300" placeholder="Add Your Price" />-
+                                    <input type="number" name="price_max" value="3000" placeholder="Add Your Price" />
                                 </div>
+                                <button class="price-filter" id="search">
+                                    搜索
+                                </button>
                             </div>
+                        </form>
                         </div>
-                    </div>
-                    <div class="content-box">
-                        <h2>规格</h2>
-                        <ul>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">l</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">m</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">s</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">xl</a>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="content-box">
-                        <h2>颜色</h2>
-                        <ul>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">黑色</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">白色</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">橙色</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">蓝色</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">棕色</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">紫色</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">红色</a>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12">

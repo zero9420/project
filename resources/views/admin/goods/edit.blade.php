@@ -29,13 +29,14 @@
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品名称
+                        商品名字
                         <span class="required">
                             *
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" placeholder="请输入最长100字符的商品名" value="{{$goods->goods_name}}">
+                        <textarea class="medium" name="goods_name" id="goodsname" maxlength="80">{{$goods->goods_name}}</textarea>
+                        <p><span id="name-count">80</span>/80</p>
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -51,6 +52,18 @@
 								<option value="{{$v->cate_id}}" @if($v->cate_id == $goods->cate_id) selected @endif >{{$v->cate_name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
+                        商品简介
+                        <span class="required">
+                            *
+                        </span>
+                    </label>
+                    <div class="mws-form-item">
+                        <textarea class="medium" name="goods_info" id="goodsinfo" maxlength="120">{{$goods->goods_info}}</textarea>
+                        <p><span id="info-count">120</span>/120</p>
                     </div>
                 </div>
 
