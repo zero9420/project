@@ -116,6 +116,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/apply','home\IndexController@Apply');
 
 
+
 	//购物车
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
@@ -124,6 +125,10 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/lunbo','home\LunboController@lunbo');
 
 
+
+
+	// 前台退款
+	Route::any('/home/ajax','home\IndexController@ajax');
 
 
 
