@@ -53,8 +53,38 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
 	// 商品上架下架
 	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
+<<<<<<< HEAD
 	// 定义热卖商品
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
+=======
+
+	// 友情链接
+	Route::resource('/admin/link','admin\LinkController');
+
+
+
+	// 角色管理
+	Route::resource('admin/auth','admin\AuthController');
+	Route::any('admin/authpassword/{id}','admin\AuthController@authpassword');
+	Route::post('admin/editpasswords','admin\AuthController@editpasswords');
+
+	// 后台个人中心信息浏览
+	Route::get('/admin/user', 'admin\IndexController@Userinfo');
+
+	// 商品分类
+	Route::resource('admin/cate','admin\CateController');
+
+	// 商品管理
+	Route::resource('admin/goods','admin\GoodsController');
+
+	// 商品详情页ajax修改
+	Route::any('/admin/ajaxsize','admin\GoodsdetailController@ajaxsize');
+
+	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
+	
+	// 商品上架下架
+	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
+>>>>>>> origin/msq
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -68,8 +98,14 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 订单管理
 	Route::resource('/admin/order','admin\OrderController');
 
-	// 订单状态
+	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
+<<<<<<< HEAD
+=======
+
+	
+	
+>>>>>>> origin/msq
 
 });
 
@@ -124,8 +160,11 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台轮播
 	Route::any('/home/lunbo','home\LunboController@lunbo');
 
+	// 前台订单页
+	Route::any('/home/order','home\OrderController@order');
 
-
+	// 前台结算页
+	Route::any('/home/jsy','home\JsyController@jsy');
 
 	// 前台退款
 	Route::any('/home/ajax','home\IndexController@ajax');

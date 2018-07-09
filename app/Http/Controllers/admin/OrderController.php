@@ -65,11 +65,16 @@ class OrderController extends Controller
     {   
         
 
-        $res = Goods::find($id)->first();
+       
+        $res = Goods::where('goods_id',$id)->first();
 
-        $spec = GoodsSpec::find($id)->first();
+        $spec = GoodsSpec::where('goods_spec_id',$id)->first();
 
-        $order = Order::where('id',$id)->first();
+         $order = Order::where('id',$id)->first();
+
+
+       
+       
 
         
         
