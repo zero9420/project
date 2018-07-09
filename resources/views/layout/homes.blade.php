@@ -12,11 +12,16 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/homes/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/homes/css/home.css">
+	<link rel="stylesheet" type="text/css" href="/homes/css/car/base.css">
+	<link rel="stylesheet" type="text/css" href="/homes/css/car/home.css">
 	<script type="text/javascript" src="/homes/js/jquery.js"></script>
 	<script type="text/javascript" src="/homes/js/index.js"></script>
 	<script type="text/javascript" src="/homes/js/modernizr-custom-v2.7.1.min.js"></script>
 	<script type="text/javascript" src="/homes/js/jquery.SuperSlide.js"></script>
+
+	
 	<script type="text/javascript">
+
 
         var intDiff = parseInt(90000);//倒计时总秒数量
 

@@ -75,7 +75,9 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 商品详情页ajax修改
 	Route::any('/admin/ajaxsize','admin\GoodsdetailController@ajaxsize');
+
 	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
+	
 	// 商品上架下架
 	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
 
@@ -91,8 +93,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 订单管理
 	Route::resource('/admin/order','admin\OrderController');
 
-	// 订单状态
+	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
+
+	
 	
 
 });
@@ -141,8 +145,11 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台轮播
 	Route::any('/home/lunbo','home\LunboController@lunbo');
 
+	// 前台订单页
+	Route::any('/home/order','home\OrderController@order');
 
-
+	// 前台结算页
+	Route::any('/home/jsy','home\JsyController@jsy');
 
 
 
