@@ -1,17 +1,23 @@
 @extends('layout.homes')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css" href="/homes/css/member.css">
 <link rel="stylesheet" type="text/css" href="/homes/css/user.css">
+<link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/homes/css/base.css">
+<link rel="stylesheet" type="text/css" href="/homes/css/home.css">
 <script src="/js/jquery-3.2.1.min.js"></script>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript" src="/homes/js/jquery.js"></script>
+<script type="text/javascript" src="/homes/js/index.js"></script>
+<script type="text/javascript" src="/homes/js/modernizr-custom-v2.7.1.min.js"></script>
+<script type="text/javascript" src="/homes/js/jquery.SuperSlide.js"></script>
 <div class="containers center"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 <section id="member">
-	
 	<div class="member-center clearfix">
 		<div class="member-left fl">
 			<div class="member-apart clearfix">
-				<div class="fl"><a href="#">
+				<div class="fl tu"><a href="#">
 					<img src="{{$res->info_image}}"></a>
 				</div>
 				<div class="f1">
@@ -116,7 +122,7 @@
 
 	
 
-		$.post('/home/ajax',{status:1},function(data){
+		$.get('/home/ajax',{status:1},function(data){
 
 			
 			console.log(data);

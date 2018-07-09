@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Http\Requests\LinkRequest;
+use Config;
 
 class LinkController extends Controller
 {
@@ -48,8 +49,27 @@ class LinkController extends Controller
     public function store(LinkRequest $request)
     {
         
+      
+        //接收数据
+        $res = $request->except(['_token','link_logo']);
+       
 
-        $res = $request->except(['_token']);
+        if($request->hasFile('link_logo')){
+
+            //设置名字
+            $name = str_random(6).time();
+
+
+            //获取后缀
+            $suffix = $request->file('link_logo')->getClientOriginalExtension();
+
+            //移动
+            $request->file('link_logo')->move('./link/',$name.'.'.$suffix);
+
+        }
+
+         //存入数据表
+        $res['link_logo'] =Config::get('app.link').$name.'.'.$suffix;
 
         try{
         //插入数据
@@ -109,8 +129,35 @@ class LinkController extends Controller
     public function update(LinkRequest $request, $id)
     {
 
+
+        $file = DB::table('shop_link')->where('link_id',$id)->first();
+
+        $urls = $file->link_logo;
+
+        $info = unlink('.'.$urls);
+
+        if(!$info) return; 
+
         //接受信息
-        $res = $request->except(['_token','_method']);
+        $res = $request->except(['_token','_method','link_logo']);
+
+
+        if($request->hasFile('link_logo')){
+
+            //设置名字
+            $name = str_random(6).time();
+
+
+            //获取后缀
+            $suffix = $request->file('link_logo')->getClientOriginalExtension();
+
+            //移动
+            $request->file('link_logo')->move('./link/',$name.'.'.$suffix);
+
+        }
+
+         //存入数据表
+        $res['link_logo'] =Config::get('app.link').$name.'.'.$suffix;
 
 
         try{
@@ -147,7 +194,16 @@ class LinkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+
+        //删除图片
+        $file = DB::table('shop_link')->where('link_id',$id)->first();
+
+        $urls = $file->link_logo;
+
+        $info = unlink('.'.$urls);
+
+        if(!$info) return; 
 
         //接受信息
         $data = DB::table('shop_link')->where('link_id',$id)->delete();

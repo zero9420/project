@@ -1,11 +1,5 @@
 <?php
-/**
- *
- * 后台
- */
-Route::get('/admin/login','admin\LoginController@login');
-Route::post('/admin/login','admin\LoginController@dologin');
-Route::any('/admin/captcha','admin\LoginController@captcha');
+
 
 /**
  *
