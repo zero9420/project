@@ -36,11 +36,16 @@
 				<div class="pc-login-title"><h2>用户注册  	|  邮箱注册</h2></div>
 
 				<form action="/home/registers" method="post">
-				<input type="hidden" name="status" value="1"> 
+				<input type="hidden" name="status" value="0"> 
 					 {{ csrf_field() }}
 					<div class="pc-sign">
-						<input type="text" name="username" placeholder="手机号">
+						<input type="text" name="username" placeholder="昵称">
 					</div>
+
+					<div class="pc-sign">
+						<input type="email" name="email" placeholder="邮箱号">
+					</div>
+					
 					<div class="pc-sign">
 						<input type="password" name="password" placeholder="请输入您的密码">
 					</div>

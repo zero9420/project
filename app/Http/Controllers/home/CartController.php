@@ -26,4 +26,19 @@ class CartController extends Controller
         $count = DB::table('shop_cart')->count();
         echo $count;
     }
+
+    public function jiajian(Request $request)
+    {
+        $num = $request->input('num');
+        // dump($num);
+
+        // Cart::where('')
+    }
+
+    public function total(Request $request)
+    {
+        $total = $request->input('total');
+        // dump($total);
+        // Cart::where('')
+    }
 }
