@@ -107,6 +107,7 @@ class IndexController extends Controller
 				$res['info_cid'] =  session('user_id');
 				
 				$data = Info::create($res);
+				
 			
 				if($data){
 
@@ -147,7 +148,7 @@ class IndexController extends Controller
 				
 				
 				$data = Info::where('info_id',$id)->update($res);
-			
+							
 				if($data){
 
 					return back();
@@ -171,6 +172,7 @@ class IndexController extends Controller
 			
 		
 			$data = Apply::where('order_name',$res->info_nickname)->first();
+			
 
 			if($data == null){
 

@@ -111,6 +111,7 @@
 <!-- slider-end -->
 
 <!-- banner-area-start (广告)-->
+{{dd($data)}}
 <div class="banner-area hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
