@@ -104,14 +104,6 @@
 <!-- slider-end -->
 
 <!-- banner-area-start (广告)-->
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/msq
-=======
-
->>>>>>> origin/msq
 <div class="banner-area hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
