@@ -102,8 +102,7 @@ class CateController extends Controller
                 return view('/layout/jump')->with([
                         'message'=>'添加成功！',
                         'url' =>'/admin/cate',
-                        'jumpTime'=>2,
-                        'title'=>'添加成功'
+                        'jumpTime'=>2
                     ]);
 
             }
@@ -181,8 +180,7 @@ class CateController extends Controller
                 return view('/layout/jump')->with([
                         'message'=>'修改成功！',
                         'url' =>'/admin/cate',
-                        'jumpTime'=>2,
-                        'title'=>'修改成功'
+                        'jumpTime'=>2
                     ]);
 
             }
@@ -211,8 +209,7 @@ class CateController extends Controller
             return view('/layout/jump')->with([
                     'message'=>'有子类不能删除！',
                     'url' =>'/admin/cate',
-                    'jumpTime'=>2,
-                    'title'=>'删除失败'
+                    'jumpTime'=>2
                 ]);
         }
         try {
@@ -221,8 +218,7 @@ class CateController extends Controller
                 return view('/layout/jump')->with([
                     'message'=>'删除成功',
                     'url' =>'/admin/cate',
-                    'jumpTime'=>2,
-                    'title'=>'删除成功页'
+                    'jumpTime'=>2
                 ]);
             }
         } catch (\Exception $e) {

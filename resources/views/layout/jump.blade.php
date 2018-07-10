@@ -1,7 +1,6 @@
 @extends('layout.admins')
 
-@section('title','$title')
-
+@section('title','云商城后台管理')
 @section('content')
 <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
 <div id="applyFor" style="text-align: center; width: 500px; margin:200px;auto;font-size: 20px;">

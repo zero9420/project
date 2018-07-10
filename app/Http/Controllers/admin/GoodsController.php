@@ -141,8 +141,7 @@ class GoodsController extends Controller
                 return view('/layout/jump')->with([
                         'message'=>'添加成功',
                         'url' =>'/admin/goods',
-                        'jumpTime'=>2,
-                        'title'=>'添加成功'
+                        'jumpTime'=>2
                     ]);
             }
         }catch(\Exception $e){
@@ -286,8 +285,7 @@ class GoodsController extends Controller
                 return view('/layout/jump')->with([
                         'message'=>'修改成功',
                         'url' =>'/admin/goods',
-                        'jumpTime'=>2,
-                        'title'=>'修改成功'
+                        'jumpTime'=>2
                     ]);
             }
         }catch(\Exception $e){
@@ -329,8 +327,7 @@ class GoodsController extends Controller
                 return view('/layout/jump')->with([
                     'message'=>'删除成功',
                     'url' =>'/admin/goods',
-                    'jumpTime'=>2,
-                    'title'=>'删除成功页'
+                    'jumpTime'=>2
                 ]);
             }
         } catch (\Exception $e) {
