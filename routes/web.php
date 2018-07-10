@@ -150,4 +150,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/cart/total','home\CartController@total');
 
 
+	// 个人中心我的收藏
+	Route::get('/home/collection','home\IndexController@collection');
+
 });
