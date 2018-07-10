@@ -32,7 +32,8 @@ class GoodslistController extends Controller
             }
 
         }
-        return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data]);
+
+        return view('home.index',['title'=>'云购物商城','data'=>$data,'arr'=>$arr]);
 
     }
     /**

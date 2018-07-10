@@ -6,7 +6,11 @@
 <div class="slider-container">
     <div class="slider">
         <!-- Slider Image -->
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> origin/zxq
         <div id="mainslider" class="nivoSlider slider-image">
             <img src=" {{$arr[0]->lunbo_image1}} " alt="main slider" title="#htmlcaption1" />
             <img src=" {{$arr[0]->lunbo_image2}} " alt="main slider" title="#htmlcaption2" />
@@ -105,13 +109,17 @@
 <!-- slider-end -->
 
 <!-- banner-area-start (广告)-->
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/zxq
 <div class="banner-area hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
             @foreach($data as $k=>$v)
             <div class="col-md-4 col-xs-12" @if($v->position_status == 1) style="display:block @else style="display:none @endif">
                 <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
-                    <a href="#">
+                    <a href="{{$v->position_url}}">
                         <img src="{{$v->position_image}}" alt="" />
                     </a>
                 </div>
