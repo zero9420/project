@@ -51,7 +51,11 @@ class GoodslistController extends Controller
     public function detail($id)
     {
         $goods = Goods::with('spec')->where('goods_id',$id)->first();
-        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods]);
+        $size = explode('|',$goods->goods_size);
+        $color = explode('|',$goods->goods_color);
+        $gname = mb_substr($goods->goods_name,0,5);
+        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
+        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related]);
     }
 
 

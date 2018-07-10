@@ -35,8 +35,8 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <textarea class="medium" name="goods_name" id="goodsname" maxlength="80">请输入最长80字符的商品名字</textarea>
-                        <p><span id="name-count">80</span>/80</p>
+                        <input type="text" class="medium" name="goods_name" id="goodsname" minlength="6" maxlength="20" value="请输入最少6位,最多20商品名">
+                        <p><span id="name-count">20</span>/20</p>
                     </div>
                 </div>
                 <div class="mws-form-row">

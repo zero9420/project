@@ -88,6 +88,24 @@
 	                                </p>
 	                            </div>
 	                            <div class="add-cart">
+	                            	<span>尺码:</span>
+	                            	@foreach($size as $k=>$v)
+	                            	<a href="javascript:void(0)">
+	                            		<input type="radio" name="goods_size" value="{{$v}}">
+	                            		<span>{{strtoupper($v)}}</span>
+	                            	</a>
+	                            	@endforeach
+	                            </div>
+	                            <div class="add-cart">
+	                            	<span>颜色:</span>
+	                            	@foreach($color as $k=>$v)
+	                            	<a href="javascript:void(0)">
+	                            		<input type="radio" name="goods_color" value="{{$v}}">
+	                            		<span>{{$v}}</span>
+	                            	</a>
+	                            	@endforeach
+	                            </div>
+	                            <div class="add-cart">
 	                                <p class="quantity cart-plus-minus">
 	                                    <label>购买数量</label>
 	                                    <input type="text" value="1">
@@ -182,62 +200,15 @@
         <div class="row">
             <div class="brands wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
                 <div class="brand-carousel">
+                	@foreach($related as $k=>$v)
                     <div class="col-md-12">
                         <div class="single-brand">
                             <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
+                                <img src="{{$v->spec[0]->goods_pic}}" alt="{{$v->goods_name}}" title="{{$v->goods_name}}" />
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#">
-                                <img src="/home/bs/img/brand/1.png" alt="" />
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -262,38 +233,6 @@
                                     <a href="#">Cloths (13)</a>
                                 </label>
                             </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">Men (9)</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">Women (11)</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">Shoes (2)</a>
-                                </label>
-                            </li>
-                            <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
-                                <label class="check-label">
-                                    <a href="#">Sunglasses (8)</a>
-                                </label>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -305,12 +244,11 @@
                             <div class="pager-area">
                                 <div>
                                     <!-- Nav tabs -->
-                                    <ul class="shop-tab">
-                                        <li role="presentation" class="active"><a href="#gried_view" role="tab" data-toggle="tab" title="商品详情">
-                                                <i class="fa fa-th-large"></i></a>
+                                    <ul class="btn-group">
+                                    	<style>li{float:left;margin:2px;}</style>
+                                        <li role="presentation" class="active"><a class="btn btn-info" href="#gried_view" role="tab" data-toggle="tab" title="商品详情">商品详情</a>
                                         </li>
-                                        <li role="presentation"><a href="#list_view" role="tab" data-toggle="tab" title="商品评价">
-                                                <i class="fa fa-th-list"></i></a>
+                                        <li role="presentation"><a href="#list_view" role="tab" data-toggle="tab" title="商品评价" class="btn btn-primary">商品评价<span class="badge">4</span></a>
                                         </li>
                                     </ul>
                                 </div>
