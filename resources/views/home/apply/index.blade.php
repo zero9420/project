@@ -68,7 +68,7 @@
 					<ul>
 						<li>
 							<div class="member-circle clearfix">
-								<!-- @foreach($goods as $k=>$v) -->
+								
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
 										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
@@ -78,7 +78,7 @@
 									
 									<div class="ap3 fl  tk" id="ajax"><a href="javascript:void(0)">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
 								</div>
-								<!-- @endforeach -->
+							
 								<!-- <div class="member-apply clearfix">
 									<div class="ap1 fl">
 										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
