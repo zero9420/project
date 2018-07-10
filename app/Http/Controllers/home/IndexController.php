@@ -171,5 +171,29 @@ class IndexController extends Controller
 			return view('home.apply.index',['res'=>$res,'data'=>$data]);
 
 		}
+
+		public function lunbo()
+		{
+			// 轮播
+
+			$res = DB::table('lunbo')->get();
+			
+			$arr = [];
+
+
+			foreach ($res as $k => $v) {
+				
+				if ($v->lunbo_status == 1) {
+					$arr[] = $v;
+				} 
+
+			}
+			
+			return view('home.index',['arr'=>$arr,'title'=>'']);
+
+			
+
+			
+		}
     	
 }

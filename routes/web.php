@@ -64,6 +64,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
 
+	// 商城快讯
+	Route::resource('/admin/express','admin\ExpressController');
+
+
 	
 	
 
@@ -118,7 +122,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/cart/delete','home\CartController@delete');
 
 	// 前台轮播
-	Route::any('/home/lunbo','home\LunboController@lunbo');
+	Route::any('/','home\IndexController@lunbo');
 
 	// 前台订单页
 	Route::any('/home/order','home\OrderController@order');
@@ -126,6 +130,10 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台结算页
 	Route::any('/home/jsy','home\JsyController@jsy');
+
+	// 商城快讯
+	Route::any('/home/express','home\ExpressController@express');
+
 
 
 

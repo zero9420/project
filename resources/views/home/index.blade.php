@@ -6,12 +6,19 @@
 <div class="slider-container">
     <div class="slider">
         <!-- Slider Image -->
+        <style>
+            
+            #id img{
+                widows: 1920px;
+                height: 610px;
+            }
+        </style>
         <div id="mainslider" class="nivoSlider slider-image">
-            <img src="/home/bs/img/slider/41.jpg" alt="main slider" title="#htmlcaption1" />
-            <img src="/home/bs/img/slider/42.jpg" alt="main slider" title="#htmlcaption2" />
-            <img src="/home/bs/img/slider/43.jpg" alt="main slider" title="#htmlcaption3" />
-            <img src="/home/bs/img/slider/44.jpg" alt="main slider" title="#htmlcaption4" />
-            <img src="/home/bs/img/slider/45.jpg" alt="main slider" title="#htmlcaption5" />
+            <img src=" {{$arr[0]->lunbo_image1}} " alt="main slider" title="#htmlcaption1" />
+            <img src=" {{$arr[0]->lunbo_image2}} " alt="main slider" title="#htmlcaption2" />
+            <img src=" {{$arr[0]->lunbo_image3}} " alt="main slider" title="#htmlcaption3" />
+            <img src=" {{$arr[0]->lunbo_image4}} " alt="main slider" title="#htmlcaption4" />
+            <img src=" {{$arr[0]->lunbo_image5}} " alt="main slider" title="#htmlcaption5" />
         </div>
         <!-- Slider Caption 1 -->
         <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
@@ -19,10 +26,10 @@
             <div class="slide1-text slide-1 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h4>德芙巧克力</h4>
+                        <h2> {{$arr[0]->lunbo_title}} </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h2>牛奶香浓，丝般感受</h2>
+                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -36,10 +43,10 @@
             <div class="slide1-text slide-2 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h4>戴尔比斯</h4>
+                         <h2> {{$arr[0]->lunbo_title}} </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h2>钻石恒久远，一颗永流传</h2>
+                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -50,18 +57,19 @@
         <!-- Slider Caption 3 -->
         <div id="htmlcaption3" class="nivo-html-caption slider-caption-3">
             <div class="slider-progress"></div>
-            <div class="slide1-text slide-3 hidden-xs">
+                    <div class="slide1-text slide-3 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h4>可口可乐</h4>
+                       <h2> {{$arr[0]->lunbo_title}} </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h2>永远的可口可乐，独一无二好味道</h2>
+                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         <!-- Slider Caption 4 -->
@@ -70,10 +78,10 @@
             <div class="slide1-text slide-4 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h4>仲景六味地黄丸</h4>
+                       <h2> {{$arr[0]->lunbo_title}} </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h2>药材好，药才好,身体才是革命的本钱</h2>
+                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -87,10 +95,10 @@
             <div class="slide1-text slide-5 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h4>M＆M巧克力</h4>
+                        <h2> {{$arr[0]->lunbo_title}} </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h2>只溶在口，不溶在手</h2>
+                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
