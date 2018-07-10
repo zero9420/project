@@ -20,7 +20,6 @@ class IndexController extends Controller
 
 			// 广告管理数据接收
 			$data = Position::all();
-
 			//  显示模板分配数据
 			return view('home.index',['data'=>$data,'title'=>'云商城购物中心']);
 

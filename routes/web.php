@@ -122,9 +122,6 @@ Route::group(['middleware'=>'homelogin'],function(){
 	//购物车ajax删除
 	Route::any('/home/cart/delete','home\CartController@delete');
 
-	// 前台轮播
-	Route::any('/','home\IndexController@lunbo');
-
 	// 前台订单页
 	Route::any('/home/order','home\OrderController@order');
 
