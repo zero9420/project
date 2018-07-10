@@ -10,7 +10,28 @@ use App\Models\Admin\Goods;
 
 class GoodslistController extends Controller
 {
-    //
+
+    public function shop()
+    {
+        $res = DB::table('lunbo')->get();
+        
+        $arr = [];
+
+
+        foreach ($res as $k => $v) {
+            
+            if ($v->lunbo_status == 1) {
+                $arr[] = $v;
+            } 
+
+        }
+        return view('home.index',['title'=>'云购物商城','arr'=>$arr]);
+    }
+    /**
+     * [index 商品列表页]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function index(Request $request)
     {
     	// 获取id
@@ -19,7 +40,7 @@ class GoodslistController extends Controller
     	$id = intval($id);
 
     	if (!empty($id)) {
-    		$goods = Goods::with('spec')->where('cate_id',$id)->paginate(12);
+    		$goods = Goods::with('spec')->where('cate_id',$id)->where('goods_status','1')->paginate(12);
     	} else {
     		$goods = Goods::with('spec')
     		->where(function($query) use($request){
@@ -29,7 +50,7 @@ class GoodslistController extends Controller
                 if (!empty($gname)) {
                 	$query->where('goods_name','like','%'.$gname.'%');
                 }
-            })->paginate(12);
+            })->where('goods_status','1')->paginate(12);
     	}
             // dump($goods);
     	return view('home.goods.index',['title'=>'商品列表页',
@@ -38,5 +59,21 @@ class GoodslistController extends Controller
                                         'request'=> $request
     								]);
     }
+
+    /**
+     * [detail 商品详情页]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function detail($id)
+    {
+        $goods = Goods::with('spec')->where('goods_id',$id)->first();
+        $size = explode('|',$goods->goods_size);
+        $color = explode('|',$goods->goods_color);
+        $gname = mb_substr($goods->goods_name,0,5);
+        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
+        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related]);
+    }
+
 
 }

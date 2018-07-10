@@ -68,23 +68,25 @@
 					<ul>
 						<li>
 							<div class="member-circle clearfix">
+								<!-- @foreach($goods as $k=>$v) -->
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
+										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
 									
-									<div class="ap3 fl ajax tk" id="1"><a href="#">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</a> </div>
+									<div class="ap3 fl  tk" id="ajax"><a href="javascript:void(0)">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
 								</div>
-								<div class="member-apply clearfix">
+								<!-- @endforeach -->
+								<!-- <div class="member-apply clearfix">
 									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
+										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
 									<div class="ap3 fl ajax ck"><a href="#">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</a> </div>
-								</div>
+								</div> -->
 							</div>
 						</li>
 					</ul>
@@ -117,12 +119,14 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-	
-	$('.ajax').click(function(){
+
 
 	
+	$('#ajax').click(function(){
+	
+		var ids = 1;
 
-		$.get('/home/ajax',{status:1},function(data){
+		$.get('/home/ajax',{ids:ids},function(data){
 
 			
 			console.log(data);

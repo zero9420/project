@@ -35,10 +35,15 @@
                             @php
                                 $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
                             @endphp
+                            <li  class="bg-info">
+                                <label class="check-label">
+                                    <a href="/goodslist">所有商品</a>
+                                </label>
+                            </li>
                             @foreach($cates as $k=>$v)
                             <li>
                                 <label class="check-label">
-                                    <a @if($id == $v->cate_id) class="bg-danger" @endif href="/goodslist/{{$v->cate_pid}}">{{$v->cate_name}}</a>
+                                    <a @if($id == $v->cate_id) class="bg-danger" @endif href="/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a>
                                 </label>
                                 @if($v->sub)
                                 @foreach($v->sub as $kk => $vv)
@@ -126,10 +131,10 @@
                                                             <img src="{{$pic[0]->goods_pic}}" alt="" />
                                                         </a>
                                                         <span class="sale-box">
-                                                            <span class="sale">Sale</span>
+                                                            <span class="sale">热销</span>
                                                         </span>
                                                         <span class="new-box">
-                                                            <span class="new">New</span>
+                                                            <span class="new">新品上市</span>
                                                         </span>
                                                     </div>
                                                     <div class="single-product-content">
@@ -150,7 +155,7 @@
                                                             <span class="old-price">￥70.00</span>
                                                         </div>
                                                         <div class="product-action">
-                                                            <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button><!-- 
+                                                            <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button><!--
                                                             <a class="add-wishlist" href="#" title="add to wishlist">
                                                                 <i class="fa fa-heart"></i>
                                                             </a>

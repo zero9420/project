@@ -3,10 +3,10 @@ $("#goodsname").on("input propertychange", function () {
     var $this = $(this),
             name_val = $this.val(),
             count = "";
-    if (name_val.length > 80) {
-        $this.val(_val.substring(0, 80));
+    if (name_val.length > 20) {
+        $this.val(_val.substring(0, 20));
     }
-    counts = 80 - $this.val().length;
+    counts = 20 - $this.val().length;
     $("#name-count").text(counts);
 });
 

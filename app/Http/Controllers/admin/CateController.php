@@ -80,6 +80,14 @@ class CateController extends Controller
             'cate_name.required'=>'类名不能为空',
         ]);
         $res = $request->except(['_token']);
+        $num = Cate::where('cate_name',$res['cate_name'])->first();
+        if($num){
+            return view('/layout/jump')->with([
+                        'message'=>'添加失败,已经有此分类!',
+                        'url' =>'/admin/cate/create',
+                        'jumpTime'=>2
+                    ]);
+        }
         if($res['cate_pid']==0){
             $res['cate_path'] = '0,';
         }else{

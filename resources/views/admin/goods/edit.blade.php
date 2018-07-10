@@ -35,8 +35,8 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <textarea class="medium" name="goods_name" id="goodsname" maxlength="80">{{$goods->goods_name}}</textarea>
-                        <p><span id="name-count">80</span>/80</p>
+                        <input type="text" class="medium" name="goods_name" id="goodsname" minlength="6" maxlength="20" value="{{$goods->goods_name}}">
+                        <p><span id="name-count">20</span>/20</p>
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -87,7 +87,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        @foreach($spec as $k => $v) 
+                        @foreach($spec as $k => $v)
                             <img src="{{$v->goods_pic}}" alt="" width='200'>
                         @endforeach
                         <input type="file" name='goods_pic[]' class="fileinput-preview" style="width: 100%; padding-right: 84px;" multiple="multiple"  readonly="readonly" placeholder="No file selected...">

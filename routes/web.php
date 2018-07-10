@@ -81,9 +81,9 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
  */
 
 // 前台首页
-Route::any('/','home\IndexController@Index');
+Route::any('/','home\GoodslistController@shop');
 Route::any('/goodslist/{id?}','home\GoodslistController@index');
-Route::resource('/goods','home\GoodsController');
+Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>'\d+']);
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');
@@ -114,6 +114,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
 
+
 	//购物车
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
@@ -127,13 +128,22 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台结算页
 	Route::any('/home/jsy','home\JsyController@jsy');
 
-	// 商城快讯
-	Route::any('/home/express','home\ExpressController@express');
-
 	// 前台退款
 	Route::any('/home/ajax','home\IndexController@ajax');
 
+	// 商城快讯
+	Route::any('/home/express','home\ExpressController@express');
 
+
+	//购物车加减ajax
+	Route::any('/home/cart/jiajian','home\CartController@jiajian');
+	//购物车总价ajax
+	Route::any('/home/cart/total','home\CartController@total');
 
 
 });
+
+
+
+// 测试
+Route::get('/home/test/','home\IndexController@goods');
