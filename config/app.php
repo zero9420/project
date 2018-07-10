@@ -234,5 +234,6 @@ return [
     
     'path' => '/uploads/',
     'address' => '/userinfo/',
+    'link' => '/link/',
 
 ];

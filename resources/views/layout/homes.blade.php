@@ -11,10 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/home/bs/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/home/bs/css/font-awesome.min.css" />/
+    <link rel="stylesheet" href="/home/bs/css/font-awesome.min.css" />
     <link href="/home/bs/style.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
-   
+
 </head>
 <body>
     <header>
@@ -52,8 +51,8 @@
                     </div>
                     <div class="col-md-5 col-sm-6 hidden-xs">
                         <div class="search-box">
-                            <form action="#">
-                                <input class="form-control search-form" type="text" placeholder="请输入关键字">
+                            <form action="/goodslist" method="get">
+                                <input class="form-control search-form" name="gname" type="text" placeholder="请输入关键字">
                                 <button class="search-button" value="Search" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -166,7 +165,7 @@
                                             $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
                                         @endphp
                                         @foreach($cates as $k=>$v)
-                                            <li><a title="My orders" href="/home/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a></li>
+                                            <li><a title="My orders" href="/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>

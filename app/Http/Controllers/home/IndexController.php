@@ -17,14 +17,13 @@ class IndexController extends Controller
 		{
 
 
-			//友情链接数据接收
-			$res = DB::select('select * from shop_link ');
 
-			//广告管理数据接收
+			// 广告管理数据接收
 			$data = Position::all();
 
-			//显示模板分配数据
-			return view('home.index',['title'=>'云商城购物中心','res'=>$res,'data'=>$data]);
+			//  显示模板分配数据
+			return view('home.index',['data'=>$data,'title'=>'云商城购物中心']);
+
 
 
 		}
@@ -158,6 +157,11 @@ class IndexController extends Controller
 		}
 
 
+
+		/**
+		 * 退款人信息
+		 */
+		  	
 		public function Apply(Request $request)
 		{	
 			// 查找个人信息ID
@@ -167,8 +171,15 @@ class IndexController extends Controller
 			
 		
 			$data = Apply::where('order_name',$res->info_nickname)->first();
-		
-			return view('home.apply.index',['res'=>$res,'data'=>$data]);
+
+			if($data == null){
+
+				return view('home.apply.none',['res'=>$res]);
+			}else{
+
+				return view('home.apply.index',['res'=>$res,'data'=>$data]);
+			}
+
 
 		}
 
@@ -196,4 +207,21 @@ class IndexController extends Controller
 			
 		}
     	
+
+
+    	public function ajax(Request $request)
+    	{
+
+    		$status = $request->input('status');
+
+    		echo $status;
+    	}
+
+
+    	public function goods(Request $request)
+    	{
+
+    		
+
+    	}
 }

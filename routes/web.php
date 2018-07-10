@@ -15,7 +15,7 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
  */
 
 
-Route::group(['middleware'=>'adminlogin'],function(){
+	Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 后台首页
 	Route::any('admin/index','admin\IndexController@index');
@@ -46,6 +46,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/ajaxcolor','admin\GoodsdetailController@ajaxcolor');
 	// 商品上架下架
 	Route::any('/admin/ajaxstatus','admin\GoodsdetailController@ajaxstatus');
+
 	// 定义热卖商品
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
 
@@ -68,9 +69,6 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::resource('/admin/express','admin\ExpressController');
 
 
-	
-	
-
 });
 
 
@@ -84,7 +82,8 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 // 前台首页
 Route::any('/','home\IndexController@Index');
-Route::any('/goodslist/{id}','home\GoodslistController@index')->where(['id' => '\d+']);;
+Route::any('/goodslist/{id?}','home\GoodslistController@index');
+Route::resource('/goods','home\GoodsController');
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');
@@ -115,7 +114,6 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
 
-
 	//购物车
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
@@ -128,11 +126,15 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/order','home\OrderController@order');
 
 
+
 	// 前台结算页
 	Route::any('/home/jsy','home\JsyController@jsy');
 
 	// 商城快讯
 	Route::any('/home/express','home\ExpressController@express');
+
+	// 前台退款
+	Route::any('/home/ajax','home\IndexController@ajax');
 
 
 

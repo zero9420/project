@@ -8,7 +8,7 @@
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span>
-            Link Form
+            广告添加页
         </span>
     </div>
     <div class="mws-panel-body no-padding">

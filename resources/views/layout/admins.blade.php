@@ -329,13 +329,14 @@
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
 
+    <script src="/admins/js/times/goods.js"></script>
+
     <script type="text/javascript">
-           
-           setTimeout(function(){
+       setTimeout(function(){
 
-                $('.mws-form-message').remove();
+            $('.mws-form-message').remove();
 
-           },3000) 
+       },3000);
 
 
     </script>

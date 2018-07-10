@@ -114,27 +114,15 @@
 <div class="banner-area hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-xs-12">
+            @foreach($data as $k=>$v)
+            <div class="col-md-4 col-xs-12" @if($v->position_status == 1) style="display:block @else style="display:none @endif">
                 <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
                     <a href="#">
-                        <img src="/home/bs/img/banner/2.png" alt="" />
+                        <img src="{{$v->position_image}}" alt="" />
                     </a>
                 </div>
             </div>
-            <div class="col-md-4 col-xs-12">
-                <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
-                    <a href="#">
-                        <img src="/home/bs/img/banner/3.png" alt="" />
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-                <div class="single-banner wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
-                    <a href="#">
-                        <img src="/home/bs/img/banner/1.png" alt="" />
-                    </a>
-                </div>
-            </div>
+           @endforeach
         </div>
     </div>
 </div>
@@ -1065,49 +1053,22 @@
                 </div>
             </div>
         </div>
+
+        @php
+        use \Illuminate\Support\Facades\DB;
+        $res = DB::select('select * from shop_link ');
+ 
+        @endphp
         <div class="row">
             <div class="brands wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
                 <div class="brand-carousel">
-                    <div class="col-md-12">
+                    @foreach($res as $k=>$v)
+                    <div class="col-md-12" @if($v->link_status == 1) style="display:block @else style="display:none @endif">
                         <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+                           <a href="{{$v->link_url}}"><img src="{{$v->link_logo}}" alt=""  ></a>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single-brand">
-                            <a href="#"><img src="/home/bs/img/brand/1.png" alt="" /></a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
