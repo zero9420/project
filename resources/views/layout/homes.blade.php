@@ -13,10 +13,20 @@
     <link rel="stylesheet" href="/home/bs/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/home/bs/css/font-awesome.min.css" />
     <link href="/home/bs/style.css" rel="stylesheet">
+<<<<<<< HEAD
     <link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
 
 
 
+=======
+
+    <link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
+
+
+>>>>>>> origin/msq
 
 </head>
 <body>
