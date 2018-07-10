@@ -13,19 +13,17 @@ use App\Models\Home\Apply;
 
 class IndexController extends Controller
 {
-    	
 		public function Index(Request $request)
 		{
 
 
-			//友情链接数据接收
-			$res = DB::select('select * from shop_link ');
 
-			//广告管理数据接收
+			// 广告管理数据接收
 			$data = Position::all();
-	
-			//显示模板分配数据
-			return view('home.index.index',['res'=>$res,'data'=>$data]);
+
+			//  显示模板分配数据
+			return view('home.index',['data'=>$data,'title'=>'云商城购物中心']);
+
 
 
 		}
@@ -159,6 +157,11 @@ class IndexController extends Controller
 		}
 
 
+
+		/**
+		 * 退款人信息
+		 */
+		  	
 		public function Apply(Request $request)
 		{	
 			// 查找个人信息ID
@@ -168,9 +171,74 @@ class IndexController extends Controller
 			
 		
 			$data = Apply::where('order_name',$res->info_nickname)->first();
-		
-			return view('home.apply.index',['res'=>$res,'data'=>$data]);
+
+			if($data == null){
+
+				return view('home.apply.none',['res'=>$res]);
+			}else{
+
+				return view('home.apply.index',['res'=>$res,'data'=>$data]);
+			}
+
 
 		}
+
+		public function lunbo()
+		{
+			// 轮播
+
+			$res = DB::table('lunbo')->get();
+			
+			$arr = [];
+
+
+			foreach ($res as $k => $v) {
+				
+				if ($v->lunbo_status == 1) {
+					$arr[] = $v;
+				} 
+
+			}
+			
+			return view('home.index',['arr'=>$arr,'title'=>'']);
+
+			
+
+			
+		}
     	
+
+		/**
+		 * [ajax description]   接收退款信息
+		 * @param  Request $request [description]
+		 * @return [type]           [description]
+		 */
+    	public function ajax(Request $request)
+    	{
+
+    	
+    		$ids = $request->input('ids');
+    		
+    		// 检测登陆者信息
+    		$user = session('user_id');
+			
+			$res = Info::where('info_cid',$user)->first();
+			
+			// 发送退货信息
+    		$status = Apply::where('order_name',$res->info_nickname)->update(['order_return_goods'=>$ids]);
+			
+    		var_dump($status);
+    		
+    	}
+
+
+    	public function goods(Request $request)
+    	{
+
+    		session(['a'=>5]);
+
+
+    		echo session('a');
+
+    	}
 }

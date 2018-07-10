@@ -29,13 +29,14 @@
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品名称
+                        商品名字
                         <span class="required">
                             *
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" maxlength="100" placeholder="请输入最长100字符的商品名" value="{{old('goods_name')}}">
+                        <input type="text" class="medium" name="goods_name" id="goodsname" minlength="6" maxlength="20" value="请输入最少6位,最多20商品名">
+                        <p><span id="name-count">20</span>/20</p>
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -53,6 +54,18 @@
                         </select>
                     </div>
                 </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
+                        商品简介
+                        <span class="required">
+                            *
+                        </span>
+                    </label>
+                    <div class="mws-form-item">
+                        <textarea class="medium" name="goods_info" id="goodsinfo" maxlength="120">请输入最长120字符的商品简介</textarea>
+                        <p><span id="info-count">120</span>/120</p>
+                    </div>
+                </div>
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
@@ -63,18 +76,6 @@
                     </label>
                     <div class="mws-form-item">
                         <input type="number" class="medium" name="goods_price" value="{{old('goods_price')}}" class="error large">
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">
-                        商品库存
-                        <span class="required">
-                            *
-                        </span>
-                    </label>
-                    <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_stock" value="{{old('goods_stock')}}" class="error large">
                     </div>
                 </div>
 
@@ -162,7 +163,7 @@
                     </label>
                     <div class="mws-form-item clearfix">
                         <ul class="mws-form-list inline">
-                            <li><input type="radio" name='goods_status' value='1'> <label>上架</label></li>
+                            <li><input type="radio" name='goods_status' value='1' checked="checked"> <label>上架</label></li>
                             <li><input type="radio" name='goods_status' value='2'> <label>下架</label></li>
                         </ul>
                     </div>

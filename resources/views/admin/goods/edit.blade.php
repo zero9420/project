@@ -29,13 +29,14 @@
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品名称
+                        商品名字
                         <span class="required">
                             *
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" placeholder="请输入最长100字符的商品名" value="{{$goods->goods_name}}">
+                        <input type="text" class="medium" name="goods_name" id="goodsname" minlength="6" maxlength="20" value="{{$goods->goods_name}}">
+                        <p><span id="name-count">20</span>/20</p>
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -53,6 +54,18 @@
                         </select>
                     </div>
                 </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
+                        商品简介
+                        <span class="required">
+                            *
+                        </span>
+                    </label>
+                    <div class="mws-form-item">
+                        <textarea class="medium" name="goods_info" id="goodsinfo" maxlength="120">{{$goods->goods_info}}</textarea>
+                        <p><span id="info-count">120</span>/120</p>
+                    </div>
+                </div>
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
@@ -68,46 +81,13 @@
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品库存
-                        <span class="required">
-                            *
-                        </span>
-                    </label>
-                    <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_stock" value="{{$goods->goods_stock}}" class="error large">
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">
-                        热卖商品
-                        <span class="required">
-                            *
-                        </span>
-                    </label>
-                    <div class="mws-form-item clearfix">
-                        <ul class="mws-form-list inline">
-                            <li>
-                                <input type="radio" name="goods_hot" value="1" @if($goods->goods_hot == 1) checked @endif>
-                                <label>普通</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="goods_hot" value="2" @if($goods->goods_hot == 2) checked @endif>
-                                <label>热卖</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">
                         商品图片
                         <span class="required">
                             *
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        @foreach($spec as $k => $v) 
+                        @foreach($spec as $k => $v)
                             <img src="{{$v->goods_pic}}" alt="" width='200'>
                         @endforeach
                         <input type="file" name='goods_pic[]' class="fileinput-preview" style="width: 100%; padding-right: 84px;" multiple="multiple"  readonly="readonly" placeholder="No file selected...">

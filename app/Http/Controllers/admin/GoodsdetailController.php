@@ -79,4 +79,28 @@ class GoodsdetailController extends Controller
                 echo 0;
         }
     }
+    /**
+     * [ajaxhot 定义热卖商品]
+     * @return [type] [description]
+     */
+    public function ajaxhot(Request $request)
+    {
+        $res = $request->input('hots');
+        $id = $request->input('ids');
+
+        try{
+            if ($res == '1') {
+                $data = Goods::where('goods_id',$id)->update(['goods_hot'=>'2']);
+                echo 2;
+            } else {
+                $data = Goods::where('goods_id',$id)->update(['goods_hot'=>'1']);
+                echo 1;
+            }
+
+
+        }catch(\Exception $e){
+
+                echo 0;
+        }
+    }
 }

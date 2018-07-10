@@ -21,7 +21,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/admin/link/{{$res->link_id}}"  method='post' class="mws-form">
+        <form action="/admin/link/{{$res->link_id}}"  method='post' enctype='multipart/form-data' class="mws-form">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">
@@ -37,6 +37,15 @@
                     </label>
                     <div class="mws-form-item">
                         <input type="text" class="medium" name="link_url" value="{{$res->link_url}}" style="width:55%">
+                    </div>
+                </div>
+                 <div class="mws-form-row">
+                    <label class="mws-form-label">
+                       广告图片
+                    </label>
+                    <div class="mws-form-item">
+                        <img src="{{$res->link_logo}}" alt=""  width="200px" height="50px">
+                        <input type="file" class="large" name="link_logo"  style="width:55%">
                     </div>
                 </div>
                 <div class="mws-form-row">

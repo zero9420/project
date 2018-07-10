@@ -80,6 +80,14 @@ class CateController extends Controller
             'cate_name.required'=>'类名不能为空',
         ]);
         $res = $request->except(['_token']);
+        $num = Cate::where('cate_name',$res['cate_name'])->first();
+        if($num){
+            return view('/layout/jump')->with([
+                        'message'=>'添加失败,已经有此分类!',
+                        'url' =>'/admin/cate/create',
+                        'jumpTime'=>2
+                    ]);
+        }
         if($res['cate_pid']==0){
             $res['cate_path'] = '0,';
         }else{
@@ -224,5 +232,29 @@ class CateController extends Controller
                     'jumpTime'=>2
                 ]);
         }
+    }
+
+    /**
+     * [getsubcate 无限极分类]
+     * @param  [type] $pid [description]
+     * @return [type]      [description]
+     */
+    public static function getsubcate($pid)
+    {
+
+        $cate = Cate::where('cate_pid',$pid)->get();
+
+        $arr = [];
+
+        foreach($cate as $k=>$v){
+
+            if($v->cate_pid==$pid){
+
+                $v->sub=self::getsubcate($v->cate_id);
+
+                $arr[]=$v;
+            }
+        }
+        return $arr;
     }
 }

@@ -22,7 +22,15 @@ class Order extends Model
 
 
 
-    
+     public function goodsspec()
+    {
+        return $this->hasMany('App\Models\Admin\GoodsSpec;','goods_gid');
+    }
+
+     public function goods()
+    {
+        return $this->hasMany('App\Models\Admin\Goods','goods_id');
+    }
 
    
 }

@@ -64,6 +64,10 @@
                         rowspan="1" colspan="1" style="width: 266px;" aria-label="Browser: activate to sort column ascending">
                             网址
                         </th>
+                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 266px;" aria-label="Browser: activate to sort column ascending">
+                            链接图片
+                        </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 126px;" aria-label="CSS grade: activate to sort column ascending">
                            状态
@@ -87,6 +91,9 @@
                         </td>
                         <td class=" ">
                             {{$v->link_url}}
+                        </td>
+                         <td class=" ">
+                            <img src=" {{$v->link_logo}}" alt=""  width="170px" height="170px">
                         </td>
                         <td class=" ">
                              @if( $v->link_status == 1) 

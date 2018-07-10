@@ -2,6 +2,13 @@
 
 <link rel="stylesheet" type="text/css" href="/homes/css/member.css">
 <link rel="stylesheet" type="text/css" href="/homes/css/user.css">
+<link rel="shortcut icon" type="image/x-icon" href="img/icon/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/homes/css/base.css">
+<link rel="stylesheet" type="text/css" href="/homes/css/home.css">
+<script type="text/javascript" src="/homes/js/jquery.js"></script>
+<script type="text/javascript" src="/homes/js/index.js"></script>
+<script type="text/javascript" src="/homes/js/modernizr-custom-v2.7.1.min.js"></script>
+<script type="text/javascript" src="/homes/js/jquery.SuperSlide.js"></script>
 @section('content')
 <div class="containers center"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 <section id="member">
@@ -10,7 +17,7 @@
 	<div class="member-center clearfix">
 		<div class="member-left fl">
 			<div class="member-apart ">
-				<div class="fl"><a href="#">
+				<div class="fl tu"><a href="#">
 					<img src="/homes/img/mem.png"></a>
 				</div>
 				<div class="fffl" >
@@ -58,8 +65,8 @@
 						<li class="clearfix">
 							<div class="warn1"></div>
 							<div class="warn2">性别</div>
-							<input type="radio" name="info_sex" id="inlineRadio1" value="1" class='p1'> 男
-							<input type="radio" name="info_sex" id="inlineRadio1" value="2" class='p1'> 女
+							<span class="checkit  p1"><input type="radio" name="info_sex"  value="1"></span> <label for="" class= 'check-label'>男</label>
+							<span class="checkit p1"><input type="radio" name="info_sex"  value="2"></span><label for="" class= 'check-label'>女</label>
 						</li>
 						<li class="clearfix">
 							<div class="warn1"></div>
@@ -93,8 +100,8 @@
 .info{
 
     position:absolute;
-    top:330px;
-    right:540px;
+    top:370px;
+    right:680px;
 }
 
 </style>
@@ -107,5 +114,6 @@
                 </ul>
             </div>
         @endif
+	 
 @endsection
 

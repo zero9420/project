@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Order;
+use App\Models\Admin\Goods;
+use App\Models\Admin\GoodsSpec;
 
 class OrderController extends Controller
 {
@@ -60,8 +62,24 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        return view('/admin/order/particulars',['title'=>'后台订单详情']);
+    {   
+        
+
+       
+        $res = Goods::where('goods_id',$id)->first();
+
+        $spec = GoodsSpec::where('goods_spec_id',$id)->first();
+
+         $order = Order::where('id',$id)->first();
+        return view('/admin/order/particulars',[
+            'title'=>'后台订单详情',
+
+            'res'=>$res,
+
+            'spec'=>$spec,
+
+            'order' =>$order
+        ]);
     }
 
     /**
@@ -75,11 +93,11 @@ class OrderController extends Controller
 
         
         $res = Order::where('order_id',$id)->first();
-        
+               
 
        return view('/admin/order.edit',[
 
-            'title'=>'订单浏览管理',
+            'title'=>'订单状态管理',
             'res'=>$res,
             
         ]);
@@ -106,6 +124,7 @@ class OrderController extends Controller
             } else {
                 return back()->with('error','修改失败');
             } 
+
 
 
         

@@ -37,12 +37,10 @@
             }
         </style>
     </head>
-    <body>
+    <body style="background: url('/image/404/404.jpg') no-repeat;">
         <div class="container">
             <div class="content">
-                <!-- <div class="title">404 NOT FOUND......</div> -->
-
-                <div class="title"><img src="/image/404.jpg" alt=""></div>
+                <div class="title" style="font-size: 24px;"><a href="http://yunsc.vip">云商城购物中心</a></div>
 
             </div>
         </div>

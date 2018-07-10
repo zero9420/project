@@ -48,7 +48,7 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap" style="color: white">
-                <h4>云商城后台管理</h4>
+                <a href="/admin/index"><h4>云购物大数据后台管理</h4></a>
 			</div>
         </div>
         
@@ -229,6 +229,7 @@
                             <li><a href="/admin/order">浏览订单</a></li>
                             <li><a href="/admin/order">订单状态</a></li>
 
+
                         </ul>
                     </li>
 
@@ -237,6 +238,17 @@
                         <ul class='closed'>
                             <li><a href="/admin/users/create">添加用户</a></li>
                             <li><a href="/admin/users">浏览用户</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                      <li>
+                        <a href="#"><i class="icon-link"></i>商城快讯</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/express/create">添加快讯</a></li>
+                            <li><a href="/admin/express">浏览快讯</a></li>
 
                         </ul>
                     </li>
@@ -317,16 +329,21 @@
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
 
+    <script src="/admins/js/times/goods.js"></script>
+
     <script type="text/javascript">
-           
-           setTimeout(function(){
+       setTimeout(function(){
 
-                $('.mws-form-message').remove();
+            $('.mws-form-message').remove();
 
-           },3000) 
+       },3000);
 
 
     </script>
+    @section('js')
+
+
+    @show
 
 </body>
 </html>

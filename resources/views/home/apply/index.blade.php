@@ -1,16 +1,23 @@
 @extends('layout.homes')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css" href="/homes/css/member.css">
 <link rel="stylesheet" type="text/css" href="/homes/css/user.css">
-
+<link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/homes/css/base.css">
+<link rel="stylesheet" type="text/css" href="/homes/css/home.css">
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/homes/js/jquery.js"></script>
+<script type="text/javascript" src="/homes/js/index.js"></script>
+<script type="text/javascript" src="/homes/js/modernizr-custom-v2.7.1.min.js"></script>
+<script type="text/javascript" src="/homes/js/jquery.SuperSlide.js"></script>
 <div class="containers center"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 <section id="member">
-	
 	<div class="member-center clearfix">
 		<div class="member-left fl">
 			<div class="member-apart clearfix">
-				<div class="fl"><a href="#">
+				<div class="fl tu"><a href="#">
 					<img src="{{$res->info_image}}"></a>
 				</div>
 				<div class="f1">
@@ -43,11 +50,10 @@
 		<div class="member-right fr">
 			<div class="member-head">
 				<div class="member-heels fl"><h2>退货申请</h2></div>
-				<div class="member-backs member-icons fr"><a href="#">搜索</a></div>
 				
 			</div>
 			<div class="member-border">
-				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span> <span><b>订单状态：</b><i class="reds">已完成</i></span></div>
+				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span> <span><b>订单状态：</b><i class="reds">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</i></span></div>
 				<div class="member-cargo">
 					<h3>收货人信息：</h3>
 					<p>{{$data->order_name}}</p>
@@ -62,24 +68,25 @@
 					<ul>
 						<li>
 							<div class="member-circle clearfix">
+								<!-- @foreach($goods as $k=>$v) -->
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
+										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
-									<div class="ap2 fl"><a href="#">查看订单</a> </div>
-									<div class="ap3 fl"><a href="#">@if($data->order_return_goods == 1)退款中 @else申请退款   @endif</a> </div>
+									
+									<div class="ap3 fl  tk" id="ajax"><a href="javascript:void(0)">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
 								</div>
-								<div class="member-apply clearfix">
+								<!-- @endforeach -->
+								<!-- <div class="member-apply clearfix">
 									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
+										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
-									<div class="ap2 fl"><a href="#">查看订单</a> </div>
-									<div class="ap3 fl"><a href="#">申请退款</a> </div>
-								</div>
+									<div class="ap3 fl ajax ck"><a href="#">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</a> </div>
+								</div> -->
 							</div>
 						</li>
 					</ul>
@@ -102,5 +109,34 @@
 		</div>
 	</div>
 </section>
+
+
+});
+<script>
+	
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+	
+	$('#ajax').click(function(){
+	
+		var ids = 1;
+
+		$.get('/home/ajax',{ids:ids},function(data){
+
+			
+			console.log(data);
+
+		})
+
+
+
+	})
+
+</script>
 
 @endsection

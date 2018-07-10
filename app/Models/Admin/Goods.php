@@ -27,7 +27,7 @@ class Goods extends Model
      */
     protected $fillable = ['goods_name',
                         'cate_id','goods_price','goods_sales',
-                        'goods_color','goods_size',
+                        'goods_color','goods_size','goods_info',
                         'goods_hot','goods_status',
                         'goods_desc',
                         'created_at','updated_at'

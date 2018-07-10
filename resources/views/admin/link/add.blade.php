@@ -8,7 +8,7 @@
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span>
-            Link Form
+            友情链接添加页
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -22,7 +22,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/admin/link"  method='post' class="mws-form">
+        <form action="/admin/link"  method='post'  enctype='multipart/form-data' class="mws-form">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">
@@ -40,6 +40,13 @@
                         <input type="text" class="medium" name="link_url" style="width:55%">
                     </div>
                 </div> 
+                 <div class="mws-form-row">
+                    <label class="mws-form-label">链接图片</label>
+                    <div class="mws-form-item">
+
+                        <input type="file" name='link_logo' class="fileinput-preview" style="width: 100%; padding-right: 84px;" readonly="readonly" placeholder="No file selected..." width="200px" height="100px">
+                    </div>
+                </div>
                 <div class="mws-form-row">
                     <label class="mws-form-label">状态</label>
                     <div class="mws-form-item clearfix">

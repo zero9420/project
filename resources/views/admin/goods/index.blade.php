@@ -112,9 +112,9 @@
                         </td>
                         <td class=" ">
                             @if($v->goods_hot==1)
-                                普通商品
+                                <button class="btn btn-info" id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="1">普通</button>
                             @else
-                                热销商品
+                                <button class='btn btn-danger' id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="2">热卖</button>
                             @endif
                         </td>
                          <td class=" ">
@@ -171,5 +171,62 @@
     }
 
 </script>
+
+@endsection
+
+@section('js')
+
+    <script>
+        // 商品状态
+        function stu($id){
+            var id = $id;
+            var status = $('.status'+'#'+id).val();
+            if(status == '1'){
+                var pro = "你确定下架吗??";
+            } else {
+                var pro = "你确定上架吗??";
+            }
+            var sta = confirm(pro);
+            if(sta){
+                $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
+                    if(data == '2'){
+                        $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
+                        $('.status'+'#'+id).val('2');
+                    } else if(data=='1') {
+                        $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
+                        $('.status'+'#'+id).val('1');
+                    } else {
+                        alert('修改失败');
+                    }
+                })
+            }
+        }
+
+        // 热卖商品
+        function hot($e){
+            var ids = $e;
+            var hots = $('#hot_'+ids).val();
+            if(hots == '1'){
+                var pro = "你确定将商品定义为热卖吗??";
+            } else {
+                var pro = "你确定取消热卖商品吗??";
+            }
+            var prom = confirm(pro);
+            if(prom){
+                $.get('/admin/ajaxhot',{hots:hots,ids:ids},function(data){
+                    if(data == '2'){
+                        $('#hot_'+ids).attr('class','btn btn-danger').text('热卖');
+                        $('#hot_'+ids).val('2');
+                    } else if(data=='1') {
+                        $('#hot_'+ids).attr('class','btn btn-info').text('普通');
+                        $('#hot_'+ids).val('1');
+                    } else {
+                        alert('修改失败');
+                    }
+                })
+            }
+        }
+
+    </script>
 
 @endsection

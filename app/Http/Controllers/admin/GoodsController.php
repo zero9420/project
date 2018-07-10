@@ -84,6 +84,18 @@ class GoodsController extends Controller
         // 获取表单数据
         $data = $request->except('_token','goods_pic[]');
 
+        // 商品名唯一
+        $num = Goods::where('goods_name',$data['goods_name'])->first();
+
+        if($num){
+            return view('/layout/jump')->with([
+                        'message'=>'添加失败,已经有此商品了',
+                        'url' =>'/admin/goods/create',
+                        'jumpTime'=>2,
+                    ]);
+        }
+
+        // 存入商品主表
         $res = Goods::create($data);
         // 获取商品id
         $goods_id = $res->goods_id;
@@ -198,19 +210,22 @@ class GoodsController extends Controller
         //
         // 表单验证
         $this->validate($request, [
-            'goods_name' => 'required|unique:shop_goods|max:100',
-            'goods_price'=>'required|regex:/^\d{0,9}\.\d{0,2}$/',
-            'goods_stock'=>'required|regex:/^\d+$/',
-            'goods_pic'=>'required',
+            'goods_name' => 'required|unique:shop_goods|max:20',
+            'goods_price'=>'required|regex:/^\d{1,9}$/',
+            'goods_info'=>'required|max:120',
+            'goods_desc'=>'required',
+            'goods_pic'=>'required|max:4',
         ],[
             'goods_name.required'=>'商品名不能为空',
             'goods_name.unique'=>'商品名不能重复',
             'goods_name.max'=>'商品名格式不正确',
             'goods_price.required'=>'商品价格不能为空',
             'goods_price.regex'=>'商品价格格式不正确',
-            'goods_stock.required'=>'商品库存不能为空',
-            'goods_stock.regex'=>'商品库存格式不正确',
+            'goods_info.required'=>'商品简介不能为空',
+            'goods_info.regex'=>'商品简介格式不正确',
+            'goods_desc.required'=>'商品描述不能为空',
             'goods_pic.required'=>'商品图片不能为空',
+            'goods_pic.max'=>'商品图片最多4张',
 
         ]);
         $res = $request->except('_token','_method','goods_pic');
