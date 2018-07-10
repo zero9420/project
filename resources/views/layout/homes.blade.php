@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="/home/bs/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/home/bs/css/font-awesome.min.css" />
     <link href="/home/bs/style.css" rel="stylesheet">
-
     <link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
-
-
 </head>
 <body>
     <header>
