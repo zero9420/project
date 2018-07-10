@@ -92,6 +92,8 @@ Route::get('/home/logins','home\LoginController@index');
 Route::post('/home/logins','home\LoginController@login');
 
 
+
+
 /**
  *
  * 前台路由组
