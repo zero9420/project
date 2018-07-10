@@ -5,8 +5,8 @@
 
 @section('content')
 
-
-<link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
  	<link rel="stylesheet" type="text/css" href="/homes/css/base.css">
     <link rel="stylesheet" type="text/css" href="/homes/css/home.css">
     <link rel="stylesheet" type="text/css" href="/homes/css/member.css">

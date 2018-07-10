@@ -14,11 +14,27 @@ class GoodslistController extends Controller
 
     public function shop()
     {
+<<<<<<< HEAD
 
         // 广告管理数据接收
         $data = Position::all();
 
         return view('home.index',['data'=>$data,'title'=>'云购物商城']);
+=======
+        $res = DB::table('lunbo')->get();
+        
+        $arr = [];
+
+
+        foreach ($res as $k => $v) {
+            
+            if ($v->lunbo_status == 1) {
+                $arr[] = $v;
+            } 
+
+        }
+        return view('home.index',['title'=>'云购物商城','arr'=>$arr]);
+>>>>>>> origin/msq
     }
     /**
      * [index 商品列表页]

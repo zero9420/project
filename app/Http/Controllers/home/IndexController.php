@@ -11,7 +11,6 @@ use App\Models\Home\Apply;
 
 class IndexController extends Controller
 {
-	
 
 	/**
 	 * 检测登陆者信息
@@ -76,6 +75,15 @@ class IndexController extends Controller
 			$name = str_random(6).time();
 
 
+			
+				$res['info_cid'] =  session('user_id');
+				
+				$data = Info::create($res);
+				
+			
+				if($data){
+
+
 			//获取后缀名
 			$suffix = $request->file('info_image')->getClientOriginalExtension();
 
@@ -112,6 +120,15 @@ class IndexController extends Controller
 			if($request->hasfile('info_image')){
 
 
+				//存入数据表
+				$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
+				
+				
+				$data = Info::where('info_id',$id)->update($res);
+							
+				if($data){
+
+
 				//设置名字
 				$name = str_random(6).time();
 
@@ -123,6 +140,20 @@ class IndexController extends Controller
 				$request->file('info_image')->move('./userinfo/',$name.'.'.$suffix);
 			}
 
+
+		/**
+		 * 退款人信息
+		 */
+		  	
+		public function Apply(Request $request)
+		{	
+			// 查找个人信息ID
+			$user = session('user_id');
+			
+			$res = Info::where('info_cid',$user)->first();
+			
+		
+			$data = Apply::where('order_name',$res->info_nickname)->first();
 
 			//存入数据表
 			$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
@@ -164,29 +195,7 @@ class IndexController extends Controller
 
 	}
 
-	public function lunbo()
-	{
-		// 轮播
-
-		$res = DB::table('lunbo')->get();
-		
-		$arr = [];
-
-
-		foreach ($res as $k => $v) {
-			
-			if ($v->lunbo_status == 1) {
-				$arr[] = $v;
-			} 
-
-		}
-		
-		return view('home.index',['arr'=>$arr,'title'=>'']);
-
-		
-
-		
-	}
+	
 	
 
 	/**
