@@ -89,9 +89,9 @@ Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>
 
 // 前台登录注册模块
 Route::get('/home/register','home\RegisterController@index');
-Route::post('/home/registers','home\RegisterController@registers');
+// Route::post('/home/registers','home\RegisterController@registers');
 Route::get('/home/login','home\LoginController@index');
-Route::post('/home/login','home\LoginController@login');
+// Route::post('/home/login','home\LoginController@login');
 
 
 /**
@@ -151,8 +151,3 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 
 });
-
-
-
-// 测试
-Route::get('/home/test/','home\IndexController@goods');
