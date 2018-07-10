@@ -241,6 +241,17 @@
 
                         </ul>
                     </li>
+
+
+
+                      <li>
+                        <a href="#"><i class="icon-link"></i>商城快讯</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/express/create">添加快讯</a></li>
+                            <li><a href="/admin/express">浏览快讯</a></li>
+
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

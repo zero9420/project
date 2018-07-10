@@ -71,14 +71,6 @@ class OrderController extends Controller
         $spec = GoodsSpec::where('goods_spec_id',$id)->first();
 
          $order = Order::where('id',$id)->first();
-
-
-       
-       
-
-        
-        
-
         return view('/admin/order/particulars',[
             'title'=>'后台订单详情',
 

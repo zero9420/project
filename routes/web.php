@@ -66,6 +66,11 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
 
+
+	// 商城快讯
+	Route::resource('/admin/express','admin\ExpressController');
+
+
 });
 
 
@@ -111,21 +116,28 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 前台退货
 	Route::any('/home/apply','home\IndexController@Apply');
 
+
 	//购物车
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
 	Route::any('/home/cart/delete','home\CartController@delete');
+
 	// 前台轮播
-	Route::any('/home/lunbo','home\LunboController@lunbo');
+	Route::any('/','home\IndexController@lunbo');
 
 	// 前台订单页
 	Route::any('/home/order','home\OrderController@order');
+
 
 	// 前台结算页
 	Route::any('/home/jsy','home\JsyController@jsy');
 
 	// 前台退款
 	Route::any('/home/ajax','home\IndexController@ajax');
+
+	// 商城快讯
+	Route::any('/home/express','home\ExpressController@express');
+
 
 
 
@@ -134,5 +146,5 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 
 
-// 测试	
+// 测试
 Route::get('/home/test/','home\IndexController@goods');
