@@ -109,3 +109,8 @@
                 <!-- Panels End -->
 
 @endsection
+@section('js')
+    <script>
+        $('#info-count').text($('#goodsinfo').val().length);
+    </script>
+@endsection
