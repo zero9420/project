@@ -118,8 +118,10 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
 	Route::any('/home/cart/delete','home\CartController@delete');
-
-
+	//购物车加减ajax
+	Route::any('/home/cart/jiajian','home\CartController@jiajian');
+	//购物车总价ajax	
+	Route::any('/home/cart/total','home\CartController@total');
 
 
 

@@ -56,10 +56,13 @@
 							<p class="price">{{$v->price}}</p>
 						</th>
 							<th class="tab-th-2">
-								<input type="button" value="-" class="minus" style="width:20px;height:30px;"/>
+								<input type="button" value="-" class="minus"
+								style="width:20px;height:30px;"/>
 								
-								<input type="text"  name="quantity" value="1" class="qty"  style="width:50px;height:25px; text-align:center;"/>
-								<input type="button" value="+" class="plus" style="width:20px;height:30px;" />
+								<input type="text"  name="quantity" value="1" class="qty" 
+
+								 style="width:50px;height:25px; text-align:center;"/>
+								<input type="button" value="+" class="plus" style="width:20px;height:30px;" id="<?php echo $v->id ?>" />
 								</th>
 							</div>
 					
@@ -86,9 +89,9 @@
 
 			<div class="fr pc-shop-fr">
 				<p>共有 <em class="red pc-shop-shu"></em> 款商品，总计（不含运费）</p>
-				¥<span class="total"><?php echo $total ?></span>
+				<span class="total"><?php echo $total ?></span>
 
-				<a href="my-add.html">去付款</a>
+				<a href="javascript:void(0)" id="fukuan">去付款</a>
 			</div>
 		</div>
 	</div>
@@ -128,6 +131,10 @@
 	$('.plus').click(function(){
 
 	//获取数量
+
+	var id = $(this).attr('id');
+	alert(id);
+
 	var num = $(this).prev().val();
 	num++;
 	//加完之后让数量发生改变
@@ -149,6 +156,14 @@
 		// alert(pc);
 		//加完之后让小计发生改变
 		$(this).parents('tr').find('.xiaoji').text(accMul(pc,num));
+		
+		var jiashuliang=$(this).prev().val();
+
+		// alert(jiashuliang);
+
+		// $.get('/')
+
+
 		totals();
 			});
 
@@ -184,6 +199,14 @@
 	        totals();
 		}
 		$(this).parents('tr').find('.xiaoji').text(accMul(pc,mins));
+			
+			var jianshuliang = $(this).next().val();
+			
+			$.get('/home/cart/jiajian',{num:jianshuliang},function($data){
+
+			});
+			// alert(jianshuliang);
+
 			totals();
 			});
 
@@ -300,7 +323,7 @@ $.ajaxSetup({
 	});
 		//全选
 	$('#quanxuan').click(function(){
-		alert(54188);
+		// alert(54188);
 		// $(':checkbox').each(function(){
 
 		// 	// $(this).attr('checked','checked');
@@ -310,4 +333,19 @@ $.ajaxSetup({
 		// totals();
 	});
 	</script>
+	
+	<script type="text/javascript">
+		$('#fukuan').click(function(){
+			// alert(54188);
+			var total = $('.total').text();
+		$.get('/home/cart/total',{total:total},function($data){
+			
+		});
+
+		})
+		
+
+	</script>
+
+
 @endsection
