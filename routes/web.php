@@ -83,7 +83,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
  */
 
 // 前台首页
-Route::any('/','home\IndexController@Index');
+Route::any('/','home\GoodslistController@shop');
 Route::any('/goodslist/{id?}','home\GoodslistController@index');
 Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>'\d+']);
 
