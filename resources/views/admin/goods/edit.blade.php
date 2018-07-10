@@ -35,8 +35,8 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" id="goodsname" minlength="6" maxlength="20" value="{{$goods->goods_name}}">
-                        <p><span id="name-count">20</span>/20</p>
+                        <input type="text" class="medium" name="goods_name" id="goodsname" maxlength="30" value="{{$goods->goods_name}}">
+                        <p><span id="name-count">30</span>/30</p>
                     </div>
                 </div>
                 <div class="mws-form-row">

@@ -210,7 +210,7 @@ class GoodsController extends Controller
         //
         // 表单验证
         $this->validate($request, [
-            'goods_name' => 'required|unique:shop_goods|max:20',
+            'goods_name' => 'required|unique:shop_goods|max:30',
             'goods_price'=>'required|regex:/^\d{1,9}$/',
             'goods_info'=>'required|max:120',
             'goods_desc'=>'required',
