@@ -15,6 +15,7 @@ class LoginController extends Controller
 	//登陆渲染
     public function index()
     {
+        // echo 123;
     	return view('home.login.login');
     }
     //登陆逻辑
