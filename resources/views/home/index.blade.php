@@ -6,16 +6,7 @@
 <div class="slider-container">
     <div class="slider">
         <!-- Slider Image -->
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> origin/zxq
-=======
-      
-        </style>
->>>>>>> origin/msq
         <div id="mainslider" class="nivoSlider slider-image">
             <img src=" {{$arr[0]->lunbo_image1}} " alt="main slider" title="#htmlcaption1" />
             <img src=" {{$arr[0]->lunbo_image2}} " alt="main slider" title="#htmlcaption2" />
@@ -114,14 +105,6 @@
 <!-- slider-end -->
 
 <!-- banner-area-start (广告)-->
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/zxq
-=======
-
->>>>>>> origin/msq
 <div class="banner-area hidden-sm hidden-xs">
     <div class="container">
         <div class="row">
