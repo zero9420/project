@@ -7,9 +7,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\CateController;
 use App\Models\Admin\Cate;
 use App\Models\Admin\Goods;
+use App\Models\Admin\Position;
 
 class GoodslistController extends Controller
 {
+
+    public function shop()
+    {
+
+        // 广告管理数据接收
+        $data = Position::all();
+
+        return view('home.index',['data'=>$data,'title'=>'云购物商城']);
+    }
     /**
      * [index 商品列表页]
      * @param  Request $request [description]

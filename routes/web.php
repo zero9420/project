@@ -83,7 +83,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
  */
 
 // 前台首页
-Route::any('/','home\IndexController@Index');
+Route::any('/','home\GoodslistController@shop');
 Route::any('/goodslist/{id?}','home\GoodslistController@index');
 Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>'\d+']);
 
@@ -136,7 +136,10 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/express','home\ExpressController@express');
 
 
-
+	//购物车加减ajax
+	Route::any('/home/cart/jiajian','home\CartController@jiajian');
+	//购物车总价ajax
+	Route::any('/home/cart/total','home\CartController@total');
 
 
 });
