@@ -10,6 +10,11 @@ use App\Models\Admin\Goods;
 
 class GoodslistController extends Controller
 {
+
+    public function shop()
+    {
+        return view('home.index','title'=>'云购物商城');
+    }
     /**
      * [index 商品列表页]
      * @param  Request $request [description]
