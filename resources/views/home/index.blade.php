@@ -7,8 +7,6 @@
     <div class="slider">
         <!-- Slider Image -->
 
-        </style>
-
         <div id="mainslider" class="nivoSlider slider-image">
             <img src=" {{$arr[0]->lunbo_image1}} " alt="main slider" title="#htmlcaption1" />
             <img src=" {{$arr[0]->lunbo_image2}} " alt="main slider" title="#htmlcaption2" />
