@@ -184,20 +184,37 @@ class IndexController extends Controller
 		}
     	
 
-
+		/**
+		 * [ajax description]   接收退款信息
+		 * @param  Request $request [description]
+		 * @return [type]           [description]
+		 */
     	public function ajax(Request $request)
     	{
 
-    		$status = $request->input('status');
-
-    		echo $status;
+    	
+    		$ids = $request->input('ids');
+    		
+    		// 检测登陆者信息
+    		$user = session('user_id');
+			
+			$res = Info::where('info_cid',$user)->first();
+			
+			// 发送退货信息
+    		$status = Apply::where('order_name',$res->info_nickname)->update(['order_return_goods'=>$ids]);
+			
+    		var_dump($status);
+    		
     	}
 
 
     	public function goods(Request $request)
     	{
 
-    		
+    		session(['a'=>5]);
+
+
+    		echo session('a');
 
     	}
 }

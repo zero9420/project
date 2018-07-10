@@ -131,3 +131,8 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 
 });
+
+
+
+// 测试	
+Route::get('/home/test/','home\IndexController@goods');
