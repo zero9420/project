@@ -35,7 +35,7 @@
                     <div class="col-md-6 col-xs-12 col-sm-12">
                         <div class="header-top-right">
                             <ul class="header-links hidden-xs">
-                                <li>您好！欢迎来云购物,请&nbsp;&nbsp;<a class="login" href="/home/login">登录</a></li>
+                                <li>您好！欢迎来云购物,请&nbsp;&nbsp;<a class="login" href="/home/logins">登录</a></li>
                                 <li><a class="my-wishlist" href="#">个人中心</a></li>
                                 <li><a class="checkout" href="#">我的订单</a></li>
                                 <li><a class="my-account" href="#">帮助</a></li>

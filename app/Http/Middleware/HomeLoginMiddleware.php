@@ -22,7 +22,7 @@ class HomeLoginMiddleware
         } else {
             
             //跳转  
-            return redirect('/home/login');
+            return redirect('/home/logins');
         }
 
     }

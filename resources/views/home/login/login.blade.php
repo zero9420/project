@@ -9,9 +9,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta name="renderer" content="webkit">
 	<title>登录.云购物商城</title>
-	<link rel="shortcut icon" type="image/x-icon" href="home/img/icon/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="/home/css/base.css">
-	<link rel="stylesheet" type="text/css" href="/home/css/home.css">
+	<link rel="shortcut icon" type="image/x-icon" href="home/login/img/icon/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/home/login/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/home/login/css/home.css">
 	 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
     >
 </head>
@@ -21,7 +21,7 @@
 	<div class="center">
 		<div class="pc-fl-logo">
 			<h1>
-				<a href="/home/index"></a>
+				<a href="/"></a>
 			</h1>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 			<div class="fl"></div>
 			<div class="fr pc-login-box" style="width: 415px">
 				<div class="pc-login-title"><h2>用户登录</h2></div>
-				<form action="/home/login" method="post">
+				<form action="/home/logins" method="post">
 				{{ csrf_field() }}
 					<div class="pc-sign">
 						<input type="text" name="username" placeholder="用户名/邮箱/手机号">
