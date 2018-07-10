@@ -8,23 +8,22 @@ use App\Http\Controllers\admin\CateController;
 use App\Models\Admin\Cate;
 use App\Models\Admin\Goods;
 use App\Models\Admin\Position;
-
+use DB;
 class GoodslistController extends Controller
 {
 
     public function shop()
     {
-<<<<<<< HEAD
+
 
         // 广告管理数据接收
         $data = Position::all();
 
-        return view('home.index',['data'=>$data,'title'=>'云购物商城']);
-=======
+      
+        //前台轮播
         $res = DB::table('lunbo')->get();
         
         $arr = [];
-
 
         foreach ($res as $k => $v) {
             
@@ -33,8 +32,8 @@ class GoodslistController extends Controller
             } 
 
         }
-        return view('home.index',['title'=>'云购物商城','arr'=>$arr]);
->>>>>>> origin/msq
+        return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data]);
+
     }
     /**
      * [index 商品列表页]
