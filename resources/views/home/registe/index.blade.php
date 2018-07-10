@@ -11,9 +11,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta name="renderer" content="webkit">
 	<title>注册.云购物商城</title>
-	<link rel="shortcut icon" type="image/x-icon" href="home/img/icon/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="/home/css/base.css">
-	<link rel="stylesheet" type="text/css" href="/home/css/home.css">
+	<link rel="shortcut icon" type="image/x-icon" href="home/login/img/icon/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/home/login/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/home/login/css/home.css">
 	    <!-- Bootstrap core CSS -->
 
 </head>

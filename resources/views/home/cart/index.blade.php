@@ -1,5 +1,10 @@
 @extends('layout.homes')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="shortcut icon" type="image/x-icon" href="home/login/img/icon/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/home/login/css/base.css">
+<link rel="stylesheet" type="text/css" href="/home/login/css/home.css">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+>
 @section('content')
 	@if(count($data) > 0)
 <section id="pc-jie" class="lamp203">

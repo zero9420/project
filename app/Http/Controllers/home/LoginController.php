@@ -35,12 +35,12 @@ class LoginController extends Controller
             $data = User::where(compact('username'))->first();
 
            if (!$data) {
-             echo '<script>alert("用户名输入错误");location.href="/home/login";</script>';
+             echo '<script>alert("用户名输入错误");location.href="/home/logins";</script>';
             }
               //判断密码
             // dd($data->password);
         if (!Hash::check($password, $data->password)) {
-             echo '<script>alert("密码输入错误");location.href="/home/login";</script>';
+             echo '<script>alert("密码输入错误");location.href="/home/logins";</script>';
         }
 
             // dump($data);
@@ -53,7 +53,7 @@ class LoginController extends Controller
                 // }
 
         //渲染
-            return '<script>alert("登入成功");location.href="/home/index";</script>';
+            return '<script>alert("登入成功");location.href="/";</script>';
 
     }
 
