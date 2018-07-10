@@ -20,10 +20,12 @@ class GoodslistController extends Controller
         // 广告管理数据接收
         $data = Position::all();
 
+
+        //前台轮播
+
         $res = DB::table('lunbo')->get();
 
         $arr = [];
-
 
         foreach ($res as $k => $v) {
 
@@ -32,8 +34,7 @@ class GoodslistController extends Controller
             }
 
         }
-
-        return view('home.index',['title'=>'云购物商城','data'=>$data,'arr'=>$arr]);
+		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data]);
 
     }
     /**
