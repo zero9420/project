@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  *
  * 后台
@@ -16,7 +15,7 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
  */
 
 
-Route::group(['middleware'=>'adminlogin'],function(){
+	Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 后台首页
 	Route::any('admin/index','admin\IndexController@index');
@@ -65,7 +64,6 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
-
 
 	// 商城快讯
 	Route::resource('/admin/express','admin\ExpressController');
@@ -125,12 +123,13 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 	//购物车加减ajax
 	Route::any('/home/cart/jiajian','home\CartController@jiajian');
-	//购物车总价ajax	
+	//购物车总价ajax
 	Route::any('/home/cart/total','home\CartController@total');
 
 
 	// 前台订单页
 	Route::any('/home/order','home\OrderController@order');
+
 
 
 	// 前台结算页
@@ -147,7 +146,6 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/cart/jiajian','home\CartController@jiajian');
 	//购物车总价ajax
 	Route::any('/home/cart/total','home\CartController@total');
-
 
 
 });
