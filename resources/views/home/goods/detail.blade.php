@@ -87,6 +87,8 @@
 	                                <p>{{$goods->goods_info}}
 	                                </p>
 	                            </div>
+	                        <form action="/home/cart/{{$goods->goods_id}}" method='POST'>
+	                        	{{ csrf_field() }}
 	                            <div class="add-cart">
 	                            	<span>尺码:</span>
 	                            	@foreach($size as $k=>$v)
@@ -108,12 +110,13 @@
 	                            <div class="add-cart">
 	                                <p class="quantity cart-plus-minus">
 	                                    <label>购买数量</label>
-	                                    <input type="text" value="1">
+	                                    <input type="text" value="1" name="goods_number">
 	                                </p>
 	                                <div class="shop-add-cart">
 	                                    <button>加入购物车</button>
 	                                </div>
 	                            </div>
+	                        </form>
 	                            <div class="widget-icon">
 	                                <a href="#">
 	                                    <i class="fa fa-facebook"></i>
