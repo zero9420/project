@@ -32,7 +32,7 @@
                         <div class="header-top-right">
                             <ul class="header-links hidden-xs">
                                 <li>您好！欢迎来云购物,请&nbsp;&nbsp;<a class="login" href="/home/logins">登录</a></li>
-                                <li><a class="my-wishlist" href="#">个人中心</a></li>
+                                <li><a class="my-wishlist" href="/home/userinfo">个人中心</a></li>
                                 <li><a class="checkout" href="#">我的订单</a></li>
                                 <li><a class="my-account" href="#">帮助</a></li>
                             </ul>
@@ -155,7 +155,7 @@
                                         <li><a title="My orders" href="#">我的订单</a></li>
                                         <li><a title="My credit slips" href="#"> 我的购物车 </a></li>
                                         <li><a title="My addresses" href="#">我的地址</a></li>
-                                        <li><a title="My personal info" href="#">我的个人信息</a></li>
+                                        <li><a title="My personal info" href="/home/userinfo">我的个人信息</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
