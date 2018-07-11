@@ -11,6 +11,6 @@ class JsyController extends Controller
     {
     	
 
-    	return view('home.order.jsy');
+    	return view('home.jsy.jsy');
     }
 }

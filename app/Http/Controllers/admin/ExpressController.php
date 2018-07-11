@@ -139,6 +139,10 @@ class ExpressController extends Controller
 
         if ($data) {
             return redirect('/admin/express')->with('success','修改成功咯');
+        }else{
+
+            return back()->with('error','检测到没有任何修改');
+
         }
     }
 

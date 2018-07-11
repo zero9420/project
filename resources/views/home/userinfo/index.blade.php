@@ -29,7 +29,7 @@
 			<div class="member-lists">
 				<dl>
 					<dt>我的商城</dt>
-					<dd><a href="#">我的订单</a></dd>
+					<dd><a href="home/order">我的订单</a></dd>
 					<dd><a href="#">我的收藏</a></dd>
 					<dd><a href="#">账户安全</a></dd>
 					<dd><a href="#">我的评价</a></dd>
