@@ -170,18 +170,6 @@
                                                     </a>
                                                 </h5>
                                             </div>
-                                            <div class="rating">
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                            </div>
                                             <div class="price-box">
                                                 <span class="price">
                                                     ￥{{$v->goods_price}}
@@ -709,9 +697,6 @@
                                                 <span class="sale-box">
                                                     <span class="sale">热销</span>
                                                 </span>
-                                                <span class="new-box">
-                                                    <span class="new">新品上市</span>
-                                                </span>
                                             </div>
                                         </div>
                                         <!-- single-product-end -->
@@ -726,9 +711,6 @@
                                                     </a>
                                                     <span class="sale-box">
                                                         <span class="sale">热销</span>
-                                                    </span>
-                                                    <span class="new-box">
-                                                        <span class="new">新品上市</span>
                                                     </span>
                                                 </div>
                                             </div>

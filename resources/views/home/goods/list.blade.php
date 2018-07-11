@@ -134,9 +134,6 @@
                                                         <span class="sale-box">
                                                             <span class="sale">热销</span>
                                                         </span>
-                                                        <span class="new-box">
-                                                            <span class="new">新品上市</span>
-                                                        </span>
                                                     </div>
                                                     <div class="single-product-content">
                                                         <div class="product-title">
@@ -159,8 +156,8 @@
                                                             <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
                                                             <a class="add-wishlist" href="#" title="加入我的收藏">
                                                                 <i class="fa fa-heart"></i>
-                                                            </a> 
-                                                            <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
+                                                            </a>
+                                                            <a class="quick-view" href="#" title="快速浏览商品"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
                                                                 <i class="fa fa-search"></i>
                                                             </a>
                                                         </div>
@@ -290,9 +287,6 @@
                                                 <span class="sale-box">
                                                     <span class="sale">热销</span>
                                                 </span>
-                                                <span class="new-box">
-                                                    <span class="new">新品上市</span>
-                                                </span>
                                             </div>
                                         </div>
                                         <!-- single-product-end -->
@@ -302,14 +296,11 @@
                                             <!-- single-product-start -->
                                             <div class="single-product">
                                                 <div class="single-product-img">
-                                                    <a href="#">
+                                                    <a href="/goodsdetail/{{$v->goods_id}}">
                                                         <img src="{{$vvv->goods_pic}}" alt="">
                                                     </a>
                                                     <span class="sale-box">
                                                         <span class="sale">热销</span>
-                                                    </span>
-                                                    <span class="new-box">
-                                                        <span class="new">新品上市</span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -327,11 +318,10 @@
                                         <span class="old-price">￥70.00</span>
                                     </div>
                                     <div class="rating">
-                                        <div class="star star-on"></div>
-                                        <div class="star star-on"></div>
-                                        <div class="star star-on"></div>
-                                        <div class="star star-on"></div>
-                                        <div class="star"></div>
+                                        <a class="add-wishlist" href="#" title="加入我的收藏">
+                                            <i class="fa fa-heart"></i>
+                                            <span>收藏宝贝</span>
+                                        </a>
                                     </div>
                                     <div class="short-description">
                                         <p>{{$v->goods_info}}

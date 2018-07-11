@@ -36,7 +36,7 @@ class GoodslistController extends Controller
         }
 
         // 热卖商品
-        $goods = Goods::with('spec')->where('goods_hot','2')->take(10)->get();
+        $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
 		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods]);
 
     }
@@ -45,7 +45,7 @@ class GoodslistController extends Controller
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function index(Request $request)
+    public function list(Request $request)
     {
     	// 获取id
         $id = $request->input('id');
@@ -77,7 +77,7 @@ class GoodslistController extends Controller
                 })->where('goods_status','1')->paginate(12);
     	}
             // dump($goods);
-    	return view('home.goods.index',['title'=>'商品列表页',
+    	return view('home.goods.list',['title'=>'商品列表页',
     									'goods'=>$goods,
     									'id'=>$id,
                                         'request'=> $request
