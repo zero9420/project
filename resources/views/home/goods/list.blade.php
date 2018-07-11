@@ -66,7 +66,7 @@
                             </li>
                             @endforeach
                         </ul>
-                    </div><!-- 
+                    </div><!--
                     <div class="content-box">
                         <h2>按价格进行搜索</h2>
                         <div class="info_widget">
@@ -154,7 +154,7 @@
                                                         </div>
                                                         <div class="product-action">
                                                             <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
-                                                            <a class="add-wishlist" href="#" title="加入我的收藏">
+                                                            <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                                                 <i class="fa fa-heart"></i>
                                                             </a>
                                                             <a class="quick-view" href="#" title="快速浏览商品"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
@@ -318,7 +318,7 @@
                                         <span class="old-price">￥70.00</span>
                                     </div>
                                     <div class="rating">
-                                        <a class="add-wishlist" href="#" title="加入我的收藏">
+                                        <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                             <i class="fa fa-heart"></i>
                                             <span>收藏宝贝</span>
                                         </a>

@@ -182,7 +182,7 @@
                                                 <button class="btn btn-default add-cart" title="add to cart">
                                                     加入购物车
                                                 </button>
-                                                <a class="add-wishlist" href="#" title="加入我的收藏">
+                                                <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                                     <i class="fa fa-heart">
                                                     </i>
                                                 </a>
@@ -728,7 +728,7 @@
                                         <span class="old-price">￥70.00</span>
                                     </div>
                                     <div class="rating">
-                                        <a class="add-wishlist" href="#" title="加入我的收藏">
+                                        <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                             <i class="fa fa-heart"></i>
                                             <span>收藏宝贝</span>
                                         </a>
