@@ -82,7 +82,7 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 // 前台首页
 Route::any('/','home\GoodslistController@shop');
-Route::any('/goodslist/{id?}','home\GoodslistController@index');
+Route::any('/goodslist','home\GoodslistController@index');
 Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>'\d+']);
 
 // 前台登录注册模块

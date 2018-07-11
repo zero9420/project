@@ -71,11 +71,15 @@
                             类别
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="Engine version: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 50px;" aria-label="Engine version: activate to sort column ascending">
                             价格
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 90px;" aria-label="Engine version: activate to sort column ascending">
+                            优惠
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 50px;" aria-label="CSS grade: activate to sort column ascending">
                            销量
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -107,6 +111,16 @@
                         <td class=" ">
                             {{$v->goods_price}}
                         </td>
+                        <style>
+                            .preferential{
+                                font-size:24px;
+                                margin: 5px;
+                            }
+                        </style>
+                        <td class=" ">
+                            <a href="javascript:void(0)" onclick="uct({{$v->goods_id}})" class="preferential" title="优惠5%">-</a><span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential*100}}</span>%
+                            <a id="+2_{{$v->goods_id}}" onclick="add({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="涨价5%">+</a>
+                        </td>
                         <td class=" ">
                             {{$v->goods_sales}}
                         </td>
@@ -125,7 +139,7 @@
                             @endif
                         </td>
                          <td class=" ">
-                            <a href="/admin/goods/{{$v->goods_id}}" class='btn btn-info'>商品详情</a>
+                            <a href="/admin/goods/{{$v->goods_id}}" class='btn btn-info'>详情</a>
                             <a href="/admin/goods/{{$v->goods_id}}/edit" class='btn btn-warning'>修改</a>
 
                             <form action="/admin/goods/{{$v->goods_id}}" method='post' style='display:inline'>
@@ -224,6 +238,21 @@
                         alert('修改失败');
                     }
                 })
+            }
+        }
+
+        // 优惠商品 减价
+        function uct($e){
+            var id = $e;
+            var pres = parseInt($('#pre_'+id).text())/100;
+            var msg = "你确定减价吗??";
+            var con = confirm(msg);
+            if(con){
+                if(pres == 1){
+                    alert('商品不能再减价了!');
+                } else {
+                    alert('1');
+                }
             }
         }
 

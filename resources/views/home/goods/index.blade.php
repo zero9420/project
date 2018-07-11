@@ -43,19 +43,19 @@
                             @foreach($cates as $k=>$v)
                             <li>
                                 <label class="check-label">
-                                    <a @if($id == $v->cate_id) class="bg-danger" @endif href="/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a>
+                                    <a @if($id == $v->cate_id) class="bg-danger" @endif href="/goodslist?id={{$v->cate_id}}">{{$v->cate_name}}</a>
                                 </label>
                                 @if($v->sub)
                                 @foreach($v->sub as $kk => $vv)
                                     <li>
                                         <label class="check-label">
-                                            &nbsp;&nbsp;&nbsp;<a @if($id == $vv->cate_id) class="bg-danger" @endif href="/goodslist/{{$vv->cate_id}}">{{$vv->cate_name}}</a>
+                                            &nbsp;&nbsp;&nbsp;<a @if($id == $vv->cate_id) class="bg-danger" @endif href="/goodslist?id={{$vv->cate_id}}">{{$vv->cate_name}}</a>
                                         </label>
                                         @if($vv->sub)
                                         @foreach($vv->sub as $kkk => $vvv)
                                             <li>
                                                 <label class="check-label">
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @if($id == $vvv->cate_id) class="bg-danger" @endif href="/goodslist/{{$vvv->cate_id}}">{{$vvv->cate_name}}</a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @if($id == $vvv->cate_id) class="bg-danger" @endif href="/goodslist?id={{$vvv->cate_id}}">{{$vvv->cate_name}}</a>
                                                 </label>
                                             </li>
                                         @endforeach
@@ -119,6 +119,7 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active fade in" id="gried_view">
+                                        @if(count($goods) != 0)
                                         @foreach($goods as $k => $v)
                                             @php
                                                 $pic = $v->spec;
@@ -155,13 +156,13 @@
                                                             <span class="old-price">￥70.00</span>
                                                         </div>
                                                         <div class="product-action">
-                                                            <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button><!--
-                                                            <a class="add-wishlist" href="#" title="add to wishlist">
+                                                            <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
+                                                            <a class="add-wishlist" href="#" title="加入我的收藏">
                                                                 <i class="fa fa-heart"></i>
-                                                            </a>
-                                                            <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
+                                                            </a> 
+                                                            <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
                                                                 <i class="fa fa-search"></i>
-                                                            </a> -->
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,6 +170,13 @@
                                             </div>
                                         @endforeach
                                         </div>
+                                        @else
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <b>该分类下暂无商品,敬请期待!</b>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <div role="tabpanel" class="tab-pane fade" id="list_view">
                                             <div class="list-view">
                                                 <div class="row">
@@ -218,12 +226,12 @@
                                                                     </p>
                                                                     <div class="product-action">
                                                                         <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
-                                                                        <!-- <a class="add-wishlist" href="#" title="add to wishlist">
+                                                                        <a class="add-wishlist" href="#" title="加入我的收藏">
                                                                             <i class="fa fa-heart"></i>
                                                                         </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
+                                                                        <a class="quick-view" href="javascript:void(0)" title="快速查看商品详情"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
                                                                             <i class="fa fa-search"></i>
-                                                                        </a> -->
+                                                                        </a>
                                                                     </div>
                                                                     <div class="availability">
                                                                         <span>有货</span>
@@ -252,5 +260,191 @@
 </div>
 <!-- shop-area-end -->
 
+<!-- Modal -->
+@foreach($goods as $v)
+<div id="myModal{{$v->goods_id}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 col-xs-12 col-sm-5">
+                                <div class="picture-tab">
+                                    <ul class="pic-tabs">
+                                        @foreach($v->spec as $vv)
+                                        <li class=" "><a data-toggle="tab" href="#pic{{$vv->goods_spec_id}}" aria-expanded="true"><img src="{{$vv->goods_pic}}" alt=""></a></li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="tab-content">
+                                    <div id="pic{{$v->spec[0]->goods_spec_id}}" class="tab-pane fade in active">
+                                        <!-- single-product-start -->
+                                        <div class="single-product">
+                                            <div class="single-product-img">
+                                                <a href="#">
+                                                    <img src="{{$v->spec[0]->goods_pic}}" alt="">
+                                                </a>
+                                                <span class="sale-box">
+                                                    <span class="sale">热销</span>
+                                                </span>
+                                                <span class="new-box">
+                                                    <span class="new">新品上市</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- single-product-end -->
+                                    </div>
+                                    @foreach($v->spec as $vvv)
+                                        <div id="pic{{$vvv->goods_spec_id}}" class="tab-pane fade">
+                                            <!-- single-product-start -->
+                                            <div class="single-product">
+                                                <div class="single-product-img">
+                                                    <a href="#">
+                                                        <img src="{{$vvv->goods_pic}}" alt="">
+                                                    </a>
+                                                    <span class="sale-box">
+                                                        <span class="sale">热销</span>
+                                                    </span>
+                                                    <span class="new-box">
+                                                        <span class="new">新品上市</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-end -->
+                                        </div>
+                                    @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-xs-12 col-sm-7">
+                                <div class="product-details-info">
+                                    <h5 class="product-title">{{$v->goods_name}}</h5>
+                                    <div class="price-box">
+                                        <span class="price">￥{{$v->goods_price}}</span>
+                                        <span class="old-price">￥70.00</span>
+                                    </div>
+                                    <div class="rating">
+                                        <div class="star star-on"></div>
+                                        <div class="star star-on"></div>
+                                        <div class="star star-on"></div>
+                                        <div class="star star-on"></div>
+                                        <div class="star"></div>
+                                    </div>
+                                    <div class="short-description">
+                                        <p>{{$v->goods_info}}
+                                        </p>
+                                    </div>
+                                    @php
+                                        $size = array_filter(explode('|',$v->goods_size));
+                                        $color = array_filter(explode('|',$v->goods_color));
+                                    @endphp
+                                <form action="/home/cart" method='POST'>
+                                    {{ csrf_field() }}
+                                    <div class="add-cart">
+                                        <span>尺码:</span>
+                                        @foreach($size as $vs)
+                                        <a href="javascript:void(0)">
+                                            <input type="radio" name="goods_size" value="{{$vs}}">
+                                            <span>{{strtoupper($vs)}}</span>
+                                        </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="add-cart">
+                                        <span>颜色:</span>
+                                        @foreach($color as $vc)
+                                        <a href="javascript:void(0)">
+                                            <input type="radio" name="goods_color" value="{{$vc}}">
+                                            <span>{{$vc}}</span>
+                                        </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="add-cart">
+                                        <p class="quantity cart-plus-minus">
+                                            <label>购买数量</label>
+                                            <input type="text" value="1" name="goods_number">
+                                        </p>
+                                        <div class="shop-add-cart">
+                                            <button>加入购物车</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <div class="widget-icon">
+                                        <a href="#">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fa fa-linkedin"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="widget-icon">
+                                    </div>
+                                    <style>
+                                        .add-cart a{
+                                            margin-right: 10px;
+                                        }
+                                        .add-cart span{
+                                            margin-right: 10px;
+                                        }
+                                    </style>
+                                    <div class="add-cart">
+                                        <span>承诺:</span>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/qitian.png" alt="" title="满足七天退货的前提下,包邮商品需买家承担退货运费!">
+                                            <span>七天退货</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/dingdanxian.png" alt="" title="订单险">
+                                            <span>订单险</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/wuyoutuihuo.png" alt="" title="无忧退货">
+                                            <span>无忧退货</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/yunfeixian.png" alt="" title="运费险">
+                                            <span>运费险</span>
+                                        </a>
+                                    </div>
+                                    <div class="widget-icon">
+                                    </div>
+                                    <div class="add-cart" style="margin-right: 20px;">
+                                        <span >支付:</span>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/zhifubao.png" alt="" title="支付宝">
+                                            <span>支付宝</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/weixin.png" alt="" title="微信">
+                                            <span>微信</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/xinyongka.png" alt="" title="信用卡">
+                                            <span>信用卡</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/mayihuabei.png" alt="" title="蚂蚁花呗">
+                                            <span>蚂蚁花呗</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- modal-end -->
 
 @endsection

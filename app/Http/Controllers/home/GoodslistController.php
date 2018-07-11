@@ -13,7 +13,7 @@ use DB;
 class GoodslistController extends Controller
 {
 
-    public function shop()
+    public function shop(Request $request)
     {
 
 
@@ -34,7 +34,10 @@ class GoodslistController extends Controller
             }
 
         }
-		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data]);
+
+        // 热卖商品
+        $goods = Goods::with('spec')->where('goods_hot','2')->take(10)->get();
+		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods]);
 
     }
     /**
@@ -45,22 +48,33 @@ class GoodslistController extends Controller
     public function index(Request $request)
     {
     	// 获取id
-        $path = $request->path();
-    	$id = substr($path,10);
-    	$id = intval($id);
+        $id = $request->input('id');
 
     	if (!empty($id)) {
-    		$goods = Goods::with('spec')->where('cate_id',$id)->where('goods_status','1')->paginate(12);
+            // 查询子分类id
+            $cate = Cate::where('cate_path','like','%,'.$id.',%')->select('cate_id')->get();
+
+            // 判断子分类
+            if(empty($cate)){
+                $goods = Goods::with('spec')->where('cate_id',$id)->where('goods_status','1')->paginate(12);
+            } else {
+                $cate_id[] = $id;
+                foreach($cate as $k => $v){
+                    $cate_id[] = $v->cate_id;
+                }
+                $goods = Goods::with('spec')
+                        ->whereIn('cate_id',$cate_id)->where('goods_status','1')->paginate(12);
+            }
     	} else {
     		$goods = Goods::with('spec')
-    		->where(function($query) use($request){
-                // 检测关键字
-                $gname = $request->input('gname');
-                // 如果关键字不为空
-                if (!empty($gname)) {
-                	$query->where('goods_name','like','%'.$gname.'%');
-                }
-            })->where('goods_status','1')->paginate(12);
+        		->where(function($query) use($request){
+                    // 检测关键字
+                    $gname = $request->input('gname');
+                    // 如果关键字不为空
+                    if (!empty($gname)) {
+                    	$query->where('goods_name','like','%'.$gname.'%');
+                    }
+                })->where('goods_status','1')->paginate(12);
     	}
             // dump($goods);
     	return view('home.goods.index',['title'=>'商品列表页',
@@ -78,12 +92,12 @@ class GoodslistController extends Controller
     public function detail($id)
     {
         $goods = Goods::with('spec')->where('goods_id',$id)->first();
-        $size = explode('|',$goods->goods_size);
-        $color = explode('|',$goods->goods_color);
+        // 取出数据拆分成数组并取出空值
+        $size = array_filter(explode('|',$goods->goods_size));
+        $color = array_filter(explode('|',$goods->goods_color));
         $gname = mb_substr($goods->goods_name,0,5);
         $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
         return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related]);
     }
-
 
 }

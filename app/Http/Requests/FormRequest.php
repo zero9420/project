@@ -27,6 +27,7 @@ class FormRequest extends FormRequest
             'goods_name' => 'required|unique:shop_goods|max:30',
             'goods_name' => 'required|max:120',
             'goods_price'=>'required|regex:/^\d{1,9}$/',
+            'goods_preferential'=>'regex:/^0\.?\d{0,2}$/',
             'goods_pic'=>'required|max:4',
             'goods_desc'=>'required',
         ];
@@ -48,6 +49,7 @@ class FormRequest extends FormRequest
             'goods_name.max'=>'商品简介格式不正确',
             'goods_price.required'=>'商品价格不能为空',
             'goods_price.regex'=>'商品价格格式不正确',
+            'goods_preferential.regex'=>'商品优惠不正确',
             'goods_pic.required'=>'商品图片不能为空',
             'goods_pic.max'=>'商品图片最多上传4张',
             'goods_desc.required'=>'商品描述不能为空',

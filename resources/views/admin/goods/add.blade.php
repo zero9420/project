@@ -35,7 +35,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" id="goodsname" maxlength="30" value="请输入最多30商品名">
+                        <input type="text" class="medium" name="goods_name" id="goodsname" maxlength="30" value="请输入最多30字符的商品名">
                         <p><span id="name-count">30</span>/30</p>
                     </div>
                 </div>
@@ -81,13 +81,25 @@
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
+                        商品优惠
+                        <span class="required">
+                            *
+                        </span>
+                    </label>
+                    <div class="mws-form-item">
+                        <input type="text" class="medium" name="goods_preferential" value="0.00" class="error large">
+                    </div>
+                </div>
+
+                <div class="mws-form-row">
+                    <label class="mws-form-label">
                         商品颜色
                         <span class="required">
                             *
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_color" value="{{old('goods_color')}}" class="error large" placeholder="颜色请用'|'分割...">
+                        <input type="text" class="medium" name="goods_color" value="白色|黑色" class="error large" placeholder="颜色请用'|'分割...">
                     </div>
                 </div>
 
@@ -99,7 +111,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_size" value="{{old('goods_size')}}" class="error large" placeholder="规格请用'|'分割...">
+                        <input type="text" class="medium" name="goods_size" value="m|l|x|xl" class="error large" placeholder="规格请用'|'分割...">
                     </div>
                 </div>
 

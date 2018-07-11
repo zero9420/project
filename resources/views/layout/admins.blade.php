@@ -48,7 +48,7 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap" style="color: white">
-                <a href="/admin/index"><h4>云购物大数据后台管理</h4></a>
+                <a href="/"><h4>云购物购物商城首页</h4></a>
 			</div>
         </div>
         
@@ -57,11 +57,6 @@
         
         	<!-- Notifications -->
         	<div id="mws-user-notif" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-                
-                <!-- Unread notification count -->
-                <span class="mws-dropdown-notif">35</span>
-                
                 <!-- Notifications dropdown -->
                 <div class="mws-dropdown-box">
                 	<div class="mws-dropdown-content">
@@ -85,7 +80,6 @@
                                         {{date('Y-m-d H:i:s',time())}}
                                     </span>
                                 </a>
-                          
                         </ul>
                         <div class="mws-dropdown-viewall">
 	                        <a href="#">View All Notifications</a>
@@ -93,46 +87,12 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Messages -->
-            <div id="mws-user-message" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
-                
-                <!-- Unred messages count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Messages dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-messages">
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        {{date('Y-m-d H:i:s',time())}}
-                                    </span>
-                                </a>
-                            </li>
-                        
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Messages</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
-            
             	<!-- User Photo -->
             	<div id="mws-user-photo">
                 	<img src="{{session('profile')}}" alt="User Photo">
                 </div>
-                
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
@@ -171,6 +131,9 @@
             <div id="mws-navigation">
                 <ul>
                 	<li>
+                        <a href="/admin/index"><i class="icon-direction"></i>返回首页</a>
+                    </li>
+                    <li>
                         <a href="#"><i class="icon-user"></i>个人信息</a>
                         <ul class='closed'>
                             <li><a href="/admin/user">浏览信息</a></li>

@@ -112,7 +112,7 @@
                                         $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
                                     @endphp
                                     @foreach($cates as $k=>$v)
-                                    <li><a href="/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a></li>
+                                    <li><a href="/goodslist?id={{$v->cate_id}}">{{$v->cate_name}}</a></li>
                                     @endforeach
                                 </ul>
                             </nav>
@@ -210,6 +210,7 @@
         </div>
     </footer>
     <!-- footer-end -->
+
 
 
     <!-- all js here -->

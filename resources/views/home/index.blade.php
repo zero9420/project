@@ -122,14 +122,14 @@
 <!-- banner-area-end -->
 
 
-<!-- feature-area-start (特价商品)-->
+<!-- feature-area-start (热卖商品)-->
 <div class="feature-area">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-heading">
                     <h3>
-                        特价商品
+                        热卖商品
                     </h3>
                 </div>
             </div>
@@ -146,24 +146,27 @@
                     <div class="tab-content">
                         <div id="new" class="tab-pane fade in active">
                             <div class="tab-carousel">
+                                @foreach($goods as $k => $v)
+                                <form action="/home/cart/{{$v->goods_id}}" method="POST">
+                                    {{ csrf_field() }}
                                 <div class="col-md-12">
                                     <!-- single-product-start -->
                                     <div class="single-product">
                                         <div class="single-product-img">
-                                            <a href="#">
-                                                <img src="/home/bs/img/singlepro/8.jpg" alt="" />
+                                            <a href="/goodsdetail/{{$v->goods_id}}">
+                                                <img src="{{$v->spec[0]->goods_pic}}" alt="" title="{{$v->goods_info}}" />
                                             </a>
                                             <span class="sale-box">
                                                 <span class="sale">
-                                                    特价
+                                                    热卖
                                                 </span>
                                             </span>
                                         </div>
                                         <div class="single-product-content">
                                             <div class="product-title">
                                                 <h5>
-                                                    <a href="#">
-                                                        商品名字
+                                                    <a href="/goodsdetail/{{$v->goods_id}}">
+                                                        {{$v->goods_name}}
                                                     </a>
                                                 </h5>
                                             </div>
@@ -181,7 +184,7 @@
                                             </div>
                                             <div class="price-box">
                                                 <span class="price">
-                                                    ￥50.00
+                                                    ￥{{$v->goods_price}}
                                                 </span>
                                                 <span class="old-price">
                                                     ￥70.00
@@ -191,12 +194,13 @@
                                                 <button class="btn btn-default add-cart" title="add to cart">
                                                     加入购物车
                                                 </button>
-                                                <a class="add-wishlist" href="#" title="add to wishlist">
+                                                <a class="add-wishlist" href="#" title="加入我的收藏">
                                                     <i class="fa fa-heart">
                                                     </i>
                                                 </a>
-                                                <a class="quick-view" href="#" title="quick view" data-toggle="modal"
-                                                data-target="#myModal">
+                                                <a class="quick-view" href="javascript:void(0)" title="快速查看商品详情" data-toggle="modal"
+                                                data-target="#myModal{{$v->goods_id}}"
+                                                >
                                                     <i class="fa fa-search">
                                                     </i>
                                                 </a>
@@ -205,242 +209,8 @@
                                     </div>
                                     <!-- single-product-end -->
                                 </div>
-                                <div class="col-md-12">
-                                    <!-- single-product-start -->
-                                    <div class="single-product">
-                                        <div class="single-product-img">
-                                            <a href="#">
-                                                <img src="/home/bs/img/singlepro/1.jpg" alt="" />
-                                            </a>
-                                            <span class="sale-box">
-                                                <span class="sale">
-                                                    特价
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div class="single-product-content">
-                                            <div class="product-title">
-                                                <h5>
-                                                    <a href="#">
-                                                        商品名字
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div class="rating">
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="price">
-                                                    ￥50.00
-                                                </span>
-                                                <span class="old-price">
-                                                    ￥70.00
-                                                </span>
-                                            </div>
-                                            <div class="product-action">
-                                                <button class="btn btn-default add-cart" title="add to cart">
-                                                    加入购物车
-                                                </button>
-                                                <a class="add-wishlist" href="#" title="add to wishlist">
-                                                    <i class="fa fa-heart">
-                                                    </i>
-                                                </a>
-                                                <a class="quick-view" href="#" title="quick view" data-toggle="modal"
-                                                data-target="#myModal">
-                                                    <i class="fa fa-search">
-                                                    </i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-end -->
-                                </div>
-                                <div class="col-md-12">
-                                    <!-- single-product-start -->
-                                    <div class="single-product">
-                                        <div class="single-product-img">
-                                            <a href="#">
-                                                <img src="/home/bs/img/singlepro/43.jpg" alt="" />
-                                            </a>
-                                            <span class="sale-box">
-                                                <span class="sale">
-                                                    特价
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div class="single-product-content">
-                                            <div class="product-title">
-                                                <h5>
-                                                    <a href="#">
-                                                        加入购物车
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div class="rating">
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="price">
-                                                    ￥50.00
-                                                </span>
-                                                <span class="old-price">
-                                                    ￥70.00
-                                                </span>
-                                            </div>
-                                            <div class="product-action">
-                                                <button class="btn btn-default add-cart" title="add to cart">
-                                                    加入购物车
-                                                </button>
-                                                <a class="add-wishlist" href="#" title="add to wishlist">
-                                                    <i class="fa fa-heart">
-                                                    </i>
-                                                </a>
-                                                <a class="quick-view" href="#" title="quick view" data-toggle="modal"
-                                                data-target="#myModal">
-                                                    <i class="fa fa-search">
-                                                    </i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-end -->
-                                </div>
-                                <div class="col-md-12">
-                                    <!-- single-product-start -->
-                                    <div class="single-product">
-                                        <div class="single-product-img">
-                                            <a href="#">
-                                                <img src="/home/bs/img/singlepro/2.jpg" alt="" />
-                                            </a>
-                                            <span class="sale-box">
-                                                <span class="sale">
-                                                    特价
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div class="single-product-content">
-                                            <div class="product-title">
-                                                <h5>
-                                                    <a href="#">
-                                                        商品名称
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div class="rating">
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star star-on">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="price">
-                                                    ￥50.00
-                                                </span>
-                                                <span class="old-price">
-                                                    ￥70.00
-                                                </span>
-                                            </div>
-                                            <div class="product-action">
-                                                <button class="btn btn-default add-cart" title="add to cart">
-                                                    加入购物车
-                                                </button>
-                                                <a class="add-wishlist" href="#" title="add to wishlist">
-                                                    <i class="fa fa-heart">
-                                                    </i>
-                                                </a>
-                                                <a class="quick-view" href="#" title="quick view" data-toggle="modal"
-                                                data-target="#myModal">
-                                                    <i class="fa fa-search">
-                                                    </i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-end -->
-                                </div>
-                                <div class="col-md-12">
-                                    <!-- single-product-start -->
-                                    <div class="single-product">
-                                        <div class="single-product-img">
-                                            <a href="#">
-                                                <img src="/home/bs/img/singlepro/7.jpg" alt="" />
-                                            </a>
-                                            <span class="sale-box">
-                                                <span class="sale">
-                                                    特价
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div class="single-product-content">
-                                            <div class="product-title">
-                                                <h5>
-                                                    <a href="#">
-                                                        商品名字
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div class="rating">
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                                <div class="star">
-                                                </div>
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="price">
-                                                    ￥50.00
-                                                </span>
-                                                <span class="old-price">
-                                                    ￥70.00
-                                                </span>
-                                            </div>
-                                            <div class="product-action">
-                                                <button class="btn btn-default add-cart" title="add to cart">
-                                                    加入购物车
-                                                </button>
-                                                <a class="add-wishlist" href="#" title="add to wishlist">
-                                                    <i class="fa fa-heart">
-                                                    </i>
-                                                </a>
-                                                <a class="quick-view" href="#" title="quick view" data-toggle="modal"
-                                                data-target="#myModal">
-                                                    <i class="fa fa-search">
-                                                    </i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-end -->
-                                </div>
+                                </form>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -450,192 +220,6 @@
     </div>
 </div>
 <!-- feature-area-end -->
-
-
-<!-- new-product-area-start (新品上市) -->
-<div class="new-product-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-heading">
-                    <h3>新品上市</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="new-product wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
-                <div class="new-carousel">
-                    <div class="col-md-12">
-                        <!-- single-product-start -->
-                        <div class="single-product">
-                            <div class="single-product-img">
-                                <a href="#"><img src="/home/bs/img/singlepro/9.jpg" alt="" /></a>
-                                <span class="new-box">
-                                        <span class="new">新品上市</span>
-                                </span>
-                            </div>
-                            <div class="single-product-content">
-                                <div class="product-title">
-                                    <h5><a href="#">商品名字</a></h5>
-                                </div>
-                                <div class="rating">
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star"></div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="price">￥50.00</span>
-                                    <span class="old-price">￥70.00</span>
-                                </div>
-                                <div class="product-action">
-                                    <button class="btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                    <a class="add-wishlist" href="#" title="add to wishlist"><i class="fa fa-heart"></i></a>
-                                    <a class="quick-view" href="#" title="quick view" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single-product-end -->
-                    </div>
-                    <div class="col-md-12">
-                        <!-- single-product-start -->
-                        <div class="single-product">
-                            <div class="single-product-img">
-                                <a href="#"><img src="/home/bs/img/singlepro/5.jpg" alt="" /></a>
-                                <span class="new-box">
-                                        <span class="new">新品上市</span>
-                                </span>
-                            </div>
-                            <div class="single-product-content">
-                                <div class="product-title">
-                                    <h5><a href="#">商品名称</a></h5>
-                                </div>
-                                <div class="rating">
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="price">￥50.00</span>
-                                    <span class="old-price">￥70.00</span>
-                                </div>
-                                <div class="product-action">
-                                    <button class="btn btn-default add-cart" title="add to cart">加入购物车</button>
-                                    <a class="add-wishlist" href="#" title="add to wishlist"><i class="fa fa-heart"></i></a>
-                                    <a class="quick-view" href="#" title="quick view" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single-product-end -->
-                    </div>
-                    <div class="col-md-12">
-                        <!-- single-product-start -->
-                        <div class="single-product">
-                            <div class="single-product-img">
-                                <a href="#"><img src="/home/bs/img/singlepro/10.jpg" alt="" /></a>
-                                <span class="new-box">
-                                        <span class="new">新品上市</span>
-                                </span>
-                            </div>
-                            <div class="single-product-content">
-                                <div class="product-title">
-                                    <h5><a href="#">商品名字</a></h5>
-                                </div>
-                                <div class="rating">
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="price">￥50.00</span>
-                                    <span class="old-price">￥70.00</span>
-                                </div>
-                                <div class="product-action">
-                                    <button class="btn btn-default add-cart" title="add to cart">加入购物车</button>
-                                    <a class="add-wishlist" href="#" title="add to wishlist"><i class="fa fa-heart"></i></a>
-                                    <a class="quick-view" href="#" title="quick view" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single-product-end -->
-                    </div>
-                    <div class="col-md-12">
-                        <!-- single-product-start -->
-                        <div class="single-product">
-                            <div class="single-product-img">
-                                <a href="#"><img src="/home/bs/img/singlepro/44.jpg" alt="" /></a>
-                                <span class="new-box">
-                                        <span class="new">新品上市</span>
-                                </span>
-                            </div>
-                            <div class="single-product-content">
-                                <div class="product-title">
-                                    <h5><a href="#">商品名称</a></h5>
-                                </div>
-                                <div class="rating">
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star star-on"></div>
-                                    <div class="star"></div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="price">￥50.00</span>
-                                    <span class="old-price">￥70.00</span>
-                                </div>
-                                <div class="product-action">
-                                    <button class="btn btn-default add-cart" title="add to cart">加入购物车</button>
-                                    <a class="add-wishlist" href="#" title="add to wishlist"><i class="fa fa-heart"></i></a>
-                                    <a class="quick-view" href="#" title="quick view" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single-product-end -->
-                    </div>
-                    <div class="col-md-12">
-                        <!-- single-product-start -->
-                        <div class="single-product">
-                            <div class="single-product-img">
-                                <a href="#"><img src="/home/bs/img/singlepro/12.jpg" alt="" /></a>
-                                <span class="new-box">
-                                        <span class="new">新品上市</span>
-                                </span>
-                            </div>
-                            <div class="single-product-content">
-                                <div class="product-title">
-                                    <h5><a href="#">商品名称</a></h5>
-                                </div>
-                                <div class="rating">
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                    <div class="star"></div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="price">￥50.00</span>
-                                    <span class="old-price">￥70.00</span>
-                                </div>
-                                <div class="product-action">
-                                    <button class="btn btn-default add-cart" title="add to cart">加入购物车</button>
-                                    <a class="add-wishlist" href="#" title="add to wishlist"><i class="fa fa-heart"></i></a>
-                                    <a class="quick-view" href="#" title="quick view" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single-product-end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- new-product-area-end -->
 
 
 <!-- exclusive-area-start (优惠商品) -->
@@ -1094,5 +678,191 @@
     </div>
 </div>
 <!-- news-letter-area-end -->
+
+<!-- Modal -->
+@foreach($goods as $v)
+<div id="myModal{{$v->goods_id}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 col-xs-12 col-sm-5">
+                                <div class="picture-tab">
+                                    <ul class="pic-tabs">
+                                        @foreach($v->spec as $vv)
+                                        <li class=" "><a data-toggle="tab" href="#pic{{$vv->goods_spec_id}}" aria-expanded="true"><img src="{{$vv->goods_pic}}" alt=""></a></li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="tab-content">
+                                    <div id="pic{{$v->spec[0]->goods_spec_id}}" class="tab-pane fade in active">
+                                        <!-- single-product-start -->
+                                        <div class="single-product">
+                                            <div class="single-product-img">
+                                                <a href="/goodsdetail/{{$v->goods_id}}">
+                                                    <img src="{{$v->spec[0]->goods_pic}}" alt="">
+                                                </a>
+                                                <span class="sale-box">
+                                                    <span class="sale">热销</span>
+                                                </span>
+                                                <span class="new-box">
+                                                    <span class="new">新品上市</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- single-product-end -->
+                                    </div>
+                                    @foreach($v->spec as $vvv)
+                                        <div id="pic{{$vvv->goods_spec_id}}" class="tab-pane fade">
+                                            <!-- single-product-start -->
+                                            <div class="single-product">
+                                                <div class="single-product-img">
+                                                    <a href="/goodsdetail/{{$v->goods_id}}">
+                                                        <img src="{{$vvv->goods_pic}}" alt="">
+                                                    </a>
+                                                    <span class="sale-box">
+                                                        <span class="sale">热销</span>
+                                                    </span>
+                                                    <span class="new-box">
+                                                        <span class="new">新品上市</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-end -->
+                                        </div>
+                                    @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-xs-12 col-sm-7">
+                                <div class="product-details-info">
+                                    <h5 class="product-title">{{$v->goods_name}}</h5>
+                                    <div class="price-box">
+                                        <span class="price">￥{{$v->goods_price}}</span>
+                                        <span class="old-price">￥70.00</span>
+                                    </div>
+                                    <div class="rating">
+                                        <a class="add-wishlist" href="#" title="加入我的收藏">
+                                            <i class="fa fa-heart"></i>
+                                            <span>收藏宝贝</span>
+                                        </a>
+                                    </div>
+                                    <div class="short-description">
+                                        <p>{{$v->goods_info}}
+                                        </p>
+                                    </div>
+                                    @php
+                                        $size = array_filter(explode('|',$v->goods_size));
+                                        $color = array_filter(explode('|',$v->goods_color));
+                                    @endphp
+                                <form action="/home/cart" method='POST'>
+                                    {{ csrf_field() }}
+                                    <div class="add-cart">
+                                        <span>尺码:</span>
+                                        @foreach($size as $vs)
+                                        <a href="javascript:void(0)">
+                                            <input type="radio" name="goods_size" value="{{$vs}}">
+                                            <span>{{strtoupper($vs)}}</span>
+                                        </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="add-cart">
+                                        <span>颜色:</span>
+                                        @foreach($color as $vc)
+                                        <a href="javascript:void(0)">
+                                            <input type="radio" name="goods_color" value="{{$vc}}">
+                                            <span>{{$vc}}</span>
+                                        </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="add-cart">
+                                        <p class="quantity cart-plus-minus">
+                                            <label>购买数量</label>
+                                            <input type="text" value="1" name="goods_number">
+                                        </p>
+                                        <div class="shop-add-cart">
+                                            <button>加入购物车</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <div class="widget-icon">
+                                        <a href="#">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fa fa-linkedin"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="widget-icon">
+                                    </div>
+                                    <style>
+                                        .add-cart a{
+                                            margin-right: 10px;
+                                        }
+                                        .add-cart span{
+                                            margin-right: 10px;
+                                        }
+                                    </style>
+                                    <div class="add-cart">
+                                        <span>承诺:</span>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/qitian.png" alt="" title="满足七天退货的前提下,包邮商品需买家承担退货运费!">
+                                            <span>七天退货</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/dingdanxian.png" alt="" title="订单险">
+                                            <span>订单险</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/wuyoutuihuo.png" alt="" title="无忧退货">
+                                            <span>无忧退货</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/yunfeixian.png" alt="" title="运费险">
+                                            <span>运费险</span>
+                                        </a>
+                                    </div>
+                                    <div class="widget-icon">
+                                    </div>
+                                    <div class="add-cart" style="margin-right: 20px;">
+                                        <span >支付:</span>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/zhifubao.png" alt="" title="支付宝">
+                                            <span>支付宝</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/weixin.png" alt="" title="微信">
+                                            <span>微信</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/xinyongka.png" alt="" title="信用卡">
+                                            <span>信用卡</span>
+                                        </a>
+                                        <a href="">
+                                            <img src="/home/bs/img/detail/mayihuabei.png" alt="" title="蚂蚁花呗">
+                                            <span>蚂蚁花呗</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- modal-end -->
 
 @endsection
