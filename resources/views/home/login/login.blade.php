@@ -14,6 +14,9 @@
 	<link rel="stylesheet" type="text/css" href="/home/login/css/home.css">
 	 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
     >
+	<link rel="stylesheet" type="text/css" href="/admins/bootstrap/css/bootstrap.min.css" media="screen">
+	<script src="/admins/bootstrap/js/bootstrap.min.js"></script>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -28,10 +31,19 @@
 </header>
 <section>
 	<div class="pc-login-bj">
+
 		<div class="center clearfix">
 			<div class="fl"></div>
 			<div class="fr pc-login-box" style="width: 415px">
+
 				<div class="pc-login-title"><h2>用户登录</h2></div>
+
+				@if(session('success'))
+					<div class="mws-form-message info" style="color:red">
+						{{session('success')}}
+					</div>
+				@endif
+
 				<form action="/home/logins" method="post">
 				{{ csrf_field() }}
 					<div class="pc-sign">
@@ -45,8 +57,8 @@
                     @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                     @endforeach
-                </div>  
-            @endif  
+                </div>
+            @endif
 					<div class="pc-submit-ss">
 						<input type="submit" value="登录" placeholder="">
 					</div>
@@ -56,7 +68,7 @@
 						<a href="#" style="margin-right:0"><img src="/home/login/img/icon/tengxun.png" alt="">QQ登录</a>
 					</div>
 					<div class="pc-reg">
-						<a href="#">忘记密码</a>
+						<a href="/home/retrieve">忘记密码</a>
 						<a href="/home/register" class="red">免费注册</a>
 					</div>
 				</form>

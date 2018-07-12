@@ -92,9 +92,15 @@ Route::get('/home/register','home\RegisterController@index');
 Route::post('/home/registers','home\RegisterController@registers');
 Route::get('/home/logins','home\LoginController@index');
 Route::post('/home/logins','home\LoginController@login');
-
-
-
+//账号激活
+Route::get('/home/jihuo','home\JihuoController@jihuo');
+//找回密码
+Route::get('/home/retrieve','home\RetrieveController@index');
+Route::post('/home/retrieve','home\RetrieveController@retrieve');
+//邮箱激活
+Route::get('/home/email/retrieve','home\RetrieveController@retrieves');
+//密码修改
+Route::post('home/email/edit','home\RetrieveController@edit');
 
 /**
  *
