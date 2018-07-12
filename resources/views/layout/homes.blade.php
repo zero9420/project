@@ -141,9 +141,8 @@
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <h4>咨询中心</h4>
                                     <ul class="toggle-footer">
-                                        <li><a title="Specials" href="#">特价商品</a></li>
-                                        <li><a title="New products" href="#">新品上架</a></li>
-                                        <li><a title="Best sellers" href="#">畅销商品</a></li>
+                                        <li><a title="Specials" href="#changxiao">畅销商品</a><li>
+                                        <li><a title="Best sellers" href="#youhui">优惠商品</a></li>
                                         <li><a title="Our stores" href="#">实体商店</a></li>
                                         <li><a title="Contact us" href="#">联系我们</a></li>
                                         <li><a title="Sitemap" href="#">站点地图</a></li>

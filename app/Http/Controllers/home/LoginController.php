@@ -30,7 +30,6 @@ class LoginController extends Controller
             //获取用户输入的账号和密码
             $username = request('username');
             $password = request('password');
-           
 
             $data = User::where(compact('username'))->first();
 

@@ -57,7 +57,7 @@
         var $this = $(this),
             finalDate = $(this).data('countdown');
         $this.countdown(finalDate, function(event) {
-            $this.html(event.strftime('<span class="cdown days"><span class="time-count">%-D</span> <p>Days</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>Hour</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>Min</p></span> <span class="cdown second"> <span><span class="time-count">%S</span> <p>Sec</p></span>'));
+            $this.html(event.strftime('<span class="cdown days"><span class="time-count">%-D</span> <p>天</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>小时</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>分</p></span> <span class="cdown second"> <span><span class="time-count">%S</span> <p>秒</p></span>'));
         });
     });
 
@@ -217,10 +217,10 @@
             var newVal = parseFloat(oldValue) + 1;
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
         $button.parent().find("input").val(newVal);

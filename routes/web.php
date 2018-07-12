@@ -49,6 +49,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 	// 定义热卖商品
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
+	// 商品减价
+	Route::any('/admin/ajaxuct','admin\GoodsdetailController@ajaxuct');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -98,8 +100,8 @@ Route::post('/home/logins','home\LoginController@login');
  *
  * 前台路由组
  */
-
-Route::group(['middleware'=>'homelogin'],function(){
+// 'middleware'=>'homelogin'
+Route::group([],function(){
 
 	// 前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');

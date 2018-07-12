@@ -37,12 +37,11 @@
 	                                        <a href="#">
 	                                            <img src="{{$goods->spec[0]->goods_pic}}" alt="">
 	                                        </a>
+	                                        @if($goods->goods_hot == '2')
 	                                        <span class="sale-box">
 	                                            <span class="sale">热销</span>
 	                                        </span>
-	                                        <span class="new-box">
-	                                            <span class="new">新品上市</span>
-	                                        </span>
+	                                        @endif
 	                                    </div>
 	                                </div>
 	                                <!-- single-product-end -->
@@ -55,12 +54,11 @@
 	                                            <a href="#">
 	                                                <img src="{{$v->goods_pic}}" alt="">
 	                                            </a>
-	                                            <span class="sale-box">
-	                                                <span class="sale">热销</span>
-	                                            </span>
-	                                            <span class="new-box">
-	                                                <span class="new">新品上市</span>
-	                                            </span>
+	                                            @if($goods->goods_hot == '2')
+		                                        <span class="sale-box">
+		                                            <span class="sale">热销</span>
+		                                        </span>
+		                                        @endif
 	                                        </div>
 	                                    </div>
 	                                    <!-- single-product-end -->
@@ -72,9 +70,22 @@
 	                    <div class="col-md-7 col-xs-12 col-sm-7">
 	                        <div class="product-details-info">
 	                            <h5 class="product-title">{{$goods->goods_name}}</h5>
+	                        <form action="/home/cart/{{$goods->goods_id}}" method='POST'>
+	                        	{{ csrf_field() }}
 	                            <div class="price-box">
-	                                <span class="price">￥{{$goods->goods_price}}</span>
-	                                <span class="old-price">￥70.00</span>
+	                                @if($goods->goods_preferential != $goods->goods_price)
+                                    <span class="price">
+                                        ￥{{$goods->goods_preferential}}
+                                        <input type="hidden" name="new_price">
+                                    </span>
+                                    <span class="old-price">
+                                        ￥{{$goods->goods_price}}
+                                    </span>
+                                    @else
+                                    <span class="price">
+                                        ￥{{$goods->goods_price}}
+                                    </span>
+                                    @endif
 	                            </div>
 	                            <div class="rating">
                                     <a class="add-wishlist" href="#" title="加入我的收藏">
@@ -86,8 +97,6 @@
 	                                <p>{{$goods->goods_info}}
 	                                </p>
 	                            </div>
-	                        <form action="/home/cart/{{$goods->goods_id}}" method='POST'>
-	                        	{{ csrf_field() }}
 	                            <div class="add-cart">
 	                            	<span>尺码:</span>
 	                            	@foreach($size as $k=>$v)
@@ -109,10 +118,11 @@
 	                            <div class="add-cart">
 	                                <p class="quantity cart-plus-minus">
 	                                    <label>购买数量</label>
-	                                    <input type="text" value="1" name="goods_number">
+	                                    <input type="text" value="1" name="num">
 	                                </p>
 	                                <div class="shop-add-cart">
-	                                    <button>加入购物车</button>
+	                                    <button title="请选择颜色和尺码">加入购物车</button>
+	                                    <button style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
 	                                </div>
 	                            </div>
 	                        </form>
@@ -205,7 +215,7 @@
                 	@foreach($related as $k=>$v)
                     <div class="col-md-12">
                         <div class="single-brand">
-                            <a href="#">
+                            <a href="/goodsdetail/{{$v->goods_id}}">
                                 <img src="{{$v->spec[0]->goods_pic}}" alt="{{$v->goods_name}}" title="{{$v->goods_name}}" />
                             </a>
                         </div>
@@ -225,14 +235,11 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="shop-left-col wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
                     <div class="content-box">
-                        <h2>Categories</h2>
+                        <h2>云商城-广告</h2>
                         <ul>
                             <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
                                 <label class="check-label">
-                                    <a href="#">Cloths (13)</a>
+                                    <a href="#"></a>
                                 </label>
                             </li>
                         </ul>
@@ -250,7 +257,7 @@
                                     	<style>li{float:left;margin:2px;}</style>
                                         <li role="presentation" class="active"><a class="btn btn-info" href="#gried_view" role="tab" data-toggle="tab" title="商品详情">商品详情</a>
                                         </li>
-                                        <li role="presentation"><a href="#list_view" role="tab" data-toggle="tab" title="商品评价" class="btn btn-primary">商品评价<span class="badge">4</span></a>
+                                        <li role="presentation"><a href="#list_view" role="tab" data-toggle="tab" title="商品评价" class="btn btn-primary">累计评价<span class="badge">125</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -264,6 +271,38 @@
                                         <div role="tabpanel" class="tab-pane active fade in" id="gried_view">
                                             <div class="col-md-12 col-sm-12 col-xs-12 mar-bot">
                                                 <!-- single-product-start -->
+                                                <div class="single-product" style="clear:both;">
+                                                	<table class="table table-hover">
+ 														<tr>
+ 															<td>尺码:</td>
+ 															<td>
+ 																@foreach($size as $k=>$v)
+			                                                		<span>{{$v}}&nbsp;&nbsp;</span>
+			                                                	@endforeach
+ 															</td>
+ 														</tr>
+ 														<tr>
+ 															<td>颜色:</td>
+ 															<td>
+ 																@foreach($color as $k=>$v)
+			                                                		<span>{{$v}}&nbsp;&nbsp;</span>
+			                                                	@endforeach
+ 															</td>
+ 														</tr>
+ 														<tr>
+ 															<td>适用场景:</td>
+ 															<td>
+			                                                	<span>日常</span>
+ 															</td>
+ 														</tr>
+ 														<tr>
+ 															<td>适用季节:</td>
+ 															<td>
+			                                                	<span>四季</span>
+ 															</td>
+ 														</tr>
+													</table>
+                                                </div>
                                                 <div class="single-product">
                                                 	<style>
                                                 		p{
@@ -281,62 +320,175 @@
                                         <div role="tabpanel" class="tab-pane fade" id="list_view">
                                             <div class="list-view">
                                                 <div class="row">
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/1.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
                                                         </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
                                                     </div>
                                                 </div>
                                             </div>

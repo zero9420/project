@@ -35,6 +35,10 @@
 					<dd><a href="#">我的评价</a></dd>
 				</dl>
 				<dl>
+					<dt>博客管理</dt>
+					<dd><a href="/home/blog">我的博客</a></dd>
+				</dl>
+				<dl>
 					<dt>客户服务</dt>
 					<dd><a href="/home/apply">退货申请</a></dd>
 					<dd><a href="#">退货/退款记录</a></dd>

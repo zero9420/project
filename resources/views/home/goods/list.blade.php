@@ -131,9 +131,11 @@
                                                         <a href="/goodsdetail/{{$v->goods_id}}">
                                                             <img src="{{$pic[0]->goods_pic}}" alt="" />
                                                         </a>
+                                                        @if($v->goods_hot == '2')
                                                         <span class="sale-box">
                                                             <span class="sale">热销</span>
                                                         </span>
+                                                        @endif
                                                     </div>
                                                     <div class="single-product-content">
                                                         <div class="product-title">
@@ -142,15 +144,20 @@
                                                             </h5>
                                                         </div>
                                                         <div class="rating">
-                                                            <div class="star star-on"></div>
-                                                            <div class="star star-on"></div>
-                                                            <div class="star star-on"></div>
-                                                            <div class="star star-on"></div>
-                                                            <div class="star"></div>
                                                         </div>
                                                         <div class="price-box">
-                                                            <span class="price">￥{{$v->goods_price}}</span>
-                                                            <span class="old-price">￥70.00</span>
+                                                            @if($v->goods_preferential != $v->goods_price)
+                                                            <span class="price">
+                                                                ￥{{$v->goods_preferential}}
+                                                            </span>
+                                                            <span class="old-price">
+                                                                ￥{{$v->goods_price}}
+                                                            </span>
+                                                            @else
+                                                            <span class="price">
+                                                                ￥{{$v->goods_price}}
+                                                            </span>
+                                                            @endif
                                                         </div>
                                                         <div class="product-action">
                                                             <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
@@ -189,12 +196,11 @@
                                                                     <a href="/goodsdetail/{{$v->goods_id}}">
                                                                         <img src="{{$pic[0]->goods_pic}}" alt="" />
                                                                     </a>
+                                                                    @if($v->goods_hot == '2')
                                                                     <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
+                                                                        <span class="sale">热销</span>
                                                                     </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                             <!-- single-product-end -->
@@ -208,16 +214,19 @@
                                                                             <a href="/goodsdetail/{{$v->goods_id}}">{{$v->goods_name}}</a>
                                                                         </h5>
                                                                     </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
                                                                     <div class="price-box">
-                                                                        <span class="price">￥{{$v->goods_price}}</span>
-                                                                        <span class="old-price">￥70.00</span>
+                                                                        @if($v->goods_preferential != $v->goods_price)
+                                                                        <span class="price">
+                                                                        ￥{{$v->goods_preferential}}
+                                                                        </span>
+                                                                        <span class="old-price">
+                                                                            ￥{{$v->goods_price}}
+                                                                        </span>
+                                                                        @else
+                                                                        <span class="price">
+                                                                            ￥{{$v->goods_price}}
+                                                                        </span>
+                                                                        @endif
                                                                     </div>
                                                                     <p class="product-desc">{{$v->goods_info}}
                                                                     </p>
@@ -314,8 +323,18 @@
                                 <div class="product-details-info">
                                     <h5 class="product-title">{{$v->goods_name}}</h5>
                                     <div class="price-box">
-                                        <span class="price">￥{{$v->goods_price}}</span>
-                                        <span class="old-price">￥70.00</span>
+                                        @if($v->goods_preferential != $v->goods_price)
+                                        <span class="price">
+                                            ￥{{$v->goods_preferential}}
+                                        </span>
+                                        <span class="old-price">
+                                            ￥{{$v->goods_price}}
+                                        </span>
+                                        @else
+                                        <span class="price">
+                                            ￥{{$v->goods_price}}
+                                        </span>
+                                        @endif
                                     </div>
                                     <div class="rating">
                                         <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
@@ -354,10 +373,11 @@
                                     <div class="add-cart">
                                         <p class="quantity cart-plus-minus">
                                             <label>购买数量</label>
-                                            <input type="text" value="1" name="goods_number">
+                                            <input type="text" value="1" name="num">
                                         </p>
                                         <div class="shop-add-cart">
                                             <button>加入购物车</button>
+                                            <button style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
                                         </div>
                                     </div>
                                 </form>

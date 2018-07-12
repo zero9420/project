@@ -108,7 +108,7 @@
                         <td class=" ">
                             {{$v->cate->cate_name}}
                         </td>
-                        <td class=" ">
+                        <td class=" " id="price_{{$v->goods_id}}">
                             {{$v->goods_price}}
                         </td>
                         <style>
@@ -118,8 +118,8 @@
                             }
                         </style>
                         <td class=" ">
-                            <a href="javascript:void(0)" onclick="uct({{$v->goods_id}})" class="preferential" title="优惠5%">-</a><span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential*100}}</span>%
-                            <a id="+2_{{$v->goods_id}}" onclick="add({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="涨价5%">+</a>
+                            <span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential}}</span>
+                            <a onclick="uct({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="降价10%">--</a>
                         </td>
                         <td class=" ">
                             {{$v->goods_sales}}
@@ -244,15 +244,42 @@
         // 优惠商品 减价
         function uct($e){
             var id = $e;
-            var pres = parseInt($('#pre_'+id).text())/100;
-            var msg = "你确定减价吗??";
+            // 优惠力度
+            var jian = 0.9;
+            // 获取原价
+            var old_price = parseInt($('#price_'+id).text().trim());
+            // 获取原优惠
+            var o_pres = parseInt($('#pre_'+id).text().trim());
+            var msg = "你确定在原优惠的基础再次优惠10%吗??";
             var con = confirm(msg);
+            function accMul(arg1, arg2)
+            {
+
+                var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+                try { m += s1.split(".")[1].length } catch (e) { }
+
+                try { m += s2.split(".")[1].length } catch (e) { }
+
+                return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+            }
+            var n_pres = accMul(o_pres,jian);
             if(con){
-                if(pres == 1){
-                    alert('商品不能再减价了!');
-                } else {
-                    alert('1');
+                if(n_pres < 0){
+                    var n_pres = o_pres;
+                    alert('亲,商品不能白送啊!');
+                } else if (n_pres >= old_price) {
+                    var n_pres = old_price;
+                    alert('亲,优惠价不能大于原价!');
                 }
+                $.get('/admin/ajaxuct',{n_pres:n_pres,id:id},function(data){
+                        // console.log(data);
+                        if(data=='01'){
+                            $('#pre_'+id).text(n_pres);
+                        } else {
+                            alert('优惠失败!');
+                        }
+                    })
             }
         }
 
