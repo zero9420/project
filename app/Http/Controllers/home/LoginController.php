@@ -16,6 +16,11 @@ class LoginController extends Controller
     public function index()
     {
         // echo 123;
+        if(!empty(session('user_id'))){
+            
+            return redirect('/');
+          };
+
     	return view('home.login.login');
     }
     //登陆逻辑
@@ -33,14 +38,20 @@ class LoginController extends Controller
            
 
             $data = User::where(compact('username'))->first();
-
            if (!$data) {
              echo '<script>alert("用户名输入错误");location.href="/home/logins";</script>';
+               exit;
             }
               //判断密码
             // dd($data->password);
         if (!Hash::check($password, $data->password)) {
              echo '<script>alert("密码输入错误");location.href="/home/logins";</script>';
+            exit;
+        }
+
+        if(!$data->status==1){
+            echo '<script>alert("账号未激活");location.href="/home/logins";</script>';
+            exit;
         }
 
             // dump($data);
