@@ -12,7 +12,7 @@ class CartController extends Controller
      * 购物车模块
      */
     public function index()
-    {	
+    {
     	//渲染购物车
     	$data = Cart::all();
     	// dd($data);

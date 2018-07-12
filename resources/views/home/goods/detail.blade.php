@@ -121,7 +121,7 @@
 	                                    <input type="text" value="1" name="num">
 	                                </p>
 	                                <div class="shop-add-cart">
-	                                    <button title="请选择颜色和尺码">加入购物车</button>
+	                                    <button>加入购物车</button>
 	                                    <button style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
 	                                </div>
 	                            </div>

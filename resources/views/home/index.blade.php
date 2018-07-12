@@ -148,8 +148,6 @@
                         <div id="new" class="tab-pane fade in active">
                             <div class="tab-carousel">
                                 @foreach($goods as $k => $v)
-                                <form action="/home/cart/{{$v->goods_id}}" method="POST">
-                                    {{ csrf_field() }}
                                 <div class="col-md-12">
                                     <!-- single-product-start -->
                                     <div class="single-product">
@@ -185,10 +183,10 @@
                                                 </span>
                                                 @endif
                                             </div>
-                                            <div class="product-action">
-                                                <button class="btn btn-default add-cart" title="add to cart">
+                                            <div class="product-action"><!--
+                                                <button class="btn btn-default add-cart" title="加入购物车">
                                                     加入购物车
-                                                </button>
+                                                </button> -->
                                                 <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                                     <i class="fa fa-heart">
                                                     </i>
@@ -204,7 +202,6 @@
                                     </div>
                                     <!-- single-product-end -->
                                 </div>
-                                </form>
                                 @endforeach
                             </div>
                         </div>
@@ -364,7 +361,6 @@
         @php
         use \Illuminate\Support\Facades\DB;
         $res = DB::select('select * from shop_link ');
- 
         @endphp
         <div class="row">
             <div class="brands wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
@@ -493,7 +489,7 @@
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
                                     @endphp
-                                <form action="/home/cart" method='POST'>
+                                <form action="/home/cart/{{$v->goods_id}}" method='POST'>
                                     {{ csrf_field() }}
                                     <div class="add-cart">
                                         <span>尺码:</span>

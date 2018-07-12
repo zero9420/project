@@ -160,7 +160,7 @@
                                                             @endif
                                                         </div>
                                                         <div class="product-action">
-                                                            <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
+                                                            <!-- <button class="button btn btn-default add-cart" title="加入购物车" >加入购物车</button> -->
                                                             <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                                                 <i class="fa fa-heart"></i>
                                                             </a>
@@ -214,6 +214,8 @@
                                                                             <a href="/goodsdetail/{{$v->goods_id}}">{{$v->goods_name}}</a>
                                                                         </h5>
                                                                     </div>
+                                                                    <div class="product-action">
+                                                                    </div>
                                                                     <div class="price-box">
                                                                         @if($v->goods_preferential != $v->goods_price)
                                                                         <span class="price">
@@ -231,17 +233,17 @@
                                                                     <p class="product-desc">{{$v->goods_info}}
                                                                     </p>
                                                                     <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
+                                                                        <!-- <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button> -->
                                                                         <a class="add-wishlist" href="#" title="加入我的收藏">
                                                                             <i class="fa fa-heart"></i>
                                                                         </a>
                                                                         <a class="quick-view" href="javascript:void(0)" title="快速查看商品详情"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
                                                                             <i class="fa fa-search"></i>
                                                                         </a>
-                                                                    </div>
+                                                                    </div><!--
                                                                     <div class="availability">
                                                                         <span>有货</span>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                             <!-- single-product-end -->
@@ -350,7 +352,7 @@
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
                                     @endphp
-                                <form action="/home/cart" method='POST'>
+                                <form action="/home/cart/{{$v->goods_id}}" method='POST'>
                                     {{ csrf_field() }}
                                     <div class="add-cart">
                                         <span>尺码:</span>
