@@ -22,7 +22,7 @@
 				<thead>
 
 					<tr class="tab-0">
-						<th class="tab-1"><input type="checkbox"  name="s_all" class="s_all tr_checkmr" id="s_all_h">全选
+						<th class="tab-1"><input type="checkbox"  name="s_all" class="s_all tr_checkmr" id="s_all_h"></th>
 						<th class="tab-2">商品</th>
 						<th class="tab-3">商品信息</th>
 						<th class="tab-4">单价</th>
@@ -48,33 +48,33 @@
 						@foreach($data as $k=>$v)
 						<th><input type="checkbox" checked style="margin-left:10px; float:left"></th>
 						<th class="tab-th-1">
-							<a href="#"><img src="images/shangpinxiangqing/X1.png" width="100%" alt=""></a>
+							<a href="#"><img src="{{$v->goods_pic}}" alt=""></a>
 
-							<a href="#" class="tab-title">{{$v->title}} </a>
+							<a href="#" class="tab-title">{{$v->goods_name}} </a>
 						</th>
 						<th>
-							<p>颜色：{{$v->colour}}</p>
-							<p>规格：{{$v->size}}</p>
+							<p>颜色：{{$v->goods_color}}</p>
+							<p>规格：{{$v->goods_size}}</p>
 						</th>
 						<th>
 
-							<p class="price">{{$v->price}}</p>
+							<p class="price">{{$v->goods_price}}</p>
 						</th>
 							<th class="tab-th-2">
 								<input type="button" value="-" class="minus"
-								style="width:20px;height:30px;"/>
+								style="width:20px;height:30px;" id="<?php echo $v->id ?>"/>
 								
-								<input type="text"  name="quantity" value="1" class="qty" 
+								<input type="text"  name="quantity" value="{{$v->num}}" class="qty" 
 
 								 style="width:50px;height:25px; text-align:center;"/>
 								<input type="button" value="+" class="plus" style="width:20px;height:30px;" id="<?php echo $v->id ?>" />
 								</th>
 							</div>
 					
-						<th class="xiaoji">{{$v->price}}</th>
+						<th class="xiaoji">{{$v->goods_price}}</th>
 						<th><a href="javascript:void(0)" class="remove" ids="{{$v->id}}">删除</a></th>
 					</tr>
-					<?php  $total +=$v->num*$v->price ?>
+					<?php  $total +=$v->num*$v->goods_price ?>
 					@endforeach
 				</tbody>
 			</table>
@@ -96,7 +96,7 @@
 				<p>共有 <em class="red pc-shop-shu"></em> 款商品，总计（不含运费）</p>
 				<span class="total"><?php echo $total ?></span>
 
-				<a href="javascript:void(0)" id="fukuan">去付款</a>
+				<a href="/home/jsy" id="fukuan">去付款</a>
 			</div>
 		</div>
 	</div>
@@ -137,9 +137,6 @@
 
 	//获取数量
 
-	var id = $(this).attr('id');
-	alert(id);
-
 	var num = $(this).prev().val();
 	num++;
 	//加完之后让数量发生改变
@@ -157,6 +154,18 @@
 
 			}
 		 // var pc = $('.price').text();
+
+
+
+		 //获取商品数量
+		 var num = $(this).prev().val();
+		 // alert(num);
+		 //获取商品id
+		 var id = $(this).attr('id');
+		 $.get('/home/cart/jiajian',{id:id,num:num},function($data){
+
+		 })
+
 		var pc = $(this).parents('tr').find('.price').text();
 		// alert(pc);
 		//加完之后让小计发生改变
@@ -205,11 +214,14 @@
 		}
 		$(this).parents('tr').find('.xiaoji').text(accMul(pc,mins));
 			
-			var jianshuliang = $(this).next().val();
-			
-			$.get('/home/cart/jiajian',{num:jianshuliang},function($data){
+			var num = $(this).next().val();
+			// alert(num);
+			 //获取商品id
+		 var id = $(this).attr('id');
+		 // alert(id);
+		 $.get('/home/cart/jiajian',{id:id,num:num},function($data){
 
-			});
+		 })
 			// alert(jianshuliang);
 
 			totals();
@@ -266,7 +278,9 @@
 		if(!rs) return;
 
 		//获取id
-		var id = $(this).attr('ids');
+		var idd = $(this).attr('ids');
+		var id=parseInt(idd);
+		// alert(id);
 		var ts = $(this);
 		// alert(id);
 		
