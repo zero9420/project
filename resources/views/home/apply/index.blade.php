@@ -32,6 +32,10 @@
 					<dd><a href="#">我的订单</a></dd>
 					<dd><a href="/home/collection">我的收藏</a></dd>
 					<dd><a href="/home/userinfo">个人中心</a></dd>
+
+					<dd><a href="/home/order">我的订单</a></dd>
+					<dd><a href="#">我的收藏</a></dd>
+					<dd><a href="#">账户安全</a></dd>
 					<dd><a href="#">我的评价</a></dd>
 				</dl>
 				<dl>
@@ -49,7 +53,7 @@
 		<div class="member-right fr">
 			<div class="member-head">
 				<div class="member-heels fl"><h2>退货申请</h2></div>
-				
+
 			</div>
 			<div class="member-border">
 				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span> <span><b>订单状态：</b><i class="reds">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</i></span></div>
@@ -67,17 +71,17 @@
 					<ul>
 						<li>
 							<div class="member-circle clearfix">
-								
+
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
 										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
 										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
 										<span class="gr3">X1</span>
 									</div>
-									
+
 									<div class="ap3 fl  tk" id="ajax"><a href="javascript:void(0)">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
 								</div>
-							
+
 								<!-- <div class="member-apply clearfix">
 									<div class="ap1 fl">
 										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
@@ -112,7 +116,7 @@
 
 });
 <script>
-	
+
 	$.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -120,14 +124,14 @@
 });
 
 
-	
+
 	$('#ajax').click(function(){
-	
+
 		var ids = 1;
 
 		$.get('/home/ajax',{ids:ids},function(data){
 
-			
+
 			console.log(data);
 
 		})
