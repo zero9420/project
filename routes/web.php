@@ -131,12 +131,12 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 
 	// 前台订单页
-	Route::any('/home/order','home\OrderController@order');
+	Route::resource('/home/order','home\OrderController');
 
 
 
 	// 前台结算页
-	Route::any('/home/jsy','home\JsyController@jsy');
+	Route::resource('/home/jsy','home\JsyController');
 
 	// 前台退款
 	Route::any('/home/ajax','home\IndexController@ajax');
