@@ -71,7 +71,7 @@
 	                 	@php
 
 	                 		$arr =  json_decode(session('gid'));
-
+							
 	                 	@endphp
 	                    <div class="col-md-7 col-xs-12 col-sm-7">
 	                        <div class="product-details-info">
