@@ -23,7 +23,7 @@
 				<div class="f1">
 
 				<p>用户名：<div></div>{{$res->info_nickname}}</p>
-					
+
 				</div>
 			</div>
 			<div class="member-lists">
