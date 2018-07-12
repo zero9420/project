@@ -70,8 +70,11 @@
 	                    </div>
 	                 	@php
 
-	                 		$arr =  json_decode(session('gid'));
-							
+							if(!empty(session('gid'))){
+								$arr =  json_decode(session('gid'));
+							} else {
+								$arr[] = 0;
+							}
 	                 	@endphp
 	                    <div class="col-md-7 col-xs-12 col-sm-7">
 	                        <div class="product-details-info">
