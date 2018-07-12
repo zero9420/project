@@ -208,20 +208,5 @@ class IndexController extends Controller
 	}
 
 
-	/**
-	 * 个人中心我的收藏
-	 */
-	public function collection()
-	{
-
-		// 查找个人信息ID
-		$user = session('user_id');
-		
-		$res = Info::where('info_cid',$user)->first();
-		
-
-		return view('home.collection.index',['res'=>$res]);
-
-		
-	}
+	
 }
