@@ -352,15 +352,6 @@
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
                                     @endphp
-                                    <div class="add-cart">
-                                        @if (count($errors) > 0)
-                                            <span id="form-error" style="border:1px solid red;background:#eb979b;padding:2px;border-radius:5px;">
-                                            @foreach ($errors->all() as $error)
-                                                {{ $error }}
-                                            @endforeach
-                                            </span>
-                                        @endif
-                                    </div>
                                 <form action="/home/cart/{{$v->goods_id}}" method='POST'>
                                     {{ csrf_field() }}
                                     <div class="add-cart">
@@ -387,8 +378,8 @@
                                             <input type="text" value="1" name="num">
                                         </p>
                                         <div class="shop-add-cart">
-                                            <button>加入购物车</button>
-                                            <button style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
+                                            <button class="addCart">加入购物车</button>
+                                            <button class="addCart" style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
                                         </div>
                                     </div>
                                 </form>

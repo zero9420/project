@@ -100,8 +100,8 @@ Route::post('/home/logins','home\LoginController@login');
  *
  * 前台路由组
  */
-
-Route::group(['middleware'=>'homelogin'],function(){
+// 'middleware'=>'homelogin'
+Route::group([],function(){
 
 	// 前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');
@@ -156,4 +156,6 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 	// 个人中心商品收藏删除
 	Route::any('/home/goods','home\CollectController@goods');
+	// 商品评价
+	Route::resource('/home/eval','home\EvaluaController');
 });
