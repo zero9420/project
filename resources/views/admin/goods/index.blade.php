@@ -265,7 +265,7 @@
             }
             var n_pres = accMul(o_pres,jian);
             if(con){
-                if(n_pres < 0){
+                if(n_pres <= 0){
                     var n_pres = o_pres;
                     alert('亲,商品不能白送啊!');
                 } else if (n_pres >= old_price) {

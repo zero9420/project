@@ -92,7 +92,7 @@ class GoodsController extends Controller
         }
 
         // 判断优惠
-        if(empty($data['goods_preferential'])){
+        if(empty($data['goods_preferential']) || $data['goods_preferential']=="0"){
             $data['goods_preferential'] = $data['goods_price'];
         }
         if($data['goods_preferential'] > $data['goods_price']){
@@ -235,7 +235,7 @@ class GoodsController extends Controller
         ]);
         $res = $request->except('_token','_method','goods_pic');
         // 判断优惠
-        if(empty($data['goods_preferential'])){
+        if(empty($data['goods_preferential']) || $data['goods_preferential']=="0"){
             $data['goods_preferential'] = $data['goods_price'];
         }
         if($data['goods_preferential'] > $data['goods_price']){
