@@ -191,7 +191,7 @@
                                                     <i class="fa fa-heart">
                                                     </i>
                                                 </a>
-                                                <a class="quick-view" href="javascript:void(0)" title="快速查看商品详情" data-toggle="modal"
+                                                <a class="quick-view" href="#" title="快速查看商品详情" data-toggle="modal"
                                                 data-target="#myModal{{$v->goods_id}}"
                                                 >
                                                     <i class="fa fa-search">
@@ -462,9 +462,9 @@
                                 <div class="product-details-info">
                                     <h5 class="product-title">{{$v->goods_name}}</h5>
                                     <div class="price-box">
-                                        @if($v->goods_preferential != 0)
+                                        @if($v->goods_preferential != $v->goods_price)
                                         <span class="price">
-                                            ￥{{$v->goods_price*((100-$v->goods_preferential)/100)}}
+                                            ￥{{$v->goods_preferential}}
                                         </span>
                                         <span class="old-price">
                                             ￥{{$v->goods_price}}
@@ -489,6 +489,15 @@
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
                                     @endphp
+                                    <div class="add-cart">
+                                        @if (count($errors) > 0)
+                                            <span id="form-error" style="border:1px solid red;background:#eb979b;padding:2px;border-radius:5px;">
+                                            @foreach ($errors->all() as $error)
+                                                {{ $error }}
+                                            @endforeach
+                                            </span>
+                                        @endif
+                                    </div>
                                 <form action="/home/cart/{{$v->goods_id}}" method='POST'>
                                     {{ csrf_field() }}
                                     <div class="add-cart">

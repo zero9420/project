@@ -18,14 +18,6 @@ class CartController extends Controller
         if (empty($user_id)) {
             echo '<script>alert("请登入账号");location.href="/home/logins";</script>';
         }
-        $this->validate($request, [
-            'goods_color' => 'required',
-            'goods_size'=>'required',
-        ],[
-            'goods_color.required'=>'商品颜色不能为空',
-            'goods_size.required'=>'商品价格不能为空',
-
-        ]);
 
     	//渲染购物车
     	$data = Cart::where('user_id',$user_id)->get();

@@ -352,6 +352,15 @@
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
                                     @endphp
+                                    <div class="add-cart">
+                                        @if (count($errors) > 0)
+                                            <span id="form-error" style="border:1px solid red;background:#eb979b;padding:2px;border-radius:5px;">
+                                            @foreach ($errors->all() as $error)
+                                                {{ $error }}
+                                            @endforeach
+                                            </span>
+                                        @endif
+                                    </div>
                                 <form action="/home/cart/{{$v->goods_id}}" method='POST'>
                                     {{ csrf_field() }}
                                     <div class="add-cart">

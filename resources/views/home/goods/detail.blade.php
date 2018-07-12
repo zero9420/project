@@ -98,6 +98,15 @@
 	                                </p>
 	                            </div>
 	                            <div class="add-cart">
+	                            	@if (count($errors) > 0)
+									    <span id="form-error" style="border:1px solid red;background:#eb979b;padding:2px;border-radius:5px;">
+							            @foreach ($errors->all() as $error)
+							                {{ $error }}
+							            @endforeach
+									    </span>
+									@endif
+	                            </div>
+	                            <div class="add-cart">
 	                            	<span>尺码:</span>
 	                            	@foreach($size as $k=>$v)
 	                            	<a href="javascript:void(0)">
@@ -504,5 +513,9 @@
     </div>
 </div>
 <!-- shop-area-end -->
+
+@endsection
+
+@section('js')
 
 @endsection

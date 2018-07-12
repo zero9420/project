@@ -233,6 +233,13 @@
     <script src="/home/bs/js/plugins.js"></script>
     <!-- main js -->
     <script src="/home/bs/js/main.js"></script>
+    <script>
+        setTimeout(function(){
+
+            $('#form-error').fadeOut("slow");;
+
+       },1800);
+    </script>
     @section('js')
 
 

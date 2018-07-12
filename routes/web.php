@@ -100,8 +100,8 @@ Route::post('/home/logins','home\LoginController@login');
  *
  * 前台路由组
  */
-// 'middleware'=>'homelogin'
-Route::group([],function(){
+
+Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');
