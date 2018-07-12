@@ -145,14 +145,15 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 商城快讯
 	Route::any('/home/express','home\ExpressController@express');
 
-
-	//购物车加减ajax
-	Route::any('/home/cart/jiajian','home\CartController@jiajian');
-	//购物车总价ajax
-	Route::any('/home/cart/total','home\CartController@total');
-
-
 	// 个人中心我的收藏
-	Route::get('/home/collection','home\IndexController@collection');
+	Route::any('/home/collection','home\CollectController@index');
 
+	// ajax商品关注收藏
+	Route::any('/home/collect','home\CollectController@collect');
+
+	// ajax商品取消收藏
+	Route::any('/home/back','home\CollectController@back');
+
+	// 个人中心商品收藏删除
+	Route::any('/home/goods','home\CollectController@goods');
 });

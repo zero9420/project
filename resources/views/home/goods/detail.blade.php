@@ -3,6 +3,7 @@
 @section('title',$title)
 
 @section('content')
+<script src="/js/jquery-3.2.1.min.js"></script>
 <div class="container">
 	<div class="content">
 	    <div class="header">
@@ -67,6 +68,11 @@
 	                            </div>
 	                        </div>
 	                    </div>
+	                 	@php
+
+	                 		$arr =  json_decode(session('gid'));
+
+	                 	@endphp
 	                    <div class="col-md-7 col-xs-12 col-sm-7">
 	                        <div class="product-details-info">
 	                            <h5 class="product-title">{{$goods->goods_name}}</h5>
@@ -87,12 +93,21 @@
                                     </span>
                                     @endif
 	                            </div>
+	                            @if(  in_array( $goods->goods_id,$arr))
+	                            <div class="rating">
+                                    <a class="add-wishlist" href="#" title="取消我的收藏" style="color:#ff6464;">
+                                        <i class="fa fa-heart"></i>
+                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sto({{$goods->goods_id}})"  >取消收藏 </span>
+                                    </a>
+	                            </div>
+	                            @else
 	                            <div class="rating">
                                     <a class="add-wishlist" href="#" title="加入我的收藏">
                                         <i class="fa fa-heart"></i>
-                                        <span>收藏宝贝</span>
+                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sta({{$goods->goods_id}})" >收藏宝贝 </span>
                                     </a>
 	                            </div>
+	                            @endif
 	                            <div class="short-description">
 	                                <p>{{$goods->goods_info}}
 	                                </p>
@@ -514,8 +529,50 @@
 </div>
 <!-- shop-area-end -->
 
+
 @endsection
 
 @section('js')
+<script>
+
+	// 收藏宝贝
+	function sta($id){
+
+		var id = $id;
+
+		$.get('/home/collect',{id:id},function(data){
+
+
+		})
+
+
+	}
+
+
+	// 取消收藏
+	function sto($id){
+
+		var id = $id;
+
+
+		$.get('/home/back',{id:id},function(data){
+
+
+
+		})
+
+	}
+
+	$('.collect').click(function(){
+
+		setTimeout(function(){
+
+		location.href="";
+
+
+		},500);
+	})
+
+</script>
 
 @endsection

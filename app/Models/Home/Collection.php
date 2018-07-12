@@ -27,8 +27,10 @@ class Collection extends Model
 
     	'collection_id',
     	'collection_gid',
-    	'collection_price',
-    	'collection_gpic',
+    	'collection_cid',
     	
 	];
+
+
+   
 }
