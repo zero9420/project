@@ -69,6 +69,7 @@
 	                        </div>
 	                    </div>
 	                 	@php
+
 							if(!empty(session('gid'))){
 								$arr =  json_decode(session('gid'));
 							} else {

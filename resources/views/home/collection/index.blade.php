@@ -78,7 +78,7 @@
 										<ul>
 											@foreach($data as $k=>$v)
 												
-											<li class="dpic" >
+											<li class="dpic">
 												<a href="/goodsdetail/{{$v->goods_id}}"><img src="{{$v->spec[0]->goods_pic}}" title="" width="125" height="125"></a>
 												<p>￥{{$v->goods_price}}</p>
 												<input type="checkbox" class="check" name="gid[]" value='{{$v->goods_id}}'>
