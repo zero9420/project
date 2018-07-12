@@ -96,21 +96,30 @@
                                     </span>
                                     @endif
 	                            </div>
-	                            @if(  in_array( $goods->goods_id,$arr))
-	                            <div class="rating">
-                                    <a class="add-wishlist" href="#" title="取消我的收藏" style="color:#ff6464;">
-                                        <i class="fa fa-heart"></i>
-                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sto({{$goods->goods_id}})"  >取消收藏 </span>
-                                    </a>
-	                            </div>
+	                            @if( in_array(0,$arr) )
+		                            <div class="rating">
+	                                    <a class="" href="/home/logins" title="加入我的收藏">
+	                                        <i class="fa fa-heart"></i>
+	                                        <span>收藏宝贝 </span>
+	                                    </a>
+		                            </div>
 	                            @else
-	                            <div class="rating">
-                                    <a class="add-wishlist" href="#" title="加入我的收藏">
-                                        <i class="fa fa-heart"></i>
-                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sta({{$goods->goods_id}})" >收藏宝贝 </span>
-                                    </a>
-	                            </div>
-	                            @endif
+		                            @if(  in_array( $goods->goods_id,$arr))
+		                            <div class="rating">
+	                                    <a class="add-wishlist" href="#" title="取消我的收藏" style="color:#ff6464;">
+	                                        <i class="fa fa-heart"></i>
+	                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sto({{$goods->goods_id}})"  >取消收藏 </span>
+	                                    </a>
+		                            </div>
+		                            @else
+		                            <div class="rating">
+	                                    <a class="add-wishlist" href="#" title="加入我的收藏">
+	                                        <i class="fa fa-heart"></i>
+	                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sta({{$goods->goods_id}})" >收藏宝贝 </span>
+	                                    </a>
+		                            </div>
+		                            @endif
+		                        @endif
 	                            <div class="short-description">
 	                                <p>{{$goods->goods_info}}
 	                                </p>
