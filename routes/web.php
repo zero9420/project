@@ -106,8 +106,7 @@ Route::post('home/email/edit','home\RetrieveController@edit');
  *
  * 前台路由组
  */
-// 'middleware'=>'homelogin'
-Route::group([],function(){
+Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台个人中心
 	Route::get('/home/userinfo','home\IndexController@UserInfo');

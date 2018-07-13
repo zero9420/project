@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\CateController;
 use App\Models\Admin\Cate;
 use App\Models\Admin\Goods;
+use App\Models\Home\Cart;
 use App\Models\Admin\Position;
 use DB;
 
@@ -34,7 +35,6 @@ class GoodslistController extends Controller
             }
 
         }
-
         // 热卖商品
         $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
 		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods]);

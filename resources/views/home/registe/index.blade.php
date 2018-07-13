@@ -23,7 +23,7 @@
 	<div class="center">
 		<div class="pc-fl-logo">
 			<h1>
-				<a href="/home/index"></a>
+				<a href="/"></a>
 			</h1>
 		</div>
 	</div>
@@ -81,7 +81,7 @@
 					</div>
 					<div class="pc-reg">
 
-						<a href="/home/login" class="red">已有账号 请登录</a>
+						<a href="/home/logins" class="red">已有账号 请登录</a>
 					</div>
 				</form>
 			</div>
