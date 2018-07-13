@@ -47,7 +47,7 @@ class AuthController extends Controller
         $res = Auth::paginate(1);
 
         return view('admin.auth.index',[
-            'title'=>'用户的列表页面',
+            'title'=>'管理员的列表页面',
             'res'=>$res
 
         ]);

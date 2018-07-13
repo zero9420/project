@@ -3,21 +3,31 @@
 @section('title',$title)
 
 @section('content')
+<!-- heading-banner-start -->
+<div class="heading-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="breadcrumb">
+                    <a title="返回首页" href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                    <span class="navigation-page">
+                        <span class="navigation-pipe">></span>
+                        <a href="/goodslist?id={{$goods->cate->cate_id}}"title="返回{{$goods->cate->cate_name}}">{{$goods->cate->cate_name}}</a>
+                        <span class="navigation-pipe">></span>
+                        <a href="javascript:void(0)">商品详情</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- heading-banner-end -->
+
+<!-- shop-detail-start -->
 <div class="container">
 	<div class="content">
-	    <div class="header">
-	        <a title="返回首页" href="/">
-	            <i class="icon-home"></i>
-	        </a>
-	        <span class=" ">
-	            <span class="navigation-pipe">></span>
-	            <a href="/goodslist" title="返回所有商品">所有商品</a>
-	        </span>
-	        <span class=" ">
-	            <span class="navigation-pipe">></span>
-	            <a href="/goodslist/{{$goods->cate->cate_id}}" title="返回{{$goods->cate->cate_name}}">{{$goods->cate->cate_name}}</a>
-	        </span>
-	    </div>
 	    <div class="body">
 	        <div class="product-details">
 	            <div class="container">
@@ -37,12 +47,11 @@
 	                                        <a href="#">
 	                                            <img src="{{$goods->spec[0]->goods_pic}}" alt="">
 	                                        </a>
+	                                        @if($goods->goods_hot == '2')
 	                                        <span class="sale-box">
 	                                            <span class="sale">热销</span>
 	                                        </span>
-	                                        <span class="new-box">
-	                                            <span class="new">新品上市</span>
-	                                        </span>
+	                                        @endif
 	                                    </div>
 	                                </div>
 	                                <!-- single-product-end -->
@@ -55,12 +64,11 @@
 	                                            <a href="#">
 	                                                <img src="{{$v->goods_pic}}" alt="">
 	                                            </a>
-	                                            <span class="sale-box">
-	                                                <span class="sale">热销</span>
-	                                            </span>
-	                                            <span class="new-box">
-	                                                <span class="new">新品上市</span>
-	                                            </span>
+	                                            @if($goods->goods_hot == '2')
+		                                        <span class="sale-box">
+		                                            <span class="sale">热销</span>
+		                                        </span>
+		                                        @endif
 	                                        </div>
 	                                    </div>
 	                                    <!-- single-product-end -->
@@ -69,26 +77,58 @@
 	                            </div>
 	                        </div>
 	                    </div>
+
 	                    <div class="col-md-7 col-xs-12 col-sm-7">
 	                        <div class="product-details-info">
 	                            <h5 class="product-title">{{$goods->goods_name}}</h5>
+	                        <form action="/home/cart/{{$goods->goods_id}}" method='POST'>
+	                        	{{ csrf_field() }}
 	                            <div class="price-box">
-	                                <span class="price">￥{{$goods->goods_price}}</span>
-	                                <span class="old-price">￥70.00</span>
+	                                @if($goods->goods_preferential != $goods->goods_price)
+                                    <span class="price">
+                                        ￥{{$goods->goods_preferential}}
+                                        <input type="hidden" name="new_price" value="{{$goods->goods_preferential}}">
+                                    </span>
+                                    <span class="old-price">
+                                        ￥{{$goods->goods_price}}
+                                        <input type="hidden" name="old_price" value="{{$goods->goods_price}}">
+                                    </span>
+                                    @else
+                                    <span class="price">
+                                        ￥{{$goods->goods_price}}
+                                        <input type="hidden" name="old_price" value="{{$goods->goods_price}}">
+                                        <input type="hidden" name="new_price" value="{{$goods->goods_price}}">
+                                    </span>
+                                    @endif
 	                            </div>
-	                            <div class="rating">
-	                                <div class="star star-on"></div>
-	                                <div class="star star-on"></div>
-	                                <div class="star star-on"></div>
-	                                <div class="star star-on"></div>
-	                                <div class="star"></div>
-	                            </div>
+	                            @if( empty(session('user_id')) )
+		                            <div class="rating">
+	                                    <a class="" href="/home/logins" title="加入我的收藏">
+	                                        <i class="fa fa-heart"></i>
+	                                        <span>收藏宝贝 </span>
+	                                    </a>
+		                            </div>
+	                            @else
+		                            @if(  in_array( $goods->goods_id,$arr) )
+		                            <div class="rating">
+	                                    <a class="add-wishlist" href="#" title="取消我的收藏" style="color:#ff6464;">
+	                                        <i class="fa fa-heart"></i>
+	                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sto({{$goods->goods_id}})"  >取消收藏 </span>
+	                                    </a>
+		                            </div>
+		                            @else
+		                            <div class="rating">
+	                                    <a class="add-wishlist" href="#" title="加入我的收藏">
+	                                        <i class="fa fa-heart"></i>
+	                                        <span class='collect' id="<?php echo $goods->goods_id ?>" onclick="sta({{$goods->goods_id}})" >收藏宝贝 </span>
+	                                    </a>
+		                            </div>
+		                            @endif
+		                        @endif
 	                            <div class="short-description">
 	                                <p>{{$goods->goods_info}}
 	                                </p>
 	                            </div>
-	                        <form action="/home/cart/{{$goods->goods_id}}" method='POST'>
-	                        	{{ csrf_field() }}
 	                            <div class="add-cart">
 	                            	<span>尺码:</span>
 	                            	@foreach($size as $k=>$v)
@@ -110,10 +150,11 @@
 	                            <div class="add-cart">
 	                                <p class="quantity cart-plus-minus">
 	                                    <label>购买数量</label>
-	                                    <input type="text" value="1" name="goods_number">
+	                                    <input type="text" value="1" name="num">
 	                                </p>
 	                                <div class="shop-add-cart">
-	                                    <button>加入购物车</button>
+	                                    <button class="addCart">加入购物车</button>
+	                                    <button class="addCart" style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
 	                                </div>
 	                            </div>
 	                        </form>
@@ -143,19 +184,19 @@
 	                            </style>
 	                            <div class="add-cart">
 	                            	<span>承诺:</span>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/qitian.png" alt="" title="满足七天退货的前提下,包邮商品需买家承担退货运费!">
 	                            		<span>七天退货</span>
 	                            	</a>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/dingdanxian.png" alt="" title="订单险">
 	                            		<span>订单险</span>
 	                            	</a>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/wuyoutuihuo.png" alt="" title="无忧退货">
 	                            		<span>无忧退货</span>
 	                            	</a>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/yunfeixian.png" alt="" title="运费险">
 	                            		<span>运费险</span>
 	                            	</a>
@@ -164,19 +205,19 @@
 	                            </div>
 	                            <div class="add-cart" style="margin-right: 20px;">
 	                            	<span >支付:</span>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/zhifubao.png" alt="" title="支付宝">
 	                            		<span>支付宝</span>
 	                            	</a>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/weixin.png" alt="" title="微信">
 	                            		<span>微信</span>
 	                            	</a>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/xinyongka.png" alt="" title="信用卡">
 	                            		<span>信用卡</span>
 	                            	</a>
-	                            	<a href="">
+	                            	<a href="javascript:void(0)">
 	                            		<img src="/home/bs/img/detail/mayihuabei.png" alt="" title="蚂蚁花呗">
 	                            		<span>蚂蚁花呗</span>
 	                            	</a>
@@ -189,6 +230,7 @@
 	    </div>
 	</div>
 </div>
+<!-- shop-detail-end -->
 
 <!-- brand-area-start 相关商品 -->
 <div class="brand-area">
@@ -206,7 +248,7 @@
                 	@foreach($related as $k=>$v)
                     <div class="col-md-12">
                         <div class="single-brand">
-                            <a href="#">
+                            <a href="/goodsdetail/{{$v->goods_id}}">
                                 <img src="{{$v->spec[0]->goods_pic}}" alt="{{$v->goods_name}}" title="{{$v->goods_name}}" />
                             </a>
                         </div>
@@ -226,14 +268,11 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="shop-left-col wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
                     <div class="content-box">
-                        <h2>Categories</h2>
+                        <h2>云商城-在线客服</h2>
                         <ul>
                             <li>
-                                <span class="checkit">
-                                    <input class="checkbox" type="checkbox" />
-                                </span>
                                 <label class="check-label">
-                                    <a href="#">Cloths (13)</a>
+                                    <a href="#"></a>
                                 </label>
                             </li>
                         </ul>
@@ -248,10 +287,10 @@
                                 <div>
                                     <!-- Nav tabs -->
                                     <ul class="btn-group">
-                                    	<style>li{float:left;margin:2px;}</style>
-                                        <li role="presentation" class="active"><a class="btn btn-info" href="#gried_view" role="tab" data-toggle="tab" title="商品详情">商品详情</a>
+                                    	<style>.lis{float:left;margin:2px;}</style>
+                                        <li role="presentation" class="active lis"><a class="btn btn-info" href="#gried_view" role="tab" data-toggle="tab" title="商品详情">商品详情</a>
                                         </li>
-                                        <li role="presentation"><a href="#list_view" role="tab" data-toggle="tab" title="商品评价" class="btn btn-primary">商品评价<span class="badge">4</span></a>
+                                        <li role="presentation" class="lis"><a href="#list_view" role="tab" data-toggle="tab" title="商品评价" class="btn btn-primary">累计评价<span class="badge">125</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -265,6 +304,38 @@
                                         <div role="tabpanel" class="tab-pane active fade in" id="gried_view">
                                             <div class="col-md-12 col-sm-12 col-xs-12 mar-bot">
                                                 <!-- single-product-start -->
+                                                <div class="single-product">
+                                                	<table class="table table-hover">
+ 														<tr>
+ 															<td>尺码:</td>
+ 															<td>
+ 																@foreach($size as $k=>$v)
+			                                                		<span>{{$v}}&nbsp;&nbsp;</span>
+			                                                	@endforeach
+ 															</td>
+ 														</tr>
+ 														<tr>
+ 															<td>颜色:</td>
+ 															<td>
+ 																@foreach($color as $k=>$v)
+			                                                		<span>{{$v}}&nbsp;&nbsp;</span>
+			                                                	@endforeach
+ 															</td>
+ 														</tr>
+ 														<tr>
+ 															<td>适用场景:</td>
+ 															<td>
+			                                                	<span>日常</span>
+ 															</td>
+ 														</tr>
+ 														<tr>
+ 															<td>适用季节:</td>
+ 															<td>
+			                                                	<span>四季</span>
+ 															</td>
+ 														</tr>
+													</table>
+                                                </div>
                                                 <div class="single-product">
                                                 	<style>
                                                 		p{
@@ -282,689 +353,175 @@
                                         <div role="tabpanel" class="tab-pane fade" id="list_view">
                                             <div class="list-view">
                                                 <div class="row">
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/1.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)" title="商品与描述完全不符,很不满意;">★☆☆☆☆</a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
                                                         </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/7.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)" title="商品实际和描述不符">★★☆☆☆</a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
                                                         </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/2.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)" title="商品与描述基本上一致">★★★☆☆</a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
                                                         </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/8.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)" title="商品与描述一致,但有一点瑕疵,比较满意">★★★★☆</a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
                                                         </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
+                                                        </div>
+                                                        <!-- shop-eval-end -->
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/3.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+                                                        <!-- shop-eval-start -->
+                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                                        	<div class="col-md-12">鞋子超级舒服，底子很软，不会磨脚，以后出门溜达不怕累啦</div>
+								                            <div class="col-md-12">
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)" title="商品和描述完全一致,太满意了">★★★★★</a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                                <div class="col-md-2" style="padding:5px;width:80px;">
+								                                    <a href="javascript:void(0)"><img src="/home/bs/img/brand/1.png" alt="" /></a>
+								                                </div>
+								                            </div>
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	<span>颜色:</span>红色<br/>
+                                                        	<span>尺码:</span>XL
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/9.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
+                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        	as********bc(匿名)
                                                         </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/1.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/10.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/5.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/11.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/6.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 top-mar">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-img">
-                                                                    <a href="#">
-                                                                        <img src="/home/bs/img/singlepro/12.jpg" alt="" />
-                                                                    </a>
-                                                                    <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
-                                                                    </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <!-- single-product-start -->
-                                                            <div class="single-product">
-                                                                <div class="single-product-content">
-                                                                    <div class="product-title">
-                                                                        <h5>
-                                                                            <a href="#">Fermentum dictum</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <span class="price">£50.00</span>
-                                                                        <span class="old-price">£70.00</span>
-                                                                    </div>
-                                                                    <p class="product-desc">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!
-                                                                    </p>
-                                                                    <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">Add to cart</button>
-                                                                        <a class="add-wishlist" href="#" title="add to wishlist">
-                                                                            <i class="fa fa-heart"></i>
-                                                                        </a>
-                                                                        <a class="quick-view" href="#" title="quick view"  data-toggle="modal" data-target="#myModal">
-                                                                            <i class="fa fa-search"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="availability">
-                                                                        <span>In stock</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- single-product-end -->
-                                                        </div>
+                                                        <!-- shop-eval-end -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -980,5 +537,51 @@
     </div>
 </div>
 <!-- shop-area-end -->
+
+
+@endsection
+
+@section('js')
+<script>
+
+	// 收藏宝贝
+	function sta($id){
+
+		var id = $id;
+
+		$.get('/home/back',{id:id},function(data){
+
+
+		})
+
+
+	}
+
+
+	// 取消收藏
+	function sto($id){
+
+		var id = $id;
+
+
+		$.get('/home/back',{id:id},function(data){
+
+
+
+		})
+
+	}
+
+	$('.collect').click(function(){
+
+		setTimeout(function(){
+
+		location.href="";
+
+
+		},300);
+	})
+
+</script>
 
 @endsection

@@ -71,11 +71,15 @@
                             类别
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="Engine version: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 50px;" aria-label="Engine version: activate to sort column ascending">
                             价格
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 90px;" aria-label="Engine version: activate to sort column ascending">
+                            优惠
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 50px;" aria-label="CSS grade: activate to sort column ascending">
                            销量
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -104,8 +108,18 @@
                         <td class=" ">
                             {{$v->cate->cate_name}}
                         </td>
-                        <td class=" ">
+                        <td class=" " id="price_{{$v->goods_id}}">
                             {{$v->goods_price}}
+                        </td>
+                        <style>
+                            .preferential{
+                                font-size:24px;
+                                margin: 5px;
+                            }
+                        </style>
+                        <td class=" ">
+                            <span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential}}</span>
+                            <a onclick="uct({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="降价10%">--</a>
                         </td>
                         <td class=" ">
                             {{$v->goods_sales}}
@@ -125,7 +139,7 @@
                             @endif
                         </td>
                          <td class=" ">
-                            <a href="/admin/goods/{{$v->goods_id}}" class='btn btn-info'>商品详情</a>
+                            <a href="/admin/goods/{{$v->goods_id}}" class='btn btn-info'>详情</a>
                             <a href="/admin/goods/{{$v->goods_id}}/edit" class='btn btn-warning'>修改</a>
 
                             <form action="/admin/goods/{{$v->goods_id}}" method='post' style='display:inline'>
@@ -150,28 +164,6 @@
         </div>
     </div>
 </div>
-<script src="/js/jquery-3.2.1.min.js"></script>
-<script>
-    function stu($id){
-        var id = $id;
-        var status = $('.status'+'#'+id).val();
-        $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
-            if(data == '2'){
-                $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
-                $('.status'+'#'+id).val('2');
-                alert('下架成功');
-            } else if(data=='1') {
-                $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
-                $('.status'+'#'+id).val('1');
-                alert('上架成功');
-            } else {
-                alert('修改失败');
-            }
-        })
-    }
-
-</script>
-
 @endsection
 
 @section('js')
@@ -224,6 +216,48 @@
                         alert('修改失败');
                     }
                 })
+            }
+        }
+
+        // 优惠商品 减价
+        function uct($e){
+            var id = $e;
+            // 优惠力度
+            var jian = 0.9;
+            // 获取原价
+            var old_price = parseInt($('#price_'+id).text().trim());
+            // 获取原优惠
+            var o_pres = parseInt($('#pre_'+id).text().trim());
+            var msg = "你确定在原优惠的基础再次优惠10%吗??";
+            var con = confirm(msg);
+            function accMul(arg1, arg2)
+            {
+
+                var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+                try { m += s1.split(".")[1].length } catch (e) { }
+
+                try { m += s2.split(".")[1].length } catch (e) { }
+
+                return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+            }
+            var n_pres = accMul(o_pres,jian);
+            if(con){
+                if(n_pres <= 0){
+                    var n_pres = o_pres;
+                    alert('亲,商品不能白送啊!');
+                } else if (n_pres >= old_price) {
+                    var n_pres = old_price;
+                    alert('亲,优惠价不能大于原价!');
+                }
+                $.get('/admin/ajaxuct',{n_pres:n_pres,id:id},function(data){
+                        // console.log(data);
+                        if(data=='01'){
+                            $('#pre_'+id).text(n_pres);
+                        } else {
+                            alert('优惠失败!');
+                        }
+                    })
             }
         }
 

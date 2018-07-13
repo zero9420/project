@@ -106,10 +106,8 @@ class IndexController extends Controller
 
 	public function Update(UserRequest $request, $id)
 	{
-				
-							
+			
 		$res = $request->except('_token','info_image');
-		
 		
 		//检测是否有上传图片
 		if($request->hasfile('info_image')){
@@ -124,18 +122,22 @@ class IndexController extends Controller
 
 			//移动
 			$request->file('info_image')->move('./userinfo/',$name.'.'.$suffix);
+
+			//存入数据表
+			$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
+			
+			
 		}
 
-
-		//存入数据表
-		$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
-		
 		
 		$data = Info::where('info_id',$id)->update($res);
 	
 		if($data){
 
 			return back();
+		}else{
+
+			return redirect('/home/userinfo');
 		}
 		
 
@@ -206,5 +208,5 @@ class IndexController extends Controller
 	}
 
 
-
+	
 }

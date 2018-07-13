@@ -16,6 +16,11 @@ class LoginController extends Controller
     public function index()
     {
         // echo 123;
+        if(!empty(session('user_id'))){
+            
+            return redirect('/');
+          };
+
     	return view('home.login.login');
     }
     //登陆逻辑
@@ -23,29 +28,34 @@ class LoginController extends Controller
     {
     	//校验
             $this->validate(request(),[
-            'username'=>'required|min:3',
             'password'=>'required|min:5|max:20',
              ]);
     	//逻辑
             //获取用户输入的账号和密码
-            $username = request('username');
+            $email = request('email');
             $password = request('password');
-           
 
-            $data = User::where(compact('username'))->first();
-
+            $data = User::where(compact('email'))->first();
            if (!$data) {
-             echo '<script>alert("用户名输入错误");location.href="/home/logins";</script>';
+             echo '<script>alert("邮箱或密码错误");location.href="/home/logins";</script>';
+               exit;
             }
               //判断密码
             // dd($data->password);
         if (!Hash::check($password, $data->password)) {
-             echo '<script>alert("密码输入错误");location.href="/home/logins";</script>';
+             echo '<script>alert("邮箱或密码错误");location.href="/home/logins";</script>';
+            exit;
+        }
+
+        if(!$data->status==1){
+            echo '<script>alert("账号未激活");location.href="/home/logins";</script>';
+            exit;
         }
 
             // dump($data);
            
              session(['user_id' => $data->id]);
+             session(['user_name' => $data->username]);
                 //     if ($request->session()->has('id')) {
                 // return '有';
                 // }else{

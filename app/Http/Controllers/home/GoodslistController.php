@@ -7,13 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\CateController;
 use App\Models\Admin\Cate;
 use App\Models\Admin\Goods;
+use App\Models\Home\Cart;
 use App\Models\Admin\Position;
 use DB;
+use App\Models\Home\Collection;
 
 class GoodslistController extends Controller
 {
 
-    public function shop()
+    public function shop(Request $request)
     {
 
 
@@ -34,7 +36,9 @@ class GoodslistController extends Controller
             }
 
         }
-		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data]);
+        // 热卖商品
+        $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
+		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods]);
 
     }
     /**
@@ -42,28 +46,39 @@ class GoodslistController extends Controller
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function index(Request $request)
+    public function list(Request $request)
     {
     	// 获取id
-        $path = $request->path();
-    	$id = substr($path,10);
-    	$id = intval($id);
+        $id = $request->input('id');
 
     	if (!empty($id)) {
-    		$goods = Goods::with('spec')->where('cate_id',$id)->where('goods_status','1')->paginate(12);
+            // 查询子分类id
+            $cate = Cate::where('cate_path','like','%,'.$id.',%')->select('cate_id')->get();
+
+            // 判断子分类
+            if(empty($cate)){
+                $goods = Goods::with('spec')->where('cate_id',$id)->where('goods_status','1')->paginate(12);
+            } else {
+                $cate_id[] = $id;
+                foreach($cate as $k => $v){
+                    $cate_id[] = $v->cate_id;
+                }
+                $goods = Goods::with('spec')
+                        ->whereIn('cate_id',$cate_id)->where('goods_status','1')->paginate(12);
+            }
     	} else {
     		$goods = Goods::with('spec')
-    		->where(function($query) use($request){
-                // 检测关键字
-                $gname = $request->input('gname');
-                // 如果关键字不为空
-                if (!empty($gname)) {
-                	$query->where('goods_name','like','%'.$gname.'%');
-                }
-            })->where('goods_status','1')->paginate(12);
+        		->where(function($query) use($request){
+                    // 检测关键字
+                    $gname = $request->input('gname');
+                    // 如果关键字不为空
+                    if (!empty($gname)) {
+                    	$query->where('goods_name','like','%'.$gname.'%');
+                    }
+                })->where('goods_status','1')->paginate(12);
     	}
             // dump($goods);
-    	return view('home.goods.index',['title'=>'商品列表页',
+    	return view('home.goods.list',['title'=>'商品列表页',
     									'goods'=>$goods,
     									'id'=>$id,
                                         'request'=> $request
@@ -75,15 +90,58 @@ class GoodslistController extends Controller
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
-    public function detail($id)
+    public function detail(Request $request,$id)
     {
         $goods = Goods::with('spec')->where('goods_id',$id)->first();
-        $size = explode('|',$goods->goods_size);
-        $color = explode('|',$goods->goods_color);
+        // 取出数据拆分成数组并取出空值
+        $size = array_filter(explode('|',$goods->goods_size));
+        $color = array_filter(explode('|',$goods->goods_color));
         $gname = mb_substr($goods->goods_name,0,5);
         $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
-        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related]);
+
+
+        //收藏者的id
+        $user = session('user_id');
+
+        // 查询该商品信息
+        $gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
+         $arr =  json_decode($gid);
+        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related,'arr'=>$arr]);
+
+
+       
+
+
     }
 
+    public function ajax(Request $request)
+    {
+        // ajax关注收藏 
+        // 获取收藏商品的ID
+        $id = $request->input('id');
+
+        //收藏者的id
+        $user = session('user_id');
+
+        // 查询该商品信息
+        $gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
+
+
+        $arr =  json_decode($gid);
+
+        if(!in_array($id,$arr)){
+
+             Collection::create(['collection_gid'=>$id,'collection_cid'=>$user]);
+
+        }else{
+
+
+            $data = Collection::where('collection_cid',$user)->where('collection_gid',$id)->delete();
+
+        }
+      
+
+      
+    }
 
 }

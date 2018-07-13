@@ -30,23 +30,24 @@
 				<dl>
 					<dt>我的商城</dt>
 					<dd><a href="/home/order">我的订单</a></dd>
-					<dd><a href="#">我的收藏</a></dd>
-					<dd><a href="#">账户安全</a></dd>
-					<dd><a href="#">我的评价</a></dd>
-					<dd><a href="#">地址管理</a></dd>
+					<dd><a href="/home/collection">我的收藏</a></dd>
+					<dd><a href="/home/userinfo">个人中心</a></dd>			
+				</dl>
+				<dl>
+					<dt>评论管理</dt>
+					<dd><a href="/home/eval">我的评价</a></dd>
 				</dl>
 				<dl>
 					<dt>客户服务</dt>
-					<dd class="cur"><a href="#">退货申请</a></dd>
+					<dd><a href="/home/apply">退货申请</a></dd>
 					<dd><a href="#">退货/退款记录</a></dd>
 				</dl>
 				<dl>
 					<dt>我的消息</dt>
-					<dd><a href="#">商城快讯</a></dd>
+					<dd class="cur"><a href="/home/express">商城快讯</a></dd>
 					<dd><a href="#">帮助中心</a></dd>
 				</dl>
 			</div>
-		</div>
 		<div class="member-right fr" style="font-size:26px">
 			您还没有退款订单信息
 		</div>

@@ -49,6 +49,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 	// 定义热卖商品
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
+	// 商品减价
+	Route::any('/admin/ajaxuct','admin\GoodsdetailController@ajaxuct');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -82,7 +84,7 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 // 前台首页
 Route::any('/','home\GoodslistController@shop');
-Route::any('/goodslist/{id?}','home\GoodslistController@index');
+Route::any('/goodslist','home\GoodslistController@list');
 Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>'\d+']);
 
 // 前台登录注册模块
@@ -90,15 +92,20 @@ Route::get('/home/register','home\RegisterController@index');
 Route::post('/home/registers','home\RegisterController@registers');
 Route::get('/home/logins','home\LoginController@index');
 Route::post('/home/logins','home\LoginController@login');
-
-
-
+//账号激活
+Route::get('/home/jihuo','home\JihuoController@jihuo');
+//找回密码
+Route::get('/home/retrieve','home\RetrieveController@index');
+Route::post('/home/retrieve','home\RetrieveController@retrieve');
+//邮箱激活
+Route::get('/home/email/retrieve','home\RetrieveController@retrieves');
+//密码修改
+Route::post('home/email/edit','home\RetrieveController@edit');
 
 /**
  *
  * 前台路由组
  */
-
 Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台个人中心
@@ -121,12 +128,12 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/cart','home\CartController@index');
 	//购物车ajax删除
 	Route::any('/home/cart/delete','home\CartController@delete');
-
-
 	//购物车加减ajax
 	Route::any('/home/cart/jiajian','home\CartController@jiajian');
 	//购物车总价ajax
 	Route::any('/home/cart/total','home\CartController@total');
+	//购物车存储
+	Route::any('/home/cart/{goods_id}','home\CartDataController@add');
 
 
 	// 前台订单页
@@ -143,11 +150,14 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 商城快讯
 	Route::any('/home/express','home\ExpressController@express');
 
+	// 个人中心我的收藏
+	Route::any('/home/collection','home\CollectController@index');
 
-	//购物车加减ajax
-	Route::any('/home/cart/jiajian','home\CartController@jiajian');
-	//购物车总价ajax
-	Route::any('/home/cart/total','home\CartController@total');
+	// ajax商品收藏
+	Route::any('/home/back','home\GoodslistController@ajax');
 
-
+	// 个人中心商品收藏删除
+	Route::any('/home/goods','home\CollectController@goods');
+	// 商品评价
+	Route::resource('/home/eval','home\EvaluaController');
 });

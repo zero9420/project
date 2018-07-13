@@ -1,4 +1,3 @@
-
 .war{
 
 	margin-left: 30px;
@@ -39,7 +38,7 @@
 
 	position:absolute;
 	right:260px;
-	top:410px;
+	top:400px;
 
 }
 .tk{
@@ -53,4 +52,42 @@
 	position:absolute;
 	right:450px;
 	top:670px;
+}
+.anniu1{
+
+	position:absolute;
+	top:398px;
+	left:600px;
+}
+.del{
+
+	position:absolute;
+	left:760px;
+	top:398px;
+}
+.member{
+
+	font-size:26px;
+	position:absolute;
+	left:600px;
+	top:300px;
+}
+.DataTables1{
+
+	position: absolute;
+	top:310px;
+	right:800px;
+}
+.DataTables2{
+
+	position: absolute;
+	top:310px;
+	right:560px;
+}
+.btn-info{
+
+	position: absolute;
+	top:308px;
+	right:490px;
+
 }
