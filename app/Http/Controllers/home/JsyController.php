@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Cart;
 use App\Models\Home\Info;
+use DB;
 
 class JsyController extends Controller
 {
@@ -49,7 +50,57 @@ class JsyController extends Controller
      */
     public function store(Request $request)
     {
-       dd($request->all());
+        //接收表单过来的值 主表
+       $req = $request->except('_token','Checkout');
+
+        //获取购物车信息 插入附表
+        $cart = Cart::where('user_id',session('user_id'))->get();
+
+        $date = date('Ymd',time()).rand(6666,8888);
+        $req['order_id'] = $date;
+      
+        
+        $req['order_info_cid'] = session('user_id');
+        $req['order_create_time'] = date('Y-m-d H:i:s',time());
+        $req['order_update_time'] = date('Y-m-d H:i:s',time());
+       
+     
+        $order = DB::table('shop_order')->insert([$req]);
+        
+       // 一对多 遍历到附表
+       
+
+     
+       foreach ($cart as $key => $v) {
+            
+          $res = DB::table('shop_order_detail')->insert(
+                
+                [
+                    'goods_name'=>$v->goods_name,
+                    'num' => $v->num,
+                    'goods_price' => $v->goods_price,
+                    'order_id'=> $req['order_id'],
+                    'goods_id'=>$v->goods_id,
+                    'goods_pic'=>$v->goods_pic,
+                    'goods_color'=>$v->goods_color,
+                    'goods_size'=>$v->goods_size,
+                    'goods_status'=> 0
+
+
+                ]
+                
+                
+            );
+       }
+
+
+           $ord = DB::table('shop_order')->where('order_info_cid',session('user_id'))->first();
+           
+           $der = DB::table('shop_order_detail')->where('order_id',$ord->order_id)->get();
+
+            return view('home/jsy/save',['ord'=>$ord,'der'=>$der]);
+       
+      
     }
 
     /**

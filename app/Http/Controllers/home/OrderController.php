@@ -5,6 +5,7 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Info;
+use App\Models\Home\OrderDetail;
 use DB;
 
 class OrderController extends Controller
@@ -14,26 +15,37 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
         $user = session('user_id');
 
         $res = Info::where('info_id',$user)->first();
 
-        $order = DB::table('shop_order')->where('order_info_cid',$user)->get();
-       
+        $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(3);
 
-        
-        
+        $order = [];
+
+        $name = $request->input('goods_name');
+
+        if(!empty($name)){
+
+            foreach ($ord as $k => $v) {
+
+                $order[] = DB::table('shop_order_detail')->where('order_id',$v->order_id)->where('goods_name','like','%'.$name.'%')->get();
+
+            }
+        } else {
+            foreach ($ord as $k => $v) {
+                $order[] = DB::table('shop_order_detail')->where('order_id',$v->order_id)->get();
+            }
+        }
 
         return view('home.order.order',[
             'title'=>'我的订单',
-
             'res'=>$res,
-            'order'=>$order
-
-
+            'order'=>$order,
+            'ord'=>$ord
         ]);
     }
 
@@ -66,12 +78,15 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $res =DB::table('shop_order')->where('id',$id)->first();
+        $user = session('user_id');
+        $res =DB::table('shop_order')->where('order_info_cid',$user)->first();
 
+        $data = DB::table('shop_order_detail')->where('id',$id)->first();
         
         return view('home.order.details',[
             'title'=>'订单详情',
             'res'=>$res,
+            'data'=>$data
 
         ]);
         

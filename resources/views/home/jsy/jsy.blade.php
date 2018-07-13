@@ -80,34 +80,40 @@
 									<dl class="checkout-goods-list">
 										<dt class="clearfix">
 											<span class="col col-1">商品名称</span>
+
 											<span class="col col-2">购买价格</span>
 											<span class="col col-3">购买数量</span>
 											<span class="col col-4">小计（元）</span>
 										</dt>
+										@php
+											$to = 0;
+										@endphp
 										@foreach($cart as $k => $v)
+										@php
+
+											$to += $v->goods_price * $v->num;
+										@endphp
 										<dd class="item clearfix">
 											<div class="item-row">
 												<div class="col col-1">
 													<div class="g-pic">
 														<img src="{{$v->goods_pic}}"  width="40" height="40" />
-														<input type="hidden" name="shop_img" value="{{$v->goods_pic}}">
 
 													</div>
 													<div class="g-info">
 														<a href="#" target="_blank">
 															{{$v->goods_name}}
-															<input type="hidden" name="order_shop_name" value="{{$v->goods_name}}">
 														</a>
 													</div>
 												</div>
 
 												<div class="col col-2"> {{$v->goods_price}} </div>
-												<input type="hidden" name="shop_price" value="{{$v->goods_price}}">
+												
 												<div class="col col-3">{{$v->num}}</div>
-												<input type="hidden" name="cnt" value="{{$v->num}}">
-												<div class="col col-4">{{$v->total}}</div>
-												<input type="hidden" name="order_payment" value="{{$v->total}}">
-
+	
+												<div class="col col-4">{{$v->goods_price * $v->num}}</div>
+												<input type="hidden" name="order_payment" value="{{$v->goods_price * $v->num}}">
+													
 											</div>
 										</dd>
 										@endforeach
@@ -123,7 +129,7 @@
 											<ul>
 
 												<li>
-													订单总额：<span>244元</span>
+													订单总额：<span>{{$to}}</span>
 												</li>
 												<li>
 													活动优惠：<span>-0元</span>
@@ -139,7 +145,8 @@
 													运费：<span id="postageDesc">0元</span>
 												</li>
 											</ul>
-											<p class="checkout-total">应付总额：<span><strong id="totalPrice">244</strong>元</span></p>
+											<p class="checkout-total">应付总额：<span><strong id="totalPrice">{{$to}}</strong>元</span></p>
+											<input type="hidden" name="order_payment" value="{{$to}}">
 										</div>
 										<!--  -->
 									</div>
@@ -163,8 +170,6 @@
 
 		</div>
 		
-
-
 
 		
 	</div>
