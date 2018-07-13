@@ -51,7 +51,7 @@ class UsersController extends Controller
             'password' => 'required|regex:/^\S{5,30}$/',
             'repass'=>'same:password',
             'email'=>'email|required',
-            'phone'=>'required|regex:/^1[3456789]\d{9}$/',            
+//            'phone'=>'required|regex:/^1[3456789]\d{9}$/',
         ],[
             'username.required'=>'用户名不能为空',
             'username.regex'=>'用户名格式不正确',
@@ -60,8 +60,8 @@ class UsersController extends Controller
             'repass.same'=>'两次密码不一致',
             'email.required'=>'邮箱不可以为空',
             'email.email'=>'邮箱格式不正确',
-            'phone.required'=>'手机号不能为空',
-            'phone.regex'=>'手机号格式不正确'
+//            'phone.required'=>'手机号不能为空',
+//            'phone.regex'=>'手机号格式不正确'
 
         ]);
          $res = $request->except(['_token','repass']);
@@ -69,9 +69,9 @@ class UsersController extends Controller
          if ($username) {
              return back()->with('error','用户名已存在请更换');
          }
-          $phone= Users::where('phone',$res['phone'])->first();
-         if ($phone) {
-           return back()->with('error','手机号已存在,请更换');
+          $email= Users::where('email',$res['email'])->first();
+         if ($email) {
+           return back()->with('error','邮箱已存在,请更换');
          }
 
           $res['password'] = bcrypt(request('password'));
@@ -136,7 +136,7 @@ class UsersController extends Controller
             'username' => 'regex:/^\w{5,12}$/',
             'email'=>'email|required',
             // 'repass'=>'same:password',
-            'phone'=>'required|regex:/^1[3456789]\d{9}$/',
+//            'phone'=>'required|regex:/^1[3456789]\d{9}$/',
             // 'password' => 'required|regex:/^\S{5,30}$/', 
                      
         ],[
@@ -166,13 +166,13 @@ class UsersController extends Controller
                 }
 
 
-            if ($res['phone'] ==$ids->phone) {
-                 
-                }else{
-                    $phone = Users::where('phone',$res['phone'])->first();
+            if ($res['email'] ==$ids->email) {
 
-                     if ($phone) {
-                    return back()->with('error','手机号已存在请重新更换!');
+                }else{
+                    $email = Users::where('email',$res['email'])->first();
+
+                     if ($email) {
+                    return back()->with('error','邮箱已存在请重新更换!');
                 }
                 }
 

@@ -48,12 +48,12 @@
     				</div>
     			</div>
 
-    			<div class="mws-form-row">
-    				<label class="mws-form-label">手机号</label>
-    				<div class="mws-form-item">
-    					<input type="text" class="small" name='phone'>
-    				</div>
-    			</div>
+    			{{--<div class="mws-form-row">--}}
+    				{{--<label class="mws-form-label">手机号</label>--}}
+    				{{--<div class="mws-form-item">--}}
+    					{{--<input type="text" class="small" name='phone'>--}}
+    				{{--</div>--}}
+    			{{--</div>--}}
   
     			<div class="mws-form-row">
     				<label class="mws-form-label">状态</label>

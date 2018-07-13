@@ -31,6 +31,9 @@ class CartDataController extends Controller
       ]);
         $goods_size = $request->input('goods_size');
         $goods_color = $request->input('goods_color');
+        $goods_price = $request->input('new_price');
+        $goods_prices =$request->input('old_price');
+//        dd($goods_price);
         $num = $request->input('num');
         if(empty($num)){
             $num = '1';
