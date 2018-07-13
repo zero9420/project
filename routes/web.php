@@ -148,11 +148,8 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 个人中心我的收藏
 	Route::any('/home/collection','home\CollectController@index');
 
-	// ajax商品关注收藏
-	Route::any('/home/collect','home\CollectController@collect');
-
-	// ajax商品取消收藏
-	Route::any('/home/back','home\CollectController@back');
+	// ajax商品收藏
+	Route::any('/home/back','home\GoodslistController@ajax');
 
 	// 个人中心商品收藏删除
 	Route::any('/home/goods','home\CollectController@goods');
