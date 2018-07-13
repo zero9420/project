@@ -48,29 +48,26 @@
 						@foreach($data as $k=>$v)
 						<th><input type="checkbox" checked style="margin-left:10px; float:left"></th>
 						<th class="tab-th-1">
-							<a href="#"><img src="{{$v->goods_pic}}" alt=""></a>
+							<a href="/goodsdetail/{{$v->goods_id}}"><img src="{{$v->goods_pic}}" alt=""></a>
 
-							<a href="#" class="tab-title">{{$v->goods_name}} </a>
+							<a href="/goodsdetail/{{$v->goods_id}}" class="tab-title">{{$v->goods_name}} </a>
 						</th>
 						<th>
 							<p>颜色：{{$v->goods_color}}</p>
 							<p>规格：{{$v->goods_size}}</p>
 						</th>
 						<th>
-
 							<p class="price">{{$v->goods_price}}</p>
 						</th>
 							<th class="tab-th-2">
 								<input type="button" value="-" class="minus"
 								style="width:20px;height:30px;" id="<?php echo $v->id ?>"/>
-								
-								<input type="text"  name="quantity" value="{{$v->num}}" class="qty" 
+								<input type="text"  name="quantity" value="{{$v->num}}" class="qty"
 
 								 style="width:50px;height:25px; text-align:center;"/>
 								<input type="button" value="+" class="plus" style="width:20px;height:30px;" id="<?php echo $v->id ?>" />
 								</th>
 							</div>
-					
 						<th class="xiaoji">{{$v->goods_price}}</th>
 						<th><a href="javascript:void(0)" class="remove" ids="{{$v->id}}">删除</a></th>
 					</tr>
@@ -102,28 +99,31 @@
 	</div>
 </section>
 	@else
-	
-<section id="pc-jie">
-	<div class="center ">
-		<ul class="pc-shopping-title clearfix">
-				    <div class="message">
-				        <ul>
-				            <li class="txt">
-				                购物车空空的哦~，去看看心仪的商品吧~
-				            </li>
-				            <li class="mt10">
-				                <a href="/home/index" class="ftx-05">
-				                    去购物&gt;
-				                </a>
-				            </li>
-				            
-				        </ul>
-				    </div>
-				</div>
-</ul>
+<!-- slider(轮播图)-start -->
+<div class="container">
+    <div class="slider">
+        <!-- Slider Image -->
+        <div id="mainslider" class="nivoSlider slider-image">
+            <img src="/home/bs/img/cart/empty-cart.png" alt="main slider" title="#htmlcaption1" />
+        </div>
+        <!-- Slider Caption 1 -->
+        <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
+            <div class="slider-progress"></div>
+            <div class="slide1-text slide-1 hidden-xs">
+                <div class="middle-text">
+                	<div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
+                        <h2>购物车空空如也,快去选择你心仪的商品吧.....</h2>
+                    </div>
+                    <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
+                        <a href="/">去购物....</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</section>
-				@endif
+<!-- slider-end -->
+@endif
 
 
 
@@ -170,7 +170,7 @@
 		// alert(pc);
 		//加完之后让小计发生改变
 		$(this).parents('tr').find('.xiaoji').text(accMul(pc,num));
-		
+
 		var jiashuliang=$(this).prev().val();
 
 		// alert(jiashuliang);

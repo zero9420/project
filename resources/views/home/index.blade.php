@@ -1,4 +1,4 @@
-javascript:void(0)@extends('layout.homes')
+@extends('layout.homes')
 @section('title',$title)
 
 @section('content')
@@ -463,16 +463,20 @@ javascript:void(0)@extends('layout.homes')
                                     <h5 class="product-title">{{$v->goods_name}}</h5>
                                     <div class="price-box">
                                         @if($v->goods_preferential != $v->goods_price)
-                                        <span class="price">
-                                            ￥{{$v->goods_preferential}}
-                                        </span>
-                                        <span class="old-price">
-                                            ￥{{$v->goods_price}}
-                                        </span>
+                                            <span class="price">
+                                                ￥{{$v->goods_preferential}}
+                                                <input type="hidden" name="new_price" value="{{$v->preferential}}">
+                                            </span>
+                                            <span class="old-price">
+                                                ￥{{$v->goods_price}}
+                                                <input type="hidden" name="old_price" value="{{$v->price}}">
+                                            </span>
                                         @else
-                                        <span class="price">
-                                            ￥{{$v->goods_price}}
-                                        </span>
+                                            <span class="price">
+                                                ￥{{$v->goods_price}}
+                                                <input type="hidden" name="old_price" value="{{$v->price}}">
+                                                <input type="hidden" name="new_price" value="{{$v->price}}">
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="rating">

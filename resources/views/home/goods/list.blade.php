@@ -323,66 +323,70 @@
                             </div>
                             <div class="col-md-7 col-xs-12 col-sm-7">
                                 <div class="product-details-info">
-                                    <h5 class="product-title">{{$v->goods_name}}</h5>
-                                    <div class="price-box">
-                                        @if($v->goods_preferential != $v->goods_price)
-                                        <span class="price">
-                                            ￥{{$v->goods_preferential}}
-                                        </span>
-                                        <span class="old-price">
-                                            ￥{{$v->goods_price}}
-                                        </span>
-                                        @else
-                                        <span class="price">
-                                            ￥{{$v->goods_price}}
-                                        </span>
-                                        @endif
-                                    </div>
-                                    <div class="rating">
-                                        <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
-                                            <i class="fa fa-heart"></i>
-                                            <span>收藏宝贝</span>
-                                        </a>
-                                    </div>
-                                    <div class="short-description">
-                                        <p>{{$v->goods_info}}
-                                        </p>
-                                    </div>
-                                    @php
-                                        $size = array_filter(explode('|',$v->goods_size));
-                                        $color = array_filter(explode('|',$v->goods_color));
-                                    @endphp
-                                <form action="/home/cart/{{$v->goods_id}}" method='POST'>
-                                    {{ csrf_field() }}
-                                    <div class="add-cart">
-                                        <span>尺码:</span>
-                                        @foreach($size as $vs)
-                                        <a href="javascript:void(0)">
-                                            <input type="radio" name="goods_size" value="{{$vs}}">
-                                            <span>{{strtoupper($vs)}}</span>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    <div class="add-cart">
-                                        <span>颜色:</span>
-                                        @foreach($color as $vc)
-                                        <a href="javascript:void(0)">
-                                            <input type="radio" name="goods_color" value="{{$vc}}">
-                                            <span>{{$vc}}</span>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    <div class="add-cart">
-                                        <p class="quantity cart-plus-minus">
-                                            <label>购买数量</label>
-                                            <input type="text" value="1" name="num">
-                                        </p>
-                                        <div class="shop-add-cart">
-                                            <button class="addCart">加入购物车</button>
-                                            <button class="addCart" style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
+                                    <form action="/home/cart/{{$v->goods_id}}" method='POST'>
+                                        {{ csrf_field() }}
+                                        <h5 class="product-title">{{$v->goods_name}}</h5>
+                                        <div class="price-box">
+                                            @if($v->goods_preferential != $v->goods_price)
+                                                <span class="price">
+                                                    ￥{{$goods->goods_preferential}}
+                                                    <input type="hidden" name="new_price" value="{{$v->preferential}}">
+                                                </span>
+                                                <span class="old-price">
+                                                    ￥{{$v->goods_price}}
+                                                    <input type="hidden" name="old_price" value="{{$v->price}}">
+                                                </span>
+                                            @else
+                                                <span class="price">
+                                                    ￥{{$v->goods_price}}
+                                                    <input type="hidden" name="old_price" value="{{$v->price}}">
+                                                    <input type="hidden" name="new_price" value="{{$v->price}}">
+                                                </span>
+                                            @endif
                                         </div>
-                                    </div>
-                                </form>
+                                        <div class="rating">
+                                            <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
+                                                <i class="fa fa-heart"></i>
+                                                <span>收藏宝贝</span>
+                                            </a>
+                                        </div>
+                                        <div class="short-description">
+                                            <p>{{$v->goods_info}}
+                                            </p>
+                                        </div>
+                                        @php
+                                            $size = array_filter(explode('|',$v->goods_size));
+                                            $color = array_filter(explode('|',$v->goods_color));
+                                        @endphp
+                                        <div class="add-cart">
+                                            <span>尺码:</span>
+                                            @foreach($size as $vs)
+                                            <a href="javascript:void(0)">
+                                                <input type="radio" name="goods_size" value="{{$vs}}">
+                                                <span>{{strtoupper($vs)}}</span>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                        <div class="add-cart">
+                                            <span>颜色:</span>
+                                            @foreach($color as $vc)
+                                            <a href="javascript:void(0)">
+                                                <input type="radio" name="goods_color" value="{{$vc}}">
+                                                <span>{{$vc}}</span>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                        <div class="add-cart">
+                                            <p class="quantity cart-plus-minus">
+                                                <label>购买数量</label>
+                                                <input type="text" value="1" name="num">
+                                            </p>
+                                            <div class="shop-add-cart">
+                                                <button class="addCart">加入购物车</button>
+                                                <button class="addCart" style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <div class="widget-icon">
                                         <a href="#">
                                             <i class="fa fa-facebook"></i>

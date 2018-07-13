@@ -55,6 +55,7 @@ class LoginController extends Controller
             // dump($data);
            
              session(['user_id' => $data->id]);
+             session(['user_name' => $data->username]);
                 //     if ($request->session()->has('id')) {
                 // return '有';
                 // }else{
