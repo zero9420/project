@@ -87,17 +87,17 @@
 	                                @if($goods->goods_preferential != $goods->goods_price)
                                     <span class="price">
                                         ￥{{$goods->goods_preferential}}
-                                        <input type="hidden" name="new_price" value="{{$goods->preferential}}">
+                                        <input type="hidden" name="new_price" value="{{$goods->goods_preferential}}">
                                     </span>
                                     <span class="old-price">
                                         ￥{{$goods->goods_price}}
-                                        <input type="hidden" name="old_price" value="{{$goods->price}}">
+                                        <input type="hidden" name="old_price" value="{{$goods->goods_price}}">
                                     </span>
                                     @else
                                     <span class="price">
                                         ￥{{$goods->goods_price}}
-                                        <input type="hidden" name="old_price" value="{{$goods->price}}">
-                                        <input type="hidden" name="new_price" value="{{$goods->price}}">
+                                        <input type="hidden" name="old_price" value="{{$goods->goods_price}}">
+                                        <input type="hidden" name="new_price" value="{{$goods->goods_price}}">
                                     </span>
                                     @endif
 	                            </div>
