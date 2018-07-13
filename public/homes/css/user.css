@@ -65,3 +65,29 @@
 	left:760px;
 	top:398px;
 }
+.member{
+
+	font-size:26px;
+	position:absolute;
+	left:600px;
+	top:300px;
+}
+.DataTables1{
+
+	position: absolute;
+	top:310px;
+	right:800px;
+}
+.DataTables2{
+
+	position: absolute;
+	top:310px;
+	right:560px;
+}
+.btn-info{
+
+	position: absolute;
+	top:308px;
+	right:490px;
+
+}
