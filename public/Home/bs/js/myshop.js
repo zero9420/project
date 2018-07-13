@@ -4,44 +4,6 @@ setTimeout(function(){
 
 },1800);
 
-// 收藏宝贝
-function sta($id){
-
-	var id = $id;
-
-	$.get('/home/collect',{id:id},function(data){
-
-
-	})
-
-
-}
-
-
-// 取消收藏
-function sto($id){
-
-	var id = $id;
-
-
-	$.get('/home/back',{id:id},function(data){
-
-
-
-	})
-
-}
-
-$('.collect').click(function(){
-
-	setTimeout(function(){
-
-	location.href="";
-
-
-	},500);
-})
-
 // 确定加入购物车时有没有选择颜色
 $('.addCart').on('click',function () {
     // 获取颜色有木有选中

@@ -77,14 +77,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                 	@php
 
-							if(!empty(session('gid'))){
-								$arr =  json_decode(session('gid'));
-							} else {
-								$arr[] = 0;
-							}
-	                 	@endphp
 	                    <div class="col-md-7 col-xs-12 col-sm-7">
 	                        <div class="product-details-info">
 	                            <h5 class="product-title">{{$goods->goods_name}}</h5>
@@ -105,7 +98,7 @@
                                     </span>
                                     @endif
 	                            </div>
-	                            @if( in_array(0,$arr) )
+	                            @if( empty(session('user_id')) )
 		                            <div class="rating">
 	                                    <a class="" href="/home/logins" title="加入我的收藏">
 	                                        <i class="fa fa-heart"></i>
@@ -113,7 +106,7 @@
 	                                    </a>
 		                            </div>
 	                            @else
-		                            @if(  in_array( $goods->goods_id,$arr))
+		                            @if(  in_array( $goods->goods_id,$arr) )
 		                            <div class="rating">
 	                                    <a class="add-wishlist" href="#" title="取消我的收藏" style="color:#ff6464;">
 	                                        <i class="fa fa-heart"></i>
@@ -542,5 +535,50 @@
 </div>
 <!-- shop-area-end -->
 
+
+@endsection
+
+@section('js')
+<script>
+
+	// 收藏宝贝
+	function sta($id){
+
+		var id = $id;
+
+		$.get('/home/back',{id:id},function(data){
+
+
+		})
+
+
+	}
+
+
+	// 取消收藏
+	function sto($id){
+
+		var id = $id;
+
+
+		$.get('/home/back',{id:id},function(data){
+
+
+
+		})
+
+	}
+
+	$('.collect').click(function(){
+
+		setTimeout(function(){
+
+		location.href="";
+
+
+		},300);
+	})
+
+</script>
 
 @endsection
