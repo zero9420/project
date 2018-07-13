@@ -65,14 +65,14 @@
                         rowspan="1" colspan="1" style="width: 247px;" aria-label="Platform(s): activate to sort column ascending">
                             邮箱
                         </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 170px;" aria-label="Engine version: activate to sort column ascending">
-                            手机号
-                        </th>
+                        {{--<th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"--}}
+                        {{--rowspan="1" colspan="1" style="width: 170px;" aria-label="Engine version: activate to sort column ascending">--}}
+                            {{--手机号--}}
+                        {{--</th>--}}
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 126px;" aria-label="CSS grade: activate to sort column ascending">
-                           状态
+
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 150px;" aria-label="CSS grade: activate to sort column ascending">
@@ -94,10 +94,7 @@
                         <td class=" ">
                             {{$v->email}}
                         </td>
-                        <td class=" ">
-                            {{$v->phone}}
-                            
-                        </td>
+
     
                          <td class=" ">
 
