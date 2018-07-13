@@ -46,7 +46,7 @@
 					 {{ csrf_field() }}
 					<div class="pc-sign">
 
-						<input type="text" name="username" value="昵称" placeholder="昵称">
+						<input type="text" name="username"  placeholder="昵称">
 					</div>
 
 					<div class="pc-sign">

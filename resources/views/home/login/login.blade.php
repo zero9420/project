@@ -47,7 +47,7 @@
 				<form action="/home/logins" method="post">
 				{{ csrf_field() }}
 					<div class="pc-sign">
-						<input type="text" name="username" placeholder="用户名/邮箱/手机号">
+						<input type="email" name="email" placeholder="邮箱号">
 					</div>
 					<div class="pc-sign">
 						<input type="password" name="password" placeholder="请输入您的密码">
