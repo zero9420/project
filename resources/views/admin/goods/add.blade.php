@@ -81,13 +81,13 @@
 
                 <div class="mws-form-row">
                     <label class="mws-form-label">
-                        商品优惠
+                        商品优惠价
                         <span class="required">
                             *
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_preferential" value="0.00" class="error large">
+                        <input type="number" class="medium" name="goods_preferential" class="error large" placeholder="请输入优惠价格,不得大于原价,默认等于原价">
                     </div>
                 </div>
 

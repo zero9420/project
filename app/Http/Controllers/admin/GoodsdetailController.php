@@ -103,4 +103,21 @@ class GoodsdetailController extends Controller
                 echo 0;
         }
     }
+    /**
+     * [ajaxuct 商品减价]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function ajaxuct(Request $requect)
+    {
+        $n_pres = $requect->input('n_pres');
+        $id = $requect->input('id');
+        $res = Goods::where('goods_id',$id)->update(['goods_preferential'=>$n_pres]);
+        // echo $res;
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
 }

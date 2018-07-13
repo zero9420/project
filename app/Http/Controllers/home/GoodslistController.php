@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\CateController;
 use App\Models\Admin\Cate;
 use App\Models\Admin\Goods;
+use App\Models\Home\Cart;
 use App\Models\Admin\Position;
 use DB;
+use App\Models\Home\Collection;
 
 class GoodslistController extends Controller
 {
@@ -34,7 +36,6 @@ class GoodslistController extends Controller
             }
 
         }
-
         // 热卖商品
         $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
 		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods]);
@@ -89,7 +90,7 @@ class GoodslistController extends Controller
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
-    public function detail($id)
+    public function detail(Request $request,$id)
     {
         $goods = Goods::with('spec')->where('goods_id',$id)->first();
         // 取出数据拆分成数组并取出空值
@@ -97,7 +98,50 @@ class GoodslistController extends Controller
         $color = array_filter(explode('|',$goods->goods_color));
         $gname = mb_substr($goods->goods_name,0,5);
         $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
-        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related]);
+
+
+        //收藏者的id
+        $user = session('user_id');
+
+        // 查询该商品信息
+        $gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
+         $arr =  json_decode($gid);
+        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related,'arr'=>$arr]);
+
+
+       
+
+
+    }
+
+    public function ajax(Request $request)
+    {
+        // ajax关注收藏 
+        // 获取收藏商品的ID
+        $id = $request->input('id');
+
+        //收藏者的id
+        $user = session('user_id');
+
+        // 查询该商品信息
+        $gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
+
+
+        $arr =  json_decode($gid);
+
+        if(!in_array($id,$arr)){
+
+             Collection::create(['collection_gid'=>$id,'collection_cid'=>$user]);
+
+        }else{
+
+
+            $data = Collection::where('collection_cid',$user)->where('collection_gid',$id)->delete();
+
+        }
+      
+
+      
     }
 
 }

@@ -49,6 +49,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 	// 定义热卖商品
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
+	// 商品减价
+	Route::any('/admin/ajaxuct','admin\GoodsdetailController@ajaxuct');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -104,7 +106,6 @@ Route::post('home/email/edit','home\RetrieveController@edit');
  *
  * 前台路由组
  */
-
 Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台个人中心
@@ -136,12 +137,12 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 
 	// 前台订单页
-	Route::any('/home/order','home\OrderController@order');
+	Route::resource('/home/order','home\OrderController');
 
 
 
 	// 前台结算页
-	Route::any('/home/jsy','home\JsyController@jsy');
+	Route::resource('/home/jsy','home\JsyController');
 
 	// 前台退款
 	Route::any('/home/ajax','home\IndexController@ajax');
@@ -149,14 +150,14 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 商城快讯
 	Route::any('/home/express','home\ExpressController@express');
 
-
-	//购物车加减ajax
-	Route::any('/home/cart/jiajian','home\CartController@jiajian');
-	//购物车总价ajax
-	Route::any('/home/cart/total','home\CartController@total');
-
-
 	// 个人中心我的收藏
-	Route::get('/home/collection','home\IndexController@collection');
+	Route::any('/home/collection','home\CollectController@index');
 
+	// ajax商品收藏
+	Route::any('/home/back','home\GoodslistController@ajax');
+
+	// 个人中心商品收藏删除
+	Route::any('/home/goods','home\CollectController@goods');
+	// 商品评价
+	Route::resource('/home/eval','home\EvaluaController');
 });

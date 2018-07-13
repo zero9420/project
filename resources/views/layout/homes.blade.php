@@ -31,7 +31,11 @@
                     <div class="col-md-6 col-xs-12 col-sm-12">
                         <div class="header-top-right">
                             <ul class="header-links hidden-xs">
-                                <li>您好！欢迎来云购物,请&nbsp;&nbsp;<a class="login" href="/home/logins">登录</a></li>
+                                @if(empty(session('user_id')))
+                                <li>您好！欢迎来到云购物商城,请&nbsp;&nbsp;<a class="login" href="/home/logins">登录</a></li>
+                                @else
+                                <li>您好！&nbsp;&nbsp;<a class="login" href="/home/userinfo">{{session('user_name')}}</a>&nbsp;&nbsp;欢迎来到云购物商城!</li>
+                                @endif
                                 <li><a class="my-wishlist" href="/home/userinfo">个人中心</a></li>
                                 <li><a class="checkout" href="#">我的订单</a></li>
                                 <li><a class="my-account" href="#">帮助</a></li>
@@ -58,44 +62,43 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-4 col-sm-6">
+                    @php
+                        $user_id = session('user_id');
+                        $cart = App\Models\Home\Cart::where('user_id',$user_id)->get();
+                    @endphp
+                    @if(count($cart) != 0)
                         <div class="shopping-cart">
-                            <a class="cart" href="#" title="view shopping cart"><span class="hidden-xs">我的购物车 <br><small>2 件商品 - ￥199.00</small></span></a>
+                            <a class="cart" href="/home/cart" title="view shopping cart"><span class="hidden-xs">我的购物车 <br><small>{{count($cart)}} 件商品</small></span></a>
                             <div class="top-cart-content">
+                            @foreach($cart as $k=>$v)
                                 <div class="media header-middle-checkout">
                                     <div class="media-left check-img">
-                                        <a href="#"><img src="/home/bs/img/cart/1.jpg" alt=""></a>
+                                        <a href="#"><img src="{{$v->goods_pic}}" alt=""></a>
                                     </div>
                                     <div class="media-body checkout-content">
                                         <h4 class="media-heading">
-                                                <span class="cart-count">2x</span>
-                                                <a href="#">连衣裙</a>
-                                                <span class="btn-remove checkout-remove" title="remove this product from my cart"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                                <span class="cart-count">{{$v->num}}</span>
+                                                <a href="/goodsdetail/{{$v->goods_id}}">{{$v->goods_name}}</a>
                                             </h4>
-                                        <p>￥78.15</p>
+                                        <p>￥{{$v->goods_price}}</p>
                                     </div>
                                 </div>
-                                <div class="media header-middle-checkout last-child">
-                                    <div class="media-left check-img">
-                                        <a href="#"><img src="/home/bs/img/cart/2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="media-body checkout-content">
-                                        <h4 class="media-heading">
-                                                <span class="cart-count">1x</span>
-                                                <a href="#">男士夹克</a>
-                                                <span class="btn-remove checkout-remove" title="remove this product from my cart"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                            </h4>
-                                        <p>￥120.85</p>
-                                    </div>
-                                </div>
-                                <div class="cart-total">
-                                    <span>小计</span>
-                                    <span><b>￥ 199.00</b></span>
-                                </div>
+                            @endforeach
                                 <div class="checkout">
-                                    <a href="#"><span>进入购物车<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span></a>
+                                    <a href="/home/cart"><span>进入购物车<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span></a>
                                 </div>
                             </div>
                         </div>
+                    @else
+                        <div class="shopping-cart">
+                            <a class="cart" href="/home/cart" title="view shopping cart"><span class="hidden-xs">我的购物车 <br><small>0件商品</small></span></a>
+                            <div class="top-cart-content">
+                                <div class="checkout">
+                                    <a href="/home/cart"><span>进入购物车<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     </div>
                 </div>
             </div>
@@ -141,9 +144,8 @@
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <h4>咨询中心</h4>
                                     <ul class="toggle-footer">
-                                        <li><a title="Specials" href="#">特价商品</a></li>
-                                        <li><a title="New products" href="#">新品上架</a></li>
-                                        <li><a title="Best sellers" href="#">畅销商品</a></li>
+                                        <li><a title="Specials" href="#changxiao">畅销商品</a><li>
+                                        <li><a title="Best sellers" href="#youhui">优惠商品</a></li>
                                         <li><a title="Our stores" href="#">实体商店</a></li>
                                         <li><a title="Contact us" href="#">联系我们</a></li>
                                         <li><a title="Sitemap" href="#">站点地图</a></li>
@@ -165,7 +167,7 @@
                                             $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
                                         @endphp
                                         @foreach($cates as $k=>$v)
-                                            <li><a title="My orders" href="/goodslist/{{$v->cate_id}}">{{$v->cate_name}}</a></li>
+                                            <li><a title="My orders" href="/goodslist?id={{$v->cate_id}}">{{$v->cate_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -234,6 +236,7 @@
     <script src="/home/bs/js/plugins.js"></script>
     <!-- main js -->
     <script src="/home/bs/js/main.js"></script>
+    <script src="/home/bs/js/myshop.js"></script>
     @section('js')
 
 

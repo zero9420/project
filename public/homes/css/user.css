@@ -1,4 +1,3 @@
-
 .war{
 
 	margin-left: 30px;
@@ -53,4 +52,16 @@
 	position:absolute;
 	right:450px;
 	top:670px;
+}
+.anniu1{
+
+	position:absolute;
+	top:398px;
+	left:600px;
+}
+.del{
+
+	position:absolute;
+	left:760px;
+	top:398px;
 }

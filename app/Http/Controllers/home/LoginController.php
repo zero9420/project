@@ -34,7 +34,6 @@ class LoginController extends Controller
             //获取用户输入的账号和密码
             $email = request('email');
             $password = request('password');
-           
 
             $data = User::where(compact('email'))->first();
            if (!$data) {
@@ -56,6 +55,7 @@ class LoginController extends Controller
             // dump($data);
            
              session(['user_id' => $data->id]);
+             session(['user_name' => $data->username]);
                 //     if ($request->session()->has('id')) {
                 // return '有';
                 // }else{

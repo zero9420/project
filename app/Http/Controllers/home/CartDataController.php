@@ -12,6 +12,23 @@ class CartDataController extends Controller
     //
     public function add(Request $request,$goods_id)
     {
+
+
+      $user_id = session('user_id');
+
+   		if (empty($user_id)) {
+
+    	    echo '<script>alert("请登入账号");location.href="/home/logins";</script>';
+    	}
+
+      $this->validate($request, [
+          'goods_color' => 'required',
+          'goods_size'=>'required',
+      ],[
+          'goods_color.required'=>'商品颜色不能为空!',
+          'goods_size.required'=>'商品价格不能为空',
+
+      ]);
         $goods_size = $request->input('goods_size');
         $goods_color = $request->input('goods_color');
         $goods_price = $request->input('new_price');
@@ -19,22 +36,8 @@ class CartDataController extends Controller
 //        dd($goods_price);
         $num = $request->input('num');
         if(empty($num)){
-            $num = '2';
+            $num = '1';
         }
-        if(empty($goods_color)){
-            $goods_color = '蓝色';
-        }
-        if(empty($goods_size)){
-            $goods_size = '均码';
-        }
-
-           $user_id = session('user_id');
-       		
-       		if (empty($user_id)) {
-        	
-        	    echo '<script>alert("请登入账号");location.href="/home/logins";</script>';die;
-        	}
-
         $res = Goods::with('spec')->where('goods_id',$goods_id)->first();
         	// dd($res);
         $goods_name = $res['goods_name'];
@@ -50,6 +53,7 @@ class CartDataController extends Controller
         }
 
         return redirect('/home/cart');
+
 
 
     }

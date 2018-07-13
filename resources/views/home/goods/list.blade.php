@@ -131,9 +131,11 @@
                                                         <a href="/goodsdetail/{{$v->goods_id}}">
                                                             <img src="{{$pic[0]->goods_pic}}" alt="" />
                                                         </a>
+                                                        @if($v->goods_hot == '2')
                                                         <span class="sale-box">
                                                             <span class="sale">热销</span>
                                                         </span>
+                                                        @endif
                                                     </div>
                                                     <div class="single-product-content">
                                                         <div class="product-title">
@@ -142,18 +144,23 @@
                                                             </h5>
                                                         </div>
                                                         <div class="rating">
-                                                            <div class="star star-on"></div>
-                                                            <div class="star star-on"></div>
-                                                            <div class="star star-on"></div>
-                                                            <div class="star star-on"></div>
-                                                            <div class="star"></div>
                                                         </div>
                                                         <div class="price-box">
-                                                            <span class="price">￥{{$v->goods_price}}</span>
-                                                            <span class="old-price">￥70.00</span>
+                                                            @if($v->goods_preferential != $v->goods_price)
+                                                            <span class="price">
+                                                                ￥{{$v->goods_preferential}}
+                                                            </span>
+                                                            <span class="old-price">
+                                                                ￥{{$v->goods_price}}
+                                                            </span>
+                                                            @else
+                                                            <span class="price">
+                                                                ￥{{$v->goods_price}}
+                                                            </span>
+                                                            @endif
                                                         </div>
                                                         <div class="product-action">
-                                                            <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
+                                                            <!-- <button class="button btn btn-default add-cart" title="加入购物车" >加入购物车</button> -->
                                                             <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
                                                                 <i class="fa fa-heart"></i>
                                                             </a>
@@ -189,12 +196,11 @@
                                                                     <a href="/goodsdetail/{{$v->goods_id}}">
                                                                         <img src="{{$pic[0]->goods_pic}}" alt="" />
                                                                     </a>
+                                                                    @if($v->goods_hot == '2')
                                                                     <span class="sale-box">
-                                                                        <span class="sale">Sale</span>
+                                                                        <span class="sale">热销</span>
                                                                     </span>
-                                                                    <span class="new-box">
-                                                                        <span class="new">New</span>
-                                                                    </span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                             <!-- single-product-end -->
@@ -208,31 +214,36 @@
                                                                             <a href="/goodsdetail/{{$v->goods_id}}">{{$v->goods_name}}</a>
                                                                         </h5>
                                                                     </div>
-                                                                    <div class="rating">
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
-                                                                        <div class="star star-on"></div>
+                                                                    <div class="product-action">
                                                                     </div>
                                                                     <div class="price-box">
-                                                                        <span class="price">￥{{$v->goods_price}}</span>
-                                                                        <span class="old-price">￥70.00</span>
+                                                                        @if($v->goods_preferential != $v->goods_price)
+                                                                        <span class="price">
+                                                                        ￥{{$v->goods_preferential}}
+                                                                        </span>
+                                                                        <span class="old-price">
+                                                                            ￥{{$v->goods_price}}
+                                                                        </span>
+                                                                        @else
+                                                                        <span class="price">
+                                                                            ￥{{$v->goods_price}}
+                                                                        </span>
+                                                                        @endif
                                                                     </div>
                                                                     <p class="product-desc">{{$v->goods_info}}
                                                                     </p>
                                                                     <div class="product-action">
-                                                                        <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button>
+                                                                        <!-- <button class="button btn btn-default add-cart" title="add to cart">加入购物车</button> -->
                                                                         <a class="add-wishlist" href="#" title="加入我的收藏">
                                                                             <i class="fa fa-heart"></i>
                                                                         </a>
                                                                         <a class="quick-view" href="javascript:void(0)" title="快速查看商品详情"  data-toggle="modal" data-target="#myModal{{$v->goods_id}}">
                                                                             <i class="fa fa-search"></i>
                                                                         </a>
-                                                                    </div>
+                                                                    </div><!--
                                                                     <div class="availability">
                                                                         <span>有货</span>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                             <!-- single-product-end -->
@@ -312,55 +323,70 @@
                             </div>
                             <div class="col-md-7 col-xs-12 col-sm-7">
                                 <div class="product-details-info">
-                                    <h5 class="product-title">{{$v->goods_name}}</h5>
-                                    <div class="price-box">
-                                        <span class="price">￥{{$v->goods_price}}</span>
-                                        <span class="old-price">￥70.00</span>
-                                    </div>
-                                    <div class="rating">
-                                        <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
-                                            <i class="fa fa-heart"></i>
-                                            <span>收藏宝贝</span>
-                                        </a>
-                                    </div>
-                                    <div class="short-description">
-                                        <p>{{$v->goods_info}}
-                                        </p>
-                                    </div>
-                                    @php
-                                        $size = array_filter(explode('|',$v->goods_size));
-                                        $color = array_filter(explode('|',$v->goods_color));
-                                    @endphp
-                                <form action="/home/cart" method='POST'>
-                                    {{ csrf_field() }}
-                                    <div class="add-cart">
-                                        <span>尺码:</span>
-                                        @foreach($size as $vs)
-                                        <a href="javascript:void(0)">
-                                            <input type="radio" name="goods_size" value="{{$vs}}">
-                                            <span>{{strtoupper($vs)}}</span>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    <div class="add-cart">
-                                        <span>颜色:</span>
-                                        @foreach($color as $vc)
-                                        <a href="javascript:void(0)">
-                                            <input type="radio" name="goods_color" value="{{$vc}}">
-                                            <span>{{$vc}}</span>
-                                        </a>
-                                        @endforeach
-                                    </div>
-                                    <div class="add-cart">
-                                        <p class="quantity cart-plus-minus">
-                                            <label>购买数量</label>
-                                            <input type="text" value="1" name="goods_number">
-                                        </p>
-                                        <div class="shop-add-cart">
-                                            <button>加入购物车</button>
+                                    <form action="/home/cart/{{$v->goods_id}}" method='POST'>
+                                        {{ csrf_field() }}
+                                        <h5 class="product-title">{{$v->goods_name}}</h5>
+                                        <div class="price-box">
+                                            @if($v->goods_preferential != $v->goods_price)
+                                                <span class="price">
+                                                    ￥{{$v->goods_preferential}}
+                                                    <input type="hidden" name="new_price" value="{{$v->preferential}}">
+                                                </span>
+                                                <span class="old-price">
+                                                    ￥{{$v->goods_price}}
+                                                    <input type="hidden" name="old_price" value="{{$v->price}}">
+                                                </span>
+                                            @else
+                                                <span class="price">
+                                                    ￥{{$v->goods_price}}
+                                                    <input type="hidden" name="old_price" value="{{$v->price}}">
+                                                    <input type="hidden" name="new_price" value="{{$v->price}}">
+                                                </span>
+                                            @endif
                                         </div>
-                                    </div>
-                                </form>
+                                        <div class="rating">
+                                            <a class="add-wishlist" href="/goodsdetail/{{$v->goods_id}}" title="加入我的收藏">
+                                                <i class="fa fa-heart"></i>
+                                                <span>收藏宝贝</span>
+                                            </a>
+                                        </div>
+                                        <div class="short-description">
+                                            <p>{{$v->goods_info}}
+                                            </p>
+                                        </div>
+                                        @php
+                                            $size = array_filter(explode('|',$v->goods_size));
+                                            $color = array_filter(explode('|',$v->goods_color));
+                                        @endphp
+                                        <div class="add-cart">
+                                            <span>尺码:</span>
+                                            @foreach($size as $vs)
+                                            <a href="javascript:void(0)">
+                                                <input type="radio" name="goods_size" value="{{$vs}}">
+                                                <span>{{strtoupper($vs)}}</span>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                        <div class="add-cart">
+                                            <span>颜色:</span>
+                                            @foreach($color as $vc)
+                                            <a href="javascript:void(0)">
+                                                <input type="radio" name="goods_color" value="{{$vc}}">
+                                                <span>{{$vc}}</span>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                        <div class="add-cart">
+                                            <p class="quantity cart-plus-minus">
+                                                <label>购买数量</label>
+                                                <input type="text" value="1" name="num">
+                                            </p>
+                                            <div class="shop-add-cart">
+                                                <button class="addCart">加入购物车</button>
+                                                <button class="addCart" style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <div class="widget-icon">
                                         <a href="#">
                                             <i class="fa fa-facebook"></i>
@@ -387,19 +413,19 @@
                                     </style>
                                     <div class="add-cart">
                                         <span>承诺:</span>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/qitian.png" alt="" title="满足七天退货的前提下,包邮商品需买家承担退货运费!">
                                             <span>七天退货</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/dingdanxian.png" alt="" title="订单险">
                                             <span>订单险</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/wuyoutuihuo.png" alt="" title="无忧退货">
                                             <span>无忧退货</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/yunfeixian.png" alt="" title="运费险">
                                             <span>运费险</span>
                                         </a>
@@ -408,19 +434,19 @@
                                     </div>
                                     <div class="add-cart" style="margin-right: 20px;">
                                         <span >支付:</span>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/zhifubao.png" alt="" title="支付宝">
                                             <span>支付宝</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/weixin.png" alt="" title="微信">
                                             <span>微信</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/xinyongka.png" alt="" title="信用卡">
                                             <span>信用卡</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/mayihuabei.png" alt="" title="蚂蚁花呗">
                                             <span>蚂蚁花呗</span>
                                         </a>

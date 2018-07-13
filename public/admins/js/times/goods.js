@@ -4,7 +4,7 @@ $("#goodsname").on("input propertychange", function () {
             name_val = $this.val(),
             count = "";
     if (name_val.length > 30) {
-        $this.val(_val.substring(0, 30));
+        $this.val(name_val.substring(0, 30));
     }
     counts = 30 - $this.val().length;
     $("#name-count").text(counts);
@@ -16,7 +16,7 @@ $("#goodsinfo").on("input propertychange", function () {
             info_val = $this.val(),
             count = "";
     if (info_val.length > 120) {
-        $this.val(_val.substring(0, 120));
+        $this.val(info_val.substring(0, 120));
     }
     count = 120 - $this.val().length;
     $("#info-count").text(count);
