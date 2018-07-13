@@ -409,19 +409,19 @@
                                     </style>
                                     <div class="add-cart">
                                         <span>承诺:</span>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/qitian.png" alt="" title="满足七天退货的前提下,包邮商品需买家承担退货运费!">
                                             <span>七天退货</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/dingdanxian.png" alt="" title="订单险">
                                             <span>订单险</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/wuyoutuihuo.png" alt="" title="无忧退货">
                                             <span>无忧退货</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/yunfeixian.png" alt="" title="运费险">
                                             <span>运费险</span>
                                         </a>
@@ -430,19 +430,19 @@
                                     </div>
                                     <div class="add-cart" style="margin-right: 20px;">
                                         <span >支付:</span>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/zhifubao.png" alt="" title="支付宝">
                                             <span>支付宝</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/weixin.png" alt="" title="微信">
                                             <span>微信</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/xinyongka.png" alt="" title="信用卡">
                                             <span>信用卡</span>
                                         </a>
-                                        <a href="">
+                                        <a href="javascript:void(0)">
                                             <img src="/home/bs/img/detail/mayihuabei.png" alt="" title="蚂蚁花呗">
                                             <span>蚂蚁花呗</span>
                                         </a>
