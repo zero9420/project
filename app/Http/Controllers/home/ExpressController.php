@@ -13,7 +13,7 @@ class ExpressController extends Controller
     	
     	$user = session('user_id');
 
-    	$data = Info::where('info_id',$user)->first();
+    	$data = Info::where('info_id',$user)->first(); 
     	
     	$res = Express::where('express_title','like','%'.$request->input('express_title').'%')->paginate(8);
 

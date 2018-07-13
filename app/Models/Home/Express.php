@@ -8,7 +8,7 @@ class Express extends Model
 {
     protected $table = 'shop_express';
 
-    protected $primaryKey = 'shop_express';
+    protected $primaryKey = 'express_id';
 
     public $timestamps = false;
 

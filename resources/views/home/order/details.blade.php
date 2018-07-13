@@ -59,7 +59,8 @@
 										<dd>
 											<p class="tel itemTel">{{$res->order_phone}}</p>
 											<p class="itemStreet"> {{$res->order_addr}} </p>
-											<span class="edit-btn J_editAddr">编辑</span>
+											<p class="itemStreet"><strong>买家留言:</strong> <p>{{$res->order_umsg}} </p>
+											<span class="edit-btn J_editAddr"></span>
 										</dd>
 										<dd style="display:none">
 											<input type="radio" name="Checkout[address]" class="addressId"  value="10140916720030323">
@@ -98,72 +99,47 @@
 					</div>
 					<div class="checkout-box-ft">
 						<!-- 商品清单 -->
-						<div id="checkoutGoodsList" class="checkout-goods-box">
-							<div class="xm-box">
-								<div class="box-hd">
-									<h2 class="title">订单信息</h2>
-								</div>
-								<div class="box-bd">
-									<dl class="checkout-goods-list">
-										<dt class="clearfix">
-											<span class="col col-1">商品名称</span>
-											<span class="col col-2">购买价格</span>
-											<span class="col col-3">购买数量</span>
-											<span class="col col-4">小计（元）</span>
-										</dt>
-										<dd class="item clearfix">
-											<div class="item-row">
-												<div class="col col-1">
-													<div class="g-pic">
-														<img src="{{$res->order_shop_img}}" width="40" height="40" />
-													</div>
-													<div class="g-info">
-														<a href="#" target="_blank">
-														{{$res->order_shop_title}}
-														</a>
-													</div>
-												</div>
+							<div class="member-sheet clearfix">
 
-												<div class="col col-2">39元</div>
-												<div class="col col-3">1</div>
-												<div class="col col-4">39元</div>
-											</div>
-										</dd>
-										
-									</dl>
-									<div class="checkout-count clearfix">
-										<div class="checkout-count-extend xm-add-buy">
+							
+						<div class="bs-example" data-example-id="hoverable-table">
+									    <table class="table table-hover">
+									      <thead>
+									        <tr>
+									          <th>商品图片</th>
+									          <th>商品名称</th>
+									          <th>商品单价</th>
+									          <th>购买数量</th>
+									          <th>订单状态</th>
+									        </tr>
+									      </thead>
+									    
 											
+									      <tbody>
+									      
+									      	
+									        <tr>
+									         
+									          <td> 
+									          	<img src=" {{$data->goods_pic}} " alt="..." class="img-circle" width="100px" height="100">
+									          </td>
+									          <td> {{$data->goods_name}} </td>
+									          <td> {{$data->goods_price}} </td>
+									          <td> {{$data->num}} </td>
+									          <td>@if($data->goods_status==0)未发货@elseif($data->goods_status==1)已发货@else交易完成@endif</td>
+									          
+									         				         
+									        </tr>
+									       
+									      </tbody> 
+									      			
 
-										</div>
-										<!-- checkout-count-extend -->
-										<div class="checkout-price">
-											<ul>
-
-												<li>
-													订单总额：<span>244元</span>
-												</li>
-												<li>
-													活动优惠：<span>-0元</span>
-													<script type="text/javascript">
-                                                        checkoutConfig.activityDiscountMoney=0;
-                                                        checkoutConfig.totalPrice=244.00;
-													</script>
-												</li>
-												
-												<li>
-													运费：<span id="postageDesc">0元</span>
-												</li>
-											</ul>
-											<p class="checkout-total">应付总额：<span><strong id="totalPrice">244</strong>元</span></p>
-										</div>
-										<!--  -->
-									</div>
-								</div>
-							</div>
-
-
+									    </table>
+									  </div>
+								
 						</div>
+					
+					</div>
 						<!-- 商品清单 END -->
 						<input type="hidden"  id="couponType" name="Checkout[couponsType]">
 						<input type="hidden" id="couponValue" name="Checkout[couponsValue]">
