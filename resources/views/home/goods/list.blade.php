@@ -329,7 +329,7 @@
                                         <div class="price-box">
                                             @if($v->goods_preferential != $v->goods_price)
                                                 <span class="price">
-                                                    ￥{{$goods->goods_preferential}}
+                                                    ￥{{$v->goods_preferential}}
                                                     <input type="hidden" name="new_price" value="{{$v->preferential}}">
                                                 </span>
                                                 <span class="old-price">

@@ -25,10 +25,10 @@
 						<th class="tab-1"><input type="checkbox"  name="s_all" class="s_all tr_checkmr" id="s_all_h"></th>
 						<th class="tab-2">商品</th>
 						<th class="tab-3">商品信息</th>
-						<th class="tab-4">单价</th>
-						<th class="tab-5">数量</th>
-						<th class="tab-6">小计</th>
-						<th class="tab-7">操作</th>
+						<th class="tab-4">价格</th>
+						<th class="tab-6">数量</th>
+						<th class="tab-7">小计</th>
+						<th class="tab-8">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -68,7 +68,9 @@
 								<input type="button" value="+" class="plus" style="width:20px;height:30px;" id="<?php echo $v->id ?>" />
 								</th>
 							</div>
-						<th class="xiaoji">{{$v->goods_price}}</th>
+						<th class="xiaoji">
+							{{$v->goods_price}}
+						</th>
 						<th><a href="javascript:void(0)" class="remove" ids="{{$v->id}}">删除</a></th>
 					</tr>
 					<?php  $total +=$v->num*$v->goods_price ?>
@@ -99,7 +101,7 @@
 	</div>
 </section>
 	@else
-<!-- slider(轮播图)-start -->
+<!-- slider(空购物车)-start -->
 <div class="container">
     <div class="slider">
         <!-- Slider Image -->
@@ -306,21 +308,7 @@ $.ajaxSetup({
 				
 			} else {
 
-				$('.lamp203').html(`<div class="cart-empty">
-				    <div class="message">
-				        <ul>
-				            <li class="txt">
-				                购物车bu空空的哦~，去看看心仪的商品吧~
-				            </li>
-				            <li class="mt10">
-				                <a href="/home/index" class="ftx-05">
-				                    去购物&gt;
-				                </a>
-				            </li>
-				            
-				        </ul>
-				    </div>
-				</div>`);
+				location.reload(true);
 			}
 
 		});
