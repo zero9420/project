@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Home\Info;
 use App\Models\Home\OrderDetail;
 use DB;
+use App\Models\Home\Evalua;
+
 
 class OrderController extends Controller
 {
@@ -82,14 +84,20 @@ class OrderController extends Controller
         $res =DB::table('shop_order')->where('order_info_cid',$user)->first();
 
         $data = DB::table('shop_order_detail')->where('id',$id)->first();
-        
+        // 获取订单号
+        $oid = $data->order_id;
+        // 获取商品id
+        $gid = $data->goods_id;
+        // 获取评价
+        $comments = Evalua::where('uid',$user)->where('oid',$oid)->where('gid',$gid)->first();
+
         return view('home.order.details',[
             'title'=>'订单详情',
             'res'=>$res,
-            'data'=>$data
+            'data'=>$data,
+            'comments'=>$comments
 
         ]);
-        
     }
 
     /**

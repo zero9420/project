@@ -5,29 +5,21 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Evalua;
-use App\Models\Home\Evaldetail;
+use App\Models\Admin\Goods;
 use DB;
 
 class EvaluaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('home.eval.add',['title'=>'商品评价页']);
+    	$goods = DB::table('shop_order_detail')->where('goods_id',$id)->first();
+    	// dd($goods);
+        return view('home.eval.add',['title'=>'商品评价页','goods'=>$goods]);
     }
 
     /**
@@ -36,38 +28,30 @@ class EvaluaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function save(Request $request)
     {
         // 表单验证
         $this->validate($request, [
             'goods_grade' => 'required',
             'comments'=>'max:120',
-            'goods_pic'=>'max:5',
+            'eval_pic'=>'max:5',
         ],[
             'goods_grade.required'=>'商品星级评价不能为空',
             'comments.max'=>'商品评价最多120字!',
-            'goods_pic.max'=>'商品图片最多5张',
+            'eval_pic.max'=>'商品图片最多5张',
 
         ]);
         $res = $request->except('_token','_method','eval_pic');
 
-        dd($res);
-
         // 获取用户id
         $res['uid'] = session('user_id');
 
-        // 获取商品id
-        $res['gid'] = session('user_id');
-
-        // 获取订单id
-        $res['oid'] = session('user_id');
-
         // 存入评价主表
-        $res = Evalua::create($res);
+        $data_eval = Evalua::create($res);
         // 获取评价id
-        $eid = $res->eid;
+        $eid = $data_eval->eid;
 
-        // 商品图片
+        // 商品评价图片
         if($request->hasFile('eval_pic')){
 
             $req = $request->file('eval_pic');
@@ -88,7 +72,7 @@ class EvaluaController extends Controller
                 $v->move('./uploads/goods/pingjia/',$name.'.'.$suffix);
 
                 // 添加评价id
-                $e_pic['eval_eid'] = $eid;
+                $e_pic['eid'] = $eid;
 
                 // 添加评论图片
                 $e_pic['eval_pic'] = '/uploads/goods/pingjia/'.$name.'.'.$suffix;
@@ -102,17 +86,16 @@ class EvaluaController extends Controller
             try{
                 // 存入数据库
                 $data = $eval->evalua()->createMany($eval_pic);
-                if($res && $data){
-                    return view('/home/userinfo')->with('success','评价成功!');
+                if($data){
+                    return redirect('/home/userinfo')->with('success','评价成功!');
                 }
             }catch(\Exception $e){
                 return back()->with('error','评价失败!');
-
             }
         } else {
             try{
-                if($res){
-                    return view('/home/userinfo')->with('success','评价成功!');
+                if($data_eval){
+                    return redirect('/home/userinfo')->with('success','评价成功!');
                 }
             }catch(\Exception $e){
                 return back()->with('error','评价失败!');
@@ -120,49 +103,20 @@ class EvaluaController extends Controller
             }
         }
     }
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * [myeval 我的评价]
+     * @param  Request $request [description]
+     * @return [type]           [description]
      */
-    public function show($id)
+    public function read(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    	$uid = session('user_id');
+    	$data = Evalua::with('evalua')->with('order')->where('uid',$uid)->get();
+    	$user = DB::table('shop_info')->where('info_cid',$uid)->first();
+    	// 获取商品详情
+    	foreach ($data as $k => $v) {
+    		$goods[] = Goods::with('spec')->where('goods_id',$v->order->goods_id)->where('goods_status','1')->first();
+    	}
+    	return view('home.eval.index',['title'=>'评论页','data'=>$data,'user'=>$user,'goods'=>$goods]);
     }
 }

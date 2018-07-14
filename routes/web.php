@@ -159,5 +159,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 个人中心商品收藏删除
 	Route::any('/home/goods','home\CollectController@goods');
 	// 商品评价
-	Route::resource('/home/eval','home\EvaluaController');
+	Route::any('/home/eval/{id}','home\EvaluaController@create')->where(['id'=>'\d+']);
+	Route::any('/home/eval','home\EvaluaController@save');
+	Route::any('/home/myeval','home\EvaluaController@read');
 });

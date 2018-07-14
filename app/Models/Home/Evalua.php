@@ -40,4 +40,18 @@ class Evalua extends Model
     {
         return $this->hasMany('App\Models\Home\Evaldetail','eid');
     }
+    /**
+     * 获得与用户关联的订单记录。
+     */
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Home\OrderDetail','oid','order_id');
+    }
+    /**
+     * 获得与用户关联的姓名。
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Home\User','uid','id');
+    }
 }

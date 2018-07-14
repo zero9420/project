@@ -101,7 +101,7 @@
 	</div>
 </section>
 	@else
-<!-- slider(空购物车)-start -->
+<!-- cart-start -->
 <div class="container">
     <div class="slider">
         <!-- Slider Image -->
@@ -124,7 +124,7 @@
         </div>
     </div>
 </div>
-<!-- slider-end -->
+<!-- cart-end -->
 @endif
 
 
