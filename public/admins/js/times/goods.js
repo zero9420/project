@@ -98,3 +98,17 @@ $('#stock').click(function(event) {
     })
 
 });
+// 一键全部上架
+$('#status').click(function(event) {
+    /* Act on the event */
+    var all = 1;
+    $.get('/admin/allstatus',{all:all},function(data){
+        if(data == '01'){
+            alert('上架成功');
+            location.reload(true);
+        } else {
+            alert('上架失败');
+        }
+    })
+
+});

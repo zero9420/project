@@ -15,7 +15,7 @@
                     <li>
                         <span class="thumbnail" title="商品ID:{{$v->goods_id}}; 商品名:{{$v->goods_name}};"><img src="{{$v->spec[0]->goods_pic}}" alt=""></span>
                         <span class="mws-gallery-overlay">
-                            <a href="/admin/goods?gname={{$v->goods_name}}" class="mws-gallery-btn" title="点击去补货"><i class="icon-search"></i></a>
+                            <a href="/admin/goods?gname={{$v->goods_name}}" class="mws-gallery-btn" title="点击查看详情"><i class="icon-search"></i></a>
                         </span>
                     </li>
                     @endforeach

@@ -136,4 +136,20 @@ class GoodsdetailController extends Controller
             echo '00';
         }
     }
+    /**
+     * [allstatus 一键全部上架]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function allstatus(Request $requect)
+    {
+        $all = $requect->input('all');
+        $res = Goods::where('goods_status','2')->update(['goods_status'=>$all]);
+        // echo $res;
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
 }

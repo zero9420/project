@@ -84,7 +84,7 @@
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
-                           库存@if($stock!=0)<a href="javascript:void(0)" id="stock" title="将库存小于20的一键全部加100"><i class="icol-add"></i></a>
+                           库存@if($stock!=0)<a href="javascript:void(0)" id="stock" title="将库存小于20的一键全部加100"><i class="icon-truck"></i></a>
                            @endif
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -96,8 +96,7 @@
                            热销
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
-                           状态
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">状态&nbsp;&nbsp;@if($status != '0')<span id="status" title="一键全部上架"><i class="icon-rocket"></i></span>@endif
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">

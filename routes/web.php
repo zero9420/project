@@ -53,6 +53,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 	Route::any('/admin/ajaxuct','admin\GoodsdetailController@ajaxuct');
 	// 增加库存
 	Route::any('/admin/ajaxadd','admin\GoodsdetailController@ajaxadd');
+	// 一键全部上架
+	Route::any('/admin/allstatus','admin\GoodsdetailController@allstatus');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');

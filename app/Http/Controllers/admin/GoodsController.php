@@ -46,11 +46,13 @@ class GoodsController extends Controller
         // 排序
         $num = $goods->firstItem();
         $stock = Goods::where('goods_stock','<=','20')->count();
+        $status = Goods::where('goods_status','2')->count();
         return view('admin/goods/index',['title'=>'商品浏览页',
                                         'goods'=>$goods,
                                         'num'=>$num,
                                         'request'=> $request,
-                                        'stock'=>$stock
+                                        'stock'=>$stock,
+                                        'status'=>$status
                                     ]);
     }
 
