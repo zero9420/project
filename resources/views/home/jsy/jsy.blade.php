@@ -28,7 +28,7 @@
 								<div class="clearfix xm-address-list" id="checkoutAddrList">
 									<dl class="item" >
 										<dt>
-											<strong class="itemConsignee">{{$info->info_name}}</strong>
+											
 											<input type="hidden" name="order_name" value="{{$info->info_name}}">
 											<span class="itemTag tag">家</span>
 										</dt>

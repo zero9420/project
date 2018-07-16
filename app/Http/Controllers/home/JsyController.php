@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Cart;
 use App\Models\Home\Info;
+use App\Models\Home\User;
 use App\Models\Admin\Goods;
 use DB;
 
@@ -25,7 +26,8 @@ class JsyController extends Controller
 
         $info = Info::where('info_cid',$user)->first();
 
-        
+      
+
        return view('home/jsy/jsy',[
         'info'=>$info,
         'cart'=>$cart
@@ -93,9 +95,18 @@ class JsyController extends Controller
         }
 
 
-        $ord = DB::table('shop_order')->where('order_info_cid',session('user_id'))->first();
+        $ord = DB::table('shop_order')->where('order_info_cid',session('user_id'))->where('order_id',$req['order_id'])->first();
 
-        $der = DB::table('shop_order_detail')->where('order_id',$ord->order_id)->get();
+      
+        $der = DB::table('shop_order_detail')->where('order_id',$req['order_id'])->get();
+
+       
+        if ($der) {
+
+           
+            DB::table('shop_cart')->where('user_id',session('user_id'))->delete();
+
+        }
 
         return view('home/jsy/save',['ord'=>$ord,'der'=>$der]);
 
