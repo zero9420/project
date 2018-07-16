@@ -22,7 +22,8 @@
 						<th class="tab-1"><input type="checkbox"  name="s_all" class="s_all tr_checkmr" id="s_all_h"></th>
 						<th class="tab-2">商品</th>
 						<th class="tab-3">商品信息</th>
-						<th class="tab-4">价格</th>
+						<th class="tab-4">优惠价</th>
+						<th class="tab-5">原价</th>
 						<th class="tab-6">数量</th>
 						<th class="tab-7">小计</th>
 						<th class="tab-8">操作</th>
@@ -38,9 +39,9 @@
 					<tr>
 					<?php $total =0; ?>
 						@foreach($data as $k=>$v)
-						<th><input type="checkbox" checked style="margin-left:10px; float:left"></th>
+						<th><input type="checkbox" checked  disabled style="margin-left:15px; float:left"></th>
 						<th class="tab-th-1">
-							<a href="/goodsdetail/{{$v->goods_id}}"><img src="{{$v->goods_pic}}" alt=""></a>
+							<a href="/goodsdetail/{{$v->goods_id}}"><img src="{{$v->goods_pic}}" alt="" style="height:100px; width:99px"></a>
 
 							<a href="/goodsdetail/{{$v->goods_id}}" class="tab-title">{{$v->goods_name}} </a>
 						</th>
@@ -50,6 +51,9 @@
 						</th>
 						<th>
 							<p class="price">{{$v->goods_price}}</p>
+						</th>
+						<th >
+							<del><p class="prices">{{$v->goods_prices}}</p></del>
 						</th>
 							<th class="tab-th-2">
 								<input type="button" value="-" class="minus"

@@ -138,11 +138,14 @@
                         </ul>
                     </li>
                     <li>
+                        @if(session('auth')==1)
                         <a href="#"><i class="icon-users"></i>角色管理</a>
+
                         <ul class='closed'>
                             <li><a href="/admin/auth/create">添加角色</a></li>
                             <li><a href="/admin/auth">浏览角色</a></li>
                         </ul>
+                            @endif
                     </li>
                     <li>
                         <a href="#"><i class="icon-th"></i>分类管理</a>
@@ -195,6 +198,7 @@
                     </li>
 
                     <li>
+                        @if(session('auth')==1)
                         <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/users/create">添加用户</a></li>
@@ -202,7 +206,7 @@
 
                         </ul>
                     </li>
-
+                    @endif
 
 
                       <li>

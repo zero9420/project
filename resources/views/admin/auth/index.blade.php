@@ -14,35 +14,23 @@
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-			<form action="/admin/user" method='get'>
+			<form action="/admin/auth" method='get'>
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
-	                <label>
-	                    显示
-	                    <select name="num" size="1" aria-controls="DataTables_Table_1">
-	                        <option value="10" selected="selected">
-	                            10
-	                        </option>
-	                        <option value="25">
-	                            25
-	                        </option>
-	                        <option value="50">
-	                            50
-	                        </option>
-	                        <option value="100">
-	                            100
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
-	            </div>
-	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
-	                <label>
-	                    关键字:
-	                    <input type="text" name='search' aria-controls="DataTables_Table_1">
-	                </label>
 
-	                <button class='btn btn-info'>搜索</button>
 	            </div>
+                <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                    <label>
+                        用户名:
+                        <input type="text" name='search' value="" aria-controls="DataTables_Table_1">
+                    </label>
+
+                    <label>
+                        邮箱:
+                        <input type="text" name='email' value="" aria-controls="DataTables_Table_1">
+                    </label>
+
+                    <button class='btn btn-info'>搜索</button>
+                </div>
             </form>
 
 
