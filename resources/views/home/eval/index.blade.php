@@ -67,7 +67,7 @@
                                 {{session('error')}}
                             </div>
                         @endif
-                    	@if(!empty($data))
+                    	@if(count($data) != '0')
 	                    	@foreach($data as $v)
 		                        <div class="col-md-12 col-sm-12 col-xs-12">
 		                            <!-- shop-eval-start -->
@@ -97,14 +97,19 @@
 													</div>
 												@endforeach
 			                                </div>
+                                            <hr>
 			                            </div>
-		                            </div>
+                                    </div>
 		                            <div class="col-md-4 col-sm-4 col-xs-4">
-                                        <div class="col-md-12"><a class="quick-view" href="#" title="快速浏览商品"  data-toggle="modal" data-target="#myModal{{$v->order->goods_id}}">
-                                        <span class="label label-success">快速浏览商品详情</span>
-                                        </a></div>
-                                        <div style="margin-bottom: 30px;"></div>
+                                        <div class="col-md-12"><span  class="label label-primary">商品名称</span>&nbsp;:&nbsp;<a href="/goodsdetail/{{$v->order->goods_id}}">{{$v->order->goods_name}}</a></div>
+                                        <div style="height:25px;"></div>
+                                        <div class="col-md-12"><span  class="label label-danger">商品价格</span>&nbsp;:&nbsp;￥{{$v->order->goods_price}}</div><div style="height:25px;"></div>
+                                        <div class="col-md-12"><span  class="label label-info">商品颜色</span>&nbsp;:&nbsp;{{$v->order->goods_color}}</div>
+                                        <div style="height:25px;"></div>
+                                        <div class="col-md-12"><span  class="label label-warning">商品尺寸</span>&nbsp;:&nbsp;{{$v->order->goods_size}}</div>
+                                        <div style="height:25px;"></div>
                                         <div class="col-md-12"><span class="label label-default">添加时间</span>&nbsp;:&nbsp;{{$v->created_at}}</div>
+                                        <hr>
 		                            </div>
 		                            <!-- shop-eval-end -->
 		                        </div>
@@ -139,190 +144,4 @@
 		</div>
 	</div>
 </div>
-
-
-@foreach($goods as $vg)
-<div id="myModal{{$vg->goods_id}}" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="product-details">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-5 col-xs-12 col-sm-5">
-                                <div class="picture-tab">
-                                    <ul class="pic-tabs">
-                                        @foreach($vg->spec as $vv)
-                                        <li class=" "><a data-toggle="tab" href="#pic{{$vv->goods_spec_id}}" aria-expanded="true"><img src="{{$vv->goods_pic}}" alt=""></a></li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="tab-content">
-                                    <div id="pic{{$vg->spec[0]->goods_spec_id}}" class="tab-pane fade in active">
-                                        <!-- single-product-start -->
-                                        <div class="single-product">
-                                            <div class="single-product-img">
-                                                <a href="/goodsdetail/{{$vg->goods_id}}">
-                                                    <img src="{{$vg->spec[0]->goods_pic}}" alt="">
-                                                </a>
-                                                <span class="sale-box">
-                                                    <span class="sale">热销</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <!-- single-product-end -->
-                                    </div>
-                                    @foreach($vg->spec as $vvv)
-                                        <div id="pic{{$vvv->goods_spec_id}}" class="tab-pane fade">
-                                            <!-- single-product-start -->
-                                            <div class="single-product">
-                                                <div class="single-product-img">
-                                                    <a href="/goodsdetail/{{$v->goods_id}}">
-                                                        <img src="{{$vvv->goods_pic}}" alt="">
-                                                    </a>
-                                                    <span class="sale-box">
-                                                        <span class="sale">热销</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <!-- single-product-end -->
-                                        </div>
-                                    @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-7 col-xs-12 col-sm-7">
-                                <div class="product-details-info">
-                                    <form action="/home/cart/{{$v->goods_id}}" method='POST'>
-                                        {{ csrf_field() }}
-                                        <h5 class="product-title">{{$vg->goods_name}}</h5>
-                                        <div class="price-box">
-                                            @if($vg->goods_preferential != $v->goods_price)
-                                                <span class="price">
-                                                    ￥{{$vg->goods_preferential}}
-                                                    <input type="hidden" name="new_price" value="{{$vg->goods_preferential}}">
-                                                </span>
-                                                <span class="old-price">
-                                                    ￥{{$vg->goods_price}}
-                                                    <input type="hidden" name="old_price" value="{{$vg->goods_price}}">
-                                                </span>
-                                            @else
-                                                <span class="price">
-                                                    ￥{{$vg->goods_price}}
-                                                    <input type="hidden" name="old_price" value="{{$vg->goods_price}}">
-                                                    <input type="hidden" name="new_price" value="{{$v->goods_price}}">
-                                                </span>
-                                            @endif
-                                        </div>
-                                        <div class="rating">
-                                            <a class="add-wishlist" href="/goodsdetail/{{$vg->goods_id}}" title="加入我的收藏">
-                                                <i class="fa fa-heart"></i>
-                                                <span>收藏宝贝</span>
-                                            </a>
-                                        </div>
-                                        <div class="short-description">
-                                            <p>{{$vg->goods_info}}
-                                            </p>
-                                        </div>
-                                        <div class="add-cart">
-                                            <span>销量:</span>
-                                            <a href="javascript:void(0)">
-                                                <span>{{$vg->goods_sales}}</span>
-                                            </a>
-                                        </div>
-                                        @php
-                                            $size = array_filter(explode('|',$vg->goods_size));
-                                            $color = array_filter(explode('|',$vg->goods_color));
-                                        @endphp
-                                        <div class="add-cart">
-                                            <span>尺码:</span>
-                                            @foreach($size as $vs)
-                                            <a href="javascript:void(0)">
-                                                <input type="radio" name="goods_size" value="{{$vs}}">
-                                                <span>{{strtoupper($vs)}}</span>
-                                            </a>
-                                            @endforeach
-                                        </div>
-                                        <div class="add-cart">
-                                            <span>颜色:</span>
-                                            @foreach($color as $vc)
-                                            <a href="javascript:void(0)">
-                                                <input type="radio" name="goods_color" value="{{$vc}}">
-                                                <span>{{$vc}}</span>
-                                            </a>
-                                            @endforeach
-                                        </div>
-                                        <div class="add-cart">
-                                            <p class="quantity cart-plus-minus">
-                                                <label>购买数量</label>
-                                                <input type="text" value="1" name="num">
-                                            </p>
-                                            <div class="shop-add-cart">
-                                                <button class="addCart">加入购物车</button>
-                                                <button class="addCart" style="background: #ff6464;" title="点击按钮,到下一步确定购买信息!">立即购买</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="widget-icon">
-                                    </div>
-                                    <style>
-                                        .add-cart a{
-                                            margin-right: 10px;
-                                        }
-                                        .add-cart span{
-                                            margin-right: 10px;
-                                        }
-                                    </style>
-                                    <div class="add-cart">
-                                        <span>承诺:</span>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/qitian.png" alt="" title="满足七天退货的前提下,包邮商品需买家承担退货运费!">
-                                            <span>七天退货</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/dingdanxian.png" alt="" title="订单险">
-                                            <span>订单险</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/wuyoutuihuo.png" alt="" title="无忧退货">
-                                            <span>无忧退货</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/yunfeixian.png" alt="" title="运费险">
-                                            <span>运费险</span>
-                                        </a>
-                                    </div>
-                                    <div class="widget-icon">
-                                    </div>
-                                    <div class="add-cart" style="margin-right: 20px;">
-                                        <span >支付:</span>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/zhifubao.png" alt="" title="支付宝">
-                                            <span>支付宝</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/weixin.png" alt="" title="微信">
-                                            <span>微信</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/xinyongka.png" alt="" title="信用卡">
-                                            <span>信用卡</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="/home/bs/img/detail/mayihuabei.png" alt="" title="蚂蚁花呗">
-                                            <span>蚂蚁花呗</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
 @endsection

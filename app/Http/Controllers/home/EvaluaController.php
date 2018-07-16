@@ -113,11 +113,6 @@ class EvaluaController extends Controller
     	$uid = session('user_id');
     	$data = Evalua::with('evalua')->with('order')->where('uid',$uid)->get();
     	$user = DB::table('shop_info')->where('info_cid',$uid)->first();
-    	// 获取商品详情
-    	foreach ($data as $k => $v) {
-    		$goods[] = Goods::with('spec')->where('goods_id',$v->order->goods_id)->where('goods_status','1')->first();
-    	}
-        $goods = array_filter($goods);
-    	return view('home.eval.index',['title'=>'评论页','data'=>$data,'user'=>$user,'goods'=>$goods]);
+    	return view('home.eval.index',['title'=>'评论页','data'=>$data,'user'=>$user]);
     }
 }
