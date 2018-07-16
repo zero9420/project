@@ -391,12 +391,11 @@
                         <p>
                             订阅我们,新品上市、特别优惠和其他折扣信息的更新我们将及时通知您!
                         </p>
-                        <form action="#">
-                            <div class="subscribe-form">
-                                <input type="text" placeholder="请输入您的邮箱..." class="form-control search-form" />
-                                <button>点击立即订阅</button>
-                            </div>
-                        </form>
+                    </div>
+                    <div class="col-md-6 col-md-offset-4">
+                        <a href="javascript:void(0)" title="拿出手机扫一扫二维码,关注我们!!">
+                            <img src="/home/bs/img/detail/guanzhuwomen.jpg" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -489,6 +488,12 @@
                                         <p>{{$v->goods_info}}
                                         </p>
                                     </div>
+                                    <div class="add-cart">
+                                        <span>销量:</span>
+                                        <a href="javascript:void(0)">
+                                            <span>{{$v->goods_sales}}</span>
+                                        </a>
+                                    </div>
                                     @php
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
@@ -524,20 +529,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                    <div class="widget-icon">
-                                        <a href="#">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </div>
                                     <div class="widget-icon">
                                     </div>
                                     <style>

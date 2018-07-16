@@ -11,6 +11,7 @@ use App\Models\Home\Cart;
 use App\Models\Admin\Position;
 use DB;
 use App\Models\Home\Collection;
+use App\Models\Home\Evalua;
 
 class GoodslistController extends Controller
 {
@@ -92,12 +93,12 @@ class GoodslistController extends Controller
      */
     public function detail(Request $request,$id)
     {
-        $goods = Goods::with('spec')->where('goods_id',$id)->first();
+        $goods = Goods::with('spec')->where('goods_id',$id)->where('goods_status','1')->first();
         // 取出数据拆分成数组并取出空值
         $size = array_filter(explode('|',$goods->goods_size));
         $color = array_filter(explode('|',$goods->goods_color));
         $gname = mb_substr($goods->goods_name,0,5);
-        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
+        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->where('goods_status','1')->take(10)->get();
 
 
         //收藏者的id
@@ -105,18 +106,20 @@ class GoodslistController extends Controller
 
         // 查询该商品信息
         $gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
-         $arr =  json_decode($gid);
-        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related,'arr'=>$arr]);
+        $arr =  json_decode($gid);
+
+        // 查询商品评论
+        $comments = Evalua::with('evalua')->with('user')->with('order')->where('gid',$id)->get();
+        return view('home.goods.detail',['title'=>'商品详情页','goods'=>$goods,'size'=>$size,'color'=>$color,'related'=>$related,'arr'=>$arr,'comments'=>$comments]);
 
 
-       
 
 
     }
 
     public function ajax(Request $request)
     {
-        // ajax关注收藏 
+        // ajax关注收藏
         // 获取收藏商品的ID
         $id = $request->input('id');
 
@@ -139,9 +142,6 @@ class GoodslistController extends Controller
             $data = Collection::where('collection_cid',$user)->where('collection_gid',$id)->delete();
 
         }
-      
-
-      
     }
 
 }

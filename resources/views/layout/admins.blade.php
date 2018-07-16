@@ -51,38 +51,36 @@
                 <a href="/"><h4>云购物购物商城首页</h4></a>
 			</div>
         </div>
-        
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
-        
         	<!-- Notifications -->
+            @php
+                $count = App\Models\Admin\Goods::where('goods_stock','<','20')->count();
+                $prompt = App\Models\Admin\Goods::where('goods_stock','<','20')->take(5)->get();
+            @endphp
         	<div id="mws-user-notif" class="mws-dropdown-menu">
+                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
+                <!-- Unread notification count -->
+                <span class="mws-dropdown-notif">{{$count}}</span>
                 <!-- Notifications dropdown -->
                 <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
+                    <div class="mws-dropdown-content">
                         <ul class="mws-notifications">
-                        	<li class="read">
-                            	<a href="#">
+                            @foreach($prompt as $v)
+                            <li class="read">
+                                <a href="#">
                                     <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+                                        商品ID:{{$v->goods_id}}; 商品名:{{$v->goods_name}}
                                     </span>
                                     <span class="time">
-                                        {{date('Y-m-d H:i:s',time())}}
+                                        库存不足,请及时添加
                                     </span>
                                 </a>
                             </li>
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        {{date('Y-m-d H:i:s',time())}}
-                                    </span>
-                                </a>
+                            @endforeach
                         </ul>
                         <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Notifications</a>
+                            <a href="/admin/index">查看全部.....</a>
                         </div>
                     </div>
                 </div>
@@ -107,17 +105,17 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Start Main Wrapper -->
     <div id="mws-wrapper">
-    
+
     	<!-- Necessary markup, do not remove -->
 		<div id="mws-sidebar-stitch"></div>
 		<div id="mws-sidebar-bg"></div>
-        
+
         <!-- Sidebar Wrapper -->
         <div id="mws-sidebar">
-        
+
             <!-- Hidden Nav Collapse Button -->
             <div id="mws-nav-collapse">
                 <span></span>
@@ -295,13 +293,6 @@
     <script src="/admins/js/times/goods.js"></script>
 
     <script type="text/javascript">
-       setTimeout(function(){
-
-            $('.mws-form-message').remove();
-
-       },3000);
-
-
     </script>
     @section('js')
 

@@ -11,8 +11,38 @@
                 <div class="product-details">
                     <div class="container">
                         <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-2 col-md-offset-2">
+                                        <h4>商品信息:</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-2 col-md-offset-2">
+                                        <a href="/goodsdetail/2">
+                                            <img src="{{$goods->goods_pic}}" alt="..." class="img-thumbnail">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><span class="label label-success">商品名称</span>&nbsp;:&nbsp;{{$goods->goods_name}}</p>
+                                        <p><span class="label label-danger">商品价格</span>&nbsp;:&nbsp;￥{{$goods->goods_price}}</p>
+                                        <p><span class="label label-info">商品颜色</span>&nbsp;:&nbsp;{{$goods->goods_color}}</p>
+                                        <p><span class="label label-primary">商品尺码</span>&nbsp;:&nbsp;{{$goods->goods_size}}</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a class="btn btn-default btn-lg" href="/goodsdetail/3">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 再次购买
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <hr>
+                                    </div>
+                                </div>
                             <form action="/home/eval" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="gid" value="{{$goods->goods_id}}">
+                                <input type="hidden" name="oid" value="{{$goods->order_id}}">
                                 <div class="col-md-12">
                                     <div class="col-md-6 col-md-offset-3">
                                         @if (count($errors) > 0)
@@ -38,7 +68,7 @@
                             	<div class="col-md-12 col-sm-12 col-xs-12">
     	                        	<div class="col-md-8 col-md-offset-2">
     		                        	<div id="starRating">
-    		                        		<p>点击进行星星评分:</p>
+    		                        		<h4>点击星星进行评分:</h4>
     									    <p class="photo">
     									        <span><i class="high"></i><i class="nohigh"></i></span>
     									        <span><i class="high"></i><i class="nohigh"></i></span>
@@ -54,8 +84,8 @@
     	                        </div>
                             	<div class="col-md-12 col-sm-12 col-xs-12">
     	                        	<div class="col-md-5 col-md-offset-2">
-    	                        		<p>请输入文本评价:</p>
-    	                        		<textarea class="form-control" id="comments" name="comments" maxlength="200" style="resize:none;" rows="5">请输入120以内的商品评论</textarea>
+    	                        		<h4>请输入文本评价:</h4>
+    	                        		<textarea class="form-control" id="comments" name="comments" maxlength="200" style="resize:none;" rows="5" value="{{old('comments')}}">请输入120以内的商品评论</textarea>
     	                        		<p><span id="count">120</span>/120</p>
     	                        	</div>
                             	</div>
@@ -66,7 +96,7 @@
                             	</div>
                             	<div class="col-md-12 col-sm-12 col-xs-12">
     	                        	<div class="col-md-5 col-md-offset-2">
-    	                        		<p>请上传图片评价:</p>
+    	                        		<h4>请上传图片评价:</h4>
     	                        		<input type="file" name='eval_pic[]' multiple="multiple">
     	                        	</div>
                                     <div class="col-md-1 col-md-offset-1">

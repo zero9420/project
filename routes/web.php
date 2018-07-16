@@ -51,6 +51,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
 	// 商品减价
 	Route::any('/admin/ajaxuct','admin\GoodsdetailController@ajaxuct');
+	// 增加库存
+	Route::any('/admin/ajaxadd','admin\GoodsdetailController@ajaxadd');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -161,5 +163,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	// 个人中心商品收藏删除
 	Route::any('/home/goods','home\CollectController@goods');
 	// 商品评价
-	Route::resource('/home/eval','home\EvaluaController');
+	Route::any('/home/eval/{id}','home\EvaluaController@create')->where(['id'=>'\d+']);
+	Route::any('/home/eval','home\EvaluaController@save');
+	Route::any('/home/myeval','home\EvaluaController@read');
 });

@@ -33,7 +33,7 @@
                         <h2>分类</h2>
                         <ul>
                             @php
-                                $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
+                                $cates = App\Models\Admin\Cate::getsubcate(0);
                             @endphp
                             <li  class="bg-info">
                                 <label class="check-label">
@@ -354,6 +354,12 @@
                                             <p>{{$v->goods_info}}
                                             </p>
                                         </div>
+                                        <div class="add-cart">
+                                            <span>销量:</span>
+                                            <a href="javascript:void(0)">
+                                                <span>{{$v->goods_sales}}</span>
+                                            </a>
+                                        </div>
                                         @php
                                             $size = array_filter(explode('|',$v->goods_size));
                                             $color = array_filter(explode('|',$v->goods_color));
@@ -387,20 +393,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="widget-icon">
-                                        <a href="#">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </div>
                                     <div class="widget-icon">
                                     </div>
                                     <style>

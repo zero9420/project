@@ -120,4 +120,20 @@ class GoodsdetailController extends Controller
             echo '00';
         }
     }
+    /**
+     * [ajaxadd 增加库存]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function ajaxadd(Request $requect)
+    {
+        $num = $requect->input('stock');
+        $res = Goods::where('goods_stock','<=',20)->increment('goods_stock',$num);
+        // echo $res;
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
 }
