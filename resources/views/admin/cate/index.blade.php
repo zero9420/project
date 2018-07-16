@@ -88,9 +88,9 @@
                             {{$v->cate_path}}
                         </td>
                         <td class=" ">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;
                             <a href="/admin/cate/{{$v->cate_id}}/edit" class='btn btn-warning'>修改</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;
                             <form action="/admin/cate/{{$v->cate_id}}" method='post' style="display: inline;">
 								{{method_field('DELETE')}}
 								{{csrf_field()}}
