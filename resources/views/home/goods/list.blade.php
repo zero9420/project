@@ -66,33 +66,7 @@
                             </li>
                             @endforeach
                         </ul>
-                    </div><!--
-                    <div class="content-box">
-                        <h2>按价格进行搜索</h2>
-                        <div class="info_widget">
-                        <form action="/goodslist" method="get">
-                            <div class="price_filter">
-                                <style>
-                                    input[type="number"]{
-                                        border: medium none;
-                                        font-weight: bold;
-                                        letter-spacing: 3px;
-                                        margin-left: -15px;
-                                        text-align: center;
-                                        width: 130px;
-                                    }
-                                </style>
-                                <div class="price_slider_amount">
-                                    <input type="number" name="price_min" value="300" placeholder="Add Your Price" />-
-                                    <input type="number" name="price_max" value="3000" placeholder="Add Your Price" />
-                                </div>
-                                <button class="price-filter" id="search">
-                                    搜索
-                                </button>
-                            </div>
-                        </form>
-                        </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -257,7 +231,7 @@
                                 </div>
                             </div>
                             <div style="float:right;">
-                                {{$goods->links()}}
+                                {{$goods->appends($arr)->links()}}
                             </div>
                         </div>
                     </div>

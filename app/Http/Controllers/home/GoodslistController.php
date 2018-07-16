@@ -78,10 +78,12 @@ class GoodslistController extends Controller
                     }
                 })->where('goods_status','1')->paginate(12);
     	}
+        $arr = ['id'=>$id];
             // dump($goods);
     	return view('home.goods.list',['title'=>'商品列表页',
     									'goods'=>$goods,
     									'id'=>$id,
+                                        'arr'=>$arr,
                                         'request'=> $request
     								]);
     }
