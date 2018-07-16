@@ -48,8 +48,20 @@
 		<div class="member-right fr">
 			<div class="member-head">
 				<div class="member-heels fl"><h2>我的收藏</h2></div>
-				<div class="member-backs member-icons fr"><a href="#">搜索</a></div>
-				<div class="member-about fr"><input placeholder="商品名称/商品编号/订单编号" type="text"></div>
+				<form action="/home/collection" method='get'>
+			 <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                    <label  class="DataTables1">
+                        最小价格:
+                        <input type="number" name='min_price' value="{{$request->min_price}}">
+                    </label>
+                    <label class="DataTables2">
+	                    最大价格:
+	                    <input type="number" name='max_price' value="{{$request->max_price}}">
+	                </label>
+
+	                <button class='btn btn-info'>搜索</button>
+	        </div>	
+	    </form>
 			</div>
 			<div class="member-switch clearfix">
 				<ul id="H-table" class="H-table">
@@ -63,76 +75,7 @@
 						<div class="member-all fl"><b class="on"></b>全选</div>
 						<div class="member-check clearfix fl"> <a href="#" class="member-delete">删除商品</a> </div>
 					</div>
-					<div class="member-vessel">
-						<ul>
-							<li class="clearfix">
-								
-
-								<div class="member-volume fl">
-									<a href="#" class="fl member-btn-fl"></a>
-									<div class="member-cakes fl">
-										<ul>
-											<li>
-												<a href="#"><img src="/homes/images/shangpinxiangqing/X-1.png" title="" width="125" height="125"></a>
-												<p>￥78.00</p>
-											</li>
-											
-										</ul>
-									</div>
-									<a href="#" class="fr member-btn-fr"></a>
-								</div>
-							</li>
-							<li class="clearfix">
-								<div class="member-volume fl">
-									<a href="#" class="fl member-btn-fl"></a>
-									<div class="member-cakes fl">
-										<ul>
-											<li>
-												<a href="#"><img src="/homes/images/shangpinxiangqing/X-1.png" title="" width="125" height="125"></a>
-												<p>￥78.00</p>
-											</li>
-											<li>
-												<a href="#"><img src="/homes/images/shangpinxiangqing/X-1.png" title="" width="125" height="125"></a>
-												<p>￥78.00</p>
-											</li>
-											<li>
-												<a href="#"><img src="/homes/images/shangpinxiangqing/X-1.png" title="" width="125" height="125"></a>
-												<p>￥78.00</p>
-											</li>
-											<li>
-												<a href="#"><img src="/homes/images/shangpinxiangqing/X-1.png" title="" width="125" height="125"></a>
-												<p>￥78.00</p>
-											</li>
-										</ul>
-									</div>
-									<a href="#" class="fr member-btn-fr"></a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-
-
-				<div class="clearfix" style="padding:30px 20px;">
-					<div class="fr pc-search-g pc-search-gs">
-						<a style="display:none" class="fl " href="#">上一页</a>
-						<a href="#" class="current">1</a>
-						<a href="javascript:;">2</a>
-						<a href="javascript:;">3</a>
-						<a href="javascript:;">4</a>
-						<a href="javascript:;">5</a>
-						<a href="javascript:;">6</a>
-						<a href="javascript:;">7</a>
-						<span class="pc-search-di">…</span>
-						<a href="javascript:;">1088</a>
-						<a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
+					
 </section>
 
 

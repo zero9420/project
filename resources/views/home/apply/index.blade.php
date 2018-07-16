@@ -1,7 +1,6 @@
 @extends('layout.homes')
 
 @section('content')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css" href="/homes/css/member.css">
 <link rel="stylesheet" type="text/css" href="/homes/css/user.css">
 <link rel="shortcut icon" type="image/x-icon" href="/homes/img/icon/favicon.ico">
@@ -55,7 +54,7 @@
 
 			</div>
 			<div class="member-border">
-				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span> <span><b>订单状态：</b><i class="reds">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</i></span></div>
+				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span></div>
 				<div class="member-cargo">
 					<h3>收货人信息：</h3>
 					<p>{{$data->order_name}}</p>
@@ -71,24 +70,20 @@
 						<li>
 							<div class="member-circle clearfix">
 
+								@foreach($order as $k=>$v)	
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
-										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-										<span class="gr3">X1</span>
+										<span class="gr1"><a href="#"><img about="" title="" src="{{$v->goods_pic}}" width="60" height="60"></a></span>
+										<span class="gr2"><a href="#">{{$v->goods_name}}</a></span>
+										<span class="gr3">{{$v->num}}</span>
 									</div>
 
-									<div class="ap3 fl  tk" id="ajax"><a href="javascript:void(0)">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
+									<div class="ap3 fl  tk" id="ajax"><a id="<?php echo $v->goods_id ?>" onclick="tk({{$v->goods_id}})"  >@if($v->order_return_goods == 1)退款中 @elseif($v->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
+
 								</div>
-
-								<!-- <div class="member-apply clearfix">
-									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="/homes/images/shangpinxiangqing/X-1.png" width="60" height="60"></a></span>
-										<span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-										<span class="gr3">X1</span>
-									</div>
-									<div class="ap3 fl ajax ck"><a href="#">@if($data->order_return_goods == 1)退款中 @elseif($data->order_return_goods == 2) 退款成功   @else申请退款   @endif</a> </div>
-								</div> -->
+									
+								@endforeach
+								
 							</div>
 						</li>
 					</ul>
@@ -99,10 +94,6 @@
 				</div>
 				<div class="member-modes clearfix">
 					<p class="clearfix"><b>配送方式：</b><em> 顺丰快递</em></p>
-				</div>
-				<div class="member-modes clearfix">
-					<p class="clearfix"><b>商品金额：</b><em>2113</em></p>
-					<p class="clearfix"><b>运费：</b><em> ￥20.00</em></p>
 				</div>
 				<div class="member-modes clearfix">
 					<p class="clearfix"><b>订单合计金额：</b><em>{{$data->order_payment}}</em></p>
@@ -116,19 +107,12 @@
 });
 <script>
 
-	$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
 
+		function tk($id){
 
+		var id = $id;
 
-	$('#ajax').click(function(){
-
-		var ids = 1;
-
-		$.get('/home/ajax',{ids:ids},function(data){
+		$.get('/home/ajax',{id:id,status:1},function(data){
 
 
 			console.log(data);
@@ -137,7 +121,7 @@
 
 
 
-	})
+	}
 
 </script>
 

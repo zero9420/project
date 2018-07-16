@@ -22,14 +22,40 @@ class Collectcontroller extends Controller
 		
 		$res = Info::where('info_cid',$user)->first();
 
-		//查询商品ID
-		$gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
+		if(!empty($res)){
 
-		$data = Goods::with('spec')->whereIn('goods_id',$gid)->paginate(4);	
-	
+			//查询商品ID
+			$gid = Collection::where('collection_cid',$user)->pluck('collection_gid');
+
+			$data = Goods::with('spec')->whereIn('goods_id',$gid)	
+			
+			 ->where(function($query) use($request){
+	               
+	                $max_price = $request->input('max_price');
+	                $min_price = $request->input('min_price');
+	               
+	                // 如果最大价格不为空
+	                if(!empty($max_price)) {
+	                    $query->where('goods_price','<=',$max_price);
+	                }
+	                // 如果最小价格不为空
+	                if(!empty($min_price)) {
+	                    $query->where('goods_price','>=',$min_price);
+	                }
+	            })
+
+	        ->paginate(4);
+			
+			return view('home.collection.index',['res'=>$res,'data'=>$data,'request'=> $request]);
+
+
+		}else{
+
+
+			return redirect('/home/userinfo');
+		}
+
 		
-		return view('home.collection.index',['res'=>$res,'data'=>$data]);
-
 		
 	}
 

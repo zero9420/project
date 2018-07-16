@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'info_name' => 'required',
             'info_telphone' => 'required|regex:/^1[3456789]\d{9}$/',
             'info_nickname'=> 'required|max:12|min:2',
+            'info_image' => 'image|required',
             'info_address' => 'required',
         ];
     }
@@ -48,6 +49,8 @@ class UserRequest extends FormRequest
                 'info_nickname.required' => '昵称不能为空',
                 'info_nickname.max' => '请输入2~16位的用户名',
                 'info_nickname.min' => '请输入2~16位的用户名',
+                'info_image.image' => '头像格式不正确',
+                'info_image.required' => '头像不能为空',
                 'info_address.required' => '地址不能为空',
                
             ];
