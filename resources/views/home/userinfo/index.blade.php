@@ -21,7 +21,7 @@
 					<img src="/homes/img/mem.png"></a>
 				</div>
 				<div class="fffl" >
-					<p>用户名:<div></div>撒反对</p>
+					<p>用户名:<div></div>admin</p>
 				</div>
 
 			</div>
