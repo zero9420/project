@@ -130,6 +130,12 @@
 	                                </p>
 	                            </div>
 	                            <div class="add-cart">
+	                            	<span>销量:</span>
+	                            	<a href="javascript:void(0)">
+	                            		<span>{{$goods->goods_sales}}</span>
+	                            	</a>
+	                            </div>
+	                            <div class="add-cart">
 	                            	<span>尺码:</span>
 	                            	@foreach($size as $k=>$v)
 	                            	<a href="javascript:void(0)">

@@ -87,7 +87,7 @@ class EvaluaController extends Controller
                 // 存入数据库
                 $data = $eval->evalua()->createMany($eval_pic);
                 if($data){
-                    return redirect('/home/userinfo')->with('success','评价成功!');
+                    return redirect('/home/myeval')->with('success','评价成功!');
                 }
             }catch(\Exception $e){
                 return back()->with('error','评价失败!');
@@ -95,7 +95,7 @@ class EvaluaController extends Controller
         } else {
             try{
                 if($data_eval){
-                    return redirect('/home/userinfo')->with('success','评价成功!');
+                    return redirect('/home/myeval')->with('success','评价成功!');
                 }
             }catch(\Exception $e){
                 return back()->with('error','评价失败!');

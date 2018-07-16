@@ -57,6 +57,16 @@
             <div role="tabpanel" class="tab-pane active fade in" id="list_view">
                 <div class="list-view">
                     <div class="row">
+                        @if(session('success'))
+                            <div id="form-error" class="alert alert-danger" role="alert">
+                                {{session('success')}}
+                            </div>
+                        @endif
+                        @if(session('error'))
+                            <div id="form-error" class="alert alert-danger" role="alert">
+                                {{session('error')}}
+                            </div>
+                        @endif
                     	@if(!empty($data))
 	                    	@foreach($data as $v)
 		                        <div class="col-md-12 col-sm-12 col-xs-12">
@@ -215,6 +225,12 @@
                                         <div class="short-description">
                                             <p>{{$vg->goods_info}}
                                             </p>
+                                        </div>
+                                        <div class="add-cart">
+                                            <span>销量:</span>
+                                            <a href="javascript:void(0)">
+                                                <span>{{$vg->goods_sales}}</span>
+                                            </a>
                                         </div>
                                         @php
                                             $size = array_filter(explode('|',$vg->goods_size));

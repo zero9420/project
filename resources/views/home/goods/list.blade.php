@@ -354,6 +354,12 @@
                                             <p>{{$v->goods_info}}
                                             </p>
                                         </div>
+                                        <div class="add-cart">
+                                            <span>销量:</span>
+                                            <a href="javascript:void(0)">
+                                                <span>{{$v->goods_sales}}</span>
+                                            </a>
+                                        </div>
                                         @php
                                             $size = array_filter(explode('|',$v->goods_size));
                                             $color = array_filter(explode('|',$v->goods_color));
