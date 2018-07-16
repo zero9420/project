@@ -108,15 +108,6 @@
 									          <th>商品单价</th>
 									          <th>购买数量</th>
 									          <th>订单状态</th>
-
-									        </tr>
-									      </thead>
-
-									      <tbody>
-
-									        <tr>
-
-									          <td>
 									          <th>订单操作</th>
 									        </tr>
 									      </thead>
@@ -130,15 +121,7 @@
 									          <td> {{$data->goods_price}} </td>
 									          <td> {{$data->num}} </td>
 									          <td>@if($data->goods_status==0)未发货@elseif($data->goods_status==1)已发货@else交易完成@endif</td>
-									        </tr>
-
-									      </tbody>
-
-									    </table>
-									  </div>
-
-						</div>
-										        <td>
+									            <td>
 										          	@if($data->goods_status==2)
 										          		@if(empty($comments))
 										          		<a href="/home/eval/{{$data->goods_id}}">评价商品</a>
@@ -147,6 +130,14 @@
 										          		@endif
 										          	@endif
 										        </td>
+									        </tr>
+
+									      </tbody>
+
+									    </table>
+									  </div>
+
+						</div>
 									        </tr>
 									      </tbody>
 
