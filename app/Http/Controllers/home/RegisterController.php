@@ -13,6 +13,11 @@ class RegisterController extends Controller
 
       public function index()
     {
+
+          if(!empty(session('user_id'))){
+            return redirect('/');
+          };
+
     	return view('home.registe.index');
     }
     
@@ -38,33 +43,39 @@ class RegisterController extends Controller
             $username = request('username');
             $password = bcrypt(request('password'));
             $email = request('email');
-            $status = request('status');;
+
+            // $status = request('status');
             // dd($status);
        		// $status = trim(request('status'));
        		// $status=array(['1']);
        	
        		// dd($status);
               // dd($status);
-
-            $user = User::create(compact('username','password','email','status'));
+            $res = User::where('email',$email)->first();
+//            dd($res);
+            if(!empty($res))
+            {
+                return back()->with('error','邮箱已存在请更换');edit;
+            }
+            $user = User::create(compact('username','password','email','status','0'));
             $id = $user->id;
 
             // $user = new User;  
-            
+            // dd($user['username']);
 
         //渲染
             if($user)
             {
-               
-                Mail::send('email.remind', ['id'=>$id], function($m) use ($user) {
+               // $view = 'emails.login_info';
+               // $time = ['time'=>date('Y-m-d H:i:s',time())];
+                Mail::send('email.jihuo', ['id'=>$id], function($m) use ($user) {
 
               $m->from(env('MAIL_USERNAME'), '云购物-市场部');
 
-              $m->to($user['email'], $user['username'])->subject('百度网-入职邀请');
+              $m->to($user['email'], $user['username'])->subject('云购物-激活邀请');
           });
 
-          // return view('home.register.tixing');
-
+                return view('email.tishi');
 
             }else{
                 echo '<script>alert("注册失败");location.href="/home/register";</script>';//跳转 并且附带信息'

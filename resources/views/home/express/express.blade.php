@@ -17,34 +17,16 @@
 
 
 	<style>
-		.ff2 {
-			position:absolute;
-			top: 350px;
-			
-			margin-right: 15px;
-		}
-		.ff3{
-			position: absolute;
-			top: -100px;
-			margin-right: 15px;
-
-		}
-		.ff4{
-			position:absolute;
-			top:200px;
-			left: 150px;
-		}
-		.pagination>li>a, .pagination>li>span {
-   
-    		 padding: 0px 12px; 
-
-		}
-
-		.member-pages {
-   			 padding: 0px;
-	}
-
+		
 	
+		.tu{
+			margin: -10px -15px;
+		}
+
+		img {
+   			 max-width: 100px;
+    			height: auto;
+		}
 	</style>
 
 
@@ -53,8 +35,8 @@
 	<div class="member-center clearfix" >
 		<div class="member-left fl ff2"  >
 			<div class="member-apart clearfix ff3">
-
-				<div class="fl  "><a href="#"><img src=" {{$data->info_image}} " ></a></div>
+				
+				<div class="fl tu "><a href="#"><img src=" {{$data->info_image}} " ></a></div>
 				<div class="fl ">
 					<p>用户昵称：</p>
 					<p><a href="/home/userinfo">{{$data->info_nickname}}</a></p>

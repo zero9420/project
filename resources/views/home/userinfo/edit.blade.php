@@ -23,9 +23,7 @@
 				<div class="fffl" >
 
 					<p>用户名：<div></div>{{$mation->info_nickname}}</p>
-					
 				</div>
-				
 			</div>
 			<div class="member-lists">
 				<dl>
@@ -36,7 +34,7 @@
 				</dl>
 				<dl>
 					<dt>评论管理</dt>
-					<dd><a href="/home/eval">我的评价</a></dd>
+					<dd><a href="/home/myeval">我的评价</a></dd>
 				</dl>
 				<dl>
 					<dt>客户服务</dt>

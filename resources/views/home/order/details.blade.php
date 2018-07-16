@@ -111,6 +111,7 @@
 									          <th>商品单价</th>
 									          <th>购买数量</th>
 									          <th>订单状态</th>
+<<<<<<< HEAD
 									        </tr>
 									      </thead>
 									    
@@ -121,12 +122,21 @@
 									        <tr>
 									         
 									          <td> 
+=======
+									          <th>订单操作</th>
+									        </tr>
+									      </thead>
+									      <tbody>
+									        <tr>
+									          <td>
+>>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
 									          	<img src=" {{$data->goods_pic}} " alt="..." class="img-circle" width="100px" height="100">
 									          </td>
 									          <td> {{$data->goods_name}} </td>
 									          <td> {{$data->goods_price}} </td>
 									          <td> {{$data->num}} </td>
 									          <td>@if($data->goods_status==0)未发货@elseif($data->goods_status==1)已发货@else交易完成@endif</td>
+<<<<<<< HEAD
 									          
 									         				         
 									        </tr>
@@ -139,13 +149,30 @@
 								
 						</div>
 					
+=======
+										        <td>
+										          	@if($data->goods_status==2)
+										          		@if(empty($comments))
+										          		<a href="/home/eval/{{$data->goods_id}}">评价商品</a>
+										          		@else
+										          		<a href="/home/myeval">查看评价</a>
+										          		@endif
+										          	@endif
+										        </td>
+									        </tr>
+									      </tbody>
+
+									    </table>
+									  </div>
+						</div>
+>>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
 					</div>
 						<!-- 商品清单 END -->
 						<input type="hidden"  id="couponType" name="Checkout[couponsType]">
 						<input type="hidden" id="couponValue" name="Checkout[couponsValue]">
 						<div class="checkout-confirm">
 
-							<a href="#" class="btn btn-lineDakeLight btn-back-cart">返回购物车</a>
+							<a href="/home/userinfo" class="btn btn-lineDakeLight btn-back-cart">返回个人中心</a>
 							
 
 						</div>

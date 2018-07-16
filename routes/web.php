@@ -51,6 +51,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 	Route::any('/admin/ajaxhot','admin\GoodsdetailController@ajaxhot');
 	// 商品减价
 	Route::any('/admin/ajaxuct','admin\GoodsdetailController@ajaxuct');
+	// 增加库存
+	Route::any('/admin/ajaxadd','admin\GoodsdetailController@ajaxadd');
 
 	// 友情链接
 	Route::resource('/admin/link','admin\LinkController');
@@ -63,6 +65,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 	// 订单管理
 	Route::resource('/admin/order','admin\OrderController');
+	// 订单发货ajax修改状态
+	Route::any('/admin/ajaxorder','admin\AjaxOrderController@ajaxorder');
 
 	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');
@@ -92,15 +96,20 @@ Route::get('/home/register','home\RegisterController@index');
 Route::post('/home/registers','home\RegisterController@registers');
 Route::get('/home/logins','home\LoginController@index');
 Route::post('/home/logins','home\LoginController@login');
-
-
-
+//账号激活
+Route::get('/home/jihuo','home\JihuoController@jihuo');
+//找回密码
+Route::get('/home/retrieve','home\RetrieveController@index');
+Route::post('/home/retrieve','home\RetrieveController@retrieve');
+//邮箱激活
+Route::get('/home/email/retrieve','home\RetrieveController@retrieves');
+//密码修改
+Route::post('home/email/edit','home\RetrieveController@edit');
 
 /**
  *
  * 前台路由组
  */
-
 Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台个人中心
@@ -153,4 +162,8 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 	// 个人中心商品收藏删除
 	Route::any('/home/goods','home\CollectController@goods');
+	// 商品评价
+	Route::any('/home/eval/{id}','home\EvaluaController@create')->where(['id'=>'\d+']);
+	Route::any('/home/eval','home\EvaluaController@save');
+	Route::any('/home/myeval','home\EvaluaController@read');
 });

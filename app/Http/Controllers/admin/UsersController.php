@@ -13,14 +13,30 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //用户浏览渲染
-        $res = Users::paginate(10);
+
+        $users = Users::orderBy('id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('search');
+                $email = $request->input('email');
+                //如果用户名不为空
+                if(!empty($username)) {
+                    $query->where('username','like','%'.$username.'%');
+                }
+                //如果邮箱不为空
+                if(!empty($email)) {
+                    $query->where('email','like','%'.$email.'%');
+                }
+            })
+            ->paginate($request->input('num', 10));
+
 
         return view('admin.users.index',[
             'title'=>'用户的列表页面',
-            'res'=>$res]);
+            'res'=>$users,
+            'request'=>$request]);
     }
 
     /**
@@ -51,7 +67,7 @@ class UsersController extends Controller
             'password' => 'required|regex:/^\S{5,30}$/',
             'repass'=>'same:password',
             'email'=>'email|required',
-            'phone'=>'required|regex:/^1[3456789]\d{9}$/',            
+//            'phone'=>'required|regex:/^1[3456789]\d{9}$/',
         ],[
             'username.required'=>'用户名不能为空',
             'username.regex'=>'用户名格式不正确',
@@ -60,8 +76,8 @@ class UsersController extends Controller
             'repass.same'=>'两次密码不一致',
             'email.required'=>'邮箱不可以为空',
             'email.email'=>'邮箱格式不正确',
-            'phone.required'=>'手机号不能为空',
-            'phone.regex'=>'手机号格式不正确'
+//            'phone.required'=>'手机号不能为空',
+//            'phone.regex'=>'手机号格式不正确'
 
         ]);
          $res = $request->except(['_token','repass']);
@@ -69,9 +85,9 @@ class UsersController extends Controller
          if ($username) {
              return back()->with('error','用户名已存在请更换');
          }
-          $phone= Users::where('phone',$res['phone'])->first();
-         if ($phone) {
-           return back()->with('error','手机号已存在,请更换');
+          $email= Users::where('email',$res['email'])->first();
+         if ($email) {
+           return back()->with('error','邮箱已存在,请更换');
          }
 
           $res['password'] = bcrypt(request('password'));
@@ -136,7 +152,7 @@ class UsersController extends Controller
             'username' => 'regex:/^\w{5,12}$/',
             'email'=>'email|required',
             // 'repass'=>'same:password',
-            'phone'=>'required|regex:/^1[3456789]\d{9}$/',
+//            'phone'=>'required|regex:/^1[3456789]\d{9}$/',
             // 'password' => 'required|regex:/^\S{5,30}$/', 
                      
         ],[
@@ -166,13 +182,13 @@ class UsersController extends Controller
                 }
 
 
-            if ($res['phone'] ==$ids->phone) {
-                 
-                }else{
-                    $phone = Users::where('phone',$res['phone'])->first();
+            if ($res['email'] ==$ids->email) {
 
-                     if ($phone) {
-                    return back()->with('error','手机号已存在请重新更换!');
+                }else{
+                    $email = Users::where('email',$res['email'])->first();
+
+                     if ($email) {
+                    return back()->with('error','邮箱已存在请重新更换!');
                 }
                 }
 

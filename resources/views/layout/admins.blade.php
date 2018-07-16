@@ -51,38 +51,36 @@
                 <a href="/"><h4>云购物购物商城首页</h4></a>
 			</div>
         </div>
-        
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
-        
         	<!-- Notifications -->
+            @php
+                $count = App\Models\Admin\Goods::where('goods_stock','<','20')->count();
+                $prompt = App\Models\Admin\Goods::where('goods_stock','<','20')->take(5)->get();
+            @endphp
         	<div id="mws-user-notif" class="mws-dropdown-menu">
+                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
+                <!-- Unread notification count -->
+                <span class="mws-dropdown-notif">{{$count}}</span>
                 <!-- Notifications dropdown -->
                 <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
+                    <div class="mws-dropdown-content">
                         <ul class="mws-notifications">
-                        	<li class="read">
-                            	<a href="#">
+                            @foreach($prompt as $v)
+                            <li class="read">
+                                <a href="#">
                                     <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+                                        商品ID:{{$v->goods_id}}; 商品名:{{$v->goods_name}}
                                     </span>
                                     <span class="time">
-                                        {{date('Y-m-d H:i:s',time())}}
+                                        库存不足,请及时添加
                                     </span>
                                 </a>
                             </li>
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        {{date('Y-m-d H:i:s',time())}}
-                                    </span>
-                                </a>
+                            @endforeach
                         </ul>
                         <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Notifications</a>
+                            <a href="/admin/index">查看全部.....</a>
                         </div>
                     </div>
                 </div>
@@ -107,17 +105,17 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Start Main Wrapper -->
     <div id="mws-wrapper">
-    
+
     	<!-- Necessary markup, do not remove -->
 		<div id="mws-sidebar-stitch"></div>
 		<div id="mws-sidebar-bg"></div>
-        
+
         <!-- Sidebar Wrapper -->
         <div id="mws-sidebar">
-        
+
             <!-- Hidden Nav Collapse Button -->
             <div id="mws-nav-collapse">
                 <span></span>
@@ -140,11 +138,14 @@
                         </ul>
                     </li>
                     <li>
+                        @if(session('auth')==1)
                         <a href="#"><i class="icon-users"></i>角色管理</a>
+
                         <ul class='closed'>
                             <li><a href="/admin/auth/create">添加角色</a></li>
                             <li><a href="/admin/auth">浏览角色</a></li>
                         </ul>
+                            @endif
                     </li>
                     <li>
                         <a href="#"><i class="icon-th"></i>分类管理</a>
@@ -190,13 +191,14 @@
                         <a href="#"><i class="icon-list-2"></i>订单管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/order">浏览订单</a></li>
-                            <li><a href="/admin/order">订单状态</a></li>
+                          
 
 
                         </ul>
                     </li>
 
                     <li>
+                        @if(session('auth')==1)
                         <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/users/create">添加用户</a></li>
@@ -204,7 +206,7 @@
 
                         </ul>
                     </li>
-
+                    @endif
 
 
                       <li>
@@ -295,13 +297,6 @@
     <script src="/admins/js/times/goods.js"></script>
 
     <script type="text/javascript">
-       setTimeout(function(){
-
-            $('.mws-form-message').remove();
-
-       },3000);
-
-
     </script>
     @section('js')
 

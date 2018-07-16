@@ -47,6 +47,7 @@ class LoginController extends Controller
         }
 
         session(['id'=>$uname->id]);
+        session(['auth'=>$uname->auth]);
 
         session(['auth_name'=>$uname->auth_name]);
        // dd($da);die;

@@ -229,28 +229,4 @@ class CateController extends Controller
                 ]);
         }
     }
-
-    /**
-     * [getsubcate 无限极分类]
-     * @param  [type] $pid [description]
-     * @return [type]      [description]
-     */
-    public static function getsubcate($pid)
-    {
-
-        $cate = Cate::where('cate_pid',$pid)->get();
-
-        $arr = [];
-
-        foreach($cate as $k=>$v){
-
-            if($v->cate_pid==$pid){
-
-                $v->sub=self::getsubcate($v->cate_id);
-
-                $arr[]=$v;
-            }
-        }
-        return $arr;
-    }
 }

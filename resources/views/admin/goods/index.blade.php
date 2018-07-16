@@ -17,23 +17,23 @@
 
 			<form action="/admin/goods" method='get'>
 	            <div id="DataTables_Table_1_length" class="dataTables_length">
-	                <label>
-	                    显示
-	                    <select name="pages" size="1" aria-controls="DataTables_Table_1">
+                    <label>
+                        显示
+                        <select name="pages" size="1" aria-controls="DataTables_Table_1">
 
-	                        <option value="10" @if($request->pages== 10)   selected="selected" @endif>
-	                            10
-	                        </option>
-	                        <option value="30" @if($request->pages== 30)   selected="selected" @endif>
-	                            30
-	                        </option>
-	                        <option value="50" @if($request->pages== 50)   selected="selected" @endif>
-	                            50
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
-	            </div>
+                            <option value="10" @if($request->pages== 10)   selected="selected" @endif>
+                                10
+                            </option>
+                            <option value="30" @if($request->pages== 30)   selected="selected" @endif>
+                                30
+                            </option>
+                            <option value="50" @if($request->pages== 50)   selected="selected" @endif>
+                                50
+                            </option>
+                        </select>
+                        条数据
+                    </label>
+                </div>
 	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
 	                <label>
                         商品名字:
@@ -41,7 +41,7 @@
                     </label>
                     <label>
                         最小价格:
-                        <input type="number" name='min_price' value="{{$request->min_price}}" aria-controls="DataTables_Table_1">
+                        <input type="number" name='min_price' value="{{$request->min_price}}" aria-controls="DataTables_Table_3">
                     </label>
                     <label>
 	                    最大价格:
@@ -59,15 +59,19 @@
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 50px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                            编号
+                        rowspan="1" colspan="1" style="width: 60px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                            序号
+                        </th>
+                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 30px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                            ID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 160px;" aria-label="Browser: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 180px;" aria-label="Browser: activate to sort column ascending">
                             名称
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 160px;" aria-label="Platform(s): activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">
                             类别
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -75,11 +79,16 @@
                             价格
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 90px;" aria-label="Engine version: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="Engine version: activate to sort column ascending">
                             优惠
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 50px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                           库存@if($stock!=0)<a href="javascript:void(0)" id="stock" title="将库存小于20的一键全部加100"><i class="icol-add"></i></a>
+                           @endif
+                        </th>
+                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
                            销量
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -87,11 +96,11 @@
                            热销
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 70px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
                            状态
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 300px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
                            操作
                         </th>
                     </tr>
@@ -101,6 +110,9 @@
                     <tr class="@if($k % 2 == 1)  odd   @else even  @endif">
                         <td class="">
                             {{$num++}}
+                        </td>
+                        <td class="">
+                            {{$v->goods_id}}
                         </td>
                         <td class=" ">
                             {{$v->goods_name}}
@@ -118,15 +130,16 @@
                             }
                         </style>
                         <td class=" ">
-                            <span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential}}</span>
-                            <a onclick="uct({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="降价10%">--</a>
+                            <span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential}}</span><a onclick="uct({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="降价10%"><i class="icon-arrow-down-3"></i></a>
+                        </td>
+                        <td class=" ">
+                            {{$v->goods_stock}}
                         </td>
                         <td class=" ">
                             {{$v->goods_sales}}
                         </td>
                         <td class=" ">
-                            @if($v->goods_hot==1)
-                                <button class="btn btn-info" id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="1">普通</button>
+                            @if($v->goods_hot==1)<button class="btn btn-info" id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="1">普通</button>
                             @else
                                 <button class='btn btn-danger' id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="2">热卖</button>
                             @endif
@@ -139,15 +152,16 @@
                             @endif
                         </td>
                          <td class=" ">
-                            <a href="/admin/goods/{{$v->goods_id}}" class='btn btn-info'>详情</a>
-                            <a href="/admin/goods/{{$v->goods_id}}/edit" class='btn btn-warning'>修改</a>
+                            <span class="btn-group">
+                                <a href="/admin/goods/{{$v->goods_id}}" class="btn btn-small" title="查看商品详情"><i class="icon-search"></i></a>
+                                <a href="/admin/goods/{{$v->goods_id}}/edit" class="btn btn-small" title="点击修改商品"><i class="icon-pencil"></i></a>
+                                <form action="/admin/goods/{{$v->goods_id}}" method='post' style='display:inline'>
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
+                                    <button class='btn btn-small' onclick="return confirm('确定要删除吗?');" title="点击删除商品"><i class="icon-trash"></i></button>
 
-                            <form action="/admin/goods/{{$v->goods_id}}" method='post' style='display:inline'>
-                                {{csrf_field()}}
-                                {{method_field('DELETE')}}
-                                <button href="" class='btn btn-danger' onclick="return confirm('确定要删除吗?');">删除</button>
-
-                            </form>
+                                </form>
+                            </span>
                         </td>
                     </tr>
                     @endforeach
@@ -164,125 +178,99 @@
         </div>
     </div>
 </div>
-<script src="/js/jquery-3.2.1.min.js"></script>
+@endsection
+@section('js')
 <script>
+    // 商品状态
     function stu($id){
         var id = $id;
         var status = $('.status'+'#'+id).val();
-        $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
-            if(data == '2'){
-                $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
-                $('.status'+'#'+id).val('2');
-                alert('下架成功');
-            } else if(data=='1') {
-                $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
-                $('.status'+'#'+id).val('1');
-                alert('上架成功');
-            } else {
-                alert('修改失败');
-            }
-        })
+        if(status == '1'){
+            var pro = "你确定下架吗??";
+        } else {
+            var pro = "你确定上架吗??";
+        }
+        var sta = confirm(pro);
+        if(sta){
+            $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
+                if(data == '2'){
+                    $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
+                    $('.status'+'#'+id).val('2');
+                } else if(data=='1') {
+                    $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
+                    $('.status'+'#'+id).val('1');
+                } else {
+                    alert('修改失败');
+                }
+            })
+        }
     }
 
-</script>
-
-@endsection
-
-@section('js')
-
-    <script>
-        // 商品状态
-        function stu($id){
-            var id = $id;
-            var status = $('.status'+'#'+id).val();
-            if(status == '1'){
-                var pro = "你确定下架吗??";
-            } else {
-                var pro = "你确定上架吗??";
-            }
-            var sta = confirm(pro);
-            if(sta){
-                $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
-                    if(data == '2'){
-                        $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
-                        $('.status'+'#'+id).val('2');
-                    } else if(data=='1') {
-                        $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
-                        $('.status'+'#'+id).val('1');
-                    } else {
-                        alert('修改失败');
-                    }
-                })
-            }
+    // 热卖商品
+    function hot($e){
+        var ids = $e;
+        var hots = $('#hot_'+ids).val();
+        if(hots == '1'){
+            var pro = "你确定将商品定义为热卖吗??";
+        } else {
+            var pro = "你确定取消热卖商品吗??";
         }
-
-        // 热卖商品
-        function hot($e){
-            var ids = $e;
-            var hots = $('#hot_'+ids).val();
-            if(hots == '1'){
-                var pro = "你确定将商品定义为热卖吗??";
-            } else {
-                var pro = "你确定取消热卖商品吗??";
-            }
-            var prom = confirm(pro);
-            if(prom){
-                $.get('/admin/ajaxhot',{hots:hots,ids:ids},function(data){
-                    if(data == '2'){
-                        $('#hot_'+ids).attr('class','btn btn-danger').text('热卖');
-                        $('#hot_'+ids).val('2');
-                    } else if(data=='1') {
-                        $('#hot_'+ids).attr('class','btn btn-info').text('普通');
-                        $('#hot_'+ids).val('1');
-                    } else {
-                        alert('修改失败');
-                    }
-                })
-            }
-        }
-
-        // 优惠商品 减价
-        function uct($e){
-            var id = $e;
-            // 优惠力度
-            var jian = 0.9;
-            // 获取原价
-            var old_price = parseInt($('#price_'+id).text().trim());
-            // 获取原优惠
-            var o_pres = parseInt($('#pre_'+id).text().trim());
-            var msg = "你确定在原优惠的基础再次优惠10%吗??";
-            var con = confirm(msg);
-            function accMul(arg1, arg2)
-            {
-
-                var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
-
-                try { m += s1.split(".")[1].length } catch (e) { }
-
-                try { m += s2.split(".")[1].length } catch (e) { }
-
-                return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
-            }
-            var n_pres = accMul(o_pres,jian);
-            if(con){
-                if(n_pres <= 0){
-                    var n_pres = o_pres;
-                    alert('亲,商品不能白送啊!');
-                } else if (n_pres >= old_price) {
-                    var n_pres = old_price;
-                    alert('亲,优惠价不能大于原价!');
+        var prom = confirm(pro);
+        if(prom){
+            $.get('/admin/ajaxhot',{hots:hots,ids:ids},function(data){
+                if(data == '2'){
+                    $('#hot_'+ids).attr('class','btn btn-danger').text('热卖');
+                    $('#hot_'+ids).val('2');
+                } else if(data=='1') {
+                    $('#hot_'+ids).attr('class','btn btn-info').text('普通');
+                    $('#hot_'+ids).val('1');
+                } else {
+                    alert('修改失败');
                 }
-                $.get('/admin/ajaxuct',{n_pres:n_pres,id:id},function(data){
-                        // console.log(data);
-                        if(data=='01'){
-                            $('#pre_'+id).text(n_pres);
-                        } else {
-                            alert('优惠失败!');
-                        }
-                    })
-            }
+            })
         }
+    }
 
-    </script>
+    // 优惠商品 减价
+    function uct($e){
+        var id = $e;
+        // 优惠力度
+        var jian = 0.9;
+        // 获取原价
+        var old_price = parseInt($('#price_'+id).text().trim());
+        // 获取原优惠
+        var o_pres = parseInt($('#pre_'+id).text().trim());
+        var msg = "你确定在原优惠的基础再次优惠10%吗??";
+        var con = confirm(msg);
+        function accMul(arg1, arg2)
+        {
 
+            var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+            try { m += s1.split(".")[1].length } catch (e) { }
+
+            try { m += s2.split(".")[1].length } catch (e) { }
+
+            return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+        }
+        var n_pres = accMul(o_pres,jian);
+        if(con){
+            if(n_pres <= 0){
+                var n_pres = o_pres;
+                alert('亲,商品不能白送啊!');
+            } else if (n_pres >= old_price) {
+                var n_pres = old_price;
+                alert('亲,优惠价不能大于原价!');
+            }
+            $.get('/admin/ajaxuct',{n_pres:n_pres,id:id},function(data){
+                    // console.log(data);
+                    if(data=='01'){
+                        $('#pre_'+id).text(n_pres);
+                    } else {
+                        alert('优惠失败!');
+                    }
+                })
+        }
+    }
+</script>
 @endsection

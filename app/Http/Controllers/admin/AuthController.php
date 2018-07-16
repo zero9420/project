@@ -39,16 +39,31 @@ class AuthController extends Controller
  */
 
 
-    public function index()
+    public function index(Request $request)
     {
         //管理员列表页面
-
+        $Auth = Auth::orderBy('id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('search');
+                $email = $request->input('email');
+                //如果用户名不为空
+                if(!empty($username)) {
+                    $query->where('auth_name','like','%'.$username.'%');
+                }
+                //如果邮箱不为空
+                if(!empty($email)) {
+                    $query->where('email','like','%'.$email.'%');
+                }
+            })
+            ->paginate($request->input('num', 1));
         //逻辑
         $res = Auth::paginate(1);
 
         return view('admin.auth.index',[
-            'title'=>'用户的列表页面',
-            'res'=>$res
+            'title'=>'管理员的列表页面',
+            'res'=>$Auth,
+            'request'=>$request
 
         ]);
         
@@ -216,7 +231,7 @@ class AuthController extends Controller
         $data = Auth::where('id',$id)->update($res);
         if($data){
 
-            return redirect('/admin/auth')->with('info','添加成功');
+            return redirect('/admin/outlogin');
 
         } else {
 

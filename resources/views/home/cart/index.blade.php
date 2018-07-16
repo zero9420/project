@@ -10,12 +10,9 @@
 <section id="pc-jie" class="lamp203">
 	<div class="center ">
 		<ul class="pc-shopping-title clearfix">
-			<li><a href="#" class="cu">全部商品(10)</a></li>
-			<li><a href="#">限时优惠(7)</a></li>
-			<li><a href="#">库存紧张(0)</a></li>
+			<li><a href="javascript:void(0)" class="cu">全部商品({{count($data)}})</a></li>
 		</ul>
 	</div>
-	
 	<div class="pc-shopping-cart center">
 		<div class="pc-shopping-tab ">
 			<table>
@@ -25,53 +22,51 @@
 						<th class="tab-1"><input type="checkbox"  name="s_all" class="s_all tr_checkmr" id="s_all_h"></th>
 						<th class="tab-2">商品</th>
 						<th class="tab-3">商品信息</th>
-						<th class="tab-4">单价</th>
-						<th class="tab-5">数量</th>
-						<th class="tab-6">小计</th>
-						<th class="tab-7">操作</th>
+						<th class="tab-4">优惠价</th>
+						<th class="tab-5">原价</th>
+						<th class="tab-6">数量</th>
+						<th class="tab-7">小计</th>
+						<th class="tab-8">操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td colspan="7" style="padding-left:10px; background:#eee">
-							<input type="checkbox" >
 							<label for="">云购物自营</label>
-							<a href="#" style="position:relative;padding-left:50px"><i class="icon-kefu"></i>联系客服</a>
-							<ul class="clearfix fr" style="padding-right:20px">
-								<li><i class="pc-shop-car-yun"></i>满109元减10</li>
-								<li><i class="pc-shop-car-yun"></i>领取3种优惠券, 最高省30元</li>
-							</ul>
+							<a href="https://www.sobot.com/chat/pc/index.html?sysNum=5f9e61cabbdc4577b59b9a02664d137b" title="云商城在线客服,点击联系客服!" style="position:relative;padding-left:50px"><i class="icon-kefu"></i>联系客服</a>
 						</td>
 					</tr>
 					<tr>
 					<?php $total =0; ?>
 						@foreach($data as $k=>$v)
-						<th><input type="checkbox" checked style="margin-left:10px; float:left"></th>
+						<th><input type="checkbox" checked  disabled style="margin-left:15px; float:left"></th>
 						<th class="tab-th-1">
-							<a href="#"><img src="{{$v->goods_pic}}" alt=""></a>
+							<a href="/goodsdetail/{{$v->goods_id}}"><img src="{{$v->goods_pic}}" alt="" style="height:100px; width:99px"></a>
 
-							<a href="#" class="tab-title">{{$v->goods_name}} </a>
+							<a href="/goodsdetail/{{$v->goods_id}}" class="tab-title">{{$v->goods_name}} </a>
 						</th>
 						<th>
 							<p>颜色：{{$v->goods_color}}</p>
 							<p>规格：{{$v->goods_size}}</p>
 						</th>
 						<th>
-
 							<p class="price">{{$v->goods_price}}</p>
+						</th>
+						<th >
+							<del><p class="prices">{{$v->goods_prices}}</p></del>
 						</th>
 							<th class="tab-th-2">
 								<input type="button" value="-" class="minus"
 								style="width:20px;height:30px;" id="<?php echo $v->id ?>"/>
-								
-								<input type="text"  name="quantity" value="{{$v->num}}" class="qty" 
+								<input type="text"  name="quantity" value="{{$v->num}}" class="qty"
 
 								 style="width:50px;height:25px; text-align:center;"/>
 								<input type="button" value="+" class="plus" style="width:20px;height:30px;" id="<?php echo $v->id ?>" />
 								</th>
 							</div>
-					
-						<th class="xiaoji">{{$v->goods_price}}</th>
+						<th class="xiaoji">
+							{{$v->goods_price}}
+						</th>
 						<th><a href="javascript:void(0)" class="remove" ids="{{$v->id}}">删除</a></th>
 					</tr>
 					<?php  $total +=$v->num*$v->goods_price ?>
@@ -102,28 +97,31 @@
 	</div>
 </section>
 	@else
-	
-<section id="pc-jie">
-	<div class="center ">
-		<ul class="pc-shopping-title clearfix">
-				    <div class="message">
-				        <ul>
-				            <li class="txt">
-				                购物车空空的哦~，去看看心仪的商品吧~
-				            </li>
-				            <li class="mt10">
-				                <a href="/home/index" class="ftx-05">
-				                    去购物&gt;
-				                </a>
-				            </li>
-				            
-				        </ul>
-				    </div>
-				</div>
-</ul>
+<!-- cart-start -->
+<div class="container">
+    <div class="slider">
+        <!-- Slider Image -->
+        <div id="mainslider" class="nivoSlider slider-image">
+            <img src="/home/bs/img/cart/empty-cart.png" alt="main slider" title="#htmlcaption1" />
+        </div>
+        <!-- Slider Caption 1 -->
+        <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
+            <div class="slider-progress"></div>
+            <div class="slide1-text slide-1 hidden-xs">
+                <div class="middle-text">
+                	<div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
+                        <h2>购物车空空如也,快去选择你心仪的商品吧.....</h2>
+                    </div>
+                    <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
+                        <a href="/">去购物....</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</section>
-				@endif
+<!-- cart-end -->
+@endif
 
 
 
@@ -170,7 +168,7 @@
 		// alert(pc);
 		//加完之后让小计发生改变
 		$(this).parents('tr').find('.xiaoji').text(accMul(pc,num));
-		
+
 		var jiashuliang=$(this).prev().val();
 
 		// alert(jiashuliang);
@@ -306,21 +304,7 @@ $.ajaxSetup({
 				
 			} else {
 
-				$('.lamp203').html(`<div class="cart-empty">
-				    <div class="message">
-				        <ul>
-				            <li class="txt">
-				                购物车bu空空的哦~，去看看心仪的商品吧~
-				            </li>
-				            <li class="mt10">
-				                <a href="/home/index" class="ftx-05">
-				                    去购物&gt;
-				                </a>
-				            </li>
-				            
-				        </ul>
-				    </div>
-				</div>`);
+				location.reload(true);
 			}
 
 		});

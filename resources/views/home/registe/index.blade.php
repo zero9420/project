@@ -23,7 +23,7 @@
 	<div class="center">
 		<div class="pc-fl-logo">
 			<h1>
-				<a href="/home/index"></a>
+				<a href="/"></a>
 			</h1>
 		</div>
 	</div>
@@ -33,13 +33,20 @@
 		<div class="center clearfix">
 			<div class="fl"></div>
 			<div class="fr pc-login-box" style=" width:395px;">
-				<div class="pc-login-title"><h2>用户注册  	|  邮箱注册</h2></div>
-
+				<div class="pc-login-title"><h2>邮箱注册</h2></div>
+				@if(session('error'))
+					<div class="mws-form-message warning"  style="color:red">
+						{{session('error')}}
+					</div>
+				@endif
 				<form action="/home/registers" method="post">
-				<input type="hidden" name="status" value="0"> 
+
+				<input type="hidden" name="status" value="0">
+
 					 {{ csrf_field() }}
 					<div class="pc-sign">
-						<input type="text" name="username" placeholder="昵称">
+
+						<input type="text" name="username"  placeholder="昵称">
 					</div>
 
 					<div class="pc-sign">
@@ -52,9 +59,9 @@
 					<div class="pc-sign">
 						<input type="password_confirmation" name="password_confirmation" placeholder="请确认您的密码">
 					</div>
-					<div class="pc-sign">
-						<input type="passwor" name="passwor"  placeholder="请输入您的验证码">
-					</div>
+					{{--<div class="pc-sign">--}}
+						{{--<input type="passwor" name="passwor"  placeholder="请输入您的验证码">--}}
+					{{--</div>--}}
 				<!--  --> 
 		    @if(count($errors)>0)
                 <div class="alert alert-danger" role='alert'>
@@ -74,7 +81,7 @@
 					</div>
 					<div class="pc-reg">
 
-						<a href="/home/login" class="red">已有账号 请登录</a>
+						<a href="/home/logins" class="red">已有账号 请登录</a>
 					</div>
 				</form>
 			</div>

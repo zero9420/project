@@ -9,7 +9,7 @@ class Order extends Model
 
 	protected $table = 'shop_order';
 
-    protected $primaryKey = 'order_id';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 
@@ -22,14 +22,10 @@ class Order extends Model
 
 
 
-     public function goodsspec()
+   
+     public function orderdetail()
     {
-        return $this->hasMany('App\Models\Admin\GoodsSpec;','goods_gid');
-    }
-
-     public function goods()
-    {
-        return $this->hasMany('App\Models\Admin\Goods','goods_id');
+        return $this->hasMany('App\Models\Admin\OrderDetail','id','id');
     }
 
    

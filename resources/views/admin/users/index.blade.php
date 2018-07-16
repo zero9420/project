@@ -14,35 +14,23 @@
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-			<form action="/admin/user" method='get'>
-	            <div id="DataTables_Table_1_length" class="dataTables_length">
-	                <label>
-	                    显示
-	                    <select name="num" size="1" aria-controls="DataTables_Table_1">
-	                        <option value="10" selected="selected">
-	                            10
-	                        </option>
-	                        <option value="25">
-	                            25
-	                        </option>
-	                        <option value="50">
-	                            50
-	                        </option>
-	                        <option value="100">
-	                            100
-	                        </option>
-	                    </select>
-	                    条数据
-	                </label>
-	            </div>
-	            <div class="dataTables_filter" id="DataTables_Table_1_filter">
-	                <label>
-	                    关键字:
-	                    <input type="text" name='search' aria-controls="DataTables_Table_1">
-	                </label>
+			<form action="/admin/users" method='get'>
+                <div id="DataTables_Table_1_length" class="dataTables_length">
 
-	                <button class='btn btn-info'>搜索</button>
-	            </div>
+                </div>
+                <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                    <label>
+                        用户名:
+                        <input type="text" name='search' value="{{$request->search}}" aria-controls="DataTables_Table_1">
+                    </label>
+
+                    <label>
+                        邮箱:
+                        <input type="text" name='email' value="{{$request->email}}" aria-controls="DataTables_Table_1">
+                    </label>
+
+                    <button class='btn btn-info'>搜索</button>
+                </div>
             </form>
 
 
@@ -65,14 +53,14 @@
                         rowspan="1" colspan="1" style="width: 247px;" aria-label="Platform(s): activate to sort column ascending">
                             邮箱
                         </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 170px;" aria-label="Engine version: activate to sort column ascending">
-                            手机号
-                        </th>
+                        {{--<th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"--}}
+                        {{--rowspan="1" colspan="1" style="width: 170px;" aria-label="Engine version: activate to sort column ascending">--}}
+                            {{--手机号--}}
+                        {{--</th>--}}
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 126px;" aria-label="CSS grade: activate to sort column ascending">
-                           状态
+
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 150px;" aria-label="CSS grade: activate to sort column ascending">
@@ -94,10 +82,7 @@
                         <td class=" ">
                             {{$v->email}}
                         </td>
-                        <td class=" ">
-                            {{$v->phone}}
-                            
-                        </td>
+
     
                          <td class=" ">
 
