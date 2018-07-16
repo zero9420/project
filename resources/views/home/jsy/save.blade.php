@@ -131,7 +131,7 @@
 </div>
 
 <script type="text/javascript">
-//3秒钟之后跳转到指定的页面
+//2秒钟之后跳转到指定的页面
 setInterval(function(){
 	location.href='/'
 },2000);

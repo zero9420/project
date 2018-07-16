@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         $user = session('user_id');
 
-        $res = Info::where('info_id',$user)->first();
+        $res = Info::where('info_cid',$user)->first();
 
 <<<<<<< HEAD
         $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(3);
