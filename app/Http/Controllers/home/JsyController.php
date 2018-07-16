@@ -26,11 +26,16 @@ class JsyController extends Controller
 
         $info = Info::where('info_cid',$user)->first();
 
-      
+         if(empty($info)){
+
+               return redirect('/home/userinfo')->with('error','请先完善信息');
+ 
+             }  
 
        return view('home/jsy/jsy',[
         'info'=>$info,
         'cart'=>$cart
+
 
         ]);
     }
