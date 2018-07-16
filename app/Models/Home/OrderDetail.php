@@ -13,7 +13,7 @@ class OrderDetail extends Model
      */
 	  protected $table = 'shop_order_detail';
 
-	  protected $primaryKey = 'order_id';
+	  protected $primaryKey = 'id';
 
 	  public $timestamps = false;
 

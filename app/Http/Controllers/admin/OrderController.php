@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Order;
+use App\Models\Home\OrderDetail;
 use App\Models\Admin\Goods;
 use App\Models\Admin\GoodsSpec;
 
@@ -17,17 +18,23 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $res =  Order::where('order_id','like','%'.$request->input('order_id').'%')->
-                paginate($request->input('num',5));
 
+        $res =  Order::with('orderdetail')->where('order_id','like','%'.$request->input('order_id').'%')->paginate($request->input('num',10));
+
+
+                
         $arr = ['num'=>$request->input('num'),'order_id'=>$request->input('order_id')];
+
+
+        $data = OrderDetail::get();
 
 
         return view('/admin/order.index',[
 
             'title'=>'订单浏览管理',
             'res'=>$res,
-            'arr'=>$arr
+            'arr'=>$arr,
+            'data'=>$data
         ]);
         
         
@@ -63,22 +70,19 @@ class OrderController extends Controller
      */
     public function show($id)
     {   
+
+        
+        $res = OrderDetail::where('order_id',$id)->get();
+       
+       
+
         
 
-       
-        $res = Goods::where('goods_id',$id)->first();
-
-        $spec = GoodsSpec::where('goods_spec_id',$id)->first();
-
-         $order = Order::where('id',$id)->first();
         return view('/admin/order/particulars',[
             'title'=>'后台订单详情',
 
-            'res'=>$res,
+            'res'=>$res
 
-            'spec'=>$spec,
-
-            'order' =>$order
         ]);
     }
 

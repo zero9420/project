@@ -190,7 +190,7 @@
                         <a href="#"><i class="icon-list-2"></i>订单管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/order">浏览订单</a></li>
-                            <li><a href="/admin/order">订单状态</a></li>
+                          
 
 
                         </ul>

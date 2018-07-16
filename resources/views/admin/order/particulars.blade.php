@@ -106,42 +106,81 @@
                         
                           <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 160px;" aria-label="CSS grade: activate to sort column ascending">
-                           付款金额
+                           商品小计
                         </th>
 
 
                          
                           <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 200px;" aria-label="CSS grade: activate to sort column ascending">
-                           下单时间
+                           商品颜色
+                          </th>
+
+
+                          <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 200px;" aria-label="CSS grade: activate to sort column ascending">
+                           商品尺码
+                          </th>
+
+                          <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" style="width: 200px;" aria-label="CSS grade: activate to sort column ascending">
+                           退款处理
                           </th>
 
 
                     </tr>
                 </thead>
-
+    
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-
+                        @foreach($res  as $k=>$v)
                          <tr class="">
-                            <td class=""> {{$res->goods_name}}</td>
+                            <td class=""> {{$v->goods_name}}</td>
 
                            <td class="">
-                            <img src="{{$spec->goods_pic}}" alt="..." class="img-rounded" >
+                            <img src="{{$v->goods_pic}}" alt="..." class="img-rounded" >
                            </td>
 
-                            <td class=" "> {{$res->goods_price}}</td>
+                            <td class=" "> {{$v->goods_price}}</td>
 
 
-                            <td class=" ">{{$order->order_cat}}</td>
+                            <td class=" ">{{$v->num}}</td>
 
 
-                             <td class=" ">{{$order->order_payment}}</td>
-                             <td class=" ">{{$order->order_create_time}}</td>
+                             <td class=" ">{{$v->goods_price * $v->num}}</td>
+                             <td class=" ">{{$v->goods_color}}</td>
+                             <td class=" ">{{$v->goods_size}}</td>
+                            <td class=" ">
+                              @if($v->order_return_goods == 0 )
+                              无退款处理
+                              @elseif($v->order_return_goods == 1 )
+                              申请退款处理
+                              @else($v->order_return_goods == 2)
+                              退款完成
+                              @endif
 
+                                  @if($v->order_return_goods == 1)
+                            <div display='block'>
+                             
+                                 <a href="/admin/orderstatus?id={{$v->id}}" class="btn btn-danger">同意退款</a>
+
+                               </div>
+                            
+                              @endif
+
+                              @if($v->order_return_goods == 2)
+                              <div display='block'>
+                             
+                               <button class="btn btn-success " >退款成功</button>
+                              @endif
+                            </div>
+                            
+                             
+                            </td>
                             
                        
          
                         </tr>
+                        @endforeach
                 </tbody>
             </table>
 

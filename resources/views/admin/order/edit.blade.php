@@ -31,13 +31,6 @@
           </div>
 
           <div class="mws-form-row">
-            <label class="mws-form-label">购买数量</label>
-            <div class="mws-form-item">
-              <input type="text" class="small" name='order_cat'  value="{{$res->order_cat}}" disabled>
-            </div>
-          </div>
-
-          <div class="mws-form-row">
             <label class="mws-form-label">付款金额</label>
             <div class="mws-form-item">
               <input type="text" class="small" name='order_payment'  value="{{$res->order_payment}}" disabled>
@@ -89,28 +82,14 @@
           </div>
 
         
+      
+        
+          <div class="mws-form-row">
 
-             <div class="mws-form-row">
-            <label class="mws-form-label">状态</label>
-            <div class="mws-form-item clearfix">
-              <ul class="mws-form-list inline">
-                <li><input type="radio" name='order_status' value='0' @if($res->order_status == 0) checked @endif> <label>未发货</label></li>
-                <li><input type="radio" name='order_status' value='1'  @if($res->order_status == 1) checked @endif> <label>发货</label></li>
-                <li><input type="radio" name='order_status' value='2'  @if($res->order_status == 2) checked @endif> <label>交易完成</label></li>
-               
-              </ul>
-            </div>
-          </div>
+                  {{csrf_field()}}
 
-
-
-        </div>
-        <div class="mws-form-row">
-
-                                {{csrf_field()}}
-
-                                {{method_field('PUT')}}
-                             <input type="submit" class="btn btn-success" value="修改">
+                  {{method_field('PUT')}}
+               <input type="submit" class="btn btn-success" value="修改">
 
                              
          </div>
