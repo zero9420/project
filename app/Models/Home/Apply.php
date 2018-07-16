@@ -23,16 +23,6 @@ class Apply extends Model
      *
      * @var array
      */
-    protected $fillable = [
+      protected $guarded = [];
 
-    	'order_id',
-    	'order_cat',
-    	'order_payment',
-    	'order_phone',
-    	'order_name',
-    	'order_addr',
-    	'order_status',
-    
-
-	];
 }

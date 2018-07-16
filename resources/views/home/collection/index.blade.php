@@ -49,6 +49,20 @@
 			<div class="member-head">
 				<div class="member-heels fl"><h2>我的收藏</h2></div>
 			</div>
+		<form action="/home/collection" method='get'>
+			 <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                    <label  class="DataTables1">
+                        最小价格:
+                        <input type="number" name='min_price' value="{{$request->min_price}}">
+                    </label>
+                    <label class="DataTables2">
+	                    最大价格:
+	                    <input type="number" name='max_price' value="{{$request->max_price}}">
+	                </label>
+
+	                <button class='btn btn-info'>搜索</button>
+	        </div>	
+	    </form>
 			<div class="member-switch clearfix">
 				<ul id="H-table" class="H-table">
 					<li><a href="#">我的收藏的商品</a></li>
@@ -106,8 +120,7 @@
 	</div>
 </section>
 <script>
-	
-	
+		
 	$("#member-delall").click(function(){
 
    		 $(":checkbox").each(function(){
@@ -116,12 +129,16 @@
     	});
 	});
 
-
-
-	
-	
-
 </script>
 
+<script type="text/javascript">
+       setTimeout(function(){
+
+            $('.mws-form-message').remove();
+
+       },3000);
+
+
+</script>
 
 @endsection

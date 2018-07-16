@@ -8,7 +8,7 @@ use App\Models\Home\Info;
 use Config;
 use App\Http\Requests\UserRequest;
 use App\Models\Home\Apply;
-
+use DB;
 class IndexController extends Controller
 {
 
@@ -26,7 +26,6 @@ class IndexController extends Controller
 		// 显示页面
 		$mation = Info::where('info_cid',$user)->first();
 
-		// dd($mation);
 		if($mation !== null){
 
 
@@ -155,18 +154,26 @@ class IndexController extends Controller
 		$user = session('user_id');
 		
 		$res = Info::where('info_cid',$user)->first();
-		
-	
-		$data = Apply::where('order_name',$res->info_nickname)->first();
 
-		if($data == null){
 
-			return view('home.apply.none',['res'=>$res]);
+		if(!empty($res)){
+			
+			// 查询登陆者有无订单
+			$data = DB::table('shop_order')->where('order_info_cid',$user)->first();
+
+			if(empty($data)){
+
+				return view('home.apply.none',['res'=>$res]);
+			}else{
+
+				$order = DB::table('shop_order_detail')->where('order_id',$data->order_id)->get();
+
+				return view('home.apply.index',['res'=>$res,'data'=>$data,'order'=>$order]);
+			}
 		}else{
 
-			return view('home.apply.index',['res'=>$res,'data'=>$data]);
+			return redirect('/home/userinfo');
 		}
-
 
 	}
 
@@ -182,30 +189,19 @@ class IndexController extends Controller
 	{
 
 	
-		$ids = $request->input('ids');
-		
-		// 检测登陆者信息
-		$user = session('user_id');
-		
-		$res = Info::where('info_cid',$user)->first();
-		
+		$id = $request->input('id');
+		$status = $request->input('status');
+
 		// 发送退货信息
-		$status = Apply::where('order_name',$res->info_nickname)->update(['order_return_goods'=>$ids]);
+		$goods = DB::table('shop_order_detail')->where('goods_id',$id)->update(['order_return_goods'=>$status]);
+		// var_dump($goods);
 		
-		var_dump($status);
+		
+		
 		
 	}
 
 
-	public function goods(Request $request)
-	{
-
-		session(['a'=>5]);
-
-
-		echo session('a');
-
-	}
 
 
 	

@@ -48,7 +48,7 @@
 					<dd><a href="#">帮助中心</a></dd>
 				</dl>
 			</div>
-		<div class="member-right fr" style="font-size:26px">
+		<div class="member">
 			您还没有退款订单信息
 		</div>
 	</div>
