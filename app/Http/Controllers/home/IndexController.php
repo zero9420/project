@@ -131,13 +131,12 @@ class IndexController extends Controller
 
 			//移动
 			$request->file('info_image')->move('./userinfo/',$name.'.'.$suffix);
-
-			//存入数据表
-			$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
-			
+	
 			
 		}
 
+		//存入数据表
+		$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
 		
 		$data = Info::where('info_id',$id)->update($res);
 	
