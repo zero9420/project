@@ -24,8 +24,6 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
-    
-
         $user = session('user_id');
 
         $res = Info::where('info_cid',$user)->first();
@@ -39,8 +37,7 @@ class OrderController extends Controller
                 ]);
 
                  $res = (object) $res;
- 
-             }  
+             }
 
 
         $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(3);

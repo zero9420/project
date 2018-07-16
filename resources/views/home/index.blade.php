@@ -459,6 +459,8 @@
                             </div>
                             <div class="col-md-7 col-xs-12 col-sm-7">
                                 <div class="product-details-info">
+                                <form action="/home/cart/{{$v->goods_id}}" method='POST'>
+                                    {{ csrf_field() }}
                                     <h5 class="product-title">{{$v->goods_name}}</h5>
                                     <div class="price-box">
                                         @if($v->goods_preferential != $v->goods_price)
@@ -498,8 +500,6 @@
                                         $size = array_filter(explode('|',$v->goods_size));
                                         $color = array_filter(explode('|',$v->goods_color));
                                     @endphp
-                                <form action="/home/cart/{{$v->goods_id}}" method='POST'>
-                                    {{ csrf_field() }}
                                     <div class="add-cart">
                                         <span>尺码:</span>
                                         @foreach($size as $vs)
