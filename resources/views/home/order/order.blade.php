@@ -40,7 +40,6 @@
 					<p><a href="/home/userinfo"></a> {{$res->info_nickname}} </p>
 					
 
-					<p><a href="/home/userinfo"></a> {{$res->info_name}} </p>
 
 				</div>
 			</div>
