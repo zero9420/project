@@ -4,46 +4,32 @@
 
 @section('content')
 <div class="container">
-    <div class="mws-panel grid_6">
-        <div class="mws-panel-header">
-            <span><i class="icon-book"></i> 销售信息</span>
+    @if(count($sales) != '0')
+        <div class="mws-panel grid_8">
+            <div class="mws-panel-header">
+                <span><i class="icon-pictures"></i> 销量前五</span>
+            </div>
+            <div class="mws-panel-body">
+                <ul class="thumbnails mws-gallery">
+                    @foreach($sales as $v)
+                    <li>
+                        <span class="thumbnail" title="商品ID:{{$v->goods_id}}; 商品名:{{$v->goods_name}};"><img src="{{$v->spec[0]->goods_pic}}" alt=""></span>
+                        <span class="mws-gallery-overlay">
+                            <a href="/admin/goods?gname={{$v->goods_name}}" class="mws-gallery-btn" title="点击去补货"><i class="icon-search"></i></a>
+                        </span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-        <div class="mws-panel-body no-padding">
-            <ul class="mws-summary">
-                <li>
-                    <span class="key"><i class="icon-shopping-cart"></i> 销售冠军</span>
-                    <span class="val">
-                        <span class="text-nowrap"><i class="icol-crown"></i> <a href="/admin/goods?gname={{$arr['gname']}}">{{$arr['gname']}} </a> <i class="icol-arrow-right"></i> 共售出 : {{$arr['gsales']}} pcs</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="key"><i class="icon-support"></i> 最受欢迎的颜色</span>
-                    <span class="val">
-                        <span class="text-nowrap"><i class="icol-control-wheel"></i> {{$arr['gcolor']}} </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="key"><i class="icon-scissor"></i> 购买最多的尺码</span>
-                    <span class="val">
-                        <span class="text-nowrap"><i class="icol-ruler-triangle"></i> {{strtoupper($arr['gsize'])}}</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="key"><i class="icon-heart"></i> 好评最多的</span>
-                    <span class="val">
-                        <span class="text-nowrap"><i class="icol-star-2"></i> <a href="/admin/goods?gname={{$arr['gname']}}"> {{$arr['pname']}} </a> <i class="icol-arrow-right"></i> 好评数 : {{$arr['pnum']}}</span>
-                    </span>
-                </li>
-            </ul>
-        </div>
-    </div>
+    @endif
+    @if(count($prompt) != '0')
     <div class="mws-panel grid_8">
         <div class="mws-panel-header">
             <span><i class="icon-pictures"></i> 库存不足最新消息</span>
         </div>
         <div class="mws-panel-body">
             <ul class="thumbnails mws-gallery">
-            @if(count($prompt) != '0')
                 @foreach($prompt as $v)
                 <li>
                     <span class="thumbnail" title="商品ID:{{$v->goods_id}}; 商品名:{{$v->goods_name}} 库存不足;"><img src="{{$v->spec[0]->goods_pic}}" alt=""></span>
@@ -52,23 +38,70 @@
                     </span>
                 </li>
                 @endforeach
-            @else
+            </ul>
+        </div>
+    </div>
+    @endif
+    <div class="mws-panel grid_8">
+        <div class="mws-panel-header">
+            <span><i class="icon-book"></i> 系统基本信息 </span>
+        </div>
+        <div class="mws-panel-body no-padding">
+            <ul class="mws-summary clearfix">
                 <li>
-                    <span class="thumbnail" title="库存充足!"><img src="/admins/example/cyan_hawk.jpg" alt=""></span>
+                    <span class="key"><i class="icon-windows"></i> 操作系统 </span>
+                    <span class="val">
+                        <span class="text-nowrap">Microsoft Windows NT</span>
+                    </span>
                 </li>
                 <li>
-                    <span class="thumbnail" title="库存充足!"><img src="/admins/example/cyan_kangaroo.jpg" alt=""></span>
+                    <span class="key"><i class="icon-globe"></i> PHP运行方式</span>
+                    <span class="val">
+                        <span class="text-nowrap">Apache 2.0 Handler PHP Version 7.0.6 </span>
+                    </span>
                 </li>
                 <li>
-                    <span class="thumbnail" title="库存充足!"><img src="/admins/example/cyan_kookaburra.jpg" alt=""></span>
+                    <span class="key"><i class="icon-install"></i>项目</span>
+                    <span class="val">
+                        <span class="text-nowrap">云商城</span>
+                    </span>
                 </li>
                 <li>
-                    <span class="thumbnail" title="库存充足!"><img src="/admins/example/scottwills_penguin.jpg" alt=""></span>
+                    <span class="key"><i class="icon-wordpress-2"></i>项目网址</span>
+                    <span class="val">
+                        <span class="text-nowrap"><a href="/">http://shop203.vip</a></span>
+                    </span>
                 </li>
                 <li>
-                    <span class="thumbnail" title="库存充足!"><img src="/admins/example/scottwills_underwater2.jpg" alt=""></span>
+                    <span class="key"><i class="icon-android"></i>开发人员</span>
+                    <span class="val">
+                        <span class="text-nowrap">常志|张学强|孟世奇|段宾古</span>
+                    </span>
                 </li>
-            @endif
+                <li>
+                    <span class="key"><i class="icon-attachment"></i>上传附件限制</span>
+                    <span class="val">
+                        <span class="text-nowrap">2M</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="key"><i class="icon-history"></i>北京时间</span>
+                    <span class="val">
+                        <span class="text-nowrap" id="nowsTime"><script src="/admins/js/times/nowtime.js"></script></span>
+                    </span>
+                </li>
+                <li>
+                    <span class="key"><i class="icon-wordpress"></i>服务器域名/IP</span>
+                    <span class="val">
+                        <span class="text-nowrap" id="nowsTime">localhost [ 127.0.0.1 ]</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="key"><i class="icon-yinyang"></i>Host</span>
+                    <span class="val">
+                        <span class="text-nowrap" id="nowsTime">127.0.0.1</span>
+                    </span>
+                </li>
             </ul>
         </div>
     </div>

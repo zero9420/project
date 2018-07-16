@@ -56,7 +56,6 @@
         	<!-- Notifications -->
             @php
                 $count = App\Models\Admin\Goods::where('goods_stock','<','20')->count();
-                $prompt = App\Models\Admin\Goods::where('goods_stock','<','20')->take(5)->get();
             @endphp
         	<div id="mws-user-notif" class="mws-dropdown-menu">
                 <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
@@ -66,18 +65,13 @@
                 <div class="mws-dropdown-box">
                     <div class="mws-dropdown-content">
                         <ul class="mws-notifications">
-                            @foreach($prompt as $v)
                             <li class="read">
-                                <a href="#">
-                                    <span class="message">
-                                        商品ID:{{$v->goods_id}}; 商品名:{{$v->goods_name}}
-                                    </span>
+                                <a href="/admin/index" title="点击查看详情!!!">
                                     <span class="time">
                                         库存不足,请及时添加
                                     </span>
                                 </a>
                             </li>
-                            @endforeach
                         </ul>
                         <div class="mws-dropdown-viewall">
                             <a href="/admin/index">查看全部.....</a>
@@ -191,7 +185,6 @@
                         <a href="#"><i class="icon-list-2"></i>订单管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/order">浏览订单</a></li>
-                          
 
 
                         </ul>
@@ -223,10 +216,10 @@
 
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-        
+
         	<!-- Inner Container Start -->
             <div class="container">
-            
+
                 @if(session('success'))
                     <div class="mws-form-message info">
                         {{session('success')}}
@@ -238,7 +231,7 @@
                         {{session('error')}}
                     </div>
                 @endif
-                
+
                 @section('content')
 
 
