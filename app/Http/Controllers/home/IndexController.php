@@ -105,7 +105,17 @@ class IndexController extends Controller
 
 	public function Update(UserRequest $request, $id)
 	{
-			
+		  //删除原文件
+		
+        $file = Info::find($id);
+       
+        $urls = $file->info_image;
+
+        $info = unlink('.'.$urls);
+
+        if(!$info) return; 
+
+
 		$res = $request->except('_token','info_image');
 		
 		//检测是否有上传图片
@@ -188,12 +198,13 @@ class IndexController extends Controller
 	public function ajax(Request $request)
 	{
 
-	
+		$ids = session('user_id');
 		$id = $request->input('id');
 		$status = $request->input('status');
 
 		// 发送退货信息
-		$goods = DB::table('shop_order_detail')->where('goods_id',$id)->update(['order_return_goods'=>$status]);
+		$order = DB::table('shop_order')->where('order_info_cid',$ids)->update(['order_return_goods'=>$status]);
+		$detail = DB::table('shop_order_detail')->where('goods_id',$id)->update(['order_return_goods'=>$status]);
 		// var_dump($goods);
 		
 		
