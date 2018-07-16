@@ -33,7 +33,6 @@ class CartDataController extends Controller
         $goods_color = $request->input('goods_color');
         $goods_price = $request->input('new_price');
         $goods_prices =$request->input('old_price');
-        dd($goods_prices);
         $num = $request->input('num');
         if(empty($num)){
             $num = '1';
@@ -42,14 +41,14 @@ class CartDataController extends Controller
         	// dd($res);
         $goods_name = $res['goods_name'];
         $goods_pic = $res['spec'][0]['goods_pic'];
-        $goods_price = $res['goods_price'];
+//        $goods_price = $res['goods_price'];
 
          $ord = Cart::where('user_id',$user_id)->where('goods_id',$goods_id)->first();
 
           if (empty($ord)) {
-          DB::table('shop_cart')->insert(['user_id'=>$user_id,'goods_id'=>$goods_id,'goods_name'=>$goods_name,'goods_pic'=>$goods_pic,'goods_price'=>$goods_price,'goods_size'=>$goods_size,'goods_color'=>$goods_color,'num'=>$num]);
+          DB::table('shop_cart')->insert(['user_id'=>$user_id,'goods_id'=>$goods_id,'goods_name'=>$goods_name,'goods_pic'=>$goods_pic,'goods_price'=>$goods_price,'goods_size'=>$goods_size,'goods_color'=>$goods_color,'num'=>$num,'goods_prices'=>$goods_prices]);
         }else{
-              DB::table('shop_cart')->where('goods_id',$goods_id)->update(['user_id'=>$user_id,'goods_id'=>$goods_id,'goods_name'=>$goods_name,'goods_pic'=>$goods_pic,'goods_price'=>$goods_price,'goods_size'=>$goods_size,'goods_color'=>$goods_color,'num'=>$num]);
+              DB::table('shop_cart')->where('goods_id',$goods_id)->update(['user_id'=>$user_id,'goods_id'=>$goods_id,'goods_name'=>$goods_name,'goods_pic'=>$goods_pic,'goods_price'=>$goods_price,'goods_size'=>$goods_size,'goods_color'=>$goods_color,'num'=>$num,'goods_prices'=>$goods_prices]);
         }
 
         return redirect('/home/cart');

@@ -13,14 +13,30 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //用户浏览渲染
-        $res = Users::paginate(10);
+
+        $users = Users::orderBy('id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('search');
+                $email = $request->input('email');
+                //如果用户名不为空
+                if(!empty($username)) {
+                    $query->where('username','like','%'.$username.'%');
+                }
+                //如果邮箱不为空
+                if(!empty($email)) {
+                    $query->where('email','like','%'.$email.'%');
+                }
+            })
+            ->paginate($request->input('num', 10));
+
 
         return view('admin.users.index',[
             'title'=>'用户的列表页面',
-            'res'=>$res]);
+            'res'=>$users,
+            'request'=>$request]);
     }
 
     /**
