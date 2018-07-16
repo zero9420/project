@@ -93,12 +93,12 @@ class GoodslistController extends Controller
      */
     public function detail(Request $request,$id)
     {
-        $goods = Goods::with('spec')->where('goods_id',$id)->first();
+        $goods = Goods::with('spec')->where('goods_id',$id)->where('goods_status','1')->first();
         // 取出数据拆分成数组并取出空值
         $size = array_filter(explode('|',$goods->goods_size));
         $color = array_filter(explode('|',$goods->goods_color));
         $gname = mb_substr($goods->goods_name,0,5);
-        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->take(10)->get();
+        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->where('goods_status','1')->take(10)->get();
 
 
         //收藏者的id

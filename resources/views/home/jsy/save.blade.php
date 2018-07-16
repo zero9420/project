@@ -130,12 +130,12 @@
 	<!--收货地址body部分结束-->
 </div>
 
-<script type="text/javascript"> 
-//3秒钟之后跳转到指定的页面 
+<script type="text/javascript">
+//3秒钟之后跳转到指定的页面
 setInterval(function(){
-	location.href='http://www.shop203.com'
-},5000); 
-</script> 
+	location.href='/'
+},2000);
+</script>
 
 @endsection
 

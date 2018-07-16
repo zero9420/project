@@ -10,12 +10,9 @@
 <section id="pc-jie" class="lamp203">
 	<div class="center ">
 		<ul class="pc-shopping-title clearfix">
-			<li><a href="#" class="cu">全部商品(10)</a></li>
-			<li><a href="#">限时优惠(7)</a></li>
-			<li><a href="#">库存紧张(0)</a></li>
+			<li><a href="javascript:void(0)" class="cu">全部商品({{count($data)}})</a></li>
 		</ul>
 	</div>
-	
 	<div class="pc-shopping-cart center">
 		<div class="pc-shopping-tab ">
 			<table>
@@ -34,13 +31,8 @@
 				<tbody>
 					<tr>
 						<td colspan="7" style="padding-left:10px; background:#eee">
-							<input type="checkbox" >
 							<label for="">云购物自营</label>
-							<a href="#" style="position:relative;padding-left:50px"><i class="icon-kefu"></i>联系客服</a>
-							<ul class="clearfix fr" style="padding-right:20px">
-								<li><i class="pc-shop-car-yun"></i>满109元减10</li>
-								<li><i class="pc-shop-car-yun"></i>领取3种优惠券, 最高省30元</li>
-							</ul>
+							<a href="https://www.sobot.com/chat/pc/index.html?sysNum=5f9e61cabbdc4577b59b9a02664d137b" title="云商城在线客服,点击联系客服!" style="position:relative;padding-left:50px"><i class="icon-kefu"></i>联系客服</a>
 						</td>
 					</tr>
 					<tr>

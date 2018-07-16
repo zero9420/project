@@ -33,7 +33,7 @@
                         <h2>分类</h2>
                         <ul>
                             @php
-                                $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
+                                $cates = App\Models\Admin\Cate::getsubcate(0);
                             @endphp
                             <li  class="bg-info">
                                 <label class="check-label">

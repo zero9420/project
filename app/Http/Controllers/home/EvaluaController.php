@@ -117,6 +117,7 @@ class EvaluaController extends Controller
     	foreach ($data as $k => $v) {
     		$goods[] = Goods::with('spec')->where('goods_id',$v->order->goods_id)->where('goods_status','1')->first();
     	}
+        $goods = array_filter($goods);
     	return view('home.eval.index',['title'=>'评论页','data'=>$data,'user'=>$user,'goods'=>$goods]);
     }
 }

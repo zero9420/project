@@ -112,7 +112,7 @@
                                 <ul>
                                     <li><a href="/">首页</a></li>
                                     @php
-                                        $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
+                                        $cates = App\Models\Admin\Cate::getsubcate(0);
                                     @endphp
                                     @foreach($cates as $k=>$v)
                                     <li><a href="/goodslist?id={{$v->cate_id}}">{{$v->cate_name}}</a></li>
@@ -163,9 +163,6 @@
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <h4>商品分类</h4>
                                     <ul class="toggle-footer">
-                                        @php
-                                            $cates = App\Http\Controllers\admin\CateController::getsubcate(0);
-                                        @endphp
                                         @foreach($cates as $k=>$v)
                                             <li><a title="My orders" href="/goodslist?id={{$v->cate_id}}">{{$v->cate_name}}</a></li>
                                         @endforeach

@@ -25,7 +25,7 @@ class Evalua extends Model
      *
      * @var array
      */
-    protected $fillable = ['gid','uid','oid','goods_grade','comments','created_at','updated_at'];
+    protected $guarded = [];
     /**
      * 模型的日期字段保存格式。
      *

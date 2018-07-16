@@ -313,7 +313,7 @@
  															<td>尺码:</td>
  															<td>
  																@foreach($size as $k=>$v)
-			                                                		<span>{{$v}}&nbsp;&nbsp;</span>
+			                                                		<span>{{strtoupper($v)}}&nbsp;&nbsp;</span>
 			                                                	@endforeach
  															</td>
  														</tr>
@@ -390,7 +390,7 @@
                                                         	<span>尺码:</span>{{$v->order->goods_size}}
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-2">
-                                                        	{{substr($v->user->username,0,2)}}********(匿名)
+                                                        	{{substr($v->user->username,0,2)}}********
                                                         </div>
                                                         <!-- shop-eval-end -->
                                                     </div>
@@ -409,6 +409,8 @@
     </div>
 </div>
 <!-- shop-area-end -->
+
+
 
 
 @endsection

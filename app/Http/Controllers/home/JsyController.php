@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Cart;
 use App\Models\Home\Info;
+use App\Models\Admin\Goods;
 use DB;
 
 class JsyController extends Controller
@@ -58,23 +59,17 @@ class JsyController extends Controller
 
         $date = date('Ymd',time()).rand(6666,8888);
         $req['order_id'] = $date;
-      
-        
+
         $req['order_info_cid'] = session('user_id');
         $req['order_create_time'] = date('Y-m-d H:i:s',time());
         $req['order_update_time'] = date('Y-m-d H:i:s',time());
-       
-     
-        $order = DB::table('shop_order')->insert([$req]);
-        
-       // 一对多 遍历到附表
-       
 
-     
+        $order = DB::table('shop_order')->insert([$req]);
+
+       // 一对多 遍历到附表
+
        foreach ($cart as $key => $v) {
-            
           $res = DB::table('shop_order_detail')->insert(
-                
                 [
                     'goods_name'=>$v->goods_name,
                     'num' => $v->num,
@@ -88,19 +83,22 @@ class JsyController extends Controller
 
 
                 ]
-                
-                
             );
        }
 
+        // 遍历修改商品销量和库存
+        foreach ($cart as $kn => $vn) {
+            $sales = Goods::where('goods_id',$vn->goods_id)->increment('goods_sales',$vn->num);
+            $stock = Goods::where('goods_id',$vn->goods_id)->decrement('goods_stock',$v->num);
+        }
 
-           $ord = DB::table('shop_order')->where('order_info_cid',session('user_id'))->first();
-           
-           $der = DB::table('shop_order_detail')->where('order_id',$ord->order_id)->get();
 
-            return view('home/jsy/save',['ord'=>$ord,'der'=>$der]);
-       
-      
+        $ord = DB::table('shop_order')->where('order_info_cid',session('user_id'))->first();
+
+        $der = DB::table('shop_order_detail')->where('order_id',$ord->order_id)->get();
+
+        return view('home/jsy/save',['ord'=>$ord,'der'=>$der]);
+
     }
 
     /**
@@ -111,7 +109,7 @@ class JsyController extends Controller
      */
     public function show($id)
     {
-       
+
     }
 
     /**
@@ -122,7 +120,7 @@ class JsyController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**

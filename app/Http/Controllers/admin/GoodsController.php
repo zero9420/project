@@ -10,6 +10,7 @@ use App\Models\Admin\GoodsSpec;
 use App\Http\Requests\FormRequest;
 use Config;
 use DB;
+use App\Models\Home\OrderDetail;
 
 class GoodsController extends Controller
 {
@@ -42,12 +43,14 @@ class GoodsController extends Controller
             })
 
         ->paginate($request->input('pages', 10));
-        // dd($goods);
+        // 排序
         $num = $goods->firstItem();
+        $stock = Goods::where('goods_stock','<=','20')->count();
         return view('admin/goods/index',['title'=>'商品浏览页',
                                         'goods'=>$goods,
                                         'num'=>$num,
-                                        'request'=> $request
+                                        'request'=> $request,
+                                        'stock'=>$stock
                                     ]);
     }
 
@@ -214,6 +217,7 @@ class GoodsController extends Controller
         // 表单验证
         $this->validate($request, [
             'goods_name' => 'required|unique:shop_goods|max:30',
+            'goods_stock' => 'required|regex:/^\d{1,9}$/',
             'goods_price'=>'required|regex:/^\d{1,9}$/',
             'goods_preferential'=>'regex:/^\d{0,9}$/',
             'goods_info'=>'required|max:120',
@@ -223,6 +227,8 @@ class GoodsController extends Controller
             'goods_name.required'=>'商品名不能为空',
             'goods_name.unique'=>'商品名不能重复',
             'goods_name.max'=>'商品名格式不正确',
+            'goods_stock.required'=>'商品库存不能为空',
+            'goods_stock.max'=>'商品库存格式不正确',
             'goods_price.required'=>'商品价格不能为空',
             'goods_price.regex'=>'商品价格格式不正确',
             'goods_preferential.regex'=>'商品优惠格式不正确',

@@ -83,3 +83,18 @@ $('#color').click(function() {
         });
     });
 });
+
+// 库存加
+$('#stock').click(function(event) {
+    /* Act on the event */
+    var stock = 100;
+    $.get('/admin/ajaxadd',{stock:stock},function(data){
+        if(data == '01'){
+            alert('添加成功');
+            location.reload(true);
+        } else {
+            alert('添加失败');
+        }
+    })
+
+});
