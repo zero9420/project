@@ -24,24 +24,12 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
+    
+
         $user = session('user_id');
 
         $res = Info::where('info_cid',$user)->first();
 
-<<<<<<< HEAD
-        $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(3);
-
-        $order = [];
-
-        $name = $request->input('goods_name');
-
-        if(!empty($name)){
-
-            foreach ($ord as $k => $v) {
-
-                $order[] = DB::table('shop_order_detail')->where('order_id',$v->order_id)->where('goods_name','like','%'.$name.'%')->get();
-
-=======
         $client =  User::where('id',$user)->first();
          if(empty($res)){
 
@@ -67,7 +55,6 @@ class OrderController extends Controller
 
                 $order[] = DB::table('shop_order_detail')->where('order_id',$v->order_id)->where('goods_name','like','%'.$name.'%')->get();
 
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
             }
         } else {
             foreach ($ord as $k => $v) {
@@ -114,15 +101,8 @@ class OrderController extends Controller
     {
         $user = session('user_id');
         $res =DB::table('shop_order')->where('order_info_cid',$user)->first();
-<<<<<<< HEAD
 
-        $data = DB::table('shop_order_detail')->where('id',$id)->first();
-        
-        return view('home.order.details',[
-            'title'=>'订单详情',
-            'res'=>$res,
-            'data'=>$data
-=======
+
 
         $data = DB::table('shop_order_detail')->where('id',$id)->first();
         // 获取订单号
@@ -137,7 +117,7 @@ class OrderController extends Controller
             'res'=>$res,
             'data'=>$data,
             'comments'=>$comments
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
+
 
         ]);
     }

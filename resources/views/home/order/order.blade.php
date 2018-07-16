@@ -36,10 +36,6 @@
 				<div class="fl tu "><a href="#"><img src=" {{$res->info_image}} "></a></div>
 				<div class="fl ">
 					<p>用户昵称：</p>
-<<<<<<< HEAD
-=======
-
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
 					<p><a href="/home/userinfo"></a> {{$res->info_nickname}} </p>
 					
 
@@ -69,15 +65,10 @@
 		<div class="member-right fr">
 			<div class="member-head">
 				<div class="member-heels fl"><h2>我的订单</h2></div>
-<<<<<<< HEAD
-				
+
 				<div class="member-about fr">
 					<form action="/home/order" method="get">
-						
-=======
-				<div class="member-about fr">
-					<form action="/home/order" method="get">
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
+
 						<input class="text-news" placeholder="关键字" type="text"  name='goods_name'>
 
 						<button class="btn">搜索</button>
@@ -87,25 +78,14 @@
 			<div class="member-whole clearfix">
 				<ul id="H-table" class="H-table">
 					<li class="cur"><a href="#">我的订单</a></li>
-<<<<<<< HEAD
 
-					
-					
-=======
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
 				</ul>
 			</div>
 			<div class="member-border">
 				<div class="member-return H-over">
-<<<<<<< HEAD
-			
-						
+
 					<div class="member-sheet clearfix">
 
-							
-=======
-					<div class="member-sheet clearfix">
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
 						<div class="bs-example" data-example-id="hoverable-table">
 									    <table class="table table-hover">
 									      <thead>
@@ -121,41 +101,20 @@
 									      </thead>
 
 									      @foreach($order as $k => $v)
-<<<<<<< HEAD
-											
-									      <tbody>
-									      	@foreach($v as $kk => $vv) 
-									      		
-									        <tr>
-									          <th scope="row">{{$vv->order_id}}</th>
-									          <td> 
-									          	<img src=" {{$vv->goods_pic}} " alt="..." class="img-circle">
-									          	 
-=======
+
 									      <tbody>
 									      	@foreach($v as $kk => $vv)
 									        <tr>
 									          <th scope="row">{{$vv->order_id}}</th>
 									          <td>
 									          	<img src=" {{$vv->goods_pic}} " alt="..." class="img-circle">
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
+
 
 									          </td>
 									          <td> {{$vv->goods_name}} </td>
 									          <td>  {{$vv->goods_price}}  </td>
 									          <td>  {{$vv->num}}  </td>
-<<<<<<< HEAD
-									          <td>  
-									          	@if($vv->goods_status==0)未发货@elseif($vv->goods_status==1)已发货@else交易完成@endif
-									          </td>
-									          
-									          <td><div class="ci5"><p><a href="/home/order/{{$vv->id}}">订单详情</a></p> <p><a href="/home/ajax">申请退款</a></p></td></div>								         
-									        </tr>
-									       
-									      </tbody> 
-									      			
 
-=======
 									            <td>
 									          	@if($vv->goods_status==0)未发货@elseif($vv->goods_status==1)已发货@else交易完成@endif
 									            </td>
@@ -171,32 +130,18 @@
 										        </td>
 									        </tr>
 									    </tbody>
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
+
 									     		@endforeach
 											@endforeach
 									    </table>
 									  </div>
-<<<<<<< HEAD
-								
-						</div>
-					
-					</div>
-				
-				
-				<div class="clearfix" style="padding:30px 20px;">
-					<div class="fr pc-search-g pc-search-gs">
 
-					
-						{{$ord->links()}}
-					
-						
-=======
 						</div>
 					</div>
 				<div class="clearfix" style="padding:30px 20px;">
 					<div class="fr pc-search-g pc-search-gs">
 						{{$ord->links()}}
->>>>>>> 69fdf577b2fc279f07ceb5448df75228293047ba
+
 
 					</div>
 					
