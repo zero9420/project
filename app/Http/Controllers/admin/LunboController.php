@@ -16,12 +16,13 @@ class LunboController extends Controller
     {
 
       
-
-
-        $res = DB::table('lunbo')
+             $res = DB::table('lunbo')
                 ->where('lunbo_title', 'like','%'.$request->input('lunbo_title').'%')
                 ->paginate($request->input('num',5));
-         $arr = $request['num'];       
+                $arr = $request['num']; 
+                
+
+       
        
         return view('/admin/lunbo/index',['res'=>$res,'title'=>'浏览轮播','arr'=>$arr]);
         
@@ -248,8 +249,9 @@ class LunboController extends Controller
                     $res['lunbo_image5'] = '/image/'.$name5.'.'.$suffix;
             }
           
-
-       
+             
+             
+             
             $data = DB::table('lunbo')->where('lunbo_id',$id)->update($res);
 
             if($data){
@@ -258,6 +260,8 @@ class LunboController extends Controller
                         'url' =>'/admin/lunbo',
                         'jumpTime'=>2
                     ]);
+
+
             }
        
 

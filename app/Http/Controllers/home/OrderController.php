@@ -7,7 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Home\Info;
 use App\Models\Home\OrderDetail;
 use DB;
+
+use App\Models\Home\User;
+
 use App\Models\Home\Evalua;
+
 
 
 class OrderController extends Controller
@@ -23,6 +27,19 @@ class OrderController extends Controller
         $user = session('user_id');
 
         $res = Info::where('info_id',$user)->first();
+
+        $client =  User::where('id',$user)->first();
+         if(empty($res)){
+
+                 $res = ([
+                    'info_nickname'=>$client->username,
+                    'info_image'=>'/userinfo/WnaSH31531120706.jpg'
+                ]);
+
+                 $res = (object) $res;
+ 
+             }  
+
 
         $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(3);
 

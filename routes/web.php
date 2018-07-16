@@ -65,6 +65,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 
 	// 订单管理
 	Route::resource('/admin/order','admin\OrderController');
+	// 订单发货ajax修改状态
+	Route::any('/admin/ajaxorder','admin\AjaxOrderController@ajaxorder');
 
 	// 退款处理
 	Route::any('/admin/orderstatus','admin\OrderStatusController@status');

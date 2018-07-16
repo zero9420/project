@@ -36,7 +36,12 @@
 				<div class="fl tu "><a href="#"><img src=" {{$res->info_image}} "></a></div>
 				<div class="fl ">
 					<p>用户昵称：</p>
+
+					<p><a href="/home/userinfo"></a> {{$res->info_nickname}} </p>
+					
+
 					<p><a href="/home/userinfo"></a> {{$res->info_name}} </p>
+
 				</div>
 			</div>
 			<div class="member-lists">

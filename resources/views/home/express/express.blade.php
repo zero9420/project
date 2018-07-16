@@ -20,7 +20,7 @@
 		
 	
 		.tu{
-			margin: -10px -10px;
+			margin: -10px -15px;
 		}
 
 		img {
@@ -35,7 +35,7 @@
 	<div class="member-center clearfix" >
 		<div class="member-left fl ff2"  >
 			<div class="member-apart clearfix ff3">
-
+				
 				<div class="fl tu "><a href="#"><img src=" {{$data->info_image}} " ></a></div>
 				<div class="fl ">
 					<p>用户昵称：</p>

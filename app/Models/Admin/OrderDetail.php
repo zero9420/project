@@ -4,10 +4,9 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class OrderDetail extends Model
 {
-
-	protected $table = 'shop_order';
+    protected $table = 'shop_order_detail';
 
     protected $primaryKey = 'id';
 
@@ -19,17 +18,4 @@ class Order extends Model
      * @var array
      */
     protected $guarded = [];
-
-
-
-   
-     public function orderdetail()
-    {
-        return $this->hasMany('App\Models\Admin\OrderDetail','id','id');
-    }
-
-   
 }
-
-
-

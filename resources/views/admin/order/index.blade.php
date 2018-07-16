@@ -3,6 +3,7 @@
 @section('title',$title)
 
 @section('content')
+<script type="text/javascript" src="/homes/js/jquery.js"></script>
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span>
@@ -100,17 +101,14 @@
             </form>
 
 
-
+          
 
 
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
-                       <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 20px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >
-                            ID
-                        </th>
+                      
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 20px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" >
                             订单号
@@ -119,10 +117,7 @@
                         rowspan="1" colspan="1" style="width: 20px;" aria-label="Browser: activate to sort column ascending">
                             付款金额
                         </th>
-                        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 20px;" aria-label="Platform: activate to sort column ascending">
-                            购买数量
-                        </th>
+                        
                       
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 20px;" aria-label="CSS grade: activate to sort column ascending">
@@ -149,7 +144,7 @@
                           </th>
                           <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 20px;" aria-label="CSS grade: activate to sort column ascending">
-                           修改时间
+                           下单时间
                         </th>
                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" style="width: 20px;" aria-label="CSS grade: activate to sort column ascending">
@@ -163,19 +158,20 @@
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-
+          
 					@foreach($res as $k => $v)
-
-                    <tr class="@if($k % 2 == 1)  odd   @else even  @endif">
-                        <td class="">{{$v->id}}</td>
-
+            
+           
+           
+                    
+                      <tr>
+                       
+ 
                         <td class="">{{$v->order_id}}</td>
 
                         <td class="">{{$v->order_payment}}</td>
-
-                        <td class=" "> {{$v->order_cat}}</td>
-
-
+               
+                         
                         <td class=" ">{{$v->order_name}}</td>
 
 
@@ -186,76 +182,66 @@
 
                          <td class=" ">{{$v->order_umsg}}</td>
 
-                         <td class=" ">
-
+                         
+                        
+                          <td class=" ">
+                         
                           @if($v->order_return_goods == 0 )
-
                           无退款处理
-
-                          @elseif($v->order_return_goods == 1)
-
+                          @elseif($v->order_return_goods == 1 )
                           申请退款处理
-
-                          @else($v->order_return_goods == 2)
-
-
+                          @else($v->order_return_goods == 2 )
                           退款完成
-
                           @endif
+                        
+                        </td>
+                        
+                          <td class=" ">{{$v->order_create_time}}</td>
+                        <td class="fahuo" onclick="to({{$v->order_id}})">
+                            
+                            @if($v->order_status == 0)
+
+                            <input type="button" class="btn btn-default " value="未发货">
+                             
+                            @endif
+
+                             @if($v->order_status == 1)
+                            
+                            <input type="button" class="btn btn-primary " value="已经发货">
+                             
+                            @endif
+
+                            @if($v->order_status == 2)
+
+                            <input type="button" class="btn btn-success " value="交易完成">
+                             
+                            @endif
 
                         </td>
-                         
-
-
-                         <td class=" ">{{$v->order_update_time}}</td>
-                         <td class="">
-                            @if($v->order_status == 0)
-                            未发货
-                            @endif
-                            @if($v->order_status == 1)
-                            已发货
-                            @endif
-                            @if($v->order_status == 2)
-                            交易完成
-                            @endif
-                          </td>
-
-                       
                         
-                           <td>
+                       
+					             
+                    
+                     
+                        <td>
                              <a href="/admin/order/{{$v->order_id}}/edit" class="btn btn-warning">订单修改</a>
-                             <a href="/admin/order/{{$v->id}}" class="btn btn-info">订单详情</a>
+                             <a href="/admin/order/{{$v->order_id}}" class="btn btn-info">订单详情</a>
 
           
-                             @if($v->order_return_goods == 1)
-                                <div display='block'>
-                             
-                                 <a href="/admin/orderstatus?id={{$v->id}}" class="btn btn-danger">同意退款</a>
-
-                               </div>
-                            
-                              @endif
-
-                              @if($v->order_return_goods == 2)
-                              <div display='block'>
-                             
-                               <button class="btn btn-success " >退款成功</button>
-
-                              </div>
-                            
-                              @endif
-					                 
-                           </td>  
-					             
-                    </tr>
-                 
-                    @endforeach
+                           
+                      </td>  
+                    
+                   
+                     
+                    </tr>  
                
                 </tbody>
+                    
+                  @endforeach
             </table>
-
+                
             <div class="dataTables_info" id="DataTables_Table_1_info">
-               
+              
             </div>
 
 			<style>
@@ -266,15 +252,33 @@
            <div class="dataTables_paginate paging_full_numbers" id="paginate">
 
 				
+              {{$res->links()}}
 
-
-              
-               
-                
                
             </div>
         </div>
     </div>
 </div>
+                     <script>
+                      function to(order_id){
+                         var order_id = order_id;
+                            
+                          $.get('/admin/ajaxorder',{order_id:order_id},function(data){
+                              
+                              
+                              if (data) {
+
+                                window.location.reload();
+                              }
+
+                               
+
+                          })
+                       
+                     }
+                
+                    </script>
+                 
 
 @endsection
+
