@@ -8,13 +8,10 @@
 <link href="/admins/login/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/admins/login/js/jquery-1.8.3.min.js"></script>
 </head>
-<body onLoad="sendRequest()" >
+
 
 <div class="videozz"></div>
-	<video  autoplay muted loop poster="/admins/login/images/fallba1ck.jpg">
-		<source src="/admins/login/images/mov.mp4">		
-		你的游览器不支持video支持
-	</video>
+
     
 <div class="box">
 	<div class="box-a">
@@ -101,6 +98,6 @@
     <div class="m-24" id="localtime"></div>
     </div>
 </div>
-<script src="/admins/login/js/common.min.js"></script>
+{{--<script src="/admins/login/js/common.min.js"></script>--}}
 </body>
 </html>

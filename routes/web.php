@@ -76,6 +76,8 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 	// 商城快讯
 	Route::resource('/admin/express','admin\ExpressController');
 
+	//评论管理
+    Route::resource('/admin/eavl','admin\EvaluaController');
 
 });
 

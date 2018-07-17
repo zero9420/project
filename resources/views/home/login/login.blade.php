@@ -12,8 +12,6 @@
 	<link rel="shortcut icon" type="image/x-icon" href="home/login/img/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/home/login/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/home/login/css/home.css">
-	 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-    >
 	<link rel="stylesheet" type="text/css" href="/admins/bootstrap/css/bootstrap.min.css" media="screen">
 	<script src="/admins/bootstrap/js/bootstrap.min.js"></script>
 	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

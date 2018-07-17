@@ -210,6 +210,14 @@
 
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#"><i class="icon-link"></i>商品评论</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/eavl">浏览品论</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>
