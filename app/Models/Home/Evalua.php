@@ -45,7 +45,14 @@ class Evalua extends Model
      */
     public function order()
     {
-        return $this->belongsTo('App\Models\Home\OrderDetail','oid','order_id');
+        return $this->belongsTo('App\Models\Home\OrderDetail','oid','id');
+    }
+    /**
+     * 获得与商品关联。
+     */
+    public function goods()
+    {
+        return $this->belongsTo('App\Models\Admin\Goods','gid','goods_id');
     }
     /**
      * 获得与用户关联的姓名。

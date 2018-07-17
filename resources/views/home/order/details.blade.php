@@ -124,7 +124,7 @@
 									            <td>
 										          	@if($data->goods_status==2)
 										          		@if(empty($comments))
-										          		<a href="/home/eval/{{$data->goods_id}}">评价商品</a>
+										          		<a href="/home/eval/{{$data->id}}">评价商品</a>
 										          		@else
 										          		<a href="/home/myeval">查看评价</a>
 										          		@endif

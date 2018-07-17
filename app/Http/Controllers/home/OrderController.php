@@ -102,8 +102,8 @@ class OrderController extends Controller
 
 
         $data = DB::table('shop_order_detail')->where('id',$id)->first();
-        // 获取订单号
-        $oid = $data->order_id;
+        // 获取订单ID
+        $oid = $data->id;
         // 获取商品id
         $gid = $data->goods_id;
         // 获取评价
