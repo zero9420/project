@@ -82,6 +82,10 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 	Route::any('/admin/aboutdel','admin\GoodsdetailController@aboutdel');
 	Route::any('/admin/aboutedit','admin\GoodsdetailController@aboutedit');
 	Route::any('/admin/aboutinsert','admin\GoodsdetailController@aboutinsert');
+
+	//评论管理
+    Route::resource('/admin/eavl','admin\EvaluaController');
+
 });
 
 
