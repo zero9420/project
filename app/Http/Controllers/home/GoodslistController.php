@@ -29,18 +29,36 @@ class GoodslistController extends Controller
 
         $res = DB::table('lunbo')->get();
 
-        $arr = [];
+             
 
+               
+        
+        $arr = [];
         foreach ($res as $k => $v) {
 
-            if ($v->lunbo_status == 1) {
-                $arr[] = $v;
-            }
+            if ($v->lunbo_status == 1 ) {
 
+                $arr[] = $v;
+            } 
+               
         }
+        $brr = [];
+        $brr['lunbo_image1'] ='/images/lunbotupian.jpg';
+        $brr['lunbo_image2'] ='/images/lunbotupian.jpg';
+        $brr['lunbo_image3'] ='/images/lunbotupian.jpg';
+        $brr['lunbo_image4'] ='/images/lunbotupian.jpg';
+        $brr['lunbo_image5'] ='/images/lunbotupian.jpg';
+        $brr['lunbo_title'] ='无轮播状态';
+        $brr['lunbo_time'] = date('Y-m-d H:i:s',time());
+
+        $brr[0]=(object)$brr;
+       
+
+
+       
         // 热卖商品
         $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
-		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods]);
+		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods,'brr'=>$brr]);
 
     }
     /**
@@ -86,6 +104,7 @@ class GoodslistController extends Controller
     									'id'=>$id,
                                         'arr'=>$arr,
                                         'request'=> $request
+                                        
     								]);
     }
 

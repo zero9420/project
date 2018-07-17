@@ -38,7 +38,7 @@
 					<p>用户昵称：</p>
 
 					<div class="fffl" >
-								<p><span class="label label-info">昵称</span>&nbsp;:&nbsp;{{$res->info_nickname}}</p>
+						<p><span class="label label-info">昵称</span>&nbsp;:&nbsp;{{$res->info_nickname}}</p>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 							<dl>
 								<dt>客户服务</dt>
 								<dd><a href="/home/apply">退货申请</a></dd>
-								<dd><a href="#">退货/退款记录</a></dd>
+								<dd><a href="/home/record">退货/退款记录</a></dd>
 							</dl>
 							<dl>
 								<dt>我的消息</dt>
@@ -70,9 +70,9 @@
 				<div class="member-heels fl"><h2>我的订单</h2></div>
 
 				<div class="member-about fr">
-					<form action="/home/order" method="get">
+					<form action="/home/record" method="get">
 
-						<input class="text-news" placeholder="商品关键字" type="text"  name='goods_name'>
+						<input class="text-news" placeholder="商品订单号查询" type="text"  name='order_id'>
 
 						<button class="btn">搜索</button>
 					</form>
@@ -98,59 +98,52 @@
 									          <th>商品名称</th>
 									          <th>商品单价</th>
 									          <th>购买数量</th>
+									          <th>退款类型</th>
 									          <th>订单状态</th>
-									          <th>操作</th>
+									          
 									        </tr>
 									      </thead>
 
-									      @foreach($order as $k => $v)
+									      @foreach($detail as $k => $v)
 
 									      <tbody>
 									      	@foreach($v as $kk => $vv)
 									        <tr>
-									          <th scope="row">{{$vv->order_id}}</th>
-									          <td>
+									            <th scope="row">{{$vv->order_id}}</th>
+									            <td>
 									          	<img src=" {{$vv->goods_pic}} " alt="..." class="img-circle">
 
 
-									          </td>
-									          <td> {{$vv->goods_name}} </td>
-									          <td>  {{$vv->goods_price}}  </td>
-									          <td>  {{$vv->num}}  </td>
-												
-									            
-									          	 <td class="" onclick="to({{$vv->id}},{{$vv->order_id}})">
-							                            
-							                            @if($vv->goods_status == 0)
-
-							                            <input type="button" class="btn btn-default" value="未发货">
-							                             
-							                            @endif
-
-							                             @if($vv->goods_status == 1)
-							                            
-							                            <input type="button" class="btn btn-primary " value="确认收货">
-							                             
-							                            @endif
-
-							                            @if($vv->goods_status == 2)
-
-							                            <input type="button" class="btn btn-success " value="交易完成">
-							                             
-							                            @endif
-
-							                        </td>
-									           
-									            <td>
-										          	<div class="ci5">
-										          		<p>
-										          			<a href="/home/order/{{$vv->id}}">订单详情</a>
-										          		</p>
-										          		<p>
-										          			<a href="/home/apply">申请退款</a>
-										          		</p>
-										          	</div>
 										        </td>
+										        <td> {{$vv->goods_name}} </td>
+										        <td>  {{$vv->goods_price}}  </td>
+										        <td>  {{$vv->num}}  </td>
+										        <td>  <a href="#" class="btn btn-info">仅退款</a>  </td>
+													
+									           
+								          	 	<td class="" >
+						                            
+						                            @if($vv->order_return_goods == 0)
+
+						                            <input type="button" class="btn btn-default" value="无退款">
+						                             
+						                            @endif
+
+						                             @if($vv->order_return_goods == 1)
+						                            
+						                            <input type="button" class="btn btn-primary " value="退款处理中">
+						                             
+						                            @endif
+
+						                            @if($vv->order_return_goods == 2)
+
+						                            <input type="button" class="btn btn-success " value="退款完成">
+						                             
+						                            @endif
+
+						                        </td>
+									            
+									          
 									        </tr>
 									    </tbody>
 
@@ -163,8 +156,7 @@
 					</div>
 				<div class="clearfix" style="padding:30px 20px;">
 					<div class="fr pc-search-g pc-search-gs">
-						{{$ord->links()}}
-
+						
 
 					</div>
 					
@@ -174,24 +166,6 @@
 		</div>
 	</div>
 </section>
-   <script>
-                      function to(id,order_id){
-                         var id = id;
-                         var order_id = order_id;
-                            
-                          $.get('/home/der',{id:id,order_id:order_id},function(data){
-                             
-                             
-
-                                window.location.reload();
-                             
-
-                               
-
-                          })
-                       
-                     }
-                
-                    </script>
+          
 
 @endsection

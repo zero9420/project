@@ -16,9 +16,12 @@ class ExpressController extends Controller
 
                 $user =  User::where('id',$user_id)->first();
 
-                $data = Info::where('info_id',$user_id)->first(); 
+                $data = Info::where('info_cid',$user_id)->first(); 
+
+               
 
                 $res = Express::where('express_title','like','%'.$request->input('express_title').'%')->paginate(8);
+
 
                 if(empty($data)){
 
@@ -29,13 +32,27 @@ class ExpressController extends Controller
 
                  $data = (object) $data;
  
-             }  
-            
+                 }  
+
+
+               $arr_obj = [];
+                foreach ($res as $k => $v) {
+
+                    if ($v->express_status == 1 ) {
+
+                        $arr_obj[] = $v;
+    
+                    } 
+
+          
+                }
+
 
               return view('home/express/express',[
                     'title'=>'商城快讯',
                     'res'=>$res,
-                    'data'=>$data
+                    'data'=>$data,
+                    'arr_obj'=>$arr_obj
 
                     ]);
 

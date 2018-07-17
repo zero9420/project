@@ -212,6 +212,38 @@ class IndexController extends Controller
 	}
 
 
+	/**
+	 * [ajax description]   确认收货
+	 * @param  Request $request [description]
+	 * @return [type]           [description]
+	 */
+
+	 public function ajaxder(Request $request)
+    {
+    	$id = $request->input('id');
+    	$order_id= $request->input('order_id');
+    	
+
+    	 $order = DB::table('shop_order')->where('order_id',$order_id)->first();
+    	 $detail = DB::table('shop_order_detail')->where('id',$id)->first();
+
+    	 
+    	if ($order->order_status >= 1   && $detail->goods_status >= 1  ) {
+
+    		DB::table('shop_order')->where('order_id',$order_id)->update(['order_status'=>2]);
+    		DB::table('shop_order_detail')->where('id',$id)->update(['goods_status'=>2]);
+    	} else {
+    		return redirect('/home/userinfo')->with('error','商家未发货');
+    	}
+
+    	
+
+
+
+
+    }
+
+
 
 
 	
