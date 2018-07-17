@@ -144,7 +144,8 @@ Route::group(['middleware'=>'homelogin'],function(){
 
 	// 前台订单页
 	Route::resource('/home/order','home\OrderController');
-
+	// 确认收货
+	Route::any('/home/der','home\IndexController@ajaxder');
 
 
 	// 前台结算页
@@ -168,4 +169,7 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/eval/{id}','home\EvaluaController@create')->where(['id'=>'\d+']);
 	Route::any('/home/eval','home\EvaluaController@save');
 	Route::any('/home/myeval','home\EvaluaController@read');
+
+	// 退货记录
+	Route::any('home/record','home\ReturnRecordController@record');
 });
