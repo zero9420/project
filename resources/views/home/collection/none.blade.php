@@ -18,7 +18,7 @@
 				<div class="fl tu"><a href="#"><img src="img/mem.png"></a></div>
 				<div class="f1">
 
-					<p>用户名：<div></div></p>
+					<p><span class="label label-info">昵称</span>&nbsp;&nbsp;</p>
 
 				</div>
 			</div>

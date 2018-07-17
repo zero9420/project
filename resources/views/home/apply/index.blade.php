@@ -21,7 +21,7 @@
 				</div>
 				<div class="f1">
 
-				<p>用户名：<div></div>{{$res->info_nickname}}</p>
+				<p><span class="label label-info">昵称</span>&nbsp;&nbsp;{{$res->info_nickname}}</p>
 
 				</div>
 			</div>
@@ -77,9 +77,19 @@
 										<span class="gr2"><a href="#">{{$v->goods_name}}</a></span>
 										<span class="gr3">{{$v->num}}</span>
 									</div>
+									@if($v->order_return_goods == 1)
+									<div class="ap3 fl  tk" id="ajax"><a href="#">退款中</a> 
+									</div>
 
-									<div class="ap3 fl  tk" id="ajax"><a id="<?php echo $v->goods_id ?>" onclick="tk({{$v->goods_id}})"  >@if($v->order_return_goods == 1)退款中 @elseif($v->order_return_goods == 2) 退款成功   @else 申请退款   @endif</a> </div>
+									@elseif($v->order_return_goods == 2) 
+									<div class="ap3 fl  tk" id="ajax"><a href="#" >退款成功</a> 
+									</div>
 
+									@else 
+									<div class="ap3 fl  tk" id="ajax"><a id="<?php echo $v->goods_id ?>" onclick="tk({{$v->goods_id}})"  >申请退款</a> 
+									</div>
+
+								    @endif
 								</div>
 									
 								@endforeach
