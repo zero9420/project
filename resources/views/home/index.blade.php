@@ -5,13 +5,14 @@
 <!-- slider(轮播图)-start -->
 <div class="slider-container">
     <div class="slider">
+
         <!-- Slider Image -->
         <div id="mainslider" class="nivoSlider slider-image">
-            <img src=" {{$arr[0]->lunbo_image1}} " alt="main slider" title="#htmlcaption1" />
-            <img src=" {{$arr[0]->lunbo_image2}} " alt="main slider" title="#htmlcaption2" />
-            <img src=" {{$arr[0]->lunbo_image3}} " alt="main slider" title="#htmlcaption3" />
-            <img src=" {{$arr[0]->lunbo_image4}} " alt="main slider" title="#htmlcaption4" />
-            <img src=" {{$arr[0]->lunbo_image5}} " alt="main slider" title="#htmlcaption5" />
+            <img src=" @if($arr) {{$arr[0]->lunbo_image1}}  @else {{$brr[0]->lunbo_image1}}  @endif" alt="main slider" title="#htmlcaption1" />
+            <img src=" @if($arr) {{$arr[0]->lunbo_image2}}  @else {{$brr[0]->lunbo_image2}}  @endif" alt="main slider" title="#htmlcaption2" />
+            <img src=" @if($arr) {{$arr[0]->lunbo_image3}}  @else {{$brr[0]->lunbo_image3}}  @endif" alt="main slider" title="#htmlcaption3" />
+            <img src=" @if($arr) {{$arr[0]->lunbo_image4}}  @else {{$brr[0]->lunbo_image4}}  @endif" alt="main slider" title="#htmlcaption4" />
+            <img src=" @if($arr) {{$arr[0]->lunbo_image5}}  @else {{$brr[0]->lunbo_image5}}  @endif" alt="main slider" title="#htmlcaption5" />
         </div>
         <!-- Slider Caption 1 -->
         <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
@@ -19,10 +20,10 @@
             <div class="slide1-text slide-1 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h2> {{$arr[0]->lunbo_title}} </h2>
+                        <h2>@if($arr) {{$arr[0]->lunbo_title}} @else {{$brr[0]->lunbo_title}} @endif </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
+                        <h4>活动时间截止到:@if($arr) {{$arr[0]->lunbo_time}} @else {{$brr[0]->lunbo_time}}  @endif</h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -34,12 +35,12 @@
         <div id="htmlcaption2" class="nivo-html-caption slider-caption-2">
             <div class="slider-progress"></div>
             <div class="slide1-text slide-2 hidden-xs">
-                <div class="middle-text">
+                <div class="middle-text"> 
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                         <h2> {{$arr[0]->lunbo_title}} </h2>
+                         <h2>  @if($arr) {{$arr[0]->lunbo_title}} @else {{$brr[0]->lunbo_title}}  @endif</h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
+                        <h4>活动时间截止到: @if($arr) {{$arr[0]->lunbo_time}} @else {{$brr[0]->lunbo_time}}  @endif </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -53,10 +54,10 @@
                     <div class="slide1-text slide-3 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                       <h2> {{$arr[0]->lunbo_title}} </h2>
+                       <h2>  @if($arr) {{$arr[0]->lunbo_title}} @else {{$brr[0]->lunbo_title}}  @endif</h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
+                        <h4>活动时间截止到:@if($arr) {{$arr[0]->lunbo_time}} @else {{$brr[0]->lunbo_time}}  @endif </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -71,10 +72,10 @@
             <div class="slide1-text slide-4 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                       <h2> {{$arr[0]->lunbo_title}} </h2>
+                       <h2> @if($arr) {{$arr[0]->lunbo_title}} @else {{$brr[0]->lunbo_title}}  @endif </h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
+                        <h4>活动时间截止到:@if($arr) {{$arr[0]->lunbo_time}} @else {{$brr[0]->lunbo_time}}  @endif </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>
@@ -88,10 +89,10 @@
             <div class="slide1-text slide-5 hidden-xs">
                 <div class="middle-text">
                     <div class="cap-dec wow bounceInLeft" data-wow-duration="0.9s" data-wow-delay="0s">
-                        <h2> {{$arr[0]->lunbo_title}} </h2>
+                        <h2>@if($arr) {{$arr[0]->lunbo_title}} @else {{$brr[0]->lunbo_title}}  @endif</h2>
                     </div>
                     <div class="cap-title wow bounceInRight" data-wow-duration="1.2s" data-wow-delay="0.2s">
-                        <h4>活动时间截止到:{{$arr[0]->lunbo_time}} </h4>
+                        <h4>活动时间截止到:@if($arr) {{$arr[0]->lunbo_time}} @else {{$brr[0]->lunbo_time}}  @endif </h4>
                     </div>
                     <div class="cap-readmore wow bounceInUp" data-wow-duration="1.3s" data-wow-delay=".5s">
                         <a href="#">快来买买买....</a>

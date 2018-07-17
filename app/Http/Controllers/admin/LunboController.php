@@ -100,7 +100,7 @@ class LunboController extends Controller
                   $data = DB::table('lunbo')->insert($res);
 
                   if($data){
-                      return redirect('/admin/lunbo')->with('success','修改成功');
+                      return redirect('/admin/lunbo')->with('success','创建成功');
                   }
               }catch(\Exception $e){
 
