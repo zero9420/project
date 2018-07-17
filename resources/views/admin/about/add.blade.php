@@ -69,7 +69,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item" id="dvs">
-                        <input type="text" class="medium" name="event[]" maxlength="50" placeholder="请输入最多50字符的事件" style="width:50%;">&nbsp;&nbsp;&nbsp;<span id="addevent" title="添加一条事件"><i class="icol-arrow-redo"></i></span><br>
+                        <input type="text" class="medium" name="event[]" maxlength="50" placeholder="请输入最多50字符的事件" style="width:50%;">&nbsp;&nbsp;&nbsp;<span id="addevent" title="添加一条事件"><i class="icol-add"></i></span><br>
                     </div>
                 </div>
                 <script>
