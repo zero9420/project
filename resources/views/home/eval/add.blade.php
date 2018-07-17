@@ -42,7 +42,7 @@
                             <form action="/home/eval" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="gid" value="{{$goods->goods_id}}">
-                                <input type="hidden" name="oid" value="{{$goods->order_id}}">
+                                <input type="hidden" name="oid" value="{{$goods->id}}">
                                 <div class="col-md-12">
                                     <div class="col-md-6 col-md-offset-3">
                                         @if (count($errors) > 0)

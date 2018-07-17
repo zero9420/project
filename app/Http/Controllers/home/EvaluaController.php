@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Evalua;
 use App\Models\Admin\Goods;
+use App\Models\Home\OrderDetail;
 use DB;
 
 class EvaluaController extends Controller
@@ -17,7 +18,7 @@ class EvaluaController extends Controller
      */
     public function create($id)
     {
-    	$goods = DB::table('shop_order_detail')->where('goods_id',$id)->first();
+    	$goods = DB::table('shop_order_detail')->where('id',$id)->first();
     	// dd($goods);
         return view('home.eval.add',['title'=>'商品评价页','goods'=>$goods]);
     }
