@@ -139,7 +139,16 @@
                             <li><a href="/admin/auth/create">添加角色</a></li>
                             <li><a href="/admin/auth">浏览角色</a></li>
                         </ul>
+                        @endif
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-sign-post"></i>关于我们</a>
+                        <ul class='closed'>
+                            @if(session('auth')==1)
+                            <li><a href="/admin/about/create">添加关于</a></li>
                             @endif
+                            <li><a href="/admin/about">关于我们</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><i class="icon-th"></i>分类管理</a>
@@ -202,7 +211,7 @@
                     @endif
 
 
-                      <li>
+                    <li>
                         <a href="#"><i class="icon-link"></i>商城快讯</a>
                         <ul class='closed'>
                             <li><a href="/admin/express/create">添加快讯</a></li>

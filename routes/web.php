@@ -76,7 +76,12 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 	// 商城快讯
 	Route::resource('/admin/express','admin\ExpressController');
 
-
+	// 关于我们
+	Route::resource('/admin/about','admin\AboutController');
+	Route::any('/admin/aboutstatus','admin\GoodsdetailController@aboutstatus');
+	Route::any('/admin/aboutdel','admin\GoodsdetailController@aboutdel');
+	Route::any('/admin/aboutedit','admin\GoodsdetailController@aboutedit');
+	Route::any('/admin/aboutinsert','admin\GoodsdetailController@aboutinsert');
 });
 
 
@@ -91,6 +96,7 @@ Route::any('/admin/captcha','admin\LoginController@captcha');
 // 前台首页
 Route::any('/','home\GoodslistController@shop');
 Route::any('/goodslist','home\GoodslistController@list');
+Route::any('/about','home\GoodslistController@about');
 Route::any('/goodsdetail/{id}','home\GoodslistController@detail')->where(['id'=>'\d+']);
 
 // 前台登录注册模块

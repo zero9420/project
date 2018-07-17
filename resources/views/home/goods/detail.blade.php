@@ -385,7 +385,7 @@
 							                                	@foreach($v->evalua as $ve)
 								                                    <div class="col-xs-4 col-md-2">
 																	    <a href="javascript:void(0)" class="thumbnail">
-																	     	<img src="{{$ve->eval_pic}}" alt="...">
+																	     	<img src="{{$ve->eval_pic}}" alt="..." data-toggle="modal" data-target="#myModal{{$ve->did}}">
 																	    </a>
 																	</div>
 																@endforeach
@@ -396,7 +396,7 @@
                                                         	<span>尺码:</span>{{$v->order->goods_size}}
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-2">
-                                                        	{{substr($v->user->username,0,2)}}********
+                                                        	<span class="label label-info">用户名</span>{{substr($v->user->username,0,2)}}********
                                                         </div>
                                                         <!-- shop-eval-end -->
                                                     </div>
@@ -415,8 +415,22 @@
     </div>
 </div>
 <!-- shop-area-end -->
-
-
+@foreach($comments as $v)
+@foreach($v->evalua as $ve)
+<div class="modal fade" id="myModal{{$ve->did}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document" style="width:500px;height: auto;">
+    <div class="modal-content">
+	    <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	    </div>
+	    <div class="modal-body">
+	        <img src="{{$ve->eval_pic}}" alt="" style="width:100%;height: auto;">
+	    </div>
+    </div>
+  </div>
+</div>
+@endforeach
+@endforeach
 
 
 @endsection

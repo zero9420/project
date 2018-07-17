@@ -21,7 +21,6 @@ $("#goodsinfo").on("input propertychange", function () {
     count = 120 - $this.val().length;
     $("#info-count").text(count);
 });
-
 // 商品规格修改
 $('#size').click(function() {
     var size = $('#goods_size').text().trim();
@@ -112,3 +111,4 @@ $('#status').click(function(event) {
     })
 
 });
+

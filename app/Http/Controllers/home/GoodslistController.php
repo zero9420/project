@@ -12,6 +12,7 @@ use App\Models\Admin\Position;
 use DB;
 use App\Models\Home\Collection;
 use App\Models\Home\Evalua;
+use App\Models\Admin\About;
 
 class GoodslistController extends Controller
 {
@@ -144,6 +145,12 @@ class GoodslistController extends Controller
             $data = Collection::where('collection_cid',$user)->where('collection_gid',$id)->delete();
 
         }
+    }
+
+    public function about()
+    {
+        $data = About::with('abouts')->where('status','1')->first();
+        return view('home.about.index',['title'=>'关于我们','data'=>$data]);
     }
 
 }

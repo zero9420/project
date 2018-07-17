@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Goods;
 use App\Models\Admin\GoodsSpec;
+use App\Models\Admin\About;
+use App\Models\Admin\AboutDetail;
 
 class GoodsdetailController extends Controller
 {
@@ -146,6 +148,85 @@ class GoodsdetailController extends Controller
         $all = $requect->input('all');
         $res = Goods::where('goods_status','2')->update(['goods_status'=>$all]);
         // echo $res;
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
+    /**
+     * [aboutdelete 删除关于我们]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function aboutstatus(Request $requect)
+    {
+        $id = $requect->input('id');
+        $status = $requect->input('status');
+        // 查询 修改
+        if($status == '2'){
+            $res = About::where('status','1')->first();
+            if($res){
+                echo '00';
+            } else {
+                $req = About::where('id',$id)->update(['status'=>'1']);
+                if ($req) {
+                    echo '01';
+                } else {
+                    echo '02';
+                }
+            }
+        } else {
+            $req = About::where('id',$id)->update(['status'=>'2']);
+            if ($req) {
+                echo '02';
+            } else {
+                echo '01';
+            }
+        }
+    }
+    /**
+     * [aboutdel 删除]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function aboutdel(Request $requect)
+    {
+        $id = $requect->input('id');
+        $res = AboutDetail::where('id',$id)->delete();
+        // echo $res;
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
+    /**
+     * [aboutedit 修改]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function aboutedit(Request $requect)
+    {
+        $id = $requect->input('id');
+        $data['event'] = $requect->input('tvs');
+        $res = AboutDetail::where('id',$id)->update($data);
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
+    /**
+     * [aboutedit 修改]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function aboutinsert(Request $requect)
+    {
+        $data['about_id'] = $requect->input('id');
+        $data['event'] = $requect->input('msg');
+        $res = AboutDetail::insert($data);
         if($res){
             echo '01';
         } else {

@@ -87,8 +87,7 @@ class GoodsController extends Controller
     public function store(FormRequest $request)
     {
         // 获取表单数据
-        $data = $request->except('_token','goods_pic[]');
-
+        $data = $request->except('_token','goods_pic');
         // 商品名唯一
         $num = Goods::where('goods_name',$data['goods_name'])->first();
 
