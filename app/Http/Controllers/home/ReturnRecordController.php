@@ -47,12 +47,15 @@ class ReturnRecordController extends Controller
     public function record(Request $request)
     {
 
-
-             
-
     	$user_id = session('user_id');
 
     	$res = Info::where('info_cid',$user_id)->first();
+
+        if(empty($res)){
+
+
+            return back();
+        } else {
 
     	// 根据当前登录用户获取shop_order 表用户ID信息  查询所有订单
 
@@ -64,12 +67,12 @@ class ReturnRecordController extends Controller
 
     		$detail[] = DB::table('shop_order_detail')->where('order_id',$v->order_id)->where('order_return_goods','>=', 1)->get();
     	}
-    	
 
-    	
-    	
-    	
+
+        }
 
     	return view('home.record.record',['detail'=>$detail,'res'=>$res,'title'=>'退货退款记录']);
+
+
     }
 }
