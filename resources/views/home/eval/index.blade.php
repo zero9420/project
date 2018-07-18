@@ -92,7 +92,7 @@
 			                                	@foreach($v->evalua as $ve)
 				                                    <div class="col-xs-4 col-md-2">
 													    <a href="javascript:void(0)" class="thumbnail">
-													     	<img src="{{$ve->eval_pic}}" alt="...">
+													     	<img src="{{$ve->eval_pic}}" alt="..." data-toggle="modal" data-target="#myModal{{$ve->did}}">
 													    </a>
 													</div>
 												@endforeach
@@ -144,4 +144,20 @@
 		</div>
 	</div>
 </div>
+@foreach($data as $dv)
+@foreach($dv->evalua as $vp)
+﻿<div class="modal fade" id="myModal{{$vp->did}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document" style="width:500px;height: auto;">
+    <div class="modal-content">
+	    <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	    </div>
+	    <div class="modal-body">
+	        <img src="{{$vp->eval_pic}}" alt="" style="width:100%;height: auto;">
+	    </div>
+    </div>
+  </div>
+</div>
+@endforeach
+@endforeach
 @endsection

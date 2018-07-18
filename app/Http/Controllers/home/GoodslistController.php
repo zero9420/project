@@ -12,13 +12,35 @@ use App\Models\Admin\Position;
 use DB;
 use App\Models\Home\Collection;
 use App\Models\Home\Evalua;
+use App\Models\Admin\About;
 
 class GoodslistController extends Controller
 {
-
+    /**
+     *　　　　　　　　┏┓　　　┏┓+ +
+     *　　　　　　　┏┛┻━━━┛┻┓ + +
+     *　　　　　　　┃　　　　　　　┃ 　
+     *　　　　　　　┃　　　━　　　┃ ++ + + +
+     *　　　　　　 ████━████ ┃+
+     *　　　　　　　┃　　　　　　　┃ +
+     *　　　　　　　┃　　　┻　　　┃
+     *　　　　　　　┃　　　　　　　┃ + +
+     *　　　　　　　┗━┓　　　┏━┛
+     *　　　　　　　　　┃　　　┃　　　　　　　　　　　
+     *　　　　　　　　　┃　　　┃ + + + +
+     *　　　　　　　　　┃　　　┃　　　　Code is far away from bug with the animal protecting　　　　　　　
+     *　　　　　　　　　┃　　　┃ + 　　　　神兽保佑,代码无bug　　
+     *　　　　　　　　　┃　　　┃
+     *　　　　　　　　　┃　　　┃　　+　　　　　　　　　
+     *　　　　　　　　　┃　 　　┗━━━┓ + +
+     *　　　　　　　　　┃ 　　　　　　　┣┓
+     *　　　　　　　　　┃ 　　　　　　　┏┛
+     *　　　　　　　　　┗┓┓┏━┳┓┏┛ + + + +
+     *　　　　　　　　　　┃┫┫　┃┫┫
+     *　　　　　　　　　　┗┻┛　┗┻┛+ + + +
+     */
     public function shop(Request $request)
     {
-
 
         // 广告管理数据接收
         $data = Position::all();
@@ -28,18 +50,13 @@ class GoodslistController extends Controller
 
         $res = DB::table('lunbo')->get();
 
-             
-
-               
-        
         $arr = [];
         foreach ($res as $k => $v) {
 
             if ($v->lunbo_status == 1 ) {
 
                 $arr[] = $v;
-            } 
-               
+            }
         }
         $brr = [];
         $brr['lunbo_image1'] ='/images/lunbotupian.jpg';
@@ -163,6 +180,12 @@ class GoodslistController extends Controller
             $data = Collection::where('collection_cid',$user)->where('collection_gid',$id)->delete();
 
         }
+    }
+
+    public function about()
+    {
+        $data = About::with('abouts')->where('status','1')->first();
+        return view('home.about.index',['title'=>'关于我们','data'=>$data]);
     }
 
 }

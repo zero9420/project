@@ -21,7 +21,7 @@
 					<img src="/homes/img/mem.png"></a>
 				</div>
 				<div class="fffl" >
-					<p>用户名:<div></div>admin</p>
+					<p<span class="label label-info">昵称</span>&nbsp;&nbsp;admin</p>
 				</div>
 
 			</div>

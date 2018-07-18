@@ -15,6 +15,29 @@ use App\Models\Home\OrderDetail;
 class GoodsController extends Controller
 {
     /**
+     *　　　　　　　　┏┓　　　┏┓+ +
+     *　　　　　　　┏┛┻━━━┛┻┓ + +
+     *　　　　　　　┃　　　　　　　┃ 　
+     *　　　　　　　┃　　　━　　　┃ ++ + + +
+     *　　　　　　 ████━████ ┃+
+     *　　　　　　　┃　　　　　　　┃ +
+     *　　　　　　　┃　　　┻　　　┃
+     *　　　　　　　┃　　　　　　　┃ + +
+     *　　　　　　　┗━┓　　　┏━┛
+     *　　　　　　　　　┃　　　┃　　　　　　　　　　　
+     *　　　　　　　　　┃　　　┃ + + + +
+     *　　　　　　　　　┃　　　┃　　　　Code is far away from bug with the animal protecting　　　　　　　
+     *　　　　　　　　　┃　　　┃ + 　　　　神兽保佑,代码无bug　　
+     *　　　　　　　　　┃　　　┃
+     *　　　　　　　　　┃　　　┃　　+　　　　　　　　　
+     *　　　　　　　　　┃　 　　┗━━━┓ + +
+     *　　　　　　　　　┃ 　　　　　　　┣┓
+     *　　　　　　　　　┃ 　　　　　　　┏┛
+     *　　　　　　　　　┗┓┓┏━┳┓┏┛ + + + +
+     *　　　　　　　　　　┃┫┫　┃┫┫
+     *　　　　　　　　　　┗┻┛　┗┻┛+ + + +
+     */
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -87,8 +110,7 @@ class GoodsController extends Controller
     public function store(FormRequest $request)
     {
         // 获取表单数据
-        $data = $request->except('_token','goods_pic[]');
-
+        $data = $request->except('_token','goods_pic');
         // 商品名唯一
         $num = Goods::where('goods_name',$data['goods_name'])->first();
 

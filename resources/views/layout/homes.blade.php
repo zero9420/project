@@ -145,7 +145,7 @@
                                     <h4>咨询中心</h4>
                                     <ul class="toggle-footer">
                                         <li><a title="Specials" href="#changxiao">畅销商品</a><li>
-                                        <li><a title="Best sellers" href="#youhui">优惠商品</a></li>
+                                        <li><a title="Best sellers" href="/about">关于我们</a></li>
                                         <li><a title="Our stores" href="#">实体商店</a></li>
                                         <li><a title="Contact us" href="#">联系我们</a></li>
                                         <li><a title="Sitemap" href="#">站点地图</a></li>
@@ -154,9 +154,9 @@
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <h4>个人中心</h4>
                                     <ul class="toggle-footer">
-                                        <li><a title="My orders" href="#">我的订单</a></li>
-                                        <li><a title="My credit slips" href="#"> 我的购物车 </a></li>
-                                        <li><a title="My addresses" href="#">我的地址</a></li>
+                                        <li><a title="My orders" href="/home/order">我的订单</a></li>
+                                        <li><a title="My credit slips" href="/home/cart"> 我的购物车 </a></li>
+                                        <li><a title="My addresses" href="/">我的地址</a></li>
                                         <li><a title="My personal info" href="/home/userinfo">我的个人信息</a></li>
                                     </ul>
                                 </div>

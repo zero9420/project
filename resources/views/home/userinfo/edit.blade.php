@@ -22,7 +22,7 @@
 				</div>
 				<div class="fffl" >
 
-					<p>用户名：<div></div>{{$mation->info_nickname}}</p>
+					<p><span class="label label-info">昵称</span>&nbsp;&nbsp;{{$mation->info_nickname}}</p>
 				</div>
 			</div>
 			<div class="member-lists">

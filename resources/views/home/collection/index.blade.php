@@ -18,7 +18,7 @@
 			<div class="member-apart clearfix">
 				<div class="fl tu"><a href="#"><img src="{{$res->info_image}}"></a></div>
 				<div class="f1">
-					<p>用户名：<div></div>{{$res->info_nickname}}</p>
+					<p><span class="label label-info">昵称</span>&nbsp;&nbsp;{{$res->info_nickname}}</p>
 
 				</div>
 			</div>
