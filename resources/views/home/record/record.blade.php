@@ -55,7 +55,6 @@
 							</dl>
 							<dl>
 								<dt>客户服务</dt>
-								<dd><a href="/home/apply">退货申请</a></dd>
 								<dd><a href="/home/record">退货/退款记录</a></dd>
 							</dl>
 							<dl>

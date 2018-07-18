@@ -161,8 +161,10 @@ Route::group(['middleware'=>'homelogin'],function(){
 	Route::any('/home/tiao','home\IndexController@tiao');
 
 	// 前台退货
-	Route::any('/home/apply','home\IndexController@Apply');
+	Route::any('/home/apply/{id}','home\IndexController@Apply');
 
+	// 个人中心退货显示页
+	Route::any('/home/appt','home\IndexController@appt');
 
 	//购物车
 	Route::any('/home/cart','home\CartController@index');

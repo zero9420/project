@@ -55,7 +55,6 @@
 							</dl>
 							<dl>
 								<dt>客户服务</dt>
-								<dd><a href="/home/apply">退货申请</a></dd>
 								<dd><a href="/home/record">退货/退款记录</a></dd>
 							</dl>
 							<dl>
@@ -148,7 +147,7 @@
 										          			<a href="/home/order/{{$vv->id}}">订单详情</a>
 										          		</p>
 										          		<p>
-										          			<a href="/home/apply">申请退款</a>
+										          			<a href=" /home/apply/{{$vv->id}}">申请退款</a>
 										          		</p>
 										          	</div>
 										        </td>
@@ -192,7 +191,11 @@
                           })
                        
                      }
+
+
+                  
+
                 
-                    </script>
+     </script>
 
 @endsection

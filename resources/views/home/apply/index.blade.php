@@ -38,8 +38,12 @@
 				</dl>
 				<dl>
 					<dt>客户服务</dt>
+<<<<<<< HEAD
 					<dd><a href="/home/apply">退货申请</a></dd>
 					<dd><a href="/home/record">退货/退款记录</a></dd>
+=======
+					<dd><a href="#">退货/退款记录</a></dd>
+>>>>>>> origin/zxq
 				</dl>
 				<dl>
 					<dt>我的消息</dt>
@@ -53,14 +57,18 @@
 				<div class="member-heels fl"><h2>退货申请</h2></div>
 
 			</div>
+
+			
+
 			<div class="member-border">
-				<div class="member-newly"><span><b>订单号：</b>{{$data->order_id}}</span></div>
+				<div class="member-newly"><span><b>订单号：</b>{{$detail->order_id}}</span></div>
 				<div class="member-cargo">
 					<h3>收货人信息：</h3>
 					<p>{{$data->order_name}}</p>
 					<p>{{$data->order_phone}}</p>
 					<p>{{$data->order_addr}}</p>
 				</div>
+ 		
 				<div class="member-cargo">
 					<h3>商品信息：</h3>
 					<p>悦商城自营店</p>
@@ -70,30 +78,26 @@
 						<li>
 							<div class="member-circle clearfix">
 
-								@foreach($order as $k=>$v)	
 								<div class="member-apply clearfix">
 									<div class="ap1 fl">
-										<span class="gr1"><a href="#"><img about="" title="" src="{{$v->goods_pic}}" width="60" height="60"></a></span>
-										<span class="gr2"><a href="#">{{$v->goods_name}}</a></span>
-										<span class="gr3">{{$v->num}}</span>
+										<span class="gr1"><a href="#"><img about="" title="" src="{{$detail->goods_pic}}" width="60" height="60"></a></span>
+										<span class="gr2"><a href="#">{{$detail->goods_name}}</a></span>
+										<span class="gr3"></span>
 									</div>
-									@if($v->order_return_goods == 1)
+									@if($detail->order_return_goods == 1)
 									<div class="ap3 fl  tk" id="ajax"><a href="#">退款中</a> 
 									</div>
 
-									@elseif($v->order_return_goods == 2) 
+									@elseif($detail->order_return_goods == 2) 
 									<div class="ap3 fl  tk" id="ajax"><a href="#" >退款成功</a> 
 									</div>
 
 									@else 
-									<div class="ap3 fl  tk" id="ajax"><a id="<?php echo $v->goods_id ?>" onclick="tk({{$v->goods_id}})"  >申请退款</a> 
+									<div class="ap3 fl  tk" id="ajax"><a id="<?php echo $detail->goods_id ?>" onclick="tk({{$detail->goods_id}})"  >申请退款</a> 
 									</div>
 
 								    @endif
-								</div>
-									
-								@endforeach
-								
+								</div>	
 							</div>
 						</li>
 					</ul>
@@ -106,7 +110,7 @@
 					<p class="clearfix"><b>配送方式：</b><em> 顺丰快递</em></p>
 				</div>
 				<div class="member-modes clearfix">
-					<p class="clearfix"><b>订单合计金额：</b><em>{{$data->order_payment}}</em></p>
+					<p class="clearfix"><b>订单合计金额：</b><em>{{$detail->goods_price}}</em></p>
 				</div>
 			</div>
 		</div>
@@ -114,7 +118,7 @@
 </section>
 
 
-});
+
 <script>
 
 
@@ -125,7 +129,7 @@
 		$.get('/home/ajax',{id:id,status:1},function(data){
 
 
-			console.log(data);
+			 window.location.reload();
 
 		})
 
