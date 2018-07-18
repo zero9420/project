@@ -38,6 +38,10 @@
 				</dl>
 				<dl>
 					<dt>客户服务</dt>
+<<<<<<< HEAD
+=======
+					<dd><a href="/home/record">退货/退款记录</a></dd>
+>>>>>>> origin/zxq
 				</dl>
 				<dl>
 					<dt>我的消息</dt>

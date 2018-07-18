@@ -38,12 +38,8 @@
 				</dl>
 				<dl>
 					<dt>客户服务</dt>
-<<<<<<< HEAD
 					<dd><a href="/home/apply">退货申请</a></dd>
 					<dd><a href="/home/record">退货/退款记录</a></dd>
-=======
-					<dd><a href="#">退货/退款记录</a></dd>
->>>>>>> origin/zxq
 				</dl>
 				<dl>
 					<dt>我的消息</dt>
@@ -58,8 +54,6 @@
 
 			</div>
 
-			
-
 			<div class="member-border">
 				<div class="member-newly"><span><b>订单号：</b>{{$detail->order_id}}</span></div>
 				<div class="member-cargo">
@@ -68,7 +62,7 @@
 					<p>{{$data->order_phone}}</p>
 					<p>{{$data->order_addr}}</p>
 				</div>
- 		
+
 				<div class="member-cargo">
 					<h3>商品信息：</h3>
 					<p>悦商城自营店</p>
