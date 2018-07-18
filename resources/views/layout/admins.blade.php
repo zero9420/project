@@ -144,9 +144,7 @@
                     <li>
                         <a href="#"><i class="icon-sign-post"></i>关于我们</a>
                         <ul class='closed'>
-                            @if(session('auth')==1)
                             <li><a href="/admin/about/create">添加关于</a></li>
-                            @endif
                             <li><a href="/admin/about">关于我们</a></li>
                         </ul>
                     </li>
