@@ -128,7 +128,8 @@ class PositionController extends Controller
     public function update(PositionRequest $request, $id)
     {
 
-        //删除原文件
+        
+         //删除原文件
         $file = Position::find($id);
 
         $urls = $file->position_image;
@@ -144,7 +145,6 @@ class PositionController extends Controller
         if($request->hasFile('position_image')){
 
 
-
             //设置名字
             $name = str_random(6).time();
 
@@ -155,18 +155,19 @@ class PositionController extends Controller
             //移动
            $request->file('position_image')->move('./uploads/',$name.'.'.$suffix);
 
+            
          
+      
 
         }
 
-
-
         //存数据表
         $res['position_image'] = Config::get('app.path').$name.'.'.$suffix;
-      
+
         try{
-        //提交修改的数据
-        $data = Position::where('position_id',$id)->update($res);
+
+            //提交修改的数据
+            $data = Position::where('position_id',$id)->update($res);
 
         //判断是否存入成功
         if($data){

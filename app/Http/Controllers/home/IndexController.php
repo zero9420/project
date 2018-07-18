@@ -157,35 +157,27 @@ class IndexController extends Controller
 	 * 退款人信息
 	 */
 	  	
-	public function Apply(Request $request)
+	public function Apply(Request $request,$id)
 	{	
+
 		// 查找个人信息ID
 		$user = session('user_id');
 		
 		$res = Info::where('info_cid',$user)->first();
 
-
-		if(!empty($res)){
 			
-			// 查询登陆者有无订单
-			$data = DB::table('shop_order')->where('order_info_cid',$user)->first();
+		// 查询登陆者有无订单
+		$data = DB::table('shop_order')->where('order_info_cid',$user)->first();
+		
+		
+		$detail = DB::table('shop_order_detail')->where('id',$id)->first();
 
-			if(empty($data)){
+		return view('home.apply.index',['res'=>$res,'data'=>$data,'detail'=>$detail]);
 
-				return view('home.apply.none',['res'=>$res]);
-			}else{
-
-				$order = DB::table('shop_order_detail')->where('order_id',$data->order_id)->get();
-
-				return view('home.apply.index',['res'=>$res,'data'=>$data,'order'=>$order]);
-			}
-		}else{
-
-			return redirect('/home/userinfo');
-		}
 
 	}
 
+	
 	
 	
 

@@ -446,6 +446,8 @@
 		$.get('/home/back',{id:id},function(data){
 
 
+			   window.location.reload();
+			   
 		})
 
 
@@ -460,21 +462,13 @@
 
 		$.get('/home/back',{id:id},function(data){
 
-
+			   window.location.reload();
 
 		})
 
 	}
 
-	$('.collect').click(function(){
-
-		setTimeout(function(){
-
-		location.href="";
-
-
-		},500);
-	})
+	
 
 </script>
 
