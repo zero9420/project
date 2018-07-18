@@ -12,6 +12,29 @@ use App\Models\Admin\AboutDetail;
 class GoodsdetailController extends Controller
 {
     /**
+     *　　　　　　　　┏┓　　　┏┓+ +
+     *　　　　　　　┏┛┻━━━┛┻┓ + +
+     *　　　　　　　┃　　　　　　　┃ 　
+     *　　　　　　　┃　　　━　　　┃ ++ + + +
+     *　　　　　　 ████━████ ┃+
+     *　　　　　　　┃　　　　　　　┃ +
+     *　　　　　　　┃　　　┻　　　┃
+     *　　　　　　　┃　　　　　　　┃ + +
+     *　　　　　　　┗━┓　　　┏━┛
+     *　　　　　　　　　┃　　　┃　　　　　　　　　　　
+     *　　　　　　　　　┃　　　┃ + + + +
+     *　　　　　　　　　┃　　　┃　　　　Code is far away from bug with the animal protecting　　　　　　　
+     *　　　　　　　　　┃　　　┃ + 　　　　神兽保佑,代码无bug　　
+     *　　　　　　　　　┃　　　┃
+     *　　　　　　　　　┃　　　┃　　+　　　　　　　　　
+     *　　　　　　　　　┃　 　　┗━━━┓ + +
+     *　　　　　　　　　┃ 　　　　　　　┣┓
+     *　　　　　　　　　┃ 　　　　　　　┏┛
+     *　　　　　　　　　┗┓┓┏━┳┓┏┛ + + + +
+     *　　　　　　　　　　┃┫┫　┃┫┫
+     *　　　　　　　　　　┗┻┛　┗┻┛+ + + +
+     */
+    /**
      * [ajaxsize 商品规格修改]
      * @return [type] [description]
      */
