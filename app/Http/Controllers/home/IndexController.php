@@ -103,23 +103,43 @@ class IndexController extends Controller
 
 
 
-	public function Update(UserRequest $request, $id)
+	public function Update(Request $request, $id)
 	{
-		  //删除原文件
 		
-        $file = Info::find($id);
-       
-        $urls = $file->info_image;
+		//表单验证
+		$this->validate($request, [
+           
+            'info_name' => 'required',
+            'info_telphone' => 'required|regex:/^1[3456789]\d{9}$/',
+            'info_nickname'=> 'required|max:12|min:2',
+            'info_address' => 'required',
+        ],[
 
-        $info = unlink('.'.$urls);
+            'info_name.required' => '姓名不能为空',
+            'info_telphone.required' => '手机号不能为空',
+            'info_telphone.regex' => '手机号输入格式不正确',
+            'info_nickname.required' => '昵称不能为空',
+            'info_nickname.max' => '请输入2~16位的用户名',
+            'info_nickname.min' => '请输入2~16位的用户名',
+            'info_address.required' => '地址不能为空',
 
-        if(!$info) return; 
+        ]);
 
 
 		$res = $request->except('_token','info_image');
 		
 		//检测是否有上传图片
 		if($request->hasfile('info_image')){
+
+			//删除原文件
+			
+	        $file = Info::find($id);
+	       
+	        $urls = $file->info_image;
+
+	        $info = unlink('.'.$urls);
+
+	        if(!$info) return; 
 
 
 			//设置名字
@@ -131,18 +151,19 @@ class IndexController extends Controller
 
 			//移动
 			$request->file('info_image')->move('./userinfo/',$name.'.'.$suffix);
-	
+			
+			//存入数据表
+			$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
+		
 			
 		}
 
-		//存入数据表
-		$res['info_image'] = Config::get('app.address').$name.'.'.$suffix;
 		
 		$data = Info::where('info_id',$id)->update($res);
 	
 		if($data){
 
-			return back();
+			return redirect('/home/userinfo');
 		}else{
 
 			return redirect('/home/userinfo');
