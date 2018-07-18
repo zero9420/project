@@ -40,7 +40,7 @@ class OrderController extends Controller
              }
 
 
-        $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(3);
+        $ord = DB::table('shop_order')->where('order_info_cid',$user)->paginate(5);
 
         $order = [];
 

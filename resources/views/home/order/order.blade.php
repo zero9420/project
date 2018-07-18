@@ -102,11 +102,12 @@
 									          <th>操作</th>
 									        </tr>
 									      </thead>
-
+											
 									      @foreach($order as $k => $v)
-
+											
 									      <tbody>
 									      	@foreach($v as $kk => $vv)
+									      	
 									        <tr>
 									          <th scope="row">{{$vv->order_id}}</th>
 									          <td>
