@@ -1,5 +1,8 @@
 @extends('layout.homes')
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具" />
+<meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
+<!--引用百度地图API-->
 <style type="text/css">
     html,body{margin:0;padding:0;}
     .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
@@ -45,17 +48,16 @@
 <!-- about-us-area-end -->
 
 <!-- about-us-address-start -->
-<div class="skill-area">
+<div class="about-us">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <!--引用百度地图API-->
-                    <h3>公司地址</h3>
-                    <span>{{$data->address}}</span>
-                    <!--百度地图容器-->
-                    <div style="width:697px;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
+                <div class="about-text wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.5s; animation-name: fadeIn;">
+                    <h2>公司地址</h2>
+                    {{$data->address}}
                 </div>
+                <!--百度地图容器-->
+                <div style="width:1000px;height:400px;border:#ccc solid 1px;" id="map_canvas"></div>
             </div>
         </div>
     </div>
@@ -151,7 +153,7 @@
     }
     //创建地图函数：
     function createMap(){
-        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var map = new BMap.Map("map_canvas");//在百度地图容器中创建一个地图
         var point = new BMap.Point(116.395645,39.929986);//定义一个中心点坐标
         map.centerAndZoom(point,12);//设定地图的中心点和坐标并将地图显示在地图容器中
         window.map = map;//将map变量存储在全局
