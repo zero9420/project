@@ -25,7 +25,7 @@ class FormRequest extends FormRequest
     {
         return [
             'goods_name' => 'required|unique:shop_goods|max:30',
-            'goods_name' => 'required|max:120',
+            'goods_info' => 'required|max:120',
             'goods_stock' => 'required|regex:/^\d{1,9}$/',
             'goods_price'=>'required|regex:/^\d{1,9}$/',
             'goods_pic'=>'required|max:4',
@@ -44,9 +44,9 @@ class FormRequest extends FormRequest
         return [
             'goods_name.required'=>'商品名不能为空',
             'goods_name.unique'=>'商品名不能重复',
-            'goods_name.max'=>'商品名格式不正确!',
-            'goods_name.required'=>'商品简介不能为空',
-            'goods_name.max'=>'商品简介格式不正确',
+            'goods_info.max'=>'商品名格式不正确!',
+            'goods_info.required'=>'商品简介不能为空',
+            'goods_info.max'=>'商品简介格式不正确',
             'goods_stock.required'=>'商品库存不能为空',
             'goods_stock.max'=>'商品库存格式不正确',
             'goods_price.required'=>'商品价格不能为空',

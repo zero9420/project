@@ -76,7 +76,7 @@ class AboutController extends Controller
     {
         // 表单验证
         $this->validate($request, [
-            'culture' => 'required',
+            'culture' => 'required|image',
             'address' => 'required|max:120',
             'about'=>'required',
             'event'=>'required',
@@ -184,7 +184,7 @@ class AboutController extends Controller
     {
         // 表单验证
         $this->validate($request, [
-            'culture' => 'required',
+            'culture' => 'required|image',
             'address' => 'required|max:120',
             'about'=>'required',
         ],[

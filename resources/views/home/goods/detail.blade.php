@@ -457,7 +457,6 @@
 
 
 			   window.location.reload();
-			   
 		})
 
 
@@ -477,8 +476,6 @@
 		})
 
 	}
-
-	
 
 </script>
 

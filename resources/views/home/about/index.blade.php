@@ -37,8 +37,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="about-text wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.5s; animation-name: fadeIn;">
-                    <h2>公司简介</h2>
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h3>公司简介</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12">
                     {!!$data->about!!}
                 </div>
             </div>
@@ -52,12 +60,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="about-text wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s" style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.5s; animation-name: fadeIn;">
-                    <h2>公司地址</h2>
-                    {{$data->address}}
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h3>公司地址</h3>
+                    </div>
                 </div>
-                <!--百度地图容器-->
-                <div style="width:1000px;height:400px;border:#ccc solid 1px;" id="map_canvas"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12">
+                    {{$data->address}}
+                    <!--百度地图容器-->
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="height:500px; border:#ccc solid 1px;" id="map_canvas"></div>
+                </div>
             </div>
         </div>
     </div>

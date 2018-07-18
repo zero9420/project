@@ -41,7 +41,7 @@
 	<!--收货地址body部分开始-->
 	<div class="border_top_cart">
 		
-		<img src="/images/session.jpg"  class="img-thumbnail" width="1200" height="400">
+		<img src="/home/bs/img/cart/success.jpg"  class="img-thumbnail" width="1200" height="400">
 		<div class="container">
 			<div class="checkout-box">
 

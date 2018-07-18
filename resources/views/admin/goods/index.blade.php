@@ -297,6 +297,7 @@
                     if(data == '01'){
                         alert('添加成功');
                         $('#stock_'+id).text(accMul(num, old));
+                        $('#stock_'+id).parents('td').find('.icol-add').eq(0).remove();
                     } else {
                         alert('添加失败');
                     };
