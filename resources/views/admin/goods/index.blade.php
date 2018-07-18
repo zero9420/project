@@ -132,7 +132,7 @@
                             <span id="pre_{{$v->goods_id}}" style="color:red;">{{$v->goods_preferential}}</span><a onclick="uct({{$v->goods_id}})" class="preferential" href="javascript:void(0)" title="降价10%"><i class="icon-arrow-down-3"></i></a>
                         </td>
                         <td class=" ">
-                            {{$v->goods_stock}}
+                            <span id="stock_{{$v->goods_id}}">{{$v->goods_stock}}</span>@if($v->goods_stock <= '20')<a href="javascript:void(0)" onclick="add({{$v->goods_id}})" title="点击添加库存"><i class="icol-add"></i></a>@endif
                         </td>
                         <td class=" ">
                             {{$v->goods_sales}}
@@ -269,6 +269,41 @@
                         alert('优惠失败!');
                     }
                 })
+        }
+    }
+    function add($ids)
+    {
+        var id = $ids;
+        var old = parseInt($('#stock_'+id).text());
+        function accMul(arg1, arg2)
+        {
+            var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+            try { m += s1.split(".")[1].length } catch (e) { }
+
+            try { m += s2.split(".")[1].length } catch (e) { }
+
+            return Number(s1.replace(".", "")) + Number(s2.replace(".", "")) / Math.pow(10, m)
+        }
+        var msg=prompt("请输入库存","库存请输入整数");
+        if (msg !=null && msg !=""){
+            var num = parseInt(msg);
+            var reg=/^[0-9]{1,9}$/;
+            if(!reg.test(num)){
+                alert('请输入正确格式');
+                return false;
+            } else {
+                $.get('/admin/addstock',{num:num,id:id},function(data){
+                    if(data == '01'){
+                        alert('添加成功');
+                        $('#stock_'+id).text(accMul(num, old));
+                    } else {
+                        alert('添加失败');
+                    };
+                });
+            }
+        } else {
+            alert('请输入正确格式');
         }
     }
 </script>

@@ -37,7 +37,7 @@
                                 <li>您好！&nbsp;&nbsp;<a class="login" href="/home/userinfo">{{session('user_name')}}</a>&nbsp;&nbsp;欢迎来到云购物商城!</li>
                                 @endif
                                 <li><a class="my-wishlist" href="/home/userinfo">个人中心</a></li>
-                                <li><a class="checkout" href="#">我的订单</a></li>
+                                <li><a class="checkout" href="/home/order">我的订单</a></li>
                                 <li><a class="my-account" href="#">帮助</a></li>
                             </ul>
                         </div>

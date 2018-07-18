@@ -237,39 +237,45 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         // 表单验证
         $this->validate($request, [
-            'goods_name' => 'required|unique:shop_goods|max:30',
+            'goods_name' => 'required|max:30',
             'goods_stock' => 'required|regex:/^\d{1,9}$/',
             'goods_price'=>'required|regex:/^\d{1,9}$/',
-            'goods_preferential'=>'regex:/^\d{0,9}$/',
             'goods_info'=>'required|max:120',
             'goods_desc'=>'required',
-            'goods_pic'=>'required|max:4',
+            'goods_pic'=>'max:4',
         ],[
             'goods_name.required'=>'商品名不能为空',
-            'goods_name.unique'=>'商品名不能重复',
             'goods_name.max'=>'商品名格式不正确',
             'goods_stock.required'=>'商品库存不能为空',
             'goods_stock.max'=>'商品库存格式不正确',
             'goods_price.required'=>'商品价格不能为空',
             'goods_price.regex'=>'商品价格格式不正确',
-            'goods_preferential.regex'=>'商品优惠格式不正确',
             'goods_info.required'=>'商品简介不能为空',
             'goods_info.regex'=>'商品简介格式不正确',
             'goods_desc.required'=>'商品描述不能为空',
-            'goods_pic.required'=>'商品图片不能为空',
             'goods_pic.max'=>'商品图片最多4张',
 
         ]);
-        $res = $request->except('_token','_method','goods_pic');
+        $gname = Goods::where('goods_id',$id)->value('goods_name');
+
+        $data = $request->except('_token','_method','goods_pic');
+        // 判断商品名
+        if ($gname != $data['goods_name']) {
+            $res = Goods::where('goods_name',$data['goods_name'])->first();
+            if($res){
+                return redirect('/admin/goods/'.$id.'/edit')->with('error','修改失败,商品名已经存在!');
+            }
+        }
         // 判断优惠
         if(empty($data['goods_preferential']) || $data['goods_preferential']=="0"){
             $data['goods_preferential'] = $data['goods_price'];
         }
         if($data['goods_preferential'] > $data['goods_price']){
-            return redirect('/admin/goods/'.$id.'/edit')->with('success','修改失败,优惠价不得大于原价!');
+            return redirect('/admin/goods/'.$id.'/edit')->with('error','修改失败,优惠价不得大于原价!');
+        } else if(!is_numeric($data['goods_preferential'])){
+            return redirect('/admin/goods/'.$id.'/edit')->with('error','修改失败,优惠价格式不正确!');
         }
 
         // 商品图片
@@ -282,7 +288,10 @@ class GoodsController extends Controller
                     // 默认图片不删除
                     continue;
                 } else {
-                    unlink('.'.$v->goods_pic);
+                    // 判断文件是否存在
+                    if (file_exists('.'.$v->goods_pic)) {
+                        unlink('.'.$v->goods_pic);
+                    }
                 }
             }
 
@@ -323,7 +332,7 @@ class GoodsController extends Controller
         // 模型
         try{
             // 修改商品表
-            $data = Goods::where('goods_id',$id)->update($res);
+            $data = Goods::where('goods_id',$id)->update($data);
             if($data){
                 return view('/layout/jump')->with([
                         'message'=>'修改成功',
@@ -358,7 +367,10 @@ class GoodsController extends Controller
                 // 默认图片不删除
                 continue;
             } else {
-                unlink('.'.$v->goods_pic);
+                // 判断文件是否存在
+                if (file_exists('.'.$v->goods_pic)) {
+                    unlink('.'.$v->goods_pic);
+                }
             }
         }
 

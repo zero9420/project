@@ -32,19 +32,19 @@ class GoodsTableSeeder extends Seeder
             $goods->spec()->createMany([
                                     [
                                         'goods_gid' => $goods_gid,
-                                        'goods_pic'=>'/uploads/goods/gpic1.jpg',
+                                        'goods_pic'=>'/uploads/goods/photo/gpic1.jpg',
                                     ],
                                     [
                                         'goods_gid' => $goods_gid,
-                                        'goods_pic'=>'/uploads/goods/gpic2.png',
+                                        'goods_pic'=>'/uploads/goods/photo/gpic2.jpg',
                                     ],
                                     [
                                         'goods_gid' => $goods_gid,
-                                        'goods_pic'=>'/uploads/goods/gpic3.jpg',
+                                        'goods_pic'=>'/uploads/goods/photo/gpic3.jpg',
                                     ],
                                     [
                                         'goods_gid' => $goods_gid,
-                                        'goods_pic'=>'/uploads/goods/gpic4.jpg',
+                                        'goods_pic'=>'/uploads/goods/photo/gpic4.jpg',
                                     ],
                                 ]);
         	// $goods_pic = ['goods_gid'=>,'goods_pic'=>'/uploads/goods/gpic.jpg'];

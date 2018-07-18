@@ -35,7 +35,7 @@
                         </span>
                     </label>
                     <div class="mws-form-item">
-                        <input type="text" class="medium" name="goods_name" id="goodsname" maxlength="30" value="请输入最多30字符的商品名">
+                        <input type="text" class="medium" name="goods_name" id="goodsname" maxlength="30" placeholder="请输入最多30字符的商品名">
                         <p><span id="name-count">30</span>/30</p>
                     </div>
                 </div>

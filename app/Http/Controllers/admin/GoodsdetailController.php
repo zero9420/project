@@ -178,7 +178,7 @@ class GoodsdetailController extends Controller
         }
     }
     /**
-     * [aboutdelete 删除关于我们]
+     * [aboutstatus  修改关于我们状态]
      * @param  Request $requect [description]
      * @return [type]           [description]
      */
@@ -250,6 +250,22 @@ class GoodsdetailController extends Controller
         $data['about_id'] = $requect->input('id');
         $data['event'] = $requect->input('msg');
         $res = AboutDetail::insert($data);
+        if($res){
+            echo '01';
+        } else {
+            echo '00';
+        }
+    }
+    /**
+     * [addstock 单个加库存 修改]
+     * @param  Request $requect [description]
+     * @return [type]           [description]
+     */
+    public function addstock(Request $requect)
+    {
+        $id = $requect->input('id');
+        $num = $requect->input('num');
+        $res = Goods::where('goods_id',$id)->increment('goods_stock', $num);
         if($res){
             echo '01';
         } else {

@@ -200,7 +200,9 @@ class AboutController extends Controller
         if($request->hasFile('culture')){
             // 删除原图片
             $urls = About::where('id',$id)->value('culture');
-            unlink('.'.$urls);
+            if (file_exists('.'.$urls)) {
+                unlink('.'.$urls);
+            }
             // 设置新名字
             $name = date('Y-m-d-H-i-s',time()).str_random(10);
 
@@ -210,9 +212,9 @@ class AboutController extends Controller
             // 移动
             $request->file('culture')->move('./uploads/about/photo/',$name.'.'.$suffix);
 
+            // 添加文化图片
+            $data['culture'] = '/uploads/about/photo/'.$name.'.'.$suffix;
         }
-        // 添加文化图片
-        $data['culture'] = '/uploads/about/photo/'.$name.'.'.$suffix;
         try{
             // 存入数据库
             $res = About::where('id',$id)->update($data);
@@ -242,7 +244,9 @@ class AboutController extends Controller
     public function destroy($id)
     {
         $urls = About::where('id',$id)->value('culture');
-        unlink('.'.$urls);
+        if (file_exists('.'.$urls)) {
+            unlink('.'.$urls);
+        }
         try {
             $about = About::find($id);
             $res = $about->delete();
