@@ -38,7 +38,7 @@
 				</dl>
 				<dl>
 					<dt>客户服务</dt>
-					<dd><a href="#">退货/退款记录</a></dd>
+					<dd><a href="/home/record">退货/退款记录</a></dd>
 				</dl>
 				<dl>
 					<dt>我的消息</dt>
