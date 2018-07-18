@@ -100,6 +100,7 @@ Route::get('/home/register','home\RegisterController@index');
 Route::post('/home/registers','home\RegisterController@registers');
 Route::get('/home/logins','home\LoginController@index');
 Route::post('/home/logins','home\LoginController@login');
+Route::any('/home/logins/toulogin','home\LoginController@toulogin');
 //账号激活
 Route::get('/home/jihuo','home\JihuoController@jihuo');
 //找回密码

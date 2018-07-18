@@ -67,4 +67,8 @@ class LoginController extends Controller
 
     }
 
+        public function toulogin(){
+                session(['user_id'=>null]);
+                return '<script>alert("退出成功");location.href="/home/logins";</script>';
+        }
 }
