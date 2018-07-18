@@ -211,18 +211,19 @@ class AuthController extends Controller
         }
          if(empty($res['profile'])){
                $res['profile'] = $request->input(['tupian']);
+
            }else{
                     //清除图片 
         $foo = Auth::find($id);
 
-
         $urls = $foo->profile;
-       
+
         // dd($urls);
+             if(file_exists('.'.$urls)){
+                 $info = '@'.unlink('.'.$urls);
+             }
 
-        $info = '@'.unlink('.'.$urls);
-
-        if(!$info)  return;
+             
             
             $res['profile'] = '/uploads/'.$name.'.'.$suffix;
            }
@@ -257,10 +258,11 @@ class AuthController extends Controller
         $urls = $foo->profile;
        
         // dd($urls);
+        if(file_exists('.'.$urls)){
+            $info = '@'.unlink('.'.$urls);
+        }
 
-        $info = '@'.unlink('.'.$urls);
 
-        if(!$info)  return;
         $res =  Auth::where('id',$id)->delete();
 
         if($res){
