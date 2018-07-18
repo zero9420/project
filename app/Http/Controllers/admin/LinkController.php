@@ -126,17 +126,25 @@ class LinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LinkRequest $request, $id)
+    public function update(Request $request, $id)
     {
+         // 表单验证
+         $this->validate($request, [
+            'link_name' => 'required|max:6|min:2',
+            'link_url' => 'required',
+            'link_url' => array('regex:/(http?|ftp?):\/\/(www)\.([^\.\/]+)\.(com|cn)(\/[\w-\.\/\?\%\&\=]*)?/i'),
+        ],[
+            
+              
+            'link_name.required' => '链接名不能为空',
+            'link_name.max' => '请输入2-6位的链接名称',
+            'link_name.min' => '请输入2-6位的链接名称',
+            'link_url.required' => '链接地址不能为空', 
+            'link_url.regex' => '链接格式不正确,正确格式为http://www.***.com或者http://www.***.cn',
 
+        ]);
 
-        $file = DB::table('shop_link')->where('link_id',$id)->first();
-
-        $urls = $file->link_logo;
-
-        $info = unlink('.'.$urls);
-
-        if(!$info) return; 
+       
 
         //接受信息
         $res = $request->except(['_token','_method','link_logo']);
@@ -144,6 +152,14 @@ class LinkController extends Controller
 
         if($request->hasFile('link_logo')){
 
+            // 删除原图片
+            $file = DB::table('shop_link')->where('link_id',$id)->first();
+
+            $urls = $file->link_logo;
+
+            $info = unlink('.'.$urls);
+
+            if(!$info) return; 
             //设置名字
             $name = str_random(6).time();
 
@@ -154,10 +170,12 @@ class LinkController extends Controller
             //移动
             $request->file('link_logo')->move('./link/',$name.'.'.$suffix);
 
+            //存入数据表
+            $res['link_logo'] =Config::get('app.link').$name.'.'.$suffix;
+
         }
 
-         //存入数据表
-        $res['link_logo'] =Config::get('app.link').$name.'.'.$suffix;
+      
 
 
         try{
@@ -166,14 +184,14 @@ class LinkController extends Controller
         //修改信息
         $data = DB::table('shop_link')->where('link_id',$id)->update($res);
 
-        if(!$data){
-
-            $data = $res;
-        }
 
         if($data){
 
-            return redirect('/admin/link')->with('success','修改成功');
+              return redirect('/admin/link')->with('success','修改成功');
+            }else{
+
+              return redirect('/admin/link')->with('success','修改成功');
+
             }
 
         }catch(\Exception $e){

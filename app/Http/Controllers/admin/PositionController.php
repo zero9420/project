@@ -125,18 +125,27 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PositionRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        // 表单验证
+         $this->validate($request, [
+             'position_name' => 'required|max:12|min:2',
+                'position_price' => 'required',
+                'position_url' => 'required',
+                'position_url' => array('regex:/(http?|ftp?):\/\/(www)\.([^\.\/]+)\.(com|cn)(\/[\w-\.\/\?\%\&\=]*)?/i'),
+                'position_desc' => 'required',
+        ],[
+            
+                'position_name.required' => '广告名不能为空',
+                'position_name.max' => '请输入2~12位的广告名称',
+                'position_name.min' => '请输入2~12位的广告名称',
+                'position_price.required' => '广告价格不能为空',
+                'position_url.required' => '广告链接不能为空',
+                'position_url.regex' => '广告链接输入格式不正确',
+                'position_desc.required' => '广告描述不能为空',
 
+        ]);
         
-         //删除原文件
-        $file = Position::find($id);
-
-        $urls = $file->position_image;
-
-        $info = unlink('.'.$urls);
-
-        if(!$info) return; 
 
         $res = $request->except('_token','_method','position_image');
 
@@ -144,6 +153,14 @@ class PositionController extends Controller
         //检测是否上传广告图片
         if($request->hasFile('position_image')){
 
+             //删除原文件
+            $file = Position::find($id);
+
+            $urls = $file->position_image;
+
+            $info = unlink('.'.$urls);
+
+            if(!$info) return; 
 
             //设置名字
             $name = str_random(6).time();
@@ -157,12 +174,12 @@ class PositionController extends Controller
 
             
          
-      
+                   //存数据表
+           $res['position_image'] = Config::get('app.path').$name.'.'.$suffix; 
 
         }
 
-        //存数据表
-        $res['position_image'] = Config::get('app.path').$name.'.'.$suffix;
+
 
         try{
 
@@ -173,6 +190,9 @@ class PositionController extends Controller
         if($data){
 
             return redirect('/admin/position')->with('success','成功修改');
+            }else{
+
+               return redirect('/admin/position')->with('success','成功修改');  
             }
         }catch(\Exception $e){
 
