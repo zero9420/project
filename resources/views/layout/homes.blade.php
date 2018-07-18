@@ -200,7 +200,7 @@
                                 <li><a href="#">客户服务</a></li>
                                 <li><a href="#">安全支付</a></li>
                                 <li><a href="#">使用条款</a></li>
-                                <li><a href="#">关于我们</a></li>
+                                <li><a href="/about">关于我们</a></li>
                             </ul>
                         </div>
                     </div>

@@ -396,8 +396,18 @@
                                                         	<span>尺码:</span>{{$v->order->goods_size}}
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-2">
-                                                        	<span class="label label-info">用户名</span>{{substr($v->user->username,0,2)}}********
+                                                        	<span class="label label-info">昵称</span>{{$v->user->username}}
                                                         </div>
+                                                        @if($v->huitie != null)
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        	<div  class="col-md-1 col-sm-1 col-xs-1">
+                                                        		<span class="label label-primary">店家回复</span>&nbsp;:&nbsp;
+                                                        	</div>
+                                                        	<div  class="col-md-11 col-sm-11 col-xs-11">
+                                                        		{{$v->huitie}}
+                                                        	</div>
+                                                        </div>
+                                                        @endif
                                                         <!-- shop-eval-end -->
                                                     </div>
                                                     @endforeach

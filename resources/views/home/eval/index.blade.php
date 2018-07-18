@@ -14,6 +14,7 @@
 <div class="containers center"><div class="pc-nav-item"><a href="/home/userinfo">首页</a> &gt; <a href="javascript:void(0)">{{$title}}</a></div></div>
 <div class="container">
 	<div class="row">
+		@if(count($user)!=0)
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<section id="member">
 				<div class="member-center clearfix">
@@ -23,7 +24,7 @@
 								<img src="{{$user->info_image}}"></a>
 							</div>
 							<div class="fffl" >
-								<p><span class="label label-info">昵称</span>&nbsp;:&nbsp;{{$user->info_nickname}}</p>
+								<p><span class="label label-info">昵称</span>&nbsp;{{$user->info_nickname}}</p>
 							</div>
 
 						</div>
@@ -40,7 +41,7 @@
 							</dl>
 							<dl>
 								<dt>客户服务</dt>
-								<dd><a href="#">退货/退款记录</a></dd>
+								<dd><a href="/home/record">退货/退款记录</a></dd>
 							</dl>
 							<dl>
 								<dt>我的消息</dt>
@@ -141,6 +142,9 @@
                 </div>
             </div>
 		</div>
+		@else
+		请先去注册个人信息!!!!!
+		@endif
 	</div>
 </div>
 @foreach($data as $dv)

@@ -120,7 +120,6 @@ class GoodslistController extends Controller
     									'id'=>$id,
                                         'arr'=>$arr,
                                         'request'=> $request
-                                        
     								]);
     }
 

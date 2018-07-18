@@ -231,7 +231,6 @@ return [
 
     ],
     'goods_path'=>'/uploads/goods/',
-    
     'path' => '/uploads/',
     'address' => '/userinfo/',
     'link' => '/link/',
