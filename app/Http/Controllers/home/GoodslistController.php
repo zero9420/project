@@ -68,10 +68,7 @@ class GoodslistController extends Controller
         $brr['lunbo_time'] = date('Y-m-d H:i:s',time());
 
         $brr[0]=(object)$brr;
-       
 
-
-       
         // 热卖商品
         $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
 		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods,'brr'=>$brr]);
