@@ -62,7 +62,7 @@
                     </tr>
                     </thead>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
-
+                    @if(count($Users)!=0)
                     @foreach($Evaluas as $k => $v)
 
                         {{--<tr class="@if($k % 2 == 1)  odd   @else even  @endif">--}}
@@ -125,6 +125,11 @@
                         </tr>
 
                     @endforeach
+                    @else
+                    <tr>
+                        <th colspan="9">暂无评论</th>
+                    </tr>
+                    @endif
 
                     </tbody>
                 </table>

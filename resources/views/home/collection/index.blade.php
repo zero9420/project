@@ -110,16 +110,15 @@
 				</div>
 				{{csrf_field()}}
 				<div class='page' style="margin-left:400px" >
-					{{ $data->links() }}	
+					{{ $data->links() }}
 				</div>
 			  </form>
-				 <button id="member-delall" class="anniu1">全选</button>
+				 <button id="member-delall" class="anniu1">全选/反选</button>
 			</div>
 		</div>
 	</div>
 </section>
 <script>
-		
 	$("#member-delall").click(function(){
 
    		 $(":checkbox").each(function(){

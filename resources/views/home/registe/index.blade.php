@@ -52,12 +52,12 @@
 					<div class="pc-sign">
 						<input type="email" name="email" placeholder="邮箱号">
 					</div>
-					
+
 					<div class="pc-sign">
 						<input type="password" name="password" placeholder="请输入您的密码">
 					</div>
 					<div class="pc-sign">
-						<input type="password_confirmation" name="password_confirmation" placeholder="请确认您的密码">
+						<input type="password" name="password_confirmation" placeholder="请确认您的密码">
 					</div>
 					{{--<div class="pc-sign">--}}
 						{{--<input type="passwor" name="passwor"  placeholder="请输入您的验证码">--}}
