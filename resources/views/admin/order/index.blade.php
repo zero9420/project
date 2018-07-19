@@ -265,13 +265,10 @@
                             
                           $.get('/admin/ajaxorder',{order_id:order_id},function(data){
                               
-                              
-                              if (data) {
+                                if (data) {
 
-                                window.location.reload();
-                              }
-
-                               
+                                  window.location.reload();
+                                }
 
                           })
                        
