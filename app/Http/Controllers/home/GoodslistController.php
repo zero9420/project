@@ -96,8 +96,7 @@ class GoodslistController extends Controller
                 foreach($cate as $k => $v){
                     $cate_id[] = $v->cate_id;
                 }
-                $goods = Goods::with('spec')
-                        ->whereIn('cate_id',$cate_id)->where('goods_status','1')->paginate(12);
+                $goods = Goods::with('spec')->whereIn('cate_id',$cate_id)->where('goods_status','1')->paginate(12);
             }
     	} else {
     		$goods = Goods::with('spec')
@@ -108,7 +107,8 @@ class GoodslistController extends Controller
                     if (!empty($gname)) {
                     	$query->where('goods_name','like','%'.$gname.'%');
                     }
-                })->where('goods_status','1')->paginate(12);
+                    $query->where('goods_status','1');
+                })->paginate(12);
     	}
         $arr = ['id'=>$id];
             // dump($goods);
@@ -127,7 +127,7 @@ class GoodslistController extends Controller
      */
     public function detail(Request $request,$id)
     {
-        $goods = Goods::with('spec')->where('goods_id',$id)->where('goods_status','1')->first();
+        $goods = Goods::with('spec')->where('goods_id',$id)->first();
         // 取出数据拆分成数组并取出空值
         $size = array_filter(explode('|',$goods->goods_size));
         $color = array_filter(explode('|',$goods->goods_color));

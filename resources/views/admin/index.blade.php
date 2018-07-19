@@ -69,7 +69,7 @@
                 <li>
                     <span class="key"><i class="icon-wordpress-2"></i>项目网址</span>
                     <span class="val">
-                        <span class="text-nowrap"><a href="/">http://shop203.vip</a></span>
+                        <span class="text-nowrap"><a href="/">http://yunsc.vip</a></span>
                     </span>
                 </li>
                 <li>

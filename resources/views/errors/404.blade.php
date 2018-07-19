@@ -4,6 +4,7 @@
         <title>404</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <meta http-equiv="refresh" content="3;url=/">
 
         <style>
             html, body {
@@ -38,11 +39,5 @@
         </style>
     </head>
     <body style="background: url('/image/404/404.jpg') no-repeat;">
-        <div class="container">
-            <div class="content">
-                <div class="title" style="font-size: 24px;"><a href="http://yunsc.vip">云商城购物中心</a></div>
-
-            </div>
-        </div>
     </body>
 </html>

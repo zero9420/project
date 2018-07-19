@@ -362,64 +362,70 @@
                                         <div role="tabpanel" class="tab-pane fade" id="list_view">
                                             <div class="list-view">
                                                 <div class="row">
-                                                	@foreach($comments as $v)
-                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
-                                                        <!-- shop-eval-start -->
-                                                        <div class="col-md-8 col-sm-8 col-xs-8">
-                                                        	<div class="col-md-12">{{$v->comments}}</div>
-                                                        	<div class="col-md-12">
-							                                    <span class="label label-info">商品星级评价</span>&nbsp;:&nbsp;
-							                                    @if($v->goods_grade == '2.0')
-							                                    <a href="javascript:void(0)" title="很不满意!"><img src="/home/bs/pingjia/img/yixing.png" alt=""></a>
-							                                    @elseif($v->goods_grade == '4.0')
-							                                    <a href="javascript:void(0)" title="不满意!"><img src="/home/bs/pingjia/img/erxing.png" alt=""></a>
-							                                    @elseif($v->goods_grade == '6.0')
-							                                    <a href="javascript:void(0)" title="一般!"><img src="/home/bs/pingjia/img/sanxing.png" alt=""></a>
-							                                    @elseif($v->goods_grade == '8.0')
-							                                    <a href="javascript:void(0)" title="满意!"><img src="/home/bs/pingjia/img/sixing.png" alt=""></a>
-							                                    @elseif($v->goods_grade == '10.0')
-							                                    <a href="javascript:void(0)" title="非常满意!"><img src="/home/bs/pingjia/img/wuxing.png" alt=""></a>
-							                                    @endif
-							                                </div>
-							                                <div class="col-md-12">
-							                                	<span  class="label label-info">发表时间:</span>
-                                                        		{{$v->created_at}}
-                                                        	</div>
-							                                <div class="col-md-12">
-							                                	@foreach($v->evalua as $ve)
-								                                    <div class="col-xs-4 col-md-2">
-																	    <a href="javascript:void(0)" class="thumbnail">
-																	     	<img src="{{$ve->eval_pic}}" alt="..." data-toggle="modal" data-target="#myModal{{$ve->did}}">
-																	    </a>
-																	</div>
-																@endforeach
-							                                </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                                        	<span>颜色:</span>{{$v->order->goods_color}}<br/>
-                                                        	<span>尺码:</span>{{$v->order->goods_size}}<br/>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2 col-xs-2">
-                                                        	<span class="label label-info">昵称</span>{{$v->user->username}}
-                                                        </div>
-                                                        @if($v->huitie != null)
-                                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        	<div class="col-md-12">
-	                                                        	<span class="label label-primary">店家回复</span>&nbsp;:&nbsp;
-	                                                        		{{$v->huitie}}
+                                                	@if(count($comments) != 0)
+	                                                	@foreach($comments as $v)
+	                                                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
+	                                                        <!-- shop-eval-start -->
+	                                                        <div class="col-md-8 col-sm-8 col-xs-8">
+	                                                        	<div class="col-md-12">{{$v->comments}}</div>
+	                                                        	<div class="col-md-12">
+								                                    <span class="label label-info">商品星级评价</span>&nbsp;:&nbsp;
+								                                    @if($v->goods_grade == '2.0')
+								                                    <a href="javascript:void(0)" title="很不满意!"><img src="/home/bs/pingjia/img/yixing.png" alt=""></a>
+								                                    @elseif($v->goods_grade == '4.0')
+								                                    <a href="javascript:void(0)" title="不满意!"><img src="/home/bs/pingjia/img/erxing.png" alt=""></a>
+								                                    @elseif($v->goods_grade == '6.0')
+								                                    <a href="javascript:void(0)" title="一般!"><img src="/home/bs/pingjia/img/sanxing.png" alt=""></a>
+								                                    @elseif($v->goods_grade == '8.0')
+								                                    <a href="javascript:void(0)" title="满意!"><img src="/home/bs/pingjia/img/sixing.png" alt=""></a>
+								                                    @elseif($v->goods_grade == '10.0')
+								                                    <a href="javascript:void(0)" title="非常满意!"><img src="/home/bs/pingjia/img/wuxing.png" alt=""></a>
+								                                    @endif
+								                                </div>
+								                                <div class="col-md-12">
+								                                	<span  class="label label-info">发表时间:</span>
+	                                                        		{{$v->created_at}}
+	                                                        	</div>
+								                                <div class="col-md-12">
+								                                	@foreach($v->evalua as $ve)
+									                                    <div class="col-xs-4 col-md-2">
+																		    <a href="javascript:void(0)" class="thumbnail">
+																		     	<img src="{{$ve->eval_pic}}" alt="..." data-toggle="modal" data-target="#myModal{{$ve->did}}">
+																		    </a>
+																		</div>
+																	@endforeach
+								                                </div>
 	                                                        </div>
-	                                                        <div style="height:30px;"></div>
-                                                        	<div  class="col-md-12">
-                                                        		<span class="label label-default">回复时间</span>&nbsp;:&nbsp;{{$v->updated_at}}
-                                                        	</div>
-                                                        </div>
-                                                        @endif
-                                                        <!-- shop-eval-end -->
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    	<hr>
-                                                    </div>
-                                                    @endforeach
+	                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+	                                                        	<span>颜色:</span>{{$v->order->goods_color}}<br/>
+	                                                        	<span>尺码:</span>{{$v->order->goods_size}}<br/>
+	                                                        </div>
+	                                                        <div class="col-md-2 col-sm-2 col-xs-2">
+	                                                        	<span class="label label-info">昵称</span>{{$v->user->username}}
+	                                                        </div>
+	                                                        @if($v->huitie != null)
+	                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+	                                                        	<div class="col-md-12">
+		                                                        	<span class="label label-primary">店家回复</span>&nbsp;:&nbsp;
+		                                                        		{{$v->huitie}}
+		                                                        </div>
+		                                                        <div style="height:30px;"></div>
+	                                                        	<div  class="col-md-12">
+	                                                        		<span class="label label-default">回复时间</span>&nbsp;:&nbsp;{{$v->updated_at}}
+	                                                        	</div>
+	                                                        </div>
+	                                                        @endif
+	                                                        <!-- shop-eval-end -->
+	                                                    </div>
+	                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                                                    	<hr>
+	                                                    </div>
+	                                                    @endforeach
+                                                    @else
+	                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+	                                                    	暂无评论!
+	                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
