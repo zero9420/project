@@ -382,6 +382,10 @@
 							                                    @endif
 							                                </div>
 							                                <div class="col-md-12">
+							                                	<span  class="label label-info">发表时间:</span>
+                                                        		{{$v->created_at}}
+                                                        	</div>
+							                                <div class="col-md-12">
 							                                	@foreach($v->evalua as $ve)
 								                                    <div class="col-xs-4 col-md-2">
 																	    <a href="javascript:void(0)" class="thumbnail">
@@ -393,22 +397,27 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                                         	<span>颜色:</span>{{$v->order->goods_color}}<br/>
-                                                        	<span>尺码:</span>{{$v->order->goods_size}}
+                                                        	<span>尺码:</span>{{$v->order->goods_size}}<br/>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-2">
                                                         	<span class="label label-info">昵称</span>{{$v->user->username}}
                                                         </div>
                                                         @if($v->huitie != null)
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        	<div  class="col-md-1 col-sm-1 col-xs-1">
-                                                        		<span class="label label-primary">店家回复</span>&nbsp;:&nbsp;
-                                                        	</div>
-                                                        	<div  class="col-md-11 col-sm-11 col-xs-11">
-                                                        		{{$v->huitie}}
+                                                        	<div class="col-md-12">
+	                                                        	<span class="label label-primary">店家回复</span>&nbsp;:&nbsp;
+	                                                        		{{$v->huitie}}
+	                                                        </div>
+	                                                        <div style="height:30px;"></div>
+                                                        	<div  class="col-md-12">
+                                                        		<span class="label label-default">回复时间</span>&nbsp;:&nbsp;{{$v->updated_at}}
                                                         	</div>
                                                         </div>
                                                         @endif
                                                         <!-- shop-eval-end -->
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    	<hr>
                                                     </div>
                                                     @endforeach
                                                 </div>
