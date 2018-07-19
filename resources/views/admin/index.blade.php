@@ -93,7 +93,7 @@
                 <li>
                     <span class="key"><i class="icon-wordpress"></i>服务器域名/IP</span>
                     <span class="val">
-                        <span class="text-nowrap" id="nowsTime">localhost [ 127.0.0.1 ]</span>
+                        <span class="text-nowrap" id="nowsTime">localhost[ 127.0.0.1 ]</span>
                     </span>
                 </li>
                 <li>

@@ -42,13 +42,11 @@
 <body>
 	<!-- Header -->
 	<div id="mws-header" class="clearfix">
-    
     	<!-- Logo Container -->
     	<div id="mws-logo-container">
-        
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap" style="color: white">
-                <a href="/"><h4>云购物购物商城首页</h4></a>
+                <a href="/"><h4>商城首页</h4></a>
 			</div>
         </div>
         <!-- User Tools (notifications, logout, profile, change password) -->
@@ -64,17 +62,8 @@
                 <!-- Notifications dropdown -->
                 <div class="mws-dropdown-box">
                     <div class="mws-dropdown-content">
-                        <ul class="mws-notifications">
-                            <li class="read">
-                                <a href="/admin/index" title="点击查看详情!!!">
-                                    <span class="time">
-                                        库存不足,请及时添加
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
                         <div class="mws-dropdown-viewall">
-                            <a href="/admin/index">查看全部.....</a>
+                            <a href="/admin/index">点击查看详细信息.....</a>
                         </div>
                     </div>
                 </div>
