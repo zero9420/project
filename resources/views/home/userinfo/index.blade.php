@@ -39,10 +39,6 @@
 				<dl>
 					<dt>客户服务</dt>
 					<dd><a href="/home/record">退货/退款记录</a></dd>
-<<<<<<< HEAD
-
-=======
->>>>>>> 465723255926c312a596f3beb01addb3fc306f91
 				</dl>
 				<dl>
 					<dt>我的消息</dt>

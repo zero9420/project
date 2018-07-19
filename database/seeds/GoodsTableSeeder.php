@@ -16,7 +16,7 @@ class GoodsTableSeeder extends Seeder
     	for ($i=1; $i < 100; $i++) {
     		$res = Goods::create([
 	            'goods_name' => '云购物商城'.str_random(8),
-                'cate_id' => mt_rand(1,7),
+                'cate_id' => mt_rand(1,5),
 	            'goods_stock' => mt_rand(500,800),
 	            'goods_price' => mt_rand(5000,6000),
                 'goods_preferential'=>mt_rand(4000,5000),

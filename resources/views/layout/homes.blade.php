@@ -150,7 +150,7 @@
                                         <li><a title="Specials" href="#changxiao">畅销商品</a><li>
                                         <li><a title="Best sellers" href="/about">关于我们</a></li>
                                         <li><a title="Our stores" href="#">实体商店</a></li>
-                                        <li><a title="Contact us" href="#">联系我们</a></li>
+                                        <li><a title="Contact us" href="#dingyue">联系我们</a></li>
                                         <li><a title="Sitemap" href="#">站点地图</a></li>
                                     </ul>
                                 </div>

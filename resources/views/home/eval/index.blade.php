@@ -109,9 +109,11 @@
                                         <div class="col-md-12"><span  class="label label-warning">商品尺寸</span>&nbsp;:&nbsp;{{$v->order->goods_size}}</div>
                                         <div style="height:25px;"></div>
                                         <div class="col-md-12"><span class="label label-default">添加时间</span>&nbsp;:&nbsp;{{$v->created_at}}</div>
-                                        <hr>
 		                            </div>
 		                            <!-- shop-eval-end -->
+		                        </div>
+		                        <div class="col-md-12 col-sm-12 col-xs-12">
+		                        	<hr>
 		                        </div>
 	                        @endforeach
                         @else

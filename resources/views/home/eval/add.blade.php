@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="col-md-2 col-md-offset-2">
-                                        <a href="/goodsdetail/2">
+                                        <a href="/goodsdetail/{{$goods->goods_id}}">
                                             <img src="{{$goods->goods_pic}}" alt="..." class="img-thumbnail">
                                         </a>
                                     </div>
@@ -29,7 +29,7 @@
                                         <p><span class="label label-primary">商品尺码</span>&nbsp;:&nbsp;{{$goods->goods_size}}</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="btn btn-default btn-lg" href="/goodsdetail/3">
+                                        <a class="btn btn-default btn-lg" href="/goodsdetail/{{$goods->goods_id}}">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 再次购买
                                         </a>
                                     </div>
