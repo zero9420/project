@@ -70,8 +70,24 @@ class GoodslistController extends Controller
         $brr[0]=(object)$brr;
 
         // 热卖商品
-        $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_status','1')->take(10)->get();
-		return view('home.index',['title'=>'云购物商城','arr'=>$arr,'data'=>$data,'goods'=>$goods,'brr'=>$brr]);
+        $goods = Goods::with('spec')->where('goods_hot','2')->where('goods_stock','>','0')->where('goods_status','1')->take(10)->get();
+        // 分类
+        $cate = Cate::where('cate_pid','0')->get();
+        foreach ($cate as $k => $v) {
+            $goods_cate[] = Goods::with('spec')->where('cate_id',$v->cate_id)->where('goods_stock','>','0')->where('goods_status','1')->take(10)->get();
+
+        }
+        // 所有商品
+        $goods_all = Goods::with('spec')->where('goods_stock','>','0')->where('goods_status','1')->get();
+		return view('home.index',['title'=>'云购物商城',
+                                'arr'=>$arr,
+                                'data'=>$data,
+                                'goods'=>$goods,
+                                'brr'=>$brr,
+                                'goods_cate'=>$goods_cate,
+                                'cate' => $cate,
+                                'goods_all'=>$goods_all
+                            ]);
 
     }
     /**
@@ -90,13 +106,13 @@ class GoodslistController extends Controller
 
             // 判断子分类
             if(empty($cate)){
-                $goods = Goods::with('spec')->where('cate_id',$id)->where('goods_status','1')->paginate(12);
+                $goods = Goods::with('spec')->where('cate_id',$id)->where('goods_stock','>','0')->where('goods_status','1')->paginate(12);
             } else {
                 $cate_id[] = $id;
                 foreach($cate as $k => $v){
                     $cate_id[] = $v->cate_id;
                 }
-                $goods = Goods::with('spec')->whereIn('cate_id',$cate_id)->where('goods_status','1')->paginate(12);
+                $goods = Goods::with('spec')->whereIn('cate_id',$cate_id)->where('goods_stock','>','0')->where('goods_status','1')->paginate(12);
             }
     	} else {
     		$goods = Goods::with('spec')
@@ -107,8 +123,7 @@ class GoodslistController extends Controller
                     if (!empty($gname)) {
                     	$query->where('goods_name','like','%'.$gname.'%');
                     }
-                    $query->where('goods_status','1');
-                })->paginate(12);
+                })->where('goods_stock','>','0')->where('goods_status','1')->paginate(12);
     	}
         $arr = ['id'=>$id];
             // dump($goods);
@@ -127,12 +142,12 @@ class GoodslistController extends Controller
      */
     public function detail(Request $request,$id)
     {
-        $goods = Goods::with('spec')->where('goods_id',$id)->first();
+        $goods = Goods::with('spec')->where('goods_id',$id)->where('goods_stock','>','0')->where('goods_status','1')->first();
         // 取出数据拆分成数组并取出空值
         $size = array_filter(explode('|',$goods->goods_size));
         $color = array_filter(explode('|',$goods->goods_color));
         $gname = mb_substr($goods->goods_name,0,5);
-        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->where('goods_status','1')->take(10)->get();
+        $related = Goods::with('spec')->where('goods_name','like','%'.$gname.'%')->where('goods_stock','>','0')->where('goods_status','1')->take(10)->get();
 
 
         //收藏者的id

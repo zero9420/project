@@ -123,7 +123,7 @@ class GoodsController extends Controller
             $data['goods_preferential'] = $data['goods_price'];
         }
         if($data['goods_preferential'] > $data['goods_price']){
-            return redirect('/admin/goods/create')->with('success','添加失败,优惠价不得大于原价!');
+            return redirect('/admin/goods/create')->with('error','添加失败,优惠价不得大于原价!');
         }
 
         // 存入商品主表

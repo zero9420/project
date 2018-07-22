@@ -218,6 +218,105 @@
 <!-- feature-area-end -->
 
 
+<!-- feature-area-start (各类商品)-->
+@if(count($cate) != 0)
+@foreach($cate as $k => $v)
+<div class="feature-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h3>
+                        {{$v->cate_name}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="feature-tab wow fadeIn" data-wow-duration=".5s" data-wow-delay=".5s">
+                    <ul class="my-tab">
+                        <li class=" ">
+                            <a data-toggle="tab" href="">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        @if(count($goods_cate[$k])!=0)
+                        <div id="new" class="tab-pane fade in active">
+                            <div class="tab-carousel">
+                                @foreach($goods_cate[$k] as $gk => $gv)
+                                <div class="col-md-12">
+                                    <!-- single-product-start -->
+                                    <div class="single-product">
+                                        <div class="single-product-img">
+                                            <a href="/goodsdetail/{{$gv->goods_id}}">
+                                                <img src="{{$gv->spec[0]->goods_pic}}" alt="" title="{{$v->goods_info}}" />
+                                            </a>
+                                            <span class="sale-box">
+                                                <span class="sale">
+                                                    热卖
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="single-product-content">
+                                            <div class="product-title">
+                                                <h5>
+                                                    <a href="/goodsdetail/{{$gv->goods_id}}">
+                                                        {{$gv->goods_name}}
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div class="price-box">
+                                                @if($gv->goods_preferential != $gv->goods_price)
+                                                <span class="price">
+                                                    ￥{{$gv->goods_preferential}}
+                                                </span>
+                                                <span class="old-price">
+                                                    ￥{{$gv->goods_price}}
+                                                </span>
+                                                @else
+                                                <span class="price">
+                                                    ￥{{$gv->goods_price}}
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-action"><!--
+                                                <button class="btn btn-default add-cart" title="加入购物车">
+                                                    加入购物车
+                                                </button> -->
+                                                <a class="add-wishlist" href="/goodsdetail/{{$gv->goods_id}}" title="加入我的收藏">
+                                                    <i class="fa fa-heart">
+                                                    </i>
+                                                </a>
+                                                <a class="quick-view" href="#" title="快速查看商品详情" data-toggle="modal"
+                                                data-target="#myModal{{$gv->goods_id}}"
+                                                >
+                                                    <i class="fa fa-search">
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-product-end -->
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @else
+                        该栏目下暂无商品,敬请期待!
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+@endif
+<!-- feature-area-end -->
+
+
 <!-- service-area-start (服务) -->
 <div class="service-area">
     <div class="container">
@@ -406,7 +505,7 @@
 <!-- news-letter-area-end -->
 
 <!-- Modal -->
-@foreach($goods as $v)
+@foreach($goods_all as $v)
 <div id="myModal{{$v->goods_id}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -62,12 +62,8 @@
                         rowspan="1" colspan="1" style="width: 60px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                             序号
                         </th>
-                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 30px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                            ID
-                        </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 180px;" aria-label="Browser: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 200px;" aria-label="Browser: activate to sort column ascending">
                             名称
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -83,23 +79,23 @@
                             优惠
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 70px;" aria-label="CSS grade: activate to sort column ascending">
                            库存@if($stock!=0)<a href="javascript:void(0)" id="stock" title="将库存小于20的一键全部加100"><i class="icon-truck"></i></a>
                            @endif
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 70px;" aria-label="CSS grade: activate to sort column ascending">
                            销量
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 60px;" aria-label="CSS grade: activate to sort column ascending">
                            热销
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">状态&nbsp;&nbsp;@if($status != '0')<span id="status" title="一键全部上架"><i class="icon-rocket"></i></span>@endif
+                        rowspan="1" colspan="1" style="width: 120px;" aria-label="CSS grade: activate to sort column ascending">状态&nbsp;&nbsp;@if($status != '0')<span id="status" title="一键全部上架"><i class="icon-rocket"></i></span>@endif
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                        rowspan="1" colspan="1" style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
                            操作
                         </th>
                     </tr>
@@ -109,9 +105,6 @@
                     <tr class="@if($k % 2 == 1)  odd   @else even  @endif">
                         <td class="">
                             {{$num++}}
-                        </td>
-                        <td class="">
-                            {{$v->goods_id}}
                         </td>
                         <td class=" ">
                             {{$v->goods_name}}
@@ -138,16 +131,16 @@
                             {{$v->goods_sales}}
                         </td>
                         <td class=" ">
-                            @if($v->goods_hot==1)<button class="btn btn-info" id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="1">普通</button>
+                            @if($v->goods_hot==1)<button class="badge" id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="1">普通</button>
                             @else
-                                <button class='btn btn-danger' id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="2">热卖</button>
+                                <button class="badge badge-important" id="hot_<?php echo $v->goods_id ?>" onclick="hot({{$v->goods_id}})" value="2">热卖</button>
                             @endif
                         </td>
                          <td class=" ">
                             @if($v->goods_status==1)
-                                <button class="btn btn-success status" id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="1">上架</button>
+                                <button class="badge badge-success status" id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="1">上架</button>
                             @else
-                                <button class='btn btn-primary status' id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="2">下架</button>
+                                <button class='badge status' id="<?php echo $v->goods_id ?>" onclick="stu({{$v->goods_id}})" value="2">下架</button>
                             @endif
                         </td>
                          <td class=" ">
@@ -193,10 +186,10 @@
         if(sta){
             $.get('/admin/ajaxstatus',{status:status,id:id},function(data){
                 if(data == '2'){
-                    $('.status'+'#'+id).attr('class','status btn btn-primary').text('下架');
+                    $('.status'+'#'+id).attr('class','status badge').text('下架');
                     $('.status'+'#'+id).val('2');
                 } else if(data=='1') {
-                    $('.status'+'#'+id).attr('class','status btn btn-success').text('上架');
+                    $('.status'+'#'+id).attr('class','status badge badge-success').text('上架');
                     $('.status'+'#'+id).val('1');
                 } else {
                     alert('修改失败');
@@ -218,10 +211,10 @@
         if(prom){
             $.get('/admin/ajaxhot',{hots:hots,ids:ids},function(data){
                 if(data == '2'){
-                    $('#hot_'+ids).attr('class','btn btn-danger').text('热卖');
+                    $('#hot_'+ids).attr('class','badge badge-important').text('热卖');
                     $('#hot_'+ids).val('2');
                 } else if(data=='1') {
-                    $('#hot_'+ids).attr('class','btn btn-info').text('普通');
+                    $('#hot_'+ids).attr('class','badge').text('普通');
                     $('#hot_'+ids).val('1');
                 } else {
                     alert('修改失败');
